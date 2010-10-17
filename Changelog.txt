@@ -1,0 +1,8 @@
+0.51
+-- softwareVendorId added as a member of the Betfair class
+-- Changes to the transport for better proxy/useragent support
+-- Moved "suds" to the same level as bfpy. This avoids using any special import technique to make the transport load into suds
+-- Changed the timezones to have a Local Timezone (following Python examples
+
+0.50
+-- First public commit to GoogleCode

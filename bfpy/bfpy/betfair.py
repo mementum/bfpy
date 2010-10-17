@@ -50,7 +50,8 @@ class Betfair(bfapi.BfApi):
 
         self.username = None
         self.password = None
-
+        self.productId = 0
+        self.vendorSoftwareId = 0
 
     ############################################################
     # API Object Creation
@@ -104,6 +105,8 @@ class Betfair(bfapi.BfApi):
         # If not exception was thrown, then login succeeded, store the credentials
         self.username = username
         self.password = password
+        self.productId = productId
+        self.vendorSoftwareId = vendorSoftwareId
 
         return response
 
@@ -124,7 +127,7 @@ class Betfair(bfapi.BfApi):
         Raises a BfApiError_t with NO_SESSION otherwise
         '''
         if self.username:
-            return self.Login(self.username, self.password)
+            return self.Login(self.username, self.password, self.productId, self.vendorSoftwareId)
         else:
             raise bferror.BfApiError('ReLogin', 'NO_SESSION', 'No credentials available to relogin')
 
@@ -387,6 +390,7 @@ class Betfair(bfapi.BfApi):
                               response.market.marketTime.second,
                               tzinfo=GMT(0))
 
+        # Return it in the local time zone
         response.market.marketTime = marketTime.astimezone(LocalTimezone())
 
         # Return the adjusted market response

@@ -34,8 +34,8 @@ from cStringIO import StringIO
 import logging
 from urlparse import urlparse
 
-import sys
-suds = sys.modules['suds']
+import suds
+
 
 class NullHandler(logging.Handler):
     def emit(self, record):
@@ -64,6 +64,8 @@ try:
         certificate support and certificate validation
         and proxy support
         '''
+
+
         def __init__(self, httxmanager=None, **kwargs):
             """
             Initialize the transport.
@@ -80,8 +82,16 @@ try:
             self.httxmanager = httxmanager if httxmanager else HttxManager()
 
 
-        def setproxy(self, proxy):
+        def setproxy(self, proxydict):
             self.httxmanager.setproxy(proxydict)
+
+
+        def setuseragent(self, useragent):
+            self.httxmanager.setuseragent(useragent)
+
+
+        def setdecompmethods(self, decompmethods):
+            self.httxmanager.setdecompmethods(decompmethods)
 
         
         def open(self, request):
@@ -109,7 +119,7 @@ try:
                     try:
                         fp = open(parsed.path)
                     except Exception, e:
-                        raise suds.TransportError(str(e), 503, StringIO(''))
+                        raise suds.transport.TransportError(str(e), 503, StringIO(''))
                 else:
                     log.debug('opening scheme (%s) over the network', parsed.scheme)
                     fp = self.invoke(request, retfile=True)
@@ -210,6 +220,7 @@ try:
             """
             return deepcopy(self)
 
+
 except ImportError:
     TransportException = None
 
@@ -252,7 +263,7 @@ except ImportError:
                     try:
                         fp = open(parsed.path)
                     except Exception, e:
-                        raise suds.TransportError(str(e), 503, StringIO(''))
+                        raise suds.transport.TransportError(str(e), 503, StringIO(''))
                 else:
                     log.debug('opening scheme (%s) over the network', parsed.scheme)
                     try:
@@ -262,5 +273,5 @@ except ImportError:
                         self.proxy = self.options.proxy
                         return self.u2open(u2request)
                     except u2.HTTPError, e:
-                        raise TransportError(str(e), e.code, e.fp)
+                        raise suds.transport.TransportError(str(e), e.code, e.fp)
             return fp

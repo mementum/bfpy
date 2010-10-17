@@ -16,7 +16,7 @@
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# ByPy is distributed in the hope that it will be useful,
+# BfPy is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
@@ -26,21 +26,9 @@
 #
 ################################################################################
 
-version = 0.50
+version = 0.51
 
-try:
-    import suds
-except ImportError:
-    # If no high level suds module exists, import the internal suds copy
-    # But because suds expects to be at the top of the hierarchy, the import
-    # has to be faked by loading it with a top hierarchy name but from the
-    # local directory
-    import imp
-    import os.path
-    moddir = os.path.dirname(__file__)
-    module = imp.load_module('suds', None, '%s/suds' % moddir, ('.py', 'r', imp.PKG_DIRECTORY))
-    # Create the suds symbol
-    suds = module
+import suds
 
 from betfair import *
 from bfapi import *

@@ -38,8 +38,7 @@ from threading import Lock
 ###############################################################################
 # suds import
 ###############################################################################
-import sys
-suds = sys.modules['suds']
+import suds
     
 ###############################################################################
 # suds logging configuration
@@ -102,14 +101,13 @@ class BfApi(object):
         self.sessionToken = ''
 
 	# Initialize the Betfair communication objects
-        transport = bftransport.BfTransport()
+        self.transport = bftransport.BfTransport()
+        # The proxy may be needed if the WSDLs are to be downloaded from the net
+        if 'proxydict' in kwargs:
+            self.transport.setproxy(kwargs['proxydict'])
         self.bfClient = dict()
         for key, val in self.WsdlFiles.iteritems():
-            if True:
-                self.bfClient[key] = suds.client.Client(val, transport=transport.clone(), timeout=self.timeout)
-            else:
-                self.bfClient[key] = suds.client.Client(val, timeout=self.timeout)
-                self.bfClient[key].transport = transport.clone()
+            self.bfClient[key] = suds.client.Client(val, transport=self.transport.clone(), timeout=self.timeout)
 
 
     def __deepcopy__(self, memo):
@@ -126,11 +124,6 @@ class BfApi(object):
         clone.sessionToken = ''
         return clone
 
-
-    def setproxy(self, proxy):
-        for client in self.bfClient:
-            client.transport.setproxy(proxy)
-        
 
     def GetAPIRequestHeader(self, reqObjName, bfServiceId):
         # Check if we are logged in

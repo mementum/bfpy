@@ -39,10 +39,8 @@ class UTC(tzinfo):
     def utcoffset(self, dt):
         return UTC.ZERO
 
-
     def tzname(self, dt):
         return "UTC"
-
 
     def dst(self, dt):
         return UTC.ZERO
@@ -52,11 +50,9 @@ class GMT(tzinfo):
     def __init__(self, timeOffset=0):
         self.timeOffset = timeOffset
 
-    
     def utcoffset(self, dt):
         return timedelta(hours=self.timeOffset) + self.dst(dt)
 
-    
     def dst(self, dt):
         d = datetime(dt.year, 4, 1) # DST starts last Sunday in March
         self.dston = d - timedelta(days=d.weekday() + 1)
@@ -71,7 +67,6 @@ class GMT(tzinfo):
 
         return timedelta(hours=deltaVal)
 
-    
     def tzname(self, dt):
         text = 'GMT'
         if self.timeOffset > 0:
