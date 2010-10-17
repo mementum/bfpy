@@ -3,7 +3,7 @@
           "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>bfpy.bferror.BfPythonError</title>
+  <title>bfpy.util.NullHandler</title>
   <link rel="stylesheet" href="epydoc.css" type="text/css" />
   <script type="text/javascript" src="epydoc.js"></script>
 </head>
@@ -43,8 +43,8 @@
     <td width="100%">
       <span class="breadcrumbs">
         <a href="bfpy-module.html">Package&nbsp;bfpy</a> ::
-        <a href="bfpy.bferror-module.html">Module&nbsp;bferror</a> ::
-        Class&nbsp;BfPythonError
+        <a href="bfpy.util-module.html">Module&nbsp;util</a> ::
+        Class&nbsp;NullHandler
       </span>
     </td>
     <td>
@@ -54,29 +54,24 @@
     onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
         <tr><td align="right"><span class="options"
             >[<a href="frames.html" target="_top">frames</a
-            >]&nbsp;|&nbsp;<a href="bfpy.bferror.BfPythonError-class.html"
+            >]&nbsp;|&nbsp;<a href="bfpy.util.NullHandler-class.html"
             target="_top">no&nbsp;frames</a>]</span></td></tr>
       </table>
     </td>
   </tr>
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
-<h1 class="epydoc">Class BfPythonError</h1><p class="nomargin-top"><span class="codelink"><a href="bfpy.bferror-pysrc.html#BfPythonError">source&nbsp;code</a></span></p>
+<h1 class="epydoc">Class NullHandler</h1><p class="nomargin-top"><span class="codelink"><a href="bfpy.util-pysrc.html#NullHandler">source&nbsp;code</a></span></p>
 <pre class="base-tree">
-              object --+            
-                       |            
-exceptions.BaseException --+        
-                           |        
-        exceptions.Exception --+    
-                               |    
-                         <a href="bfpy.bferror.BfError-class.html">BfError</a> --+
-                                   |
-                                  <strong class="uidshort">BfPythonError</strong>
+logging.Filterer --+    
+                   |    
+     logging.Handler --+
+                       |
+                      <strong class="uidshort">NullHandler</strong>
 </pre>
 
 <hr />
-<p>Derived from BfError, holding potential Python errors (like missing 
-  method or syntax errors)</p>
+<p>Definition of a Null logging class to avoid any output from suds</p>
 
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -101,11 +96,11 @@ exceptions.BaseException --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="bfpy.bferror.BfPythonError-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">*args</span>)</span><br />
-      Constructor.</td>
+          <td><span class="summary-sig"><a href="bfpy.util.NullHandler-class.html#emit" class="summary-sig-name">emit</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">record</span>)</span><br />
+      Simply discard the incoming with the incoming logging record</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bferror-pysrc.html#BfPythonError.__init__">source&nbsp;code</a></span>
+            <span class="codelink"><a href="bfpy.util-pysrc.html#NullHandler.emit">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -115,86 +110,23 @@ exceptions.BaseException --+
   </tr>
   <tr>
     <td colspan="2" class="summary">
-    <p class="indent-wrapped-lines"><b>Inherited from <code>exceptions.Exception</code></b>:
-      <code>__new__</code>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>logging.Handler</code></b>:
+      <code>__init__</code>,
+      <code>acquire</code>,
+      <code>close</code>,
+      <code>createLock</code>,
+      <code>flush</code>,
+      <code>format</code>,
+      <code>handle</code>,
+      <code>handleError</code>,
+      <code>release</code>,
+      <code>setFormatter</code>,
+      <code>setLevel</code>
       </p>
-    <p class="indent-wrapped-lines"><b>Inherited from <code>exceptions.BaseException</code></b>:
-      <code>__delattr__</code>,
-      <code>__getattribute__</code>,
-      <code>__getitem__</code>,
-      <code>__getslice__</code>,
-      <code>__reduce__</code>,
-      <code>__repr__</code>,
-      <code>__setattr__</code>,
-      <code>__setstate__</code>,
-      <code>__str__</code>,
-      <code>__unicode__</code>
-      </p>
-    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
-      <code>__format__</code>,
-      <code>__hash__</code>,
-      <code>__reduce_ex__</code>,
-      <code>__sizeof__</code>,
-      <code>__subclasshook__</code>
-      </p>
-    </td>
-  </tr>
-</table>
-<!-- ==================== INSTANCE VARIABLES ==================== -->
-<a name="section-InstanceVariables"></a>
-<table class="summary" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr bgcolor="#70b0f0" class="table-header">
-  <td colspan="2" class="table-header">
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-      <tr valign="top">
-        <td align="left"><span class="table-header">Instance Variables</span></td>
-        <td align="right" valign="top"
-         ><span class="options">[<a href="#section-InstanceVariables"
-         class="privatelink" onclick="toggle_private();"
-         >hide private</a>]</span></td>
-      </tr>
-    </table>
-  </td>
-</tr>
-  <tr>
-    <td colspan="2" class="summary">
-    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="bfpy.bferror.BfError-class.html">BfError</a></code></b>:
-      <code><a href="bfpy.bferror.BfError-class.html#errorCode">errorCode</a></code>,
-      <code><a href="bfpy.bferror.BfError-class.html#name">name</a></code>,
-      <code><a href="bfpy.bferror.BfError-class.html#object">object</a></code>,
-      <code><a href="bfpy.bferror.BfError-class.html#requestName">requestName</a></code>,
-      <code><a href="bfpy.bferror.BfError-class.html#response">response</a></code>,
-      <code><a href="bfpy.bferror.BfError-class.html#text">text</a></code>
-      </p>
-    </td>
-  </tr>
-</table>
-<!-- ==================== PROPERTIES ==================== -->
-<a name="section-Properties"></a>
-<table class="summary" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr bgcolor="#70b0f0" class="table-header">
-  <td colspan="2" class="table-header">
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-      <tr valign="top">
-        <td align="left"><span class="table-header">Properties</span></td>
-        <td align="right" valign="top"
-         ><span class="options">[<a href="#section-Properties"
-         class="privatelink" onclick="toggle_private();"
-         >hide private</a>]</span></td>
-      </tr>
-    </table>
-  </td>
-</tr>
-  <tr>
-    <td colspan="2" class="summary">
-    <p class="indent-wrapped-lines"><b>Inherited from <code>exceptions.BaseException</code></b>:
-      <code>args</code>,
-      <code>message</code>
-      </p>
-    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
-      <code>__class__</code>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>logging.Filterer</code></b>:
+      <code>addFilter</code>,
+      <code>filter</code>,
+      <code>removeFilter</code>
       </p>
     </td>
   </tr>
@@ -217,30 +149,29 @@ exceptions.BaseException --+
   </td>
 </tr>
 </table>
-<a name="__init__"></a>
+<a name="emit"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">*args</span>)</span>
-    <br /><em class="fname">(Constructor)</em>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">emit</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">record</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bferror-pysrc.html#BfPythonError.__init__">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="bfpy.util-pysrc.html#NullHandler.emit">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Constructor. Saves the args by calling the base class constructor</p>
+  <p>Simply discard the incoming with the incoming logging record</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>args</code></strong> - standard Python args</li>
+        <li><strong class="pname"><code>record</code></strong> (str) - logging record</li>
     </ul></dd>
     <dt>Overrides:
-        object.__init__
+        logging.Handler.emit
     </dt>
   </dl>
 </td></tr></table>

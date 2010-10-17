@@ -29,7 +29,7 @@
 BfPy main module. It imports the main objects to let them be re-imported
 '''
 
-version = 0.52
+version = 0.53
 
 import suds
 

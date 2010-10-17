@@ -100,15 +100,16 @@ object --+
 </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">BfApi</span>
+      <span class="summary-type">suds object</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">**kwargs</span>)</span><br />
-      Constructor.</td>
+          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#CancelBets" class="summary-sig-name">CancelBets</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">exchangeId</span>,
+        <span class="summary-sig-arg">cancelBets</span>)</span><br />
+      Cancel a list of bets in an exchange</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.__init__">source&nbsp;code</a></span>
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.CancelBets">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -118,16 +119,16 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">BfApi</span>
+      <span class="summary-type">suds object</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#__deepcopy__" class="summary-sig-name">__deepcopy__</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">memo</span>)</span><br />
-      Clones the <a href="bfpy.bfapi.BfApi-class.html" 
-      class="link">BfApi</a> object</td>
+          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#CancelBetsByMarket" class="summary-sig-name">CancelBetsByMarket</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">exchangeId</span>,
+        <span class="summary-sig-arg">markets</span>)</span><br />
+      Cancel all bets on given markets</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.__deepcopy__">source&nbsp;code</a></span>
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.CancelBetsByMarket">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -160,6 +161,26 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
+          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#ConvertCurrency" class="summary-sig-name">ConvertCurrency</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">amount</span>,
+        <span class="summary-sig-arg">fromCurrency</span>,
+        <span class="summary-sig-arg">toCurrency</span>)</span><br />
+      Converts an amount from fromCurrentcy to toCurrentcy</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.ConvertCurrency">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
           <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetAPIRequestHeader" class="summary-sig-name">GetAPIRequestHeader</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">reqObjName</span>,
         <span class="summary-sig-arg">bfServiceId</span>)</span><br />
@@ -168,6 +189,327 @@ object --+
       class="link">BfApiError</a> if no session is alive.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetAPIRequestHeader">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetAccountFunds" class="summary-sig-name">GetAccountFunds</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">exchangeId</span>)</span><br />
+      Get Account Funds from an exchange</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetAccountFunds">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetActiveEventTypes" class="summary-sig-name">GetActiveEventTypes</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Retrieve the list of Active Event Types (top level events)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetActiveEventTypes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetAllCurrencies" class="summary-sig-name">GetAllCurrencies</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get a list of the currencies and the conversion rate to GBP</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetAllCurrencies">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetAllCurrenciesV2" class="summary-sig-name">GetAllCurrenciesV2</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get a list of the currencies and the conversion rate to GBP and the 
+      minimum bet for each currency</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetAllCurrenciesV2">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetAllEventTypes" class="summary-sig-name">GetAllEventTypes</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Retrieve the list of all Event Types (top level events)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetAllEventTypes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetAllMarkets" class="summary-sig-name">GetAllMarkets</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">exchangeId</span>)</span><br />
+      Retrieve a list of objects with all available markets in an exchange</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetAllMarkets">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetCompleteMarketPricesCompressed" class="summary-sig-name">GetCompleteMarketPricesCompressed</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">exchangeId</span>,
+        <span class="summary-sig-arg">marketId</span>)</span><br />
+      Retrieve the complete market prices (compressed)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetCompleteMarketPricesCompressed">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetCurrentBets" class="summary-sig-name">GetCurrentBets</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">exchangeId</span>,
+        <span class="summary-sig-arg">betStatus</span>,
+        <span class="summary-sig-arg">orderBy</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">NONE</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">marketId</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">startRecord</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">recordCount</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">noTotalRecordCount</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Retrieve a list of current bets on an exchange, according to 
+      betStatus marketId and ordered according to orderBy</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetCurrentBets">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetEvents" class="summary-sig-name">GetEvents</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">parentEventId</span>)</span><br />
+      Retrieve a list of eventItems/marketItems for a given Active Event or
+      eventItem</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetEvents">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetMUBets" class="summary-sig-name">GetMUBets</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">exchangeId</span>,
+        <span class="summary-sig-arg">marketId</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">betIds</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">betStatus</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">MU</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">orderBy</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">BET_ID</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">sortOrder</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">DESC</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">startRecord</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">recordCount</span>=<span class="summary-sig-default">200</span>,
+        <span class="summary-sig-arg">excludeLastSecond</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">useMatchedSince</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">matchedSince</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Get Matched and Unmatched bets for a given marketId</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetMUBets">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetMarket" class="summary-sig-name">GetMarket</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">exchangeId</span>,
+        <span class="summary-sig-arg">marketId</span>)</span><br />
+      Retrieve a market object</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetMarket">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetMarketInfo" class="summary-sig-name">GetMarketInfo</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">exchangeId</span>,
+        <span class="summary-sig-arg">marketId</span>)</span><br />
+      Retrieve market information</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetMarketInfo">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetMarketPrices" class="summary-sig-name">GetMarketPrices</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">exchangeId</span>,
+        <span class="summary-sig-arg">marketId</span>)</span><br />
+      Retrieve the market prices</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetMarketPrices">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetMarketPricesCompressed" class="summary-sig-name">GetMarketPricesCompressed</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">exchangeId</span>,
+        <span class="summary-sig-arg">marketId</span>)</span><br />
+      Retrieve the market prices (compressed)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetMarketPricesCompressed">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetMarketProfitAndLoss" class="summary-sig-name">GetMarketProfitAndLoss</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">exchangeId</span>,
+        <span class="summary-sig-arg">marketId</span>,
+        <span class="summary-sig-arg">includeBspBets</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">includeSettledBets</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">netOfCommission</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Get Matched and Unmatched bets for a given marketId</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetMarketProfitAndLoss">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetMatchedAndUnmatchedBets" class="summary-sig-name">GetMatchedAndUnmatchedBets</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">exchangeId</span>,
+        <span class="summary-sig-arg">marketId</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">betStatus</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">MU</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">orderBy</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">BET_ID</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">sortOrder</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">DESC</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">startRecord</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">recordCount</span>=<span class="summary-sig-default">200</span>,
+        <span class="summary-sig-arg">excludeLastSecond</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">useMatchedSince</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">matchedSince</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Alias for GetMUBets</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetMatchedAndUnmatchedBets">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -260,13 +602,13 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetRequestObjectGlobal" class="summary-sig-name">GetRequestObjectGlobal</a>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetRequestObjectExchange" class="summary-sig-name">GetRequestObjectExchange</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">requestObjectName</span>,
-        <span class="summary-sig-arg">addHeader</span>=<span class="summary-sig-default">True</span>)</span><br />
-      Helper Proxy function to obtain a request object from the suds 
-      &quot;global&quot; wsdl client</td>
+        <span class="summary-sig-arg">exchangeId</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Helper Proxy function to obtain a request object from suds 
+      &quot;exchange&quot; wsdl client</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetRequestObjectGlobal">source&nbsp;code</a></span>
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetRequestObjectExchange">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -280,13 +622,13 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetRequestObjectExchange" class="summary-sig-name">GetRequestObjectExchange</a>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetRequestObjectGlobal" class="summary-sig-name">GetRequestObjectGlobal</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">requestObjectName</span>,
-        <span class="summary-sig-arg">exchangeId</span>=<span class="summary-sig-default">1</span>)</span><br />
-      Helper Proxy function to obtain a request object from suds 
-      &quot;exchange&quot; wsdl client</td>
+        <span class="summary-sig-arg">addHeader</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Helper Proxy function to obtain a request object from the suds 
+      &quot;global&quot; wsdl client</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetRequestObjectExchange">source&nbsp;code</a></span>
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetRequestObjectGlobal">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -322,6 +664,27 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
+          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#InvokeRequestExchange" class="summary-sig-name">InvokeRequestExchange</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">exchangeId</span>,
+        <span class="summary-sig-arg">requestName</span>,
+        <span class="summary-sig-arg">requestParam</span>,
+        <span class="summary-sig-arg">goodErrorCodes</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Helper Proxy function to invoke &quot;exchange&quot; methods</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.InvokeRequestExchange">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
           <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#InvokeRequestGlobal" class="summary-sig-name">InvokeRequestGlobal</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">requestName</span>,
         <span class="summary-sig-arg">requestArg</span>,
@@ -342,14 +705,10 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#InvokeRequestExchange" class="summary-sig-name">InvokeRequestExchange</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">exchangeId</span>,
-        <span class="summary-sig-arg">requestName</span>,
-        <span class="summary-sig-arg">requestParam</span>,
-        <span class="summary-sig-arg">goodErrorCodes</span>=<span class="summary-sig-default">None</span>)</span><br />
-      Helper Proxy function to invoke &quot;exchange&quot; methods</td>
+          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#KeepAlive" class="summary-sig-name">KeepAlive</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Keepalive</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.InvokeRequestExchange">source&nbsp;code</a></span>
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.KeepAlive">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -401,23 +760,6 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#KeepAlive" class="summary-sig-name">KeepAlive</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Keepalive</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.KeepAlive">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">suds object</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
           <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#PlaceBets" class="summary-sig-name">PlaceBets</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">exchangeId</span>,
         <span class="summary-sig-arg">placeBets</span>)</span><br />
@@ -437,31 +779,13 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#CancelBets" class="summary-sig-name">CancelBets</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">exchangeId</span>,
-        <span class="summary-sig-arg">cancelBets</span>)</span><br />
-      Cancel a list of bets in an exchange</td>
+          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#TransferFunds" class="summary-sig-name">TransferFunds</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">sourceWalletId</span>,
+        <span class="summary-sig-arg">destWalletId</span>,
+        <span class="summary-sig-arg">amount</span>)</span><br />
+      Transfer funds amongst exchanges</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.CancelBets">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">suds object</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#CancelBetsByMarket" class="summary-sig-name">CancelBetsByMarket</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">exchangeId</span>,
-        <span class="summary-sig-arg">markets</span>)</span><br />
-      Cancel all bets on given markets</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.CancelBetsByMarket">source&nbsp;code</a></span>
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.TransferFunds">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -490,14 +814,16 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">suds object</span>
+      <span class="summary-type">BfApi</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetActiveEventTypes" class="summary-sig-name">GetActiveEventTypes</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Retrieve the list of Active Event Types (top level events)</td>
+          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#__deepcopy__" class="summary-sig-name">__deepcopy__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">memo</span>)</span><br />
+      Clones the <a href="bfpy.bfapi.BfApi-class.html" 
+      class="link">BfApi</a> object</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetActiveEventTypes">source&nbsp;code</a></span>
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.__deepcopy__">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -507,286 +833,15 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">suds object</span>
+      <span class="summary-type">BfApi</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetAllEventTypes" class="summary-sig-name">GetAllEventTypes</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Retrieve the list of all Event Types (top level events)</td>
+          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Constructor.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetAllEventTypes">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">suds object</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetAllMarkets" class="summary-sig-name">GetAllMarkets</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">exchangeId</span>)</span><br />
-      Retrieve a list of objects with all available markets in an exchange</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetAllMarkets">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">suds object</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetCompleteMarketPricesCompressed" class="summary-sig-name">GetCompleteMarketPricesCompressed</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">exchangeId</span>,
-        <span class="summary-sig-arg">marketId</span>)</span><br />
-      Retrieve the complete market prices (compressed)</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetCompleteMarketPricesCompressed">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">suds object</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetEvents" class="summary-sig-name">GetEvents</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">parentEventId</span>)</span><br />
-      Retrieve a list of eventItems/marketItems for a given Active Event or
-      eventItem</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetEvents">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">suds object</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetMarket" class="summary-sig-name">GetMarket</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">exchangeId</span>,
-        <span class="summary-sig-arg">marketId</span>)</span><br />
-      Retrieve a market object</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetMarket">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">suds object</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetMarketInfo" class="summary-sig-name">GetMarketInfo</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">exchangeId</span>,
-        <span class="summary-sig-arg">marketId</span>)</span><br />
-      Retrieve market information</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetMarketInfo">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">suds object</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetMarketPrices" class="summary-sig-name">GetMarketPrices</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">exchangeId</span>,
-        <span class="summary-sig-arg">marketId</span>)</span><br />
-      Retrieve the market prices</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetMarketPrices">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">suds object</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetMarketPricesCompressed" class="summary-sig-name">GetMarketPricesCompressed</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">exchangeId</span>,
-        <span class="summary-sig-arg">marketId</span>)</span><br />
-      Retrieve the market prices (compressed)</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetMarketPricesCompressed">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">suds object</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetCurrentBets" class="summary-sig-name">GetCurrentBets</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">exchangeId</span>,
-        <span class="summary-sig-arg">betStatus</span>,
-        <span class="summary-sig-arg">orderBy</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">NONE</code><code class="variable-quote">'</code></span>,
-        <span class="summary-sig-arg">marketId</span>=<span class="summary-sig-default">0</span>,
-        <span class="summary-sig-arg">startRecord</span>=<span class="summary-sig-default">0</span>,
-        <span class="summary-sig-arg">recordCount</span>=<span class="summary-sig-default">0</span>,
-        <span class="summary-sig-arg">noTotalRecordCount</span>=<span class="summary-sig-default">True</span>)</span><br />
-      Retrieve a list of current bets on an exchange, according to 
-      betStatus marketId and ordered according to orderBy</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetCurrentBets">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">suds object</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetMatchedAndUnmatchedBets" class="summary-sig-name">GetMatchedAndUnmatchedBets</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">exchangeId</span>,
-        <span class="summary-sig-arg">marketId</span>=<span class="summary-sig-default">None</span>,
-        <span class="summary-sig-arg">betStatus</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">MU</code><code class="variable-quote">'</code></span>,
-        <span class="summary-sig-arg">orderBy</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">BET_ID</code><code class="variable-quote">'</code></span>,
-        <span class="summary-sig-arg">sortOrder</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">DESC</code><code class="variable-quote">'</code></span>,
-        <span class="summary-sig-arg">startRecord</span>=<span class="summary-sig-default">0</span>,
-        <span class="summary-sig-arg">recordCount</span>=<span class="summary-sig-default">200</span>,
-        <span class="summary-sig-arg">excludeLastSecond</span>=<span class="summary-sig-default">False</span>,
-        <span class="summary-sig-arg">usedMatchedSince</span>=<span class="summary-sig-default">False</span>,
-        <span class="summary-sig-arg">matchedSince</span>=<span class="summary-sig-default">None</span>)</span><br />
-      Alias for GetMUBets</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetMatchedAndUnmatchedBets">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">suds object</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetMUBets" class="summary-sig-name">GetMUBets</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">exchangeId</span>,
-        <span class="summary-sig-arg">marketId</span>=<span class="summary-sig-default">None</span>,
-        <span class="summary-sig-arg">betIds</span>=<span class="summary-sig-default">None</span>,
-        <span class="summary-sig-arg">betStatus</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">MU</code><code class="variable-quote">'</code></span>,
-        <span class="summary-sig-arg">orderBy</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">BET_ID</code><code class="variable-quote">'</code></span>,
-        <span class="summary-sig-arg">sortOrder</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">DESC</code><code class="variable-quote">'</code></span>,
-        <span class="summary-sig-arg">startRecord</span>=<span class="summary-sig-default">0</span>,
-        <span class="summary-sig-arg">recordCount</span>=<span class="summary-sig-default">200</span>,
-        <span class="summary-sig-arg">excludeLastSecond</span>=<span class="summary-sig-default">False</span>,
-        <span class="summary-sig-arg">usedMatchedSince</span>=<span class="summary-sig-default">False</span>,
-        <span class="summary-sig-arg">matchedSince</span>=<span class="summary-sig-default">None</span>)</span><br />
-      Get Matched and Unmatched bets for a given marketId</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetMUBets">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">suds object</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetMarketProfitAndLoss" class="summary-sig-name">GetMarketProfitAndLoss</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">exchangeId</span>,
-        <span class="summary-sig-arg">marketId</span>,
-        <span class="summary-sig-arg">includeBspBets</span>=<span class="summary-sig-default">False</span>,
-        <span class="summary-sig-arg">includeSettledBets</span>=<span class="summary-sig-default">None</span>,
-        <span class="summary-sig-arg">netOfCommission</span>=<span class="summary-sig-default">None</span>)</span><br />
-      Get Matched and Unmatched bets for a given marketId</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetMarketProfitAndLoss">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">suds object</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#GetAccountFunds" class="summary-sig-name">GetAccountFunds</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">exchangeId</span>)</span><br />
-      Get Account Funds from an exchange</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetAccountFunds">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">suds object</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#TransferFunds" class="summary-sig-name">TransferFunds</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">sourceWalletId</span>,
-        <span class="summary-sig-arg">destWalletId</span>,
-        <span class="summary-sig-arg">amount</span>)</span><br />
-      Transfer funds amongst exchanges</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.TransferFunds">source&nbsp;code</a></span>
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.__init__">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -813,6 +868,40 @@ object --+
     </td>
   </tr>
 </table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Static Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-StaticMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="GetMinBet"></a><span class="summary-sig-name">GetMinBet</span>(<span class="summary-sig-arg">currency</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetMinBet">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
 <!-- ==================== CLASS VARIABLES ==================== -->
 <a name="section-ClassVariables"></a>
 <table class="summary" border="1" cellpadding="3"
@@ -834,13 +923,6 @@ object --+
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="classTimeout"></a><span class="summary-name">classTimeout</span> = <code title="14">14</code>
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
         <a href="bfpy.bfapi.BfApi-class.html#WsdlFiles" class="summary-name">WsdlFiles</a> = <code title="{0: '''
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 
@@ -850,6 +932,63 @@ Copyright 2003-2004 The Sporting Exchange Limited. All rights reserved\
 . 
 The presentation, distribution or other dissemination of the informati\
 ..."><code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">\n&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;\n\n&lt;</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="classTimeout"></a><span class="summary-name">classTimeout</span> = <code title="14">14</code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">dict</span>
+    </td><td class="summary">
+        <a name="bfClient"></a><span class="summary-name">bfClient</span><br />
+      references to suds clients (global and exchanges)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">str</span>
+    </td><td class="summary">
+        <a name="sessionToken"></a><span class="summary-name">sessionToken</span><br />
+      holds the session information
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">float</span>
+    </td><td class="summary">
+        <a name="timeout"></a><span class="summary-name">timeout</span><br />
+      timeout to apply to network calls
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds.transport.Transport</span>
+    </td><td class="summary">
+        <a name="transport"></a><span class="summary-name">transport</span><br />
+      reference to the transport class to use with suds
     </td>
   </tr>
 </table>
@@ -896,61 +1035,59 @@ The presentation, distribution or other dissemination of the informati\
   </td>
 </tr>
 </table>
-<a name="__init__"></a>
+<a name="CancelBets"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">**kwargs</span>)</span>
-    <br /><em class="fname">(Constructor)</em>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CancelBets</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">exchangeId</span>,
+        <span class="sig-arg">cancelBets</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.__init__">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.CancelBets">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Constructor. Create the transport and the suds clients needed to talk 
-  to the Betfair API.</p>
+  <p>Cancel a list of bets in an exchange</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>kwargs</code></strong> (dict) - standard Python keywords arguments</li>
+        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
+        <li><strong class="pname"><code>cancelBets</code></strong> (list) - list of bets to be canceled</li>
     </ul></dd>
-    <dt>Returns: BfApi</dt>
-        <dd>a constructed object</dd>
-    <dt>Overrides:
-        object.__init__
-    </dt>
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
   </dl>
 </td></tr></table>
 </div>
-<a name="__deepcopy__"></a>
+<a name="CancelBetsByMarket"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">__deepcopy__</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">memo</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CancelBetsByMarket</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">exchangeId</span>,
+        <span class="sig-arg">markets</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.__deepcopy__">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.CancelBetsByMarket">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Clones the <a href="bfpy.bfapi.BfApi-class.html" 
-  class="link">BfApi</a> object</p>
+  <p>Cancel all bets on given markets</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>memo</code></strong> (dict) - standard Python deepcopy param</li>
+        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
+        <li><strong class="pname"><code>markets</code></strong> (list) - list of market ids where to cancel bets</li>
     </ul></dd>
-    <dt>Returns: BfApi</dt>
-        <dd>cloned self</dd>
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -974,6 +1111,36 @@ The presentation, distribution or other dissemination of the informati\
   <dl class="fields">
     <dt>Returns: BfApi</dt>
         <dd>cloned self</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="ConvertCurrency"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ConvertCurrency</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">amount</span>,
+        <span class="sig-arg">fromCurrency</span>,
+        <span class="sig-arg">toCurrency</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.ConvertCurrency">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Converts an amount from fromCurrentcy to toCurrentcy</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>amount</code></strong> (float) - amount to be converted</li>
+        <li><strong class="pname"><code>fromCurrency</code></strong> (str) - source currency</li>
+        <li><strong class="pname"><code>toCurrency</code></strong> (str) - destination currency</li>
+    </ul></dd>
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -1009,6 +1176,475 @@ The presentation, distribution or other dissemination of the informati\
     <dd><ul class="nomargin-top">
         <li><code><strong class='fraise'><a href="bfpy.bferror.BfApiError-class.html">BfApiError</a></strong></code> - on no session available</li>
     </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetAccountFunds"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetAccountFunds</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">exchangeId</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetAccountFunds">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get Account Funds from an exchange</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
+    </ul></dd>
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetActiveEventTypes"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetActiveEventTypes</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetActiveEventTypes">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Retrieve the list of Active Event Types (top level events)</p>
+  <dl class="fields">
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetAllCurrencies"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetAllCurrencies</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetAllCurrencies">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get a list of the currencies and the conversion rate to GBP</p>
+  <dl class="fields">
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetAllCurrenciesV2"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetAllCurrenciesV2</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetAllCurrenciesV2">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get a list of the currencies and the conversion rate to GBP and the 
+  minimum bet for each currency</p>
+  <dl class="fields">
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetAllEventTypes"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetAllEventTypes</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetAllEventTypes">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Retrieve the list of all Event Types (top level events)</p>
+  <dl class="fields">
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetAllMarkets"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetAllMarkets</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">exchangeId</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetAllMarkets">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Retrieve a list of objects with all available markets in an 
+  exchange</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
+    </ul></dd>
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetCompleteMarketPricesCompressed"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetCompleteMarketPricesCompressed</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">exchangeId</span>,
+        <span class="sig-arg">marketId</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetCompleteMarketPricesCompressed">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Retrieve the complete market prices (compressed)</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
+        <li><strong class="pname"><code>marketId</code></strong> (int) - id of the market</li>
+    </ul></dd>
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetCurrentBets"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetCurrentBets</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">exchangeId</span>,
+        <span class="sig-arg">betStatus</span>,
+        <span class="sig-arg">orderBy</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">NONE</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">marketId</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">startRecord</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">recordCount</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">noTotalRecordCount</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetCurrentBets">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Retrieve a list of current bets on an exchange, according to betStatus
+  marketId and ordered according to orderBy</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
+        <li><strong class="pname"><code>betStatus</code></strong> (string (Betfair enum)) - status of bets to be returned (matched, unmatched)</li>
+        <li><strong class="pname"><code>orderBy</code></strong> (string (Betfair enum)) - ordering criterion</li>
+        <li><strong class="pname"><code>marketId</code></strong> (int) - id of market to get current bets for. With 0, all bets in the 
+          selected exchange will be returned</li>
+        <li><strong class="pname"><code>startRecord</code></strong> (int) - to enable paging through long lists</li>
+        <li><strong class="pname"><code>recordCount</code></strong> (int) - maximum number of records to retrieve (see matchedSince)</li>
+        <li><strong class="pname"><code>noTotalRecordCount</code></strong> (bool) - whether the total record count should be returned</li>
+    </ul></dd>
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetEvents"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetEvents</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">parentEventId</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetEvents">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Retrieve a list of eventItems/marketItems for a given Active Event or 
+  eventItem</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>parentEventId</code></strong> (int) - id of the parent event</li>
+    </ul></dd>
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetMUBets"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetMUBets</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">exchangeId</span>,
+        <span class="sig-arg">marketId</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">betIds</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">betStatus</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">MU</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">orderBy</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">BET_ID</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">sortOrder</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">DESC</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">startRecord</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">recordCount</span>=<span class="sig-default">200</span>,
+        <span class="sig-arg">excludeLastSecond</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">useMatchedSince</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">matchedSince</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetMUBets">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get Matched and Unmatched bets for a given marketId</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
+        <li><strong class="pname"><code>marketId</code></strong> (int) - id of the market</li>
+        <li><strong class="pname"><code>betStatus</code></strong> (string (Betfair enum)) - status of bets to be returned (matched, unmatched)</li>
+        <li><strong class="pname"><code>orderBy</code></strong> (string (Betfair enum)) - ordering criterion</li>
+        <li><strong class="pname"><code>sortOrder</code></strong> (string (Betfair enum)) - ordering criterion (asc/desc)</li>
+        <li><strong class="pname"><code>startRecord</code></strong> (int) - to enable paging through long lists</li>
+        <li><strong class="pname"><code>recordCount</code></strong> (int) - maximum number of records to retrieve (see matchedSince)</li>
+        <li><strong class="pname"><code>excludeLastSecond</code></strong> (bool) - exclude changes in the last second</li>
+        <li><strong class="pname"><code>useMatchedSince</code></strong> (bool) - whether to use the matched since param</li>
+        <li><strong class="pname"><code>matchedSince</code></strong> (datetime) - date to return bets since. It should void recordCounts</li>
+    </ul></dd>
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetMarket"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetMarket</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">exchangeId</span>,
+        <span class="sig-arg">marketId</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetMarket">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Retrieve a market object</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
+        <li><strong class="pname"><code>marketId</code></strong> (int) - id of the market</li>
+    </ul></dd>
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetMarketInfo"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetMarketInfo</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">exchangeId</span>,
+        <span class="sig-arg">marketId</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetMarketInfo">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Retrieve market information</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
+        <li><strong class="pname"><code>marketId</code></strong> (int) - id of the market</li>
+    </ul></dd>
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetMarketPrices"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetMarketPrices</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">exchangeId</span>,
+        <span class="sig-arg">marketId</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetMarketPrices">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Retrieve the market prices</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
+        <li><strong class="pname"><code>marketId</code></strong> (int) - id of the market</li>
+    </ul></dd>
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetMarketPricesCompressed"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetMarketPricesCompressed</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">exchangeId</span>,
+        <span class="sig-arg">marketId</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetMarketPricesCompressed">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Retrieve the market prices (compressed)</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
+        <li><strong class="pname"><code>marketId</code></strong> (int) - id of the market</li>
+    </ul></dd>
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetMarketProfitAndLoss"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetMarketProfitAndLoss</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">exchangeId</span>,
+        <span class="sig-arg">marketId</span>,
+        <span class="sig-arg">includeBspBets</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">includeSettledBets</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">netOfCommission</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetMarketProfitAndLoss">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get Matched and Unmatched bets for a given marketId</p>
+  <p>The param netOfCommission is optional according to the docs</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
+        <li><strong class="pname"><code>marketId</code></strong> (int) - id of the market</li>
+        <li><strong class="pname"><code>includeBspBets</code></strong> (bool) - whether to include BspBets</li>
+        <li><strong class="pname"><code>includeSettledBets</code></strong> (bool) - whether to include settled bets</li>
+        <li><strong class="pname"><code>netOfCommission</code></strong> (bool) - whether to include commision in profit and loss</li>
+    </ul></dd>
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetMatchedAndUnmatchedBets"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetMatchedAndUnmatchedBets</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">exchangeId</span>,
+        <span class="sig-arg">marketId</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">betStatus</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">MU</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">orderBy</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">BET_ID</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">sortOrder</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">DESC</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">startRecord</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">recordCount</span>=<span class="sig-default">200</span>,
+        <span class="sig-arg">excludeLastSecond</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">useMatchedSince</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">matchedSince</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetMatchedAndUnmatchedBets">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Alias for GetMUBets</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
+        <li><strong class="pname"><code>marketId</code></strong> (int) - id of the market</li>
+        <li><strong class="pname"><code>betStatus</code></strong> (string (Betfair enum)) - status of bets to be returned (matched, unmatched)</li>
+        <li><strong class="pname"><code>orderBy</code></strong> (string (Betfair enum)) - ordering criterion</li>
+        <li><strong class="pname"><code>sortOrder</code></strong> (string (Betfair enum)) - ordering criterion (asc/desc)</li>
+        <li><strong class="pname"><code>startRecord</code></strong> (int) - to enable paging through long lists</li>
+        <li><strong class="pname"><code>recordCount</code></strong> (int) - maximum number of records to retrieve (see matchedSince)</li>
+        <li><strong class="pname"><code>excludeLastSecond</code></strong> (bool) - exclude changes in the last second</li>
+        <li><strong class="pname"><code>useMatchedSince</code></strong> (bool) - whether to use the matched since param</li>
+        <li><strong class="pname"><code>matchedSince</code></strong> (datetime) - date to return bets since. It should void recordCounts</li>
+    </ul></dd>
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -1131,37 +1767,6 @@ The presentation, distribution or other dissemination of the informati\
   </dl>
 </td></tr></table>
 </div>
-<a name="GetRequestObjectGlobal"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetRequestObjectGlobal</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">requestObjectName</span>,
-        <span class="sig-arg">addHeader</span>=<span class="sig-default">True</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetRequestObjectGlobal">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Helper Proxy function to obtain a request object from the suds 
-  &quot;global&quot; wsdl client</p>
-  <p>Some services (like Login) do not require a header and that is the 
-  reason for the addHeader param</p>
-  <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>requestObjectName</code></strong> (str) - Name of the request object</li>
-        <li><strong class="pname"><code>addHeader</code></strong> (bool) - whether a APIRequestHeader should be returned in the object</li>
-    </ul></dd>
-    <dt>Returns: suds object</dt>
-        <dd>requested suds &quot;global&quot; object</dd>
-  </dl>
-</td></tr></table>
-</div>
 <a name="GetRequestObjectExchange"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
@@ -1193,6 +1798,37 @@ The presentation, distribution or other dissemination of the informati\
     </ul></dd>
     <dt>Returns: suds object</dt>
         <dd>requested suds &quot;exchange&quot; object</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetRequestObjectGlobal"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetRequestObjectGlobal</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">requestObjectName</span>,
+        <span class="sig-arg">addHeader</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetRequestObjectGlobal">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Helper Proxy function to obtain a request object from the suds 
+  &quot;global&quot; wsdl client</p>
+  <p>Some services (like Login) do not require a header and that is the 
+  reason for the addHeader param</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>requestObjectName</code></strong> (str) - Name of the request object</li>
+        <li><strong class="pname"><code>addHeader</code></strong> (bool) - whether a APIRequestHeader should be returned in the object</li>
+    </ul></dd>
+    <dt>Returns: suds object</dt>
+        <dd>requested suds &quot;global&quot; object</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -1251,6 +1887,38 @@ The presentation, distribution or other dissemination of the informati\
   </dl>
 </td></tr></table>
 </div>
+<a name="InvokeRequestExchange"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">InvokeRequestExchange</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">exchangeId</span>,
+        <span class="sig-arg">requestName</span>,
+        <span class="sig-arg">requestParam</span>,
+        <span class="sig-arg">goodErrorCodes</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.InvokeRequestExchange">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Helper Proxy function to invoke &quot;exchange&quot; methods</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds wsdl client to use</li>
+        <li><strong class="pname"><code>requestName</code></strong> (str) - service to invoke</li>
+        <li><strong class="pname"><code>requestParam</code></strong> (suds object) - object to be passed as param of the request</li>
+        <li><strong class="pname"><code>goodErrorCodes</code></strong> (list) - list of errorCodes to skip</li>
+    </ul></dd>
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+  </dl>
+</td></tr></table>
+</div>
 <a name="InvokeRequestGlobal"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
@@ -1281,33 +1949,22 @@ The presentation, distribution or other dissemination of the informati\
   </dl>
 </td></tr></table>
 </div>
-<a name="InvokeRequestExchange"></a>
+<a name="KeepAlive"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">InvokeRequestExchange</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">exchangeId</span>,
-        <span class="sig-arg">requestName</span>,
-        <span class="sig-arg">requestParam</span>,
-        <span class="sig-arg">goodErrorCodes</span>=<span class="sig-default">None</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">KeepAlive</span>(<span class="sig-arg">self</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.InvokeRequestExchange">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.KeepAlive">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Helper Proxy function to invoke &quot;exchange&quot; methods</p>
+  <p>Keepalive</p>
   <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds wsdl client to use</li>
-        <li><strong class="pname"><code>requestName</code></strong> (str) - service to invoke</li>
-        <li><strong class="pname"><code>requestParam</code></strong> (suds object) - object to be passed as param of the request</li>
-        <li><strong class="pname"><code>goodErrorCodes</code></strong> (list) - list of errorCodes to skip</li>
-    </ul></dd>
     <dt>Returns: suds object</dt>
         <dd>Betfair API answer</dd>
   </dl>
@@ -1366,27 +2023,6 @@ The presentation, distribution or other dissemination of the informati\
   </dl>
 </td></tr></table>
 </div>
-<a name="KeepAlive"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">KeepAlive</span>(<span class="sig-arg">self</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.KeepAlive">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Keepalive</p>
-  <dl class="fields">
-    <dt>Returns: suds object</dt>
-        <dd>Betfair API answer</dd>
-  </dl>
-</td></tr></table>
-</div>
 <a name="PlaceBets"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
@@ -1415,56 +2051,30 @@ The presentation, distribution or other dissemination of the informati\
   </dl>
 </td></tr></table>
 </div>
-<a name="CancelBets"></a>
+<a name="TransferFunds"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">CancelBets</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">exchangeId</span>,
-        <span class="sig-arg">cancelBets</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">TransferFunds</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">sourceWalletId</span>,
+        <span class="sig-arg">destWalletId</span>,
+        <span class="sig-arg">amount</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.CancelBets">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.TransferFunds">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Cancel a list of bets in an exchange</p>
+  <p>Transfer funds amongst exchanges</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
-        <li><strong class="pname"><code>cancelBets</code></strong> (list) - list of bets to be canceled</li>
-    </ul></dd>
-    <dt>Returns: suds object</dt>
-        <dd>Betfair API answer</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="CancelBetsByMarket"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">CancelBetsByMarket</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">exchangeId</span>,
-        <span class="sig-arg">markets</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.CancelBetsByMarket">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Cancel all bets on given markets</p>
-  <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
-        <li><strong class="pname"><code>markets</code></strong> (list) - list of market ids where to cancel bets</li>
+        <li><strong class="pname"><code>sourceWalletId</code></strong> (int) - id of the suds &quot;exchange&quot; to use as source</li>
+        <li><strong class="pname"><code>destWalletId</code></strong> (int) - id of the suds &quot;exchange&quot; to use as destination</li>
+        <li><strong class="pname"><code>amount</code></strong> (float) - amount to transfer</li>
     </ul></dd>
     <dt>Returns: suds object</dt>
         <dd>Betfair API answer</dd>
@@ -1499,458 +2109,61 @@ The presentation, distribution or other dissemination of the informati\
   </dl>
 </td></tr></table>
 </div>
-<a name="GetActiveEventTypes"></a>
+<a name="__deepcopy__"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetActiveEventTypes</span>(<span class="sig-arg">self</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__deepcopy__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">memo</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetActiveEventTypes">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.__deepcopy__">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Retrieve the list of Active Event Types (top level events)</p>
-  <dl class="fields">
-    <dt>Returns: suds object</dt>
-        <dd>Betfair API answer</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="GetAllEventTypes"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetAllEventTypes</span>(<span class="sig-arg">self</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetAllEventTypes">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Retrieve the list of all Event Types (top level events)</p>
-  <dl class="fields">
-    <dt>Returns: suds object</dt>
-        <dd>Betfair API answer</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="GetAllMarkets"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetAllMarkets</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">exchangeId</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetAllMarkets">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Retrieve a list of objects with all available markets in an 
-  exchange</p>
+  <p>Clones the <a href="bfpy.bfapi.BfApi-class.html" 
+  class="link">BfApi</a> object</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
+        <li><strong class="pname"><code>memo</code></strong> (dict) - standard Python deepcopy param</li>
     </ul></dd>
-    <dt>Returns: suds object</dt>
-        <dd>Betfair API answer</dd>
+    <dt>Returns: BfApi</dt>
+        <dd>cloned self</dd>
   </dl>
 </td></tr></table>
 </div>
-<a name="GetCompleteMarketPricesCompressed"></a>
+<a name="__init__"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetCompleteMarketPricesCompressed</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">exchangeId</span>,
-        <span class="sig-arg">marketId</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetCompleteMarketPricesCompressed">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.__init__">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Retrieve the complete market prices (compressed)</p>
+  <p>Constructor. Create the transport and the suds clients needed to talk 
+  to the Betfair API.</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
-        <li><strong class="pname"><code>marketId</code></strong> (int) - id of the market</li>
+        <li><strong class="pname"><code>kwargs</code></strong> (dict) - standard Python keywords arguments</li>
     </ul></dd>
-    <dt>Returns: suds object</dt>
-        <dd>Betfair API answer</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="GetEvents"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetEvents</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">parentEventId</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetEvents">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Retrieve a list of eventItems/marketItems for a given Active Event or 
-  eventItem</p>
-  <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>parentEventId</code></strong> (int) - id of the parent event</li>
-    </ul></dd>
-    <dt>Returns: suds object</dt>
-        <dd>Betfair API answer</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="GetMarket"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetMarket</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">exchangeId</span>,
-        <span class="sig-arg">marketId</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetMarket">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Retrieve a market object</p>
-  <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
-        <li><strong class="pname"><code>marketId</code></strong> (int) - id of the market</li>
-    </ul></dd>
-    <dt>Returns: suds object</dt>
-        <dd>Betfair API answer</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="GetMarketInfo"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetMarketInfo</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">exchangeId</span>,
-        <span class="sig-arg">marketId</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetMarketInfo">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Retrieve market information</p>
-  <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
-        <li><strong class="pname"><code>marketId</code></strong> (int) - id of the market</li>
-    </ul></dd>
-    <dt>Returns: suds object</dt>
-        <dd>Betfair API answer</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="GetMarketPrices"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetMarketPrices</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">exchangeId</span>,
-        <span class="sig-arg">marketId</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetMarketPrices">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Retrieve the market prices</p>
-  <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
-        <li><strong class="pname"><code>marketId</code></strong> (int) - id of the market</li>
-    </ul></dd>
-    <dt>Returns: suds object</dt>
-        <dd>Betfair API answer</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="GetMarketPricesCompressed"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetMarketPricesCompressed</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">exchangeId</span>,
-        <span class="sig-arg">marketId</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetMarketPricesCompressed">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Retrieve the market prices (compressed)</p>
-  <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
-        <li><strong class="pname"><code>marketId</code></strong> (int) - id of the market</li>
-    </ul></dd>
-    <dt>Returns: suds object</dt>
-        <dd>Betfair API answer</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="GetCurrentBets"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetCurrentBets</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">exchangeId</span>,
-        <span class="sig-arg">betStatus</span>,
-        <span class="sig-arg">orderBy</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">NONE</code><code class="variable-quote">'</code></span>,
-        <span class="sig-arg">marketId</span>=<span class="sig-default">0</span>,
-        <span class="sig-arg">startRecord</span>=<span class="sig-default">0</span>,
-        <span class="sig-arg">recordCount</span>=<span class="sig-default">0</span>,
-        <span class="sig-arg">noTotalRecordCount</span>=<span class="sig-default">True</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetCurrentBets">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Retrieve a list of current bets on an exchange, according to betStatus
-  marketId and ordered according to orderBy</p>
-  <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
-        <li><strong class="pname"><code>betStatus</code></strong> (string (Betfair enum)) - status of bets to be returned (matched, unmatched)</li>
-        <li><strong class="pname"><code>orderBy</code></strong> (string (Betfair enum)) - ordering criterion</li>
-        <li><strong class="pname"><code>marketId</code></strong> (int) - id of market to get current bets for. With 0, all bets in the 
-          selected exchange will be returned</li>
-        <li><strong class="pname"><code>startRecord</code></strong> (int) - to enable paging through long lists</li>
-        <li><strong class="pname"><code>recordCount</code></strong> (int) - maximum number of records to retrieve (see matchedSince)</li>
-        <li><strong class="pname"><code>noTotalRecordCount</code></strong> (bool) - whether the total record count should be returned</li>
-    </ul></dd>
-    <dt>Returns: suds object</dt>
-        <dd>Betfair API answer</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="GetMatchedAndUnmatchedBets"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetMatchedAndUnmatchedBets</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">exchangeId</span>,
-        <span class="sig-arg">marketId</span>=<span class="sig-default">None</span>,
-        <span class="sig-arg">betStatus</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">MU</code><code class="variable-quote">'</code></span>,
-        <span class="sig-arg">orderBy</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">BET_ID</code><code class="variable-quote">'</code></span>,
-        <span class="sig-arg">sortOrder</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">DESC</code><code class="variable-quote">'</code></span>,
-        <span class="sig-arg">startRecord</span>=<span class="sig-default">0</span>,
-        <span class="sig-arg">recordCount</span>=<span class="sig-default">200</span>,
-        <span class="sig-arg">excludeLastSecond</span>=<span class="sig-default">False</span>,
-        <span class="sig-arg">usedMatchedSince</span>=<span class="sig-default">False</span>,
-        <span class="sig-arg">matchedSince</span>=<span class="sig-default">None</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetMatchedAndUnmatchedBets">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Alias for GetMUBets</p>
-  <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
-        <li><strong class="pname"><code>marketId</code></strong> (int) - id of the market</li>
-        <li><strong class="pname"><code>betStatus</code></strong> (string (Betfair enum)) - status of bets to be returned (matched, unmatched)</li>
-        <li><strong class="pname"><code>orderBy</code></strong> (string (Betfair enum)) - ordering criterion</li>
-        <li><strong class="pname"><code>sortOrder</code></strong> (string (Betfair enum)) - ordering criterion (asc/desc)</li>
-        <li><strong class="pname"><code>startRecord</code></strong> (int) - to enable paging through long lists</li>
-        <li><strong class="pname"><code>recordCount</code></strong> (int) - maximum number of records to retrieve (see matchedSince)</li>
-        <li><strong class="pname"><code>excludeLastSecond</code></strong> (bool) - exclude changes in the last second</li>
-        <li><strong class="pname"><code>usedMatchedSince</code></strong> (bool) - whether to use the matched since param</li>
-        <li><strong class="pname"><code>matchedSince</code></strong> (datetime) - date to return bets since. It should void recordCounts</li>
-    </ul></dd>
-    <dt>Returns: suds object</dt>
-        <dd>Betfair API answer</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="GetMUBets"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetMUBets</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">exchangeId</span>,
-        <span class="sig-arg">marketId</span>=<span class="sig-default">None</span>,
-        <span class="sig-arg">betIds</span>=<span class="sig-default">None</span>,
-        <span class="sig-arg">betStatus</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">MU</code><code class="variable-quote">'</code></span>,
-        <span class="sig-arg">orderBy</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">BET_ID</code><code class="variable-quote">'</code></span>,
-        <span class="sig-arg">sortOrder</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">DESC</code><code class="variable-quote">'</code></span>,
-        <span class="sig-arg">startRecord</span>=<span class="sig-default">0</span>,
-        <span class="sig-arg">recordCount</span>=<span class="sig-default">200</span>,
-        <span class="sig-arg">excludeLastSecond</span>=<span class="sig-default">False</span>,
-        <span class="sig-arg">usedMatchedSince</span>=<span class="sig-default">False</span>,
-        <span class="sig-arg">matchedSince</span>=<span class="sig-default">None</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetMUBets">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Get Matched and Unmatched bets for a given marketId</p>
-  <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
-        <li><strong class="pname"><code>marketId</code></strong> (int) - id of the market</li>
-        <li><strong class="pname"><code>betStatus</code></strong> (string (Betfair enum)) - status of bets to be returned (matched, unmatched)</li>
-        <li><strong class="pname"><code>orderBy</code></strong> (string (Betfair enum)) - ordering criterion</li>
-        <li><strong class="pname"><code>sortOrder</code></strong> (string (Betfair enum)) - ordering criterion (asc/desc)</li>
-        <li><strong class="pname"><code>startRecord</code></strong> (int) - to enable paging through long lists</li>
-        <li><strong class="pname"><code>recordCount</code></strong> (int) - maximum number of records to retrieve (see matchedSince)</li>
-        <li><strong class="pname"><code>excludeLastSecond</code></strong> (bool) - exclude changes in the last second</li>
-        <li><strong class="pname"><code>usedMatchedSince</code></strong> (bool) - whether to use the matched since param</li>
-        <li><strong class="pname"><code>matchedSince</code></strong> (datetime) - date to return bets since. It should void recordCounts</li>
-    </ul></dd>
-    <dt>Returns: suds object</dt>
-        <dd>Betfair API answer</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="GetMarketProfitAndLoss"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetMarketProfitAndLoss</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">exchangeId</span>,
-        <span class="sig-arg">marketId</span>,
-        <span class="sig-arg">includeBspBets</span>=<span class="sig-default">False</span>,
-        <span class="sig-arg">includeSettledBets</span>=<span class="sig-default">None</span>,
-        <span class="sig-arg">netOfCommission</span>=<span class="sig-default">None</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetMarketProfitAndLoss">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Get Matched and Unmatched bets for a given marketId</p>
-  <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
-        <li><strong class="pname"><code>marketId</code></strong> (int) - id of the market</li>
-        <li><strong class="pname"><code>includeBspBets</code></strong> (bool) - whether to include BspBets</li>
-        <li><strong class="pname"><code>includeSettledBets</code></strong> (bool) - whether to include settled bets</li>
-        <li><strong class="pname"><code>netOfCommission</code></strong> (bool) - whether to include commision in profit and loss</li>
-    </ul></dd>
-    <dt>Returns: suds object</dt>
-        <dd>Betfair API answer</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="GetAccountFunds"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetAccountFunds</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">exchangeId</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.GetAccountFunds">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Get Account Funds from an exchange</p>
-  <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
-    </ul></dd>
-    <dt>Returns: suds object</dt>
-        <dd>Betfair API answer</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="TransferFunds"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">TransferFunds</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">sourceWalletId</span>,
-        <span class="sig-arg">destWalletId</span>,
-        <span class="sig-arg">amount</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.TransferFunds">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Transfer funds amongst exchanges</p>
-  <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>sourceWalletId</code></strong> (int) - id of the suds &quot;exchange&quot; to use as source</li>
-        <li><strong class="pname"><code>destWalletId</code></strong> (int) - id of the suds &quot;exchange&quot; to use as destination</li>
-        <li><strong class="pname"><code>amount</code></strong> (float) - amount to transfer</li>
-    </ul></dd>
-    <dt>Returns: suds object</dt>
-        <dd>Betfair API answer</dd>
+    <dt>Returns: BfApi</dt>
+        <dd>a constructed object</dd>
+    <dt>Overrides:
+        object.__init__
+    </dt>
   </dl>
 </td></tr></table>
 </div>
@@ -2031,7 +2244,7 @@ The presentation, distribution or other dissemination of the informati\
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Sun Oct 17 16:02:33 2010
+    Generated by Epydoc 3.0.1 on Mon Oct 18 00:01:13 2010
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

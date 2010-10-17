@@ -334,7 +334,7 @@ except ImportError:
             If request.url can't be identified as a url, it will
             return the content in a file-like object
             @param request: A suds Request
-            @type Request: suds.transport.Request
+            @type request: suds.transport.Request
             @return: A file-like object
             @rtype: file
             """
@@ -362,8 +362,9 @@ except ImportError:
         def send(self, request):
             """
             Send a soap request
+
             @param request: A suds Request
-            @type Request: suds.transport.Request
+            @type request: suds.transport.Request
             @return: suds Reply
             @rtype: suds.transport.Reply
             """
@@ -381,9 +382,9 @@ except ImportError:
             """
             Open a connection.
             @param request: A suds Request
-            @type Request: suds.transport.Request
+            @type request: suds.transport.Request
             @param retfile: indicates if a file-like object is to be returned
-            @type: bool 
+            @type retfile: bool 
             @return: A file-like object or a suds Reply
             @rtype: file or suds.transport.Reply
             """
@@ -548,8 +549,8 @@ except ImportError:
             """
             Do postprocessing of the received reply before returning it
 
-            @param replay: the reply to process
-            @type request: suds.transport.Reply
+            @param reply: the reply to process
+            @type reply: suds.transport.Reply
             @return: the reply (although the reference is being modified)
             @rtype: suds.transport.Replay
             """

@@ -327,6 +327,41 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#GetAllCurrencies" class="summary-sig-name">GetAllCurrencies</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get a list of the currencies and the conversion rate to GBP</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.GetAllCurrencies">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#GetAllCurrenciesV2" class="summary-sig-name">GetAllCurrenciesV2</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get a list of the currencies and the conversion rate to GBP and the 
+      minimum bet for each currency</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.GetAllCurrenciesV2">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
           <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#GetActiveEventTypes" class="summary-sig-name">GetActiveEventTypes</a>(<span class="summary-sig-arg">self</span>)</span><br />
       Retrieve the list of Active Event Types (top level events)</td>
           <td align="right" valign="top">
@@ -520,7 +555,7 @@
         <span class="summary-sig-arg">startRecord</span>=<span class="summary-sig-default">0</span>,
         <span class="summary-sig-arg">recordCount</span>=<span class="summary-sig-default">200</span>,
         <span class="summary-sig-arg">excludeLastSecond</span>=<span class="summary-sig-default">False</span>,
-        <span class="summary-sig-arg">usedMatchedSince</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">useMatchedSince</span>=<span class="summary-sig-default">False</span>,
         <span class="summary-sig-arg">matchedSince</span>=<span class="summary-sig-default">None</span>)</span><br />
       Get Matched and Unmatched bets for a given marketId</td>
           <td align="right" valign="top">
@@ -542,8 +577,8 @@
         <span class="summary-sig-arg">exchangeId</span>,
         <span class="summary-sig-arg">marketId</span>,
         <span class="summary-sig-arg">includeBspBets</span>=<span class="summary-sig-default">False</span>,
-        <span class="summary-sig-arg">includeSettledBets</span>=<span class="summary-sig-default">None</span>,
-        <span class="summary-sig-arg">netOfCommission</span>=<span class="summary-sig-default">None</span>)</span><br />
+        <span class="summary-sig-arg">includeSettledBets</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">netOfCommission</span>=<span class="summary-sig-default">False</span>)</span><br />
       Get Matched and Unmatched bets for a given marketId</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.GetMarketProfitAndLoss">source&nbsp;code</a></span>
@@ -781,6 +816,7 @@
     <p class="indent-wrapped-lines"><b>Inherited from <code><a href="bfpy.bfapi.BfApi-class.html">bfapi.BfApi</a></code></b>:
       <code><a href="bfpy.bfapi.BfApi-class.html#CancelBetsByMarket">CancelBetsByMarket</a></code>,
       <code><a href="bfpy.bfapi.BfApi-class.html#Clone">Clone</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#ConvertCurrency">ConvertCurrency</a></code>,
       <code><a href="bfpy.bfapi.BfApi-class.html#GetAPIRequestHeader">GetAPIRequestHeader</a></code>,
       <code><a href="bfpy.bfapi.BfApi-class.html#GetAccountFunds">GetAccountFunds</a></code>,
       <code><a href="bfpy.bfapi.BfApi-class.html#GetMarketPrices">GetMarketPrices</a></code>,
@@ -849,6 +885,13 @@
       
     </td>
   </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="bfpy.bfapi.BfApi-class.html">bfapi.BfApi</a></code></b>:
+      <code><a href="bfpy.bfapi.BfApi-class.html#GetMinBet">GetMinBet</a></code>
+      </p>
+    </td>
+  </tr>
 </table>
 <!-- ==================== CLASS VARIABLES ==================== -->
 <a name="section-ClassVariables"></a>
@@ -872,6 +915,34 @@
     <p class="indent-wrapped-lines"><b>Inherited from <code><a href="bfpy.bfapi.BfApi-class.html">bfapi.BfApi</a></code></b>:
       <code><a href="bfpy.bfapi.BfApi-class.html#WsdlFiles">WsdlFiles</a></code>,
       <code><a href="bfpy.bfapi.BfApi-class.html#classTimeout">classTimeout</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="bfpy.bfapi.BfApi-class.html">bfapi.BfApi</a></code></b>:
+      <code><a href="bfpy.bfapi.BfApi-class.html#bfClient">bfClient</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#sessionToken">sessionToken</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#timeout">timeout</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#transport">transport</a></code>
       </p>
     </td>
   </tr>
@@ -1232,6 +1303,57 @@
   </dl>
 </td></tr></table>
 </div>
+<a name="GetAllCurrencies"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetAllCurrencies</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.GetAllCurrencies">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get a list of the currencies and the conversion rate to GBP</p>
+  <p>Removes indirection of currencyItems</p>
+  <dl class="fields">
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+    <dt>Overrides:
+        <a href="bfpy.bfapi.BfApi-class.html#GetAllCurrencies">bfapi.BfApi.GetAllCurrencies</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetAllCurrenciesV2"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetAllCurrenciesV2</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.GetAllCurrenciesV2">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get a list of the currencies and the conversion rate to GBP and the 
+  minimum bet for each currency</p>
+  <p>Removes indirection of currencyItems</p>
+  <dl class="fields">
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+    <dt>Overrides:
+        <a href="bfpy.bfapi.BfApi-class.html#GetAllCurrenciesV2">bfapi.BfApi.GetAllCurrenciesV2</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
 <a name="GetActiveEventTypes"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
@@ -1575,7 +1697,7 @@
         <span class="sig-arg">startRecord</span>=<span class="sig-default">0</span>,
         <span class="sig-arg">recordCount</span>=<span class="sig-default">200</span>,
         <span class="sig-arg">excludeLastSecond</span>=<span class="sig-default">False</span>,
-        <span class="sig-arg">usedMatchedSince</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">useMatchedSince</span>=<span class="sig-default">False</span>,
         <span class="sig-arg">matchedSince</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
@@ -1596,7 +1718,7 @@
         <li><strong class="pname"><code>startRecord</code></strong> (int) - to enable paging through long lists</li>
         <li><strong class="pname"><code>recordCount</code></strong> (int) - maximum number of records to retrieve (see matchedSince)</li>
         <li><strong class="pname"><code>excludeLastSecond</code></strong> (bool) - exclude changes in the last second</li>
-        <li><strong class="pname"><code>usedMatchedSince</code></strong> (bool) - whether to use the matched since param</li>
+        <li><strong class="pname"><code>useMatchedSince</code></strong> (bool) - whether to use the matched since param</li>
         <li><strong class="pname"><code>matchedSince</code></strong> (datetime) - date to return bets since. It should void recordCounts</li>
     </ul></dd>
     <dt>Returns: suds object</dt>
@@ -1618,8 +1740,8 @@
         <span class="sig-arg">exchangeId</span>,
         <span class="sig-arg">marketId</span>,
         <span class="sig-arg">includeBspBets</span>=<span class="sig-default">False</span>,
-        <span class="sig-arg">includeSettledBets</span>=<span class="sig-default">None</span>,
-        <span class="sig-arg">netOfCommission</span>=<span class="sig-default">None</span>)</span>
+        <span class="sig-arg">includeSettledBets</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">netOfCommission</span>=<span class="sig-default">False</span>)</span>
   </h3>
   </td><td align="right" valign="top"
     ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.GetMarketProfitAndLoss">source&nbsp;code</a></span>&nbsp;
@@ -1946,7 +2068,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Sun Oct 17 16:02:33 2010
+    Generated by Epydoc 3.0.1 on Mon Oct 18 00:01:13 2010
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
