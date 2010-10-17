@@ -1,0 +1,1968 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>bfpy.betfair.Betfair</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="bfpy-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.google.com/p/bfpy/">BfPy</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="bfpy-module.html">Package&nbsp;bfpy</a> ::
+        <a href="bfpy.betfair-module.html">Module&nbsp;betfair</a> ::
+        Class&nbsp;Betfair
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="bfpy.betfair.Betfair-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Betfair</h1><p class="nomargin-top"><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+ object --+    
+          |    
+<a href="bfpy.bfapi.BfApi-class.html">bfapi.BfApi</a> --+
+              |
+             <strong class="uidshort">Betfair</strong>
+</pre>
+
+<hr />
+<p>The Betfair object processes Betfair API answers (if needed) and 
+  decompresses compressed answers into usable objects</p>
+  <p>It does also save necessary information to performa relogin</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">Betfair</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Constructor.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#CreateMarket" class="summary-sig-name">CreateMarket</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Helper to create a suds &quot;Market&quot; object</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.CreateMarket">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#CreateRunner" class="summary-sig-name">CreateRunner</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Helper to create a suds &quot;Runner&quot; object</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.CreateRunner">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#CreateMarketPrices" class="summary-sig-name">CreateMarketPrices</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Helper to create a suds &quot;Market Prices&quot; object</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.CreateMarketPrices">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#CreateRunnerPrices" class="summary-sig-name">CreateRunnerPrices</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Helper to create a suds &quot;Runner Prices&quot; object</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.CreateRunnerPrices">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#CreatePrice" class="summary-sig-name">CreatePrice</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Helper to create a suds &quot;Price&quot; object</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.CreatePrice">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#CreateEvent" class="summary-sig-name">CreateEvent</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">eventId</span>=<span class="summary-sig-default">-1</span>,
+        <span class="summary-sig-arg">eventName</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span><br />
+      Helper to create a suds &quot;Event&quot; object</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.CreateEvent">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#CreatePlaceBet" class="summary-sig-name">CreatePlaceBet</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Helper to create a suds &quot;PlaceBet&quot; object</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.CreatePlaceBet">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#CreateCancelBet" class="summary-sig-name">CreateCancelBet</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Helper to create a suds &quot;CancelBet&quot; object</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.CreateCancelBet">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#CreateUpdateBet" class="summary-sig-name">CreateUpdateBet</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Helper to create a suds &quot;UpdateBet&quot; object</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.CreateUpdateBet">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#Login" class="summary-sig-name">Login</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">username</span>,
+        <span class="summary-sig-arg">password</span>,
+        <span class="summary-sig-arg">productId</span>=<span class="summary-sig-default">82</span>,
+        <span class="summary-sig-arg">vendorSoftwareId</span>=<span class="summary-sig-default">0</span>)</span><br />
+      Login onto the Betfair API.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.Login">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#Logout" class="summary-sig-name">Logout</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Logout.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.Logout">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#ReLogin" class="summary-sig-name">ReLogin</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Attempts to execute Login if the credentials have already been proven
+      right</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.ReLogin">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#GetActiveEventTypes" class="summary-sig-name">GetActiveEventTypes</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Retrieve the list of Active Event Types (top level events)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.GetActiveEventTypes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#GetAllEventTypes" class="summary-sig-name">GetAllEventTypes</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Retrieve the list of all Event Types (top level events)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.GetAllEventTypes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#GetAllMarkets" class="summary-sig-name">GetAllMarkets</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">exchangeId</span>)</span><br />
+      Retrieve a list of objects with all available markets in an exchange.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.GetAllMarkets">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#GetCompleteMarketPricesCompressed" class="summary-sig-name">GetCompleteMarketPricesCompressed</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">exchangeId</span>,
+        <span class="summary-sig-arg">marketId</span>)</span><br />
+      Retrieve the complete market prices (compressed).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.GetCompleteMarketPricesCompressed">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#GetCurrentBets" class="summary-sig-name">GetCurrentBets</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">exchangeId</span>)</span><br />
+      Retrieve a list of current bets on an exchange, according to 
+      betStatus marketId and ordered according to orderBy</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.GetCurrentBets">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#GetEvents" class="summary-sig-name">GetEvents</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">parentEventId</span>)</span><br />
+      Retrieve a list of eventItems/marketItems for a given Active Event or
+      eventItem</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.GetEvents">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#GetMarket" class="summary-sig-name">GetMarket</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">exchangeId</span>,
+        <span class="summary-sig-arg">marketId</span>)</span><br />
+      Retrieve a market object.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.GetMarket">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#GetMarketInfo" class="summary-sig-name">GetMarketInfo</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">exchangeId</span>,
+        <span class="summary-sig-arg">marketId</span>)</span><br />
+      Retrieve market information</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.GetMarketInfo">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#GetMarketPricesCompressed" class="summary-sig-name">GetMarketPricesCompressed</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">exchangeId</span>,
+        <span class="summary-sig-arg">marketId</span>)</span><br />
+      Retrieve the market prices (compressed)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.GetMarketPricesCompressed">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#GetMarketPricesCompressedForMarket" class="summary-sig-name">GetMarketPricesCompressedForMarket</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">market</span>)</span><br />
+      Retrieve the market prices (compressed) for a given market object</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.GetMarketPricesCompressedForMarket">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#GetMUBets" class="summary-sig-name">GetMUBets</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">exchangeId</span>,
+        <span class="summary-sig-arg">marketId</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">betStatus</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">MU</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">orderBy</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">BET_ID</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">sortOrder</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">DESC</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">startRecord</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">recordCount</span>=<span class="summary-sig-default">200</span>,
+        <span class="summary-sig-arg">excludeLastSecond</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">usedMatchedSince</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">matchedSince</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Get Matched and Unmatched bets for a given marketId</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.GetMUBets">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#GetMarketProfitAndLoss" class="summary-sig-name">GetMarketProfitAndLoss</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">exchangeId</span>,
+        <span class="summary-sig-arg">marketId</span>,
+        <span class="summary-sig-arg">includeBspBets</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">includeSettledBets</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">netOfCommission</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Get Matched and Unmatched bets for a given marketId</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.GetMarketProfitAndLoss">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#PlaceBets" class="summary-sig-name">PlaceBets</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">exchangeId</span>,
+        <span class="summary-sig-arg">placeBets</span>,
+        <span class="summary-sig-arg">nonIPRePlace</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Place a list of bets in an exchange</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.PlaceBets">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#CancelBets" class="summary-sig-name">CancelBets</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">exchangeId</span>,
+        <span class="summary-sig-arg">cancelBets</span>)</span><br />
+      Cancel a list of bets in an exchange</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.CancelBets">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#UpdateBets" class="summary-sig-name">UpdateBets</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">exchangeId</span>,
+        <span class="summary-sig-arg">updateBets</span>)</span><br />
+      Update a list of bets</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.UpdateBets">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="GetAccountFundsUk"></a><span class="summary-sig-name">GetAccountFundsUk</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Helper function to Get Account funds from the UK Exchange</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.GetAccountFundsUk">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="GetAccountFundsAus"></a><span class="summary-sig-name">GetAccountFundsAus</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Helper function to Get Account funds from the Aus Exchange</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.GetAccountFundsAus">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="TransferFundsFromUkToAus"></a><span class="summary-sig-name">TransferFundsFromUkToAus</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">amount</span>)</span><br />
+      Helper function to Transfer Account funds from the UK to Aus</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.TransferFundsFromUkToAus">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="TransferFundsFromAusToUk"></a><span class="summary-sig-name">TransferFundsFromAusToUk</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">amount</span>)</span><br />
+      Helper function to Transfer Account funds from the Aus to UK</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.TransferFundsFromAusToUk">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds MarketPrices/CompleteMarketPrices object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#ParseMarketPricesCompressed" class="summary-sig-name">ParseMarketPricesCompressed</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">compressedPrices</span>,
+        <span class="summary-sig-arg">completeCompressed</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Decompress compressed (complete or standard 3 levels) into a</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.ParseMarketPricesCompressed">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds MarketPrices header object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#ParseMarketPricesCompressedHeader" class="summary-sig-name">ParseMarketPricesCompressedHeader</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">marketPricesHeader</span>,
+        <span class="summary-sig-arg">completeCompressed</span>)</span><br />
+      Decompress the header of the compressed market prices</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.ParseMarketPricesCompressedHeader">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds RunnerPrices objects</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#ParseMarketPricesCompressedRunner" class="summary-sig-name">ParseMarketPricesCompressedRunner</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">marketPricesRunner</span>,
+        <span class="summary-sig-arg">completeCompressed</span>)</span><br />
+      Decompress the the prices of a runner</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.ParseMarketPricesCompressedRunner">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds Price objects</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#ParseMarketPricesCompressedRunnerPrice" class="summary-sig-name">ParseMarketPricesCompressedRunnerPrice</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">compressedPriceParts</span>)</span><br />
+      Decompress individual price parts into Price objects</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.ParseMarketPricesCompressedRunnerPrice">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">suds Price objects</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#ParseMarketPricesRunnerCompressedAvailabilityInfo" class="summary-sig-name">ParseMarketPricesRunnerCompressedAvailabilityInfo</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">compressedPriceParts</span>)</span><br />
+      Decompress individual price availability (complete prices) parts into
+      objects</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.ParseMarketPricesRunnerCompressedAvailabilityInfo">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="bfpy.bfapi.BfApi-class.html">bfapi.BfApi</a></code></b>:
+      <code><a href="bfpy.bfapi.BfApi-class.html#CancelBetsByMarket">CancelBetsByMarket</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#Clone">Clone</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#GetAPIRequestHeader">GetAPIRequestHeader</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#GetAccountFunds">GetAccountFunds</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#GetMarketPrices">GetMarketPrices</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#GetMatchedAndUnmatchedBets">GetMatchedAndUnmatchedBets</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#GetObject">GetObject</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#GetObjectExchange">GetObjectExchange</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#GetObjectGlobal">GetObjectGlobal</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#GetRequestObject">GetRequestObject</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#GetRequestObjectExchange">GetRequestObjectExchange</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#GetRequestObjectGlobal">GetRequestObjectGlobal</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#InvokeRequest">InvokeRequest</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#InvokeRequestExchange">InvokeRequestExchange</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#InvokeRequestGlobal">InvokeRequestGlobal</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#KeepAlive">KeepAlive</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#TransferFunds">TransferFunds</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#__deepcopy__">__deepcopy__</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Static Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-StaticMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">float</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.betfair.Betfair-class.html#ToFloatIfNotNull" class="summary-sig-name">ToFloatIfNotNull</a>(<span class="summary-sig-arg">strval</span>)</span><br />
+      Return a float if the string is not null or 0.0</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.ToFloatIfNotNull">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="bfpy.bfapi.BfApi-class.html">bfapi.BfApi</a></code></b>:
+      <code><a href="bfpy.bfapi.BfApi-class.html#WsdlFiles">WsdlFiles</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#classTimeout">classTimeout</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Constructor. Call the parent BfApi constructor and initialize the 
+  variables that will allow session login management</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>kwargs</code></strong> (dict) - standard Python keywords arguments</li>
+    </ul></dd>
+    <dt>Returns: Betfair</dt>
+        <dd>a constructed object</dd>
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="CreateMarket"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CreateMarket</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.CreateMarket">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Helper to create a suds &quot;Market&quot; object</p>
+  <dl class="fields">
+    <dt>Returns: suds object</dt>
+        <dd>a Market object</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="CreateRunner"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CreateRunner</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.CreateRunner">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Helper to create a suds &quot;Runner&quot; object</p>
+  <dl class="fields">
+    <dt>Returns: suds object</dt>
+        <dd>a Runner object</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="CreateMarketPrices"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CreateMarketPrices</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.CreateMarketPrices">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Helper to create a suds &quot;Market Prices&quot; object</p>
+  <dl class="fields">
+    <dt>Returns: suds object</dt>
+        <dd>a Market Prices object</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="CreateRunnerPrices"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CreateRunnerPrices</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.CreateRunnerPrices">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Helper to create a suds &quot;Runner Prices&quot; object</p>
+  <dl class="fields">
+    <dt>Returns: suds object</dt>
+        <dd>a Runner Prices object</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="CreatePrice"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CreatePrice</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.CreatePrice">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Helper to create a suds &quot;Price&quot; object</p>
+  <dl class="fields">
+    <dt>Returns: suds object</dt>
+        <dd>a Price object</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="CreateEvent"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CreateEvent</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">eventId</span>=<span class="sig-default">-1</span>,
+        <span class="sig-arg">eventName</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.CreateEvent">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Helper to create a suds &quot;Event&quot; object</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>eventId</code></strong> (int) - id of the event</li>
+        <li><strong class="pname"><code>eventName</code></strong> (str) - name of the event</li>
+    </ul></dd>
+    <dt>Returns: suds object</dt>
+        <dd>a Event object</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="CreatePlaceBet"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CreatePlaceBet</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.CreatePlaceBet">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Helper to create a suds &quot;PlaceBet&quot; object</p>
+  <dl class="fields">
+    <dt>Returns: suds object</dt>
+        <dd>a PlaceBet object</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="CreateCancelBet"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CreateCancelBet</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.CreateCancelBet">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Helper to create a suds &quot;CancelBet&quot; object</p>
+  <dl class="fields">
+    <dt>Returns: suds object</dt>
+        <dd>a CancelBet object</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="CreateUpdateBet"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CreateUpdateBet</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.CreateUpdateBet">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Helper to create a suds &quot;UpdateBet&quot; object</p>
+  <dl class="fields">
+    <dt>Returns: suds object</dt>
+        <dd>a UpdateBet object</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="Login"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">Login</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">username</span>,
+        <span class="sig-arg">password</span>,
+        <span class="sig-arg">productId</span>=<span class="sig-default">82</span>,
+        <span class="sig-arg">vendorSoftwareId</span>=<span class="sig-default">0</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.Login">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Login onto the Betfair API. Values are temporarily stored for login 
+  session management</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>username</code></strong> (str) - username</li>
+        <li><strong class="pname"><code>password</code></strong> (str) - password</li>
+        <li><strong class="pname"><code>productId</code></strong> (int) - type of API access to use</li>
+        <li><strong class="pname"><code>vendorSoftwareId</code></strong> (int) - id assigned to software vendors</li>
+    </ul></dd>
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+    <dt>Overrides:
+        <a href="bfpy.bfapi.BfApi-class.html#Login">bfapi.BfApi.Login</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="Logout"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">Logout</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.Logout">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Logout. Invalidates login management data</p>
+  <dl class="fields">
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+    <dt>Overrides:
+        <a href="bfpy.bfapi.BfApi-class.html#Logout">bfapi.BfApi.Logout</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="ReLogin"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ReLogin</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.ReLogin">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Attempts to execute Login if the credentials have already been proven 
+  right</p>
+  <dl class="fields">
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+    <dt>Raises:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code><strong class='fraise'><a href="bfpy.bferror.BfApiError-class.html">BfApiError</a></strong></code> - if no session was active (with NO_SESSION as errorCode)</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetActiveEventTypes"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetActiveEventTypes</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.GetActiveEventTypes">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Retrieve the list of Active Event Types (top level events)</p>
+  <p>Removes one level of idirection for eventTypeItems</p>
+  <p>It performs an &quot;eventItemization&quot; of the top level 
+  events.</p>
+  <p>The reasoning behind this is to let the UI manage only two types of 
+  objects: -- Events (eventItems) -- Markets (marketItems)</p>
+  <p>EventTypes have an exchangeId field for Greyhound races and Events 
+  have fields like menuLevel and orderIndex, but the main fields are 
+  actually the same:</p>
+  <p>-- id vs eventId -- name vs eventName</p>
+  <dl class="fields">
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+    <dt>Overrides:
+        <a href="bfpy.bfapi.BfApi-class.html#GetActiveEventTypes">bfapi.BfApi.GetActiveEventTypes</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetAllEventTypes"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetAllEventTypes</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.GetAllEventTypes">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Retrieve the list of all Event Types (top level events)</p>
+  <p>Removes one level of idirection for eventTypeItems</p>
+  <p>It performs an &quot;eventItemization&quot; of the top level 
+  events.</p>
+  <p>The reasoning behind this is to let the UI manage only two types of 
+  objects: -- Events (eventItems) -- Markets (marketItems)</p>
+  <p>EventTypes have an exchangeId field for Greyhound races and Events 
+  have fields like menuLevel and orderIndex, but the main fields are 
+  actually the same: -- id vs eventId -- name vs eventName</p>
+  <dl class="fields">
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+    <dt>Overrides:
+        <a href="bfpy.bfapi.BfApi-class.html#GetAllEventTypes">bfapi.BfApi.GetAllEventTypes</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetAllMarkets"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetAllMarkets</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">exchangeId</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.GetAllMarkets">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Retrieve a list of objects with all available markets in an 
+  exchange.</p>
+  <p>The response is compressed and is decompressed into a list of 
+  marketItems objects</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
+    </ul></dd>
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+    <dt>Overrides:
+        <a href="bfpy.bfapi.BfApi-class.html#GetAllMarkets">bfapi.BfApi.GetAllMarkets</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetCompleteMarketPricesCompressed"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetCompleteMarketPricesCompressed</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">exchangeId</span>,
+        <span class="sig-arg">marketId</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.GetCompleteMarketPricesCompressed">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Retrieve the complete market prices (compressed).</p>
+  <p>Decompresses the answer into an object</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
+        <li><strong class="pname"><code>marketId</code></strong> (int) - id of the market</li>
+    </ul></dd>
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+    <dt>Overrides:
+        <a href="bfpy.bfapi.BfApi-class.html#GetCompleteMarketPricesCompressed">bfapi.BfApi.GetCompleteMarketPricesCompressed</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetCurrentBets"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetCurrentBets</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">exchangeId</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.GetCurrentBets">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Retrieve a list of current bets on an exchange, according to betStatus
+  marketId and ordered according to orderBy</p>
+  <p>Unfortunately passing &quot;MU&quot; fails, so 2 calls have to be 
+  made, one to get the matched bets and another to get the unmatched 
+  bets</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
+    </ul></dd>
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+    <dt>Overrides:
+        <a href="bfpy.bfapi.BfApi-class.html#GetCurrentBets">bfapi.BfApi.GetCurrentBets</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetEvents"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetEvents</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">parentEventId</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.GetEvents">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Retrieve a list of eventItems/marketItems for a given Active Event or 
+  eventItem</p>
+  <p>parentEvenId -1 indicates that the top active EventTypes shall be 
+  returned, voiding the need to separately call GetActiveEventTypes</p>
+  <p>Removes one level of idirection for eventItems and marketItems</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>parentEventId</code></strong> (int) - id of the parent event</li>
+    </ul></dd>
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+    <dt>Overrides:
+        <a href="bfpy.bfapi.BfApi-class.html#GetEvents">bfapi.BfApi.GetEvents</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetMarket"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetMarket</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">exchangeId</span>,
+        <span class="sig-arg">marketId</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.GetMarket">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Retrieve a market object.</p>
+  <p>A &quot;exchangeId&quot; parameter is added to the object (to ease all
+  management for the calling application)</p>
+  <p>Removal of array indirection is performed on runners and 
+  eventHiearchy.</p>
+  <p>marketTime is returned as naive (no timezone) by suds. Adjusted to 
+  local timezone before returning</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
+        <li><strong class="pname"><code>marketId</code></strong> (int) - id of the market</li>
+    </ul></dd>
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+    <dt>Overrides:
+        <a href="bfpy.bfapi.BfApi-class.html#GetMarket">bfapi.BfApi.GetMarket</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetMarketInfo"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetMarketInfo</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">exchangeId</span>,
+        <span class="sig-arg">marketId</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.GetMarketInfo">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Retrieve market information</p>
+  <p>A &quot;exchangeId&quot; parameter is added to the object (to ease all
+  management for the calling application)</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
+        <li><strong class="pname"><code>marketId</code></strong> (int) - id of the market</li>
+    </ul></dd>
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+    <dt>Overrides:
+        <a href="bfpy.bfapi.BfApi-class.html#GetMarketInfo">bfapi.BfApi.GetMarketInfo</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetMarketPricesCompressed"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetMarketPricesCompressed</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">exchangeId</span>,
+        <span class="sig-arg">marketId</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.GetMarketPricesCompressed">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Retrieve the market prices (compressed)</p>
+  <p>The answer is decompressed into a MarketPrices object</p>
+  <p>Removal of array indirection is done on runnerPrices and 
+  bestPricesToXXX</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
+        <li><strong class="pname"><code>marketId</code></strong> (int) - id of the market</li>
+    </ul></dd>
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+    <dt>Overrides:
+        <a href="bfpy.bfapi.BfApi-class.html#GetMarketPricesCompressed">bfapi.BfApi.GetMarketPricesCompressed</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetMarketPricesCompressedForMarket"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetMarketPricesCompressedForMarket</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">market</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.GetMarketPricesCompressedForMarket">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Retrieve the market prices (compressed) for a given market object</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>market</code></strong> (suds object) - object as returned by <a 
+          href="bfpy.betfair.Betfair-class.html#GetMarket" 
+          class="link">GetMarket</a></li>
+    </ul></dd>
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetMUBets"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetMUBets</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">exchangeId</span>,
+        <span class="sig-arg">marketId</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">betStatus</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">MU</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">orderBy</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">BET_ID</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">sortOrder</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">DESC</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">startRecord</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">recordCount</span>=<span class="sig-default">200</span>,
+        <span class="sig-arg">excludeLastSecond</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">usedMatchedSince</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">matchedSince</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.GetMUBets">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get Matched and Unmatched bets for a given marketId</p>
+  <p>Removal of indirection for bets is performed</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
+        <li><strong class="pname"><code>marketId</code></strong> (int) - id of the market</li>
+        <li><strong class="pname"><code>betStatus</code></strong> (string (Betfair enum)) - status of bets to be returned (matched, unmatched)</li>
+        <li><strong class="pname"><code>orderBy</code></strong> (string (Betfair enum)) - ordering criterion</li>
+        <li><strong class="pname"><code>sortOrder</code></strong> (string (Betfair enum)) - ordering criterion (asc/desc)</li>
+        <li><strong class="pname"><code>startRecord</code></strong> (int) - to enable paging through long lists</li>
+        <li><strong class="pname"><code>recordCount</code></strong> (int) - maximum number of records to retrieve (see matchedSince)</li>
+        <li><strong class="pname"><code>excludeLastSecond</code></strong> (bool) - exclude changes in the last second</li>
+        <li><strong class="pname"><code>usedMatchedSince</code></strong> (bool) - whether to use the matched since param</li>
+        <li><strong class="pname"><code>matchedSince</code></strong> (datetime) - date to return bets since. It should void recordCounts</li>
+    </ul></dd>
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+    <dt>Overrides:
+        <a href="bfpy.bfapi.BfApi-class.html#GetMUBets">bfapi.BfApi.GetMUBets</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetMarketProfitAndLoss"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetMarketProfitAndLoss</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">exchangeId</span>,
+        <span class="sig-arg">marketId</span>,
+        <span class="sig-arg">includeBspBets</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">includeSettledBets</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">netOfCommission</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.GetMarketProfitAndLoss">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get Matched and Unmatched bets for a given marketId</p>
+  <p>Removal of annotations indirection is performed.</p>
+  <p>Correction of errorCode is performed on API mismatch</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
+        <li><strong class="pname"><code>marketId</code></strong> (int) - id of the market</li>
+        <li><strong class="pname"><code>includeBspBets</code></strong> (bool) - whether to include BspBets</li>
+        <li><strong class="pname"><code>includeSettledBets</code></strong> (bool) - whether to include settled bets</li>
+        <li><strong class="pname"><code>netOfCommission</code></strong> (bool) - whether to include commision in profit and loss</li>
+    </ul></dd>
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+    <dt>Overrides:
+        <a href="bfpy.bfapi.BfApi-class.html#GetMarketProfitAndLoss">bfapi.BfApi.GetMarketProfitAndLoss</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="PlaceBets"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">PlaceBets</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">exchangeId</span>,
+        <span class="sig-arg">placeBets</span>,
+        <span class="sig-arg">nonIPRePlace</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.PlaceBets">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Place a list of bets in an exchange</p>
+  <p>Removal of betResults indirection is performed</p>
+  <p>As the API is non-permissive and sometimes the correct persistenceType
+  can not be fully inferred, the function can be asked to re-place the bet 
+  by changing the persistenceType</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
+        <li><strong class="pname"><code>placeBets</code></strong> (list) - list of bets to be placed</li>
+        <li><strong class="pname"><code>nonIPRePlace</code></strong> (bool) - whether to re-place in-play bets if persistence type was wrong</li>
+    </ul></dd>
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+    <dt>Overrides:
+        <a href="bfpy.bfapi.BfApi-class.html#PlaceBets">bfapi.BfApi.PlaceBets</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="CancelBets"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CancelBets</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">exchangeId</span>,
+        <span class="sig-arg">cancelBets</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.CancelBets">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Cancel a list of bets in an exchange</p>
+  <p>Removal of betResults indirection is performed</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
+        <li><strong class="pname"><code>cancelBets</code></strong> (list) - list of bets to be canceled</li>
+    </ul></dd>
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+    <dt>Overrides:
+        <a href="bfpy.bfapi.BfApi-class.html#CancelBets">bfapi.BfApi.CancelBets</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="UpdateBets"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">UpdateBets</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">exchangeId</span>,
+        <span class="sig-arg">updateBets</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.UpdateBets">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Update a list of bets</p>
+  <p>Removal of betResults indirection is performed</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>exchangeId</code></strong> (int) - id of the suds &quot;exchange&quot; wsdl client to use</li>
+        <li><strong class="pname"><code>updateBets</code></strong> (list) - list of bets to be canceled</li>
+    </ul></dd>
+    <dt>Returns: suds object</dt>
+        <dd>Betfair API answer</dd>
+    <dt>Overrides:
+        <a href="bfpy.bfapi.BfApi-class.html#UpdateBets">bfapi.BfApi.UpdateBets</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="ParseMarketPricesCompressed"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ParseMarketPricesCompressed</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">compressedPrices</span>,
+        <span class="sig-arg">completeCompressed</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.ParseMarketPricesCompressed">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Decompress compressed (complete or standard 3 levels) into a</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>compressedPrices</code></strong> (str) - compressed prices string</li>
+        <li><strong class="pname"><code>completeCompressed</code></strong> (bool) - whether the prices to decompress are the standard 3 level or the 
+          complete market prices</li>
+    </ul></dd>
+    <dt>Returns: suds MarketPrices/CompleteMarketPrices object</dt>
+        <dd>a MarketPrices or CompleteMarketPrices formed object from the 
+          compressed string</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="ParseMarketPricesCompressedHeader"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ParseMarketPricesCompressedHeader</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">marketPricesHeader</span>,
+        <span class="sig-arg">completeCompressed</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.ParseMarketPricesCompressedHeader">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Decompress the header of the compressed market prices</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>marketPricesHeader</code></strong> (str) - compressed prices header string</li>
+        <li><strong class="pname"><code>completeCompressed</code></strong> (bool) - whether the prices to decompress are the standard 3 level or the 
+          complete market prices</li>
+    </ul></dd>
+    <dt>Returns: suds MarketPrices header object</dt>
+        <dd>the prices header</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="ParseMarketPricesCompressedRunner"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ParseMarketPricesCompressedRunner</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">marketPricesRunner</span>,
+        <span class="sig-arg">completeCompressed</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.ParseMarketPricesCompressedRunner">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Decompress the the prices of a runner</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>marketPricesRunner</code></strong> (str) - compressed prices header string</li>
+        <li><strong class="pname"><code>completeCompressed</code></strong> (bool) - whether the prices to decompress are the standard 3 level or the 
+          complete market prices</li>
+    </ul></dd>
+    <dt>Returns: suds RunnerPrices objects</dt>
+        <dd>the prices for a runner</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="ToFloatIfNotNull"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ToFloatIfNotNull</span>(<span class="sig-arg">strval</span>)</span>
+    <br /><em class="fname">Static Method</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.ToFloatIfNotNull">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return a float if the string is not null or 0.0</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>strval</code></strong> (str) - string containing the float</li>
+    </ul></dd>
+    <dt>Returns: float</dt>
+        <dd>the float contained in the string or 0.0</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="ParseMarketPricesCompressedRunnerPrice"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ParseMarketPricesCompressedRunnerPrice</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">compressedPriceParts</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.ParseMarketPricesCompressedRunnerPrice">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Decompress individual price parts into Price objects</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>compressedPriceParts</code></strong> (str) - compressed prices</li>
+    </ul></dd>
+    <dt>Returns: suds Price objects</dt>
+        <dd>the individual prices</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="ParseMarketPricesRunnerCompressedAvailabilityInfo"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ParseMarketPricesRunnerCompressedAvailabilityInfo</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">compressedPriceParts</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.betfair-pysrc.html#Betfair.ParseMarketPricesRunnerCompressedAvailabilityInfo">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Decompress individual price availability (complete prices) parts into 
+  objects</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>compressedPriceParts</code></strong> (str) - compressed prices</li>
+    </ul></dd>
+    <dt>Returns: suds Price objects</dt>
+        <dd>the individual prices</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="bfpy-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.google.com/p/bfpy/">BfPy</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun Oct 17 16:02:33 2010
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

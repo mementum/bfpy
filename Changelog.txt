@@ -1,3 +1,11 @@
+0.52
+-- Added eypdoc documentation for the entire library
+-- Full param set for GetCurrentBets (with defaults)
+-- Full param set for GetMatchedAndUnmatchedBets (with defaults)
+-- Full param set for GetMarketProfitAndLoss (with defaults)
+-- Suds replica transport now has setuseragent and setdecompmethods
+   as stubs
+
 0.51
 -- softwareVendorId added as a member of the Betfair class
 -- Changes to the transport for better proxy/useragent support

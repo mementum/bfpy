@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class Hierarchy</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="bfpy-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th bgcolor="#70b0f0" class="navbar-select"
+          >&nbsp;&nbsp;&nbsp;Trees&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.google.com/p/bfpy/">BfPy</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">&nbsp;</td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="class-tree.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<center><b>
+ [ <a href="module-tree.html">Module Hierarchy</a>
+ | <a href="class-tree.html">Class Hierarchy</a> ]
+</b></center><br />
+<h1 class="epydoc">Class Hierarchy</h1>
+<ul class="nomargin-top">
+    <li> <strong class="uidlink">logging.Filterer</strong>:
+      <em class="summary">A base class for loggers and handlers which allows them to share 
+        common code.</em>
+    <ul>
+    <li> <strong class="uidlink">logging.Handler</strong>:
+      <em class="summary">Handler instances dispatch logging events to specific destinations.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="bfpy.bftransport.NullHandler-class.html">bfpy.bftransport.NullHandler</a></strong>:
+      <em class="summary">Definition of a Null logging class to avoid any output from suds</em>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.bfapi.NullHandler-class.html">bfpy.bfapi.NullHandler</a></strong>:
+      <em class="summary">Definition of a Null logging class to avoid any output from suds</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink">suds.transport.Transport</strong>:
+      <em class="summary">The transport <i>interface</i>.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="bfpy.bftransport.BfTransport-class.html">bfpy.bftransport.BfTransport</a></strong>:
+      <em class="summary">Small replica from original suds transport that allows setting a 
+        proxy via a method and opening wsdl files stored in a string</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink">object</strong>:
+      <em class="summary">The most base type</em>
+    <ul>
+    <li> <strong class="uidlink">exceptions.BaseException</strong>:
+      <em class="summary">Common base class for all exceptions</em>
+    <ul>
+    <li> <strong class="uidlink">exceptions.Exception</strong>:
+      <em class="summary">Common base class for all non-exit exceptions.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="bfpy.bferror.BfError-class.html">bfpy.bferror.BfError</a></strong>:
+      <em class="summary">Base BfPy exception class.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="bfpy.bferror.BfBetfairError-class.html">bfpy.bferror.BfBetfairError</a></strong>:
+      <em class="summary">Derived from BfError.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="bfpy.bferror.BfApiError-class.html">bfpy.bferror.BfApiError</a></strong>:
+      <em class="summary">Derived from the Betfair Catch-all exceptions for API errors</em>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.bferror.BfApplicationError-class.html">bfpy.bferror.BfApplicationError</a></strong>:
+      <em class="summary">Derived from the Betfair Catch-all exceptions for application 
+        specific errors.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.bferror.BfServiceError-class.html">bfpy.bferror.BfServiceError</a></strong>:
+      <em class="summary">Derived from the Betfair Catch-all exceptions for Service errors</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.bferror.BfPythonError-class.html">bfpy.bferror.BfPythonError</a></strong>:
+      <em class="summary">Derived from BfError, holding potential Python errors (like missing
+        method or syntax errors)</em>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.bferror.BfSudsError-class.html">bfpy.bferror.BfSudsError</a></strong>:
+      <em class="summary">Derived from BfError, holding potential Suds errors Not all suds 
+        errors can be caught, due to lack of unified exception generation 
+        in suds</em>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.bferror.BfTransportError-class.html">bfpy.bferror.BfTransportError</a></strong>:
+      <em class="summary">Derived from BfError, to hold error generated by BfTransport</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="bfpy.bferror.BfHttpError-class.html">bfpy.bferror.BfHttpError</a></strong>:
+      <em class="summary">Derived from BfError, to hold error errors at Http level</em>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.bferror.BfNetworkError-class.html">bfpy.bferror.BfNetworkError</a></strong>:
+      <em class="summary">Derived from BfError, to hold error (potential) network errors</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.bfapi.BfApi-class.html">bfpy.bfapi.BfApi</a></strong>:
+      <em class="summary">The BfApi is a mere &quot;objectization&quot; of the betfair API.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="bfpy.betfair.Betfair-class.html">bfpy.betfair.Betfair</a></strong>:
+      <em class="summary">The Betfair object processes Betfair API answers (if needed) and 
+        decompresses compressed answers into usable objects</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.betfair.EmptyObject-class.html">bfpy.betfair.EmptyObject</a></strong>:
+      <em class="summary">Used to implement objects, like those arising from compressed 
+        answers</em>
+    </li>
+    <li> <strong class="uidlink">tuple</strong>:
+      <em class="summary">tuple() -&gt; empty tuple tuple(iterable) -&gt; tuple initialized 
+        from iterable's items</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="bfpy.bfapi.MarketTuple-class.html">bfpy.bfapi.MarketTuple</a></strong>:
+      <em class="summary">MarketTuple(exchangeId, marketId)</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink">datetime.tzinfo</strong>:
+      <em class="summary">Abstract base class for time zone info objects.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="bfpy.timezone.GMT-class.html">bfpy.timezone.GMT</a></strong>:
+      <em class="summary">GMT (good for 0, +1 and possibly +2) Timezone.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.timezone.LocalTimezone-class.html">bfpy.timezone.LocalTimezone</a></strong>:
+      <em class="summary">System specific local timezone.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.timezone.UTC-class.html">bfpy.timezone.UTC</a></strong>:
+      <em class="summary">UTC Timezone class</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+</ul>
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="bfpy-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th bgcolor="#70b0f0" class="navbar-select"
+          >&nbsp;&nbsp;&nbsp;Trees&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.google.com/p/bfpy/">BfPy</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun Oct 17 16:02:33 2010
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

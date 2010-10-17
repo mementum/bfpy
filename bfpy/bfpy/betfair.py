@@ -31,21 +31,38 @@ from datetime import datetime
 from collections import defaultdict
 from operator import attrgetter
 
-from timezone import GMT, LocalTimezone
-
-
-class EmptyObject(object):
-    pass
-
 import bfapi
 import bferror
+from timezone import GMT, LocalTimezone
+
+class EmptyObject(object):
+    '''
+    Used to implement objects, like those arising from
+    compressed answers
+    '''
+    pass
 
 MinBet = 2.00
 
 class Betfair(bfapi.BfApi):
+    '''
+    The Betfair object processes Betfair API answers (if needed) and decompresses
+    compressed answers into usable objects
+
+    It does also save necessary information to performa relogin
+    '''
 
     def __init__(self, **kwargs):
+        '''
+        Constructor. Call the parent BfApi constructor and initialize the variables
+        that will allow session login management
 
+        @param kwargs: standard Python keywords arguments
+        @type kwargs: dict
+
+        @returns: a constructed object
+        @rtype: Betfair
+        '''
         bfapi.BfApi.__init__(self, **kwargs)
 
         self.username = None
@@ -57,21 +74,62 @@ class Betfair(bfapi.BfApi):
     # API Object Creation
     ############################################################
     def CreateMarket(self):
+        '''
+        Helper to create a suds "Market" object
+
+        @returns: a Market object
+        @rtype: suds object
+        '''
         return self.GetObjectExchange('Market')
 
     def CreateRunner(self):
+        '''
+        Helper to create a suds "Runner" object
+
+        @returns: a Runner object
+        @rtype: suds object
+        '''
         return self.GetObjectExchange('Runner')
 
     def CreateMarketPrices(self):
+        '''
+        Helper to create a suds "Market Prices" object
+
+        @returns: a Market Prices object
+        @rtype: suds object
+        '''
         return self.GetObjectExchange('MarketPrices')
 
     def CreateRunnerPrices(self):
+        '''
+        Helper to create a suds "Runner Prices" object
+
+        @returns: a Runner Prices object
+        @rtype: suds object
+        '''
         return self.GetObjectExchange('RunnerPrices')
 
     def CreatePrice(self):
+        '''
+        Helper to create a suds "Price" object
+
+        @returns: a Price object
+        @rtype: suds object
+        '''
         return self.GetObjectExchange('Price')
 
     def CreateEvent(self, eventId=-1, eventName=''):
+        '''
+        Helper to create a suds "Event" object
+
+        @param eventId: id of the event
+        @type eventId: int
+        @param eventName: name of the event
+        @type eventName: str
+
+        @returns: a Event object
+        @rtype: suds object
+        '''
         # event = self.GetObjectGlobal('BFEvent')
         event = EmptyObject()
         event.eventId = eventId
@@ -80,14 +138,32 @@ class Betfair(bfapi.BfApi):
 
 
     def CreatePlaceBet(self):
+        '''
+        Helper to create a suds "PlaceBet" object
+
+        @returns: a PlaceBet object
+        @rtype: suds object
+        '''
         return self.GetObjectExchange('PlaceBets')
 
 
     def CreateCancelBet(self):
+        '''
+        Helper to create a suds "CancelBet" object
+
+        @returns: a CancelBet object
+        @rtype: suds object
+        '''
         return self.GetObjectExchange('CancelBets')
 
 
     def CreateUpdateBet(self):
+        '''
+        Helper to create a suds "UpdateBet" object
+
+        @returns: a UpdateBet object
+        @rtype: suds object
+        '''
         return self.GetObjectExchange('UpdateBets')
 
 
@@ -96,6 +172,22 @@ class Betfair(bfapi.BfApi):
     ############################################################
 
     def Login(self, username, password, productId=82, vendorSoftwareId=0):
+        '''
+        Login onto the Betfair API. Values are temporarily stored for
+        login session management
+
+        @param username: username
+        @type username: str
+        @param password: password
+        @type password: str
+        @param productId: type of API access to use
+        @type productId: int
+        @param vendorSoftwareId: id assigned to software vendors
+        @type vendorSoftwareId: int
+
+        @returns: Betfair API answer
+        @rtype: suds object
+        '''
         # Invalidate previous credentials
         self.username = None
         self.password = None
@@ -112,6 +204,12 @@ class Betfair(bfapi.BfApi):
 
 
     def Logout(self):
+        '''
+        Logout. Invalidates login management data
+
+        @returns: Betfair API answer
+        @rtype: suds object
+        '''
         # Invalidate credentials before calling the service, since this might fail
         # with an Exception, preventing us from clearing the credentials 
         self.username = None
@@ -124,7 +222,10 @@ class Betfair(bfapi.BfApi):
         '''
         Attempts to execute Login if the credentials have already been proven right
 
-        Raises a BfApiError_t with NO_SESSION otherwise
+        @returns: Betfair API answer
+        @rtype: suds object
+
+        @raise BfApiError: if no session was active (with NO_SESSION as errorCode)
         '''
         if self.username:
             return self.Login(self.username, self.password, self.productId, self.vendorSoftwareId)
@@ -138,16 +239,24 @@ class Betfair(bfapi.BfApi):
 
     def GetActiveEventTypes(self):
         '''
-        Return the list of EventTypes aliased as Events.
+        Retrieve the list of Active Event Types (top level events)
+
+        Removes one level of idirection for eventTypeItems
+
+        It performs an "eventItemization" of the top level events.
+
         The reasoning behind this is to let the UI manage only two types of objects:
-        -- Events
-        -- Markets
+        -- Events (eventItems)
+        -- Markets (marketItems)
 
         EventTypes have an exchangeId field for Greyhound races and Events have fields
         like menuLevel and orderIndex, but the main fields are actually the same:
 
         -- id vs eventId
         -- name vs eventName
+
+        @returns: Betfair API answer
+        @rtype: suds object
         '''
         # Invoke the plain Api method
         response = bfapi.BfApi.GetActiveEventTypes(self)
@@ -157,7 +266,6 @@ class Betfair(bfapi.BfApi):
             response.eventTypeItems = response.eventTypeItems.EventType
         else:
             response.eventTypeItems = list()
-
 
         # Alias the .id and .name attributes to those of an event
         for event in response.eventTypeItems:
@@ -173,6 +281,26 @@ class Betfair(bfapi.BfApi):
 
 
     def GetAllEventTypes(self):
+        '''
+        Retrieve the list of all Event Types (top level events)
+
+        Removes one level of idirection for eventTypeItems
+
+        It performs an "eventItemization" of the top level events.
+
+        The reasoning behind this is to let the UI manage only two types of objects:
+        -- Events (eventItems)
+        -- Markets (marketItems)
+
+        EventTypes have an exchangeId field for Greyhound races and Events have fields
+        like menuLevel and orderIndex, but the main fields are actually the same:
+        -- id vs eventId
+        -- name vs eventName
+
+
+        @returns: Betfair API answer
+        @rtype: suds object
+        '''
         response = bfapi.BfApi.GetAllEventTypes(self)
 
         # Remove indirection
@@ -181,10 +309,31 @@ class Betfair(bfapi.BfApi):
         else:
             response.eventTypeItems = list()
 
+        # Alias the .id and .name attributes to those of an event
+        for event in response.eventTypeItems:
+            event.eventId = event.id
+            event.eventName = event.name
+
+        # Create the eventItems and marketItems alias
+        response.eventItems = response.eventTypeItems
+        response.marketItems = list()
+
         return response
 
 
     def GetAllMarkets(self, exchangeId):
+        '''
+        Retrieve a list of objects with all available markets in an exchange.
+
+        The response is compressed and is decompressed into a list of marketItems
+        objects
+
+        @param exchangeId: id of the suds "exchange" wsdl client to use
+        @type exchangeId: int
+
+        @returns: Betfair API answer
+        @rtype: suds object
+        '''
         # Call the plain Api service
         response = bfapi.BfApi.GetAllMarkets(self, exchangeId)
 
@@ -280,6 +429,19 @@ class Betfair(bfapi.BfApi):
 
 
     def GetCompleteMarketPricesCompressed(self, exchangeId, marketId):
+        '''
+        Retrieve the complete market prices (compressed).
+
+        Decompresses the answer into an object
+
+        @param exchangeId: id of the suds "exchange" wsdl client to use
+        @type exchangeId: int
+        @param marketId: id of the market
+        @type marketId: int
+
+        @returns: Betfair API answer
+        @rtype: suds object
+        '''
         response = bfapi.BfApi.GetCompleteMarketPricesCompressed(self, exchangeId, marketId)
 
         response.completeMarketPrices = self.ParseMarketPricesCompressed(response.completemarketPrices, completeCompressed=True)
@@ -289,7 +451,20 @@ class Betfair(bfapi.BfApi):
 
 
     def GetCurrentBets(self, exchangeId):
-        responseMatched = bfapi.BfApi.GetCurrentBets(self, exchangeId, 'M')
+        '''
+        Retrieve a list of current bets on an exchange, according to betStatus
+        marketId and ordered according to orderBy
+
+        Unfortunately passing "MU" fails, so 2 calls have to be made, one to
+        get the matched bets and another to get the unmatched bets
+
+        @param exchangeId: id of the suds "exchange" wsdl client to use
+        @type exchangeId: int
+
+        @returns: Betfair API answer
+        @rtype: suds object
+        '''
+        responseMatched = bfapi.BfApi.GetCurrentBets(self, exchangeId, betStatus='M')
 
         # Remove one indirection level if possible
         if responseMatched.bets:
@@ -297,7 +472,7 @@ class Betfair(bfapi.BfApi):
         else:
             responseMatched.bets = list()
 
-        responseUnmatched = bfapi.BfApi.GetCurrentBets(self, exchangeId, 'U')
+        responseUnmatched = bfapi.BfApi.GetCurrentBets(self, exchangeId, betStatus='U')
         if responseUnmatched.bets:
             responseMatched.bets.extend(responseUnmatched.bets.Bet)
 
@@ -324,21 +499,20 @@ class Betfair(bfapi.BfApi):
 
     def GetEvents(self, parentEventId):
         '''
-        Return the list of events and markets for the given parentEventId
+        Retrieve a list of eventItems/marketItems for a given Active Event
+        or eventItem
 
-        The id -1 indicates that the top active EventTypes shall be returned.
+        parentEvenId -1 indicates that the top active EventTypes shall be returned,
+        voiding the need to separately call GetActiveEventTypes
 
-        The EventTypes will be aliased to eventItems
+        Removes one level of idirection for eventItems and marketItems
 
+        @param parentEventId: id of the parent event
         @type parentEventId: int
-        @param parentEventId: Id of parent event for the returned objects
 
-        @rtype: object
-        @return: the response contains two lists: eventItems and marketItems
-                 eventItems can be identified by the eventId and eventName fields
-                 marketItems can be identified by teh marketId and marketName fields
+        @returns: Betfair API answer
+        @rtype: suds object
         '''
-
         # Return the EventTypes if requested to do so with a -1 parentEventId
         if parentEventId == bfapi.RootEventId:
             return self.GetActiveEventTypes()
@@ -361,6 +535,25 @@ class Betfair(bfapi.BfApi):
 
 
     def GetMarket(self, exchangeId, marketId):
+        '''
+        Retrieve a market object.
+
+        A "exchangeId" parameter is added to the object (to ease all management
+        for the calling application)
+        
+        Removal of array indirection is performed on runners and eventHiearchy.
+
+        marketTime is returned as naive (no timezone) by suds. Adjusted to local
+        timezone before returning
+
+        @param exchangeId: id of the suds "exchange" wsdl client to use
+        @type exchangeId: int
+        @param marketId: id of the market
+        @type marketId: int
+
+        @returns: Betfair API answer
+        @rtype: suds object
+        '''
         # Call the original
         response = bfapi.BfApi.GetMarket(self, exchangeId, marketId);
 
@@ -398,6 +591,20 @@ class Betfair(bfapi.BfApi):
 
 
     def GetMarketInfo(self, exchangeId, marketId):
+        '''
+        Retrieve market information
+
+        A "exchangeId" parameter is added to the object (to ease all management
+        for the calling application)
+
+        @param exchangeId: id of the suds "exchange" wsdl client to use
+        @type exchangeId: int
+        @param marketId: id of the market
+        @type marketId: int
+
+        @returns: Betfair API answer
+        @rtype: suds object
+        '''
         response = bfapi.BfApi.GetMarketInfo(self, exchangeId, marketId)
 
         response.marketLite.exchangeId = exchangeId
@@ -406,6 +613,21 @@ class Betfair(bfapi.BfApi):
 
 
     def GetMarketPricesCompressed(self, exchangeId, marketId):
+        '''
+        Retrieve the market prices (compressed)
+
+        The answer is decompressed into a MarketPrices object
+
+        Removal of array indirection is done on runnerPrices and bestPricesToXXX
+
+        @param exchangeId: id of the suds "exchange" wsdl client to use
+        @type exchangeId: int
+        @param marketId: id of the market
+        @type marketId: int
+
+        @returns: Betfair API answer
+        @rtype: suds object
+        '''
         response = bfapi.BfApi.GetMarketPricesCompressed(self, exchangeId, marketId)
 
         # The 'compressed string' response has to be parsed, processed and returned in a structure, ready
@@ -430,6 +652,15 @@ class Betfair(bfapi.BfApi):
 
 
     def GetMarketPricesCompressedForMarket(self, market):
+        '''
+        Retrieve the market prices (compressed) for a given market object
+
+        @param market: object as returned by L{GetMarket}
+        @type market: suds object
+
+        @returns: Betfair API answer
+        @rtype: suds object
+        '''
         response = self.GetMarketPricesCompressed(market.exchangeId, market.marketId)
 
         response.market = market
@@ -444,8 +675,47 @@ class Betfair(bfapi.BfApi):
         return response
 
 
-    def GetMUBets(self, exchangeId, marketId):
-        response = bfapi.BfApi.GetMUBets(self, exchangeId, marketId)
+    def GetMUBets(self, exchangeId, marketId=None,
+                  betStatus='MU', orderBy='BET_ID', sortOrder='DESC',
+                  startRecord=0, recordCount=200, excludeLastSecond=False,
+                  useMatchedSince=False, matchedSince=None):
+        '''
+        Get Matched and Unmatched bets for a given marketId
+
+        Removal of indirection for bets is performed
+
+        @param exchangeId: id of the suds "exchange" wsdl client to use
+        @type exchangeId: int
+        @param marketId: id of the market
+        @type marketId: int
+        @param betStatus: status of bets to be returned (matched, unmatched)
+        @type betStatus: string (Betfair enum)
+        @param orderBy: ordering criterion
+        @type orderBy: string (Betfair enum)
+        @param sortOrder: ordering criterion (asc/desc)
+        @type sortOrder: string (Betfair enum)
+        @param startRecord: to enable paging through long lists
+        @type startRecord: int
+        @param recordCount: maximum number of records to retrieve (see matchedSince)
+        @type recordCount: int
+        @param excludeLastSecond: exclude changes in the last second
+        @type excludeLastSecond: bool
+        @param useMatchedSince: whether to use the matched since param
+        @type useMatchedSince: bool
+        @param matchedSince: date to return bets since. It should void recordCounts
+        @type matchedSince: datetime
+
+        @returns: Betfair API answer
+        @rtype: suds object
+        '''
+        response = bfapi.BfApi.GetMUBets(self, exchangeId, marketId=marketId,
+                                         betStatus=betStatus, orderBy=orderBy,
+                                         sortOrder=sortOrder,
+                                         startRecord=startRecord, recordCount=recordCount,
+                                         excludeLastSecond=excludeLastSecond,
+                                         useMatchedSince=useMatchedSince,
+                                         matchedSince=matchedSince)
+                                         
 
         if response.bets:
             response.bets = response.bets.MUBet
@@ -455,8 +725,34 @@ class Betfair(bfapi.BfApi):
         return response
 
 
-    def GetMarketProfitAndLoss(self, exchangeId, marketId):
-        response = bfapi.BfApi.GetMarketProfitAndLoss(self, exchangeId, marketId)
+    def GetMarketProfitAndLoss(self, exchangeId, marketId,
+                               includeBspBets=False,
+                               includeSettledBets=False, netOfCommission=False):
+        '''
+        Get Matched and Unmatched bets for a given marketId
+
+        Removal of annotations indirection is performed.
+
+        Correction of errorCode is performed on API mismatch
+
+        @param exchangeId: id of the suds "exchange" wsdl client to use
+        @type exchangeId: int
+        @param marketId: id of the market
+        @type marketId: int
+        @param includeBspBets: whether to include BspBets
+        @type includeBspBets: bool
+        @param includeSettledBets: whether to include settled bets
+        @type includeSettledBets: bool
+        @param netOfCommission: whether to include commision in profit and loss
+        @type netOfCommission: bool
+
+        @returns: Betfair API answer
+        @rtype: suds object
+        '''
+        response = bfapi.BfApi.GetMarketProfitAndLoss(self, exchangeId, marketId,
+                                                      includeBspBets=includeBspBets,
+                                                      includeSettledBets=includeSettledBets,
+                                                      netOfCommission=netOfCommission)
 
         if response.annotations:
             response.annotations = response.annotations.ProfitAndLoss
@@ -475,6 +771,26 @@ class Betfair(bfapi.BfApi):
     ############################################################
 
     def PlaceBets(self, exchangeId, placeBets, nonIPRePlace=False):
+        '''
+        Place a list of bets in an exchange
+
+        Removal of betResults indirection is performed
+
+        As the API is non-permissive and sometimes the correct persistenceType
+        can not be fully inferred, the function can be asked to re-place
+        the bet by changing the persistenceType
+
+        @param exchangeId: id of the suds "exchange" wsdl client to use
+        @type exchangeId: int
+        @param placeBets: list of bets to be placed
+        @type placeBets: list
+        @param nonIPRePlace: whether to re-place in-play bets if persistence
+                             type was wrong
+        @type nonIPRePlace: bool
+
+        @returns: Betfair API answer
+        @rtype: suds object
+        '''
         response = bfapi.BfApi.PlaceBets(self, exchangeId, placeBets)
         if response.betResults:
             response.betResults = response.betResults.PlaceBetsResult
@@ -503,6 +819,19 @@ class Betfair(bfapi.BfApi):
 
 
     def CancelBets(self, exchangeId, cancelBets):
+        '''
+        Cancel a list of bets in an exchange
+
+        Removal of betResults indirection is performed
+
+        @param exchangeId: id of the suds "exchange" wsdl client to use
+        @type exchangeId: int
+        @param cancelBets: list of bets to be canceled
+        @type cancelBets: list
+
+        @returns: Betfair API answer
+        @rtype: suds object
+        '''
         response = bfapi.BfApi.CancelBets(self, exchangeId, cancelBets)
         if response.betResults:
             response.betResults = response.betResults.CancelBetsResult
@@ -513,6 +842,19 @@ class Betfair(bfapi.BfApi):
 
 
     def UpdateBets(self, exchangeId, updateBets):
+        '''
+        Update a list of bets
+
+        Removal of betResults indirection is performed
+
+        @param exchangeId: id of the suds "exchange" wsdl client to use
+        @type exchangeId: int
+        @param updateBets: list of bets to be canceled
+        @type updateBets: list
+
+        @returns: Betfair API answer
+        @rtype: suds object
+        '''
         response = bfapi.BfApi.UpdateBets(self, exchangeId, updateBets)
         if response.betResults:
             response.betResults = response.betResults.UpdateBetsResult
@@ -527,18 +869,30 @@ class Betfair(bfapi.BfApi):
     ############################################################
 
     def GetAccountFundsUk(self):
+        '''
+        Helper function to Get Account funds from the UK Exchange
+        '''
         return self.GetAccountFunds(bfapi.ExchangeUk)
 
 
     def GetAccountFundsAus(self):
+        '''
+        Helper function to Get Account funds from the Aus Exchange
+        '''
         return self.GetAccountFunds(bfapi.ExchangeAus)
 
 
     def TransferFundsFromUkToAus(self, amount):
+        '''
+        Helper function to Transfer Account funds from the UK to Aus
+        '''
         return self.TransferFunds(bfapi.ExchangeUk, bfapi.ExchangeAus, amount)
 
 
     def TransferFundsFromAusToUk(self, amount):
+        '''
+        Helper function to Transfer Account funds from the Aus to UK
+        '''
         return self.TransferFunds(bfapi.ExchangeAus, bfapi.ExchangeUk, amount)
 
     ############################################################
@@ -546,6 +900,18 @@ class Betfair(bfapi.BfApi):
     ############################################################
 
     def ParseMarketPricesCompressed(self, compressedPrices, completeCompressed=False):
+        '''
+        Decompress compressed (complete or standard 3 levels) into a
+
+        @param compressedPrices: compressed prices string
+        @type compressedPrices: str
+        @param completeCompressed: whether the prices to decompress are the standard
+                                   3 level or the complete market prices
+        @type completeCompressed: bool
+
+        @returns: a MarketPrices or CompleteMarketPrices formed object from the compressed string
+        @rtype: suds MarketPrices/CompleteMarketPrices object
+        '''
         # Split the string in main MarketPrices object + Runner Objects
         parts = compressedPrices.split(':')
 
@@ -579,6 +945,18 @@ class Betfair(bfapi.BfApi):
 
 
     def ParseMarketPricesCompressedHeader(self, marketPricesHeader, completeCompressed):
+        '''
+        Decompress the header of the compressed market prices
+
+        @param marketPricesHeader: compressed prices header string
+        @type marketPricesHeader: str
+        @param completeCompressed: whether the prices to decompress are the standard
+                                   3 level or the complete market prices
+        @type completeCompressed: bool
+
+        @returns: the prices header
+        @rtype: suds MarketPrices header object
+        '''
         # Generate the object to store the information
         # marketPrices = self.GetObjectExchange('MarketPrices')
         marketPrices = EmptyObject()
@@ -625,6 +1003,18 @@ class Betfair(bfapi.BfApi):
 
 
     def ParseMarketPricesCompressedRunner(self, marketPricesRunner, completeCompressed):
+        '''
+        Decompress the the prices of a runner
+
+        @param marketPricesRunner: compressed prices header string
+        @type marketPricesRunner: str
+        @param completeCompressed: whether the prices to decompress are the standard
+                                   3 level or the complete market prices
+        @type completeCompressed: bool
+
+        @returns: the prices for a runner
+        @rtype: suds RunnerPrices objects
+        '''
         # Generate a RunnerPrices object
         # runner = self.GetObjectExchange('RunnerPrices')
         runner = EmptyObject()
@@ -715,11 +1105,28 @@ class Betfair(bfapi.BfApi):
 
     @staticmethod
     def ToFloatIfNotNull(strval):
+        '''
+        Return a float if the string is not null or 0.0
 
-        return float(strval) if len(strval) else 0.0
+        @param strval: string containing the float
+        @type strval: str
+
+        @returns: the float contained in the string or 0.0
+        @rtype: float
+        '''
+        return float(strval) if strval else 0.0
 
 
     def ParseMarketPricesCompressedRunnerPrice(self, compressedPriceParts):
+        '''
+        Decompress individual price parts into Price objects
+
+        @param compressedPriceParts: compressed prices
+        @type compressedPriceParts: str
+
+        @returns: the individual prices
+        @rtype: suds Price objects
+        '''
         # Generate a RunnerPrices object
         # price = self.GetObjectExchange('Price')
         price = EmptyObject()
@@ -738,6 +1145,15 @@ class Betfair(bfapi.BfApi):
 
 
     def ParseMarketPricesRunnerCompressedAvailabilityInfo(self, compressedPriceParts):
+        '''
+        Decompress individual price availability (complete prices) parts into objects
+
+        @param compressedPriceParts: compressed prices
+        @type compressedPriceParts: str
+
+        @returns: the individual prices
+        @rtype: suds Price objects
+        '''
         # Generate a RunnerPrices object
         # price = self.GetObjectExchange('AvailabilityInfo')
         price = EmptyObject()

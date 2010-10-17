@@ -25,6 +25,12 @@
 # along with BfPy. If not, see <http://www.gnu.org/licenses/>.
 #
 ################################################################################
+
+'''
+BfPy wsdsl variables holding the Betfair WSDL definitions
+'''
+
+
 #
 # Variables containing the Betfair WSDL files
 #

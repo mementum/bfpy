@@ -25,35 +25,70 @@
 # along with BfPy. If not, see <http://www.gnu.org/licenses/>.
 #
 ################################################################################
-#
-# Timezone classes. Adapted (if needed) from the Python documentation to make
-# them more generic
-#
+'''
+BfPy Timezone classes. Adapted (if needed) from the Python documentation to make
+them more generic
+'''
 
 from datetime import datetime, timedelta, tzinfo
 import time as _time
 
 class UTC(tzinfo):
+    '''
+    UTC Timezone class
+    '''
     ZERO = timedelta(0)
 
     def utcoffset(self, dt):
+        '''
+        Offset to utc. Always zero for itself
+        '''
         return UTC.ZERO
 
     def tzname(self, dt):
+        '''
+        Return the name of this timezone
+        '''
         return "UTC"
 
     def dst(self, dt):
+        '''
+        Return the current offset for Daylight Savings. Always 0
+        in UTC
+        '''
         return UTC.ZERO
 
 
 class GMT(tzinfo):
+    '''
+    GMT (good for 0, +1 and possibly +2) Timezone.
+    Since Betfair times seem to be in UK time (GMT0) it serves the purpose
+    '''
     def __init__(self, timeOffset=0):
+        '''
+        Initialize
+
+        @param timeOffset: distance to GMT
+        @type timeOffset: int
+        '''
         self.timeOffset = timeOffset
 
     def utcoffset(self, dt):
+        '''
+        Return the offset to UTC (GMT) for the given datetime
+
+        @param dt: datetime to see offset against
+        @type dt: datetime
+        '''
         return timedelta(hours=self.timeOffset) + self.dst(dt)
 
     def dst(self, dt):
+        '''
+        Return the daylight savings offset for the given datetime
+
+        @param dt: datetime to see offset against
+        @type dt: datetime
+        '''
         d = datetime(dt.year, 4, 1) # DST starts last Sunday in March
         self.dston = d - timedelta(days=d.weekday() + 1)
 
@@ -68,6 +103,12 @@ class GMT(tzinfo):
         return timedelta(hours=deltaVal)
 
     def tzname(self, dt):
+        '''
+        Return the name of this timezone for the given datetime
+
+        @param dt: datetime to see offset against
+        @type dt: datetime
+        '''
         text = 'GMT'
         if self.timeOffset > 0:
             text += '+' + self.timeOffset
@@ -78,6 +119,11 @@ class GMT(tzinfo):
 
 
 class LocalTimezone(tzinfo):
+    '''
+    System specific local timezone.
+
+    As seen in the Python docs (with mods)
+    '''
     ZERO = timedelta(0)
     STDOFFSET = timedelta(seconds=-_time.timezone)
     if _time.daylight:
@@ -88,21 +134,46 @@ class LocalTimezone(tzinfo):
     DSTDIFF = DSTOFFSET - STDOFFSET
 
     def utcoffset(self, dt):
+        '''
+        Return the offset to UTC (GMT) for the given datetime
+
+        @param dt: datetime to see offset against
+        @type dt: datetime
+        '''
         if self._isdst(dt):
             return LocalTimezone.DSTOFFSET
         else:
             return LocalTimezone.STDOFFSET
 
     def dst(self, dt):
+        '''
+        Return the daylight savings offset for the given datetime
+
+        @param dt: datetime to see offset against
+        @type dt: datetime
+        '''
         if self._isdst(dt):
             return LocalTimezone.DSTDIFF
         else:
             return LocalTimezone.ZERO
 
     def tzname(self, dt):
+        '''
+        Return the name of this timezone for the given datetime
+
+        @param dt: datetime to see offset against
+        @type dt: datetime
+        '''
         return _time.tzname[self._isdst(dt)]
 
     def _isdst(self, dt):
+        '''
+        Private function to find out fi the system reports
+        to be in DST mode for the given datetime
+
+        @param dt: datetime to see offset against
+        @type dt: datetime
+        '''
         tt = (dt.year, dt.month, dt.day,
               dt.hour, dt.minute, dt.second,
               dt.weekday(), 0, -1)

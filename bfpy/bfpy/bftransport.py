@@ -25,6 +25,11 @@
 # along with BfPy. If not, see <http://www.gnu.org/licenses/>.
 #
 ################################################################################
+'''
+BfPy suds transport
+'''
+
+
 #
 # Contains classes for a suds http(s) transport implementation
 #
@@ -38,7 +43,17 @@ import suds
 
 
 class NullHandler(logging.Handler):
+    '''
+    Definition of a Null logging class to avoid any output
+    from suds
+    '''
     def emit(self, record):
+        '''
+        Simply discard the incoming with the incoming logging record
+
+        @param record: logging record
+        @type record: str
+        '''
         pass
 
 log = logging.getLogger(__name__)
@@ -59,15 +74,14 @@ try:
 
     class BfTransport(suds.transport.Transport):
         '''
-        HTTP transport using httxlib.  Provides http/https transport
+        HTTP transport using httxlib. Provides http/https transport
         with cookies, authentication (basic and digest), redirection,
         certificate support and certificate validation
         and proxy support
         '''
 
-
         def __init__(self, httxmanager=None, **kwargs):
-            """
+            '''
             Initialize the transport.
 
             If an httxmanager is passed it will be used as the underlying transport
@@ -77,20 +91,38 @@ try:
             @type httxmanager: HttxManager
             @param kwargs: keyword arguments
             @type kwargs: dict
-            """
+            '''
             suds.transport.Transport.__init__(self)
             self.httxmanager = httxmanager if httxmanager else HttxManager()
 
 
         def setproxy(self, proxydict):
+            '''
+            Set the proxy options for the transport
+
+            @param proxydict: proxy options
+            @type proxydict: dict
+            '''
             self.httxmanager.setproxy(proxydict)
 
 
         def setuseragent(self, useragent):
+            '''
+            Set the useragent option for the transport
+
+            @param useragent: the useragent to fake
+            @type useragent: str
+            '''
             self.httxmanager.setuseragent(useragent)
 
 
         def setdecompmethods(self, decompmethods):
+            '''
+            Set the decompression methods option for the transport
+
+            @param decompmethods: the useragent to fake
+            @type decompmethods: list
+            '''
             self.httxmanager.setdecompmethods(decompmethods)
 
         
@@ -226,16 +258,55 @@ except ImportError:
 
     import urllib2 as u2
 
-    # Small replica from original suds transport that allows
-    # setting a proxy via a method and opening wsdl files
-    # stored in a string
     class BfTransport(suds.transport.Transport):
+        '''
+        Small replica from original suds transport that allows
+        setting a proxy via a method and opening wsdl files
+        stored in a string
+        '''
         def __init__(self, **kwargs):
+            '''
+            Initialize the transport.
+
+            @param kwargs: keyword arguments
+            @type kwargs: dict
+            '''
             suds.transport.Transport.__init__(self, **kwargs)
 
 
+        def setdecompmethods(self, decompmethods):
+            '''
+            Set the decompression methods option for the transport
+
+            Do nothing. It can be implemented by overriding
+            the send from the standard suds transport
+
+            @param decompmethods: the useragent to fake
+            @type decompmethods: list
+            '''
+            pass
+
         def setproxy(self, proxy):
+            '''
+            Set the proxy options for the transport
+
+            @param proxy: proxy options
+            @type proxy: dict
+            '''
             self.options.proxy = proxy
+
+
+        def setuseragent(self, useragent):
+            '''
+            Set the useragent option for the transport
+
+            Do nothing. It can be implemented by overriding
+            the send from the standard suds transport
+
+            @param useragent: the useragent to fake
+            @type useragent: str
+            '''
+            pass
 
 
         def open(self, request):
@@ -245,7 +316,7 @@ except ImportError:
             return the content in a file-like object
 
             @param request: A suds Request
-            @type Request: suds.transport.Request
+            @type request: suds.transport.Request
             @return: A file-like object
             @rtype: file
             """

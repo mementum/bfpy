@@ -25,8 +25,11 @@
 # along with BfPy. If not, see <http://www.gnu.org/licenses/>.
 #
 ################################################################################
+'''
+BfPy main module. It imports the main objects to let them be re-imported
+'''
 
-version = 0.51
+version = 0.52
 
 import suds
 
