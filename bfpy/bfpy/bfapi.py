@@ -39,39 +39,28 @@ from socket import error as SocketError
 from threading import Lock
 
 import suds
-    
-class NullHandler(logging.Handler):
-    '''
-    Definition of a Null logging class to avoid any output
-    from suds
-    '''
-    def emit(self, record):
-        '''
-        Simply discard the incoming with the incoming logging record
-
-        @param record: logging record
-        @type record: str
-        '''
-        pass
-
-sudsLogger = logging.getLogger('suds')
-sudsLogger.setLevel(logging.ERROR)
-
-if True:
-    handler = NullHandler()
-else:
-    handler = logging.StreamHandler()
-    formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s -\n%(message)s")
-    handler.setFormatter(formatter)
-    handler.setLevel(logging.ERROR)
-
-sudsLogger.addHandler(handler)
-
 
 import bferror
 import bftransport
 import bfwsdl
+from util import NullHandler
 
+# Logging configuration
+sudsLogger = logging.getLogger('suds')
+sudsLogger.setLevel(logging.ERROR)
+
+if False:
+    handler = logging.StreamHandler()
+    formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s -\n%(message)s")
+    handler.setFormatter(formatter)
+    handler.setLevel(logging.ERROR)
+else:
+    handler = NullHandler()
+
+sudsLogger.addHandler(handler)
+
+
+# Some defaults
 RootEventId = -1
 
 GlobalService = 0
@@ -90,6 +79,16 @@ class BfApi(object):
     management.
 
     No processing of the answers received from the API is done
+
+    @ivar sessionToken: holds the session information
+    @type sessionToken: str
+    @ivar transport: reference to the transport class to use with suds
+    @type transport: suds.transport.Transport
+    @ivar bfClient: references to suds clients (global and exchanges)
+    @type bfClient: dict
+    @ivar timeout: timeout to apply to network calls
+    @type timeout: float
+
     '''
 
     # default send receive timeout
@@ -552,6 +551,70 @@ class BfApi(object):
     ############################################################
     # Read-Only Betting API Services
     ############################################################
+
+    @staticmethod
+    def GetMinBet(currency):
+
+        MinBets = {
+            'AUD': {'minimumStake': 5.0, 'minimumRangeStake': 3.0, 'minimumBSPLayLiability': 30.0},
+            'CAD': {'minimumStake': 6.0, 'minimumRangeStake': 3.0, 'minimumBSPLayLiability': 30.0},
+            'DKK': {'minimumStake': 30.0, 'minimumRangeStake': 15.0, 'minimumBSPLayLiability': 150.0},
+            'EUR': {'minimumStake': 2.0, 'minimumRangeStake': 2.0, 'minimumBSPLayLiability': 20.0},
+            'HKD': {'minimumStake': 25.0, 'minimumRangeStake': 15.0, 'minimumBSPLayLiability': 125.0},
+            'NOK': {'minimumStake': 30.0, 'minimumRangeStake': 15.0, 'minimumBSPLayLiability': 150.0},
+            'SGD': {'minimumStake': 6.0, 'minimumRangeStake': 1.0, 'minimumBSPLayLiability': 30.0},
+            'SEK': {'minimumStake': 30.0, 'minimumRangeStake': 15.0, 'minimumBSPLayLiability': 150.0},
+            'GBP': {'minimumStake': 2.0, 'minimumRangeStake': 1.0, 'minimumBSPLayLiability': 10.0},
+            'USD': {'minimumStake': 4.0, 'minimumRangeStake': 2.0, 'minimumBSPLayLiability': 20.0},
+            }
+
+        return MinBets[currency]
+
+
+    def ConvertCurrency(self, amount, fromCurrency, toCurrency):
+        '''
+        Converts an amount from fromCurrentcy to toCurrentcy
+
+        @param amount: amount to be converted
+        @type amount: float
+        @param fromCurrency: source currency
+        @type fromCurrency: str
+        @param toCurrency: destination currency
+        @type toCurrency: str
+
+        @returns: Betfair API answer
+        @rtype: suds object
+        '''
+        request = self.GetRequestObjectGlobal('ConvertCurrencyReq')
+        request.amount = amount
+        request.fromCurrency = fromCurrency
+        request.toCurrency = toCurrency
+        
+        return self.InvokeRequestGlobal('convertCurrency', request);
+
+
+    def GetAllCurrencies(self):
+        '''
+        Get a list of the currencies and the conversion rate to GBP
+
+        @returns: Betfair API answer
+        @rtype: suds object
+        '''
+        request = self.GetRequestObjectGlobal('GetCurrenciesReq')
+        return self.InvokeRequestGlobal('getAllCurrencies', request);
+
+
+    def GetAllCurrenciesV2(self):
+        '''
+        Get a list of the currencies and the conversion rate to GBP
+        and the minimum bet for each currency
+
+        @returns: Betfair API answer
+        @rtype: suds object
+        '''
+        request = self.GetRequestObjectGlobal('GetCurrenciesV2Req')
+        return self.InvokeRequestGlobal('getAllCurrenciesV2', request);
+
 
     def GetActiveEventTypes(self):
         '''

@@ -1,3 +1,9 @@
+0.53
+-- Added currency functions (ConvertCurrency, GetAllCurrencies, GetAllCurrenciesV2)
+-- Added a staticmethod to retrieve minimum bets per currency
+-- Improved the non-HttxLib transport (for independent usage) HTTP 1.1 Keep-alive can't be implemented due to the restrictions on urllib2
+-- Moved utility object definitions to a util module
+
 0.52
 -- Added eypdoc documentation for the entire library
 -- Full param set for GetCurrentBets (with defaults)

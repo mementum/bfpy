@@ -34,13 +34,7 @@ from operator import attrgetter
 import bfapi
 import bferror
 from timezone import GMT, LocalTimezone
-
-class EmptyObject(object):
-    '''
-    Used to implement objects, like those arising from
-    compressed answers
-    '''
-    pass
+from util import EmptyObject
 
 MinBet = 2.00
 
@@ -82,6 +76,7 @@ class Betfair(bfapi.BfApi):
         '''
         return self.GetObjectExchange('Market')
 
+
     def CreateRunner(self):
         '''
         Helper to create a suds "Runner" object
@@ -90,6 +85,7 @@ class Betfair(bfapi.BfApi):
         @rtype: suds object
         '''
         return self.GetObjectExchange('Runner')
+
 
     def CreateMarketPrices(self):
         '''
@@ -100,6 +96,7 @@ class Betfair(bfapi.BfApi):
         '''
         return self.GetObjectExchange('MarketPrices')
 
+
     def CreateRunnerPrices(self):
         '''
         Helper to create a suds "Runner Prices" object
@@ -109,6 +106,7 @@ class Betfair(bfapi.BfApi):
         '''
         return self.GetObjectExchange('RunnerPrices')
 
+
     def CreatePrice(self):
         '''
         Helper to create a suds "Price" object
@@ -117,6 +115,7 @@ class Betfair(bfapi.BfApi):
         @rtype: suds object
         '''
         return self.GetObjectExchange('Price')
+
 
     def CreateEvent(self, eventId=-1, eventName=''):
         '''
@@ -165,7 +164,6 @@ class Betfair(bfapi.BfApi):
         @rtype: suds object
         '''
         return self.GetObjectExchange('UpdateBets')
-
 
     ############################################################
     # General Services API Services
@@ -236,6 +234,43 @@ class Betfair(bfapi.BfApi):
     ############################################################
     # Read-Only Betting API Services
     ############################################################
+
+    def GetAllCurrencies(self):
+        '''
+        Get a list of the currencies and the conversion rate to GBP
+
+        Removes indirection of currencyItems
+
+        @returns: Betfair API answer
+        @rtype: suds object
+        '''
+        request = bfapi.BfApi.GetRequestObjectGlobal(self, 'GetCurrenciesReq')
+
+        if hasattr(request, 'currencyItems'):
+            request.currencyItems = request.currencyItems.Currency
+        else:
+            request.currencyItems = list()
+            
+        return self.InvokeRequestGlobal('getAllCurrencies', request);
+
+
+    def GetAllCurrenciesV2(self):
+        '''
+        Get a list of the currencies and the conversion rate to GBP
+        and the minimum bet for each currency
+
+        Removes indirection of currencyItems
+
+        @returns: Betfair API answer
+        @rtype: suds object
+        '''
+        request = bfapi.BfApi.GetRequestObjectGlobal(self, 'GetCurrenciesV2Req')
+        if hasattr(request, 'currencyItems'):
+            request.currencyItems = request.currencyItems.CurrencyV2
+        else:
+            request.currencyItems = list()
+        return self.InvokeRequestGlobal('getAllCurrenciesV2', request);
+
 
     def GetActiveEventTypes(self):
         '''
