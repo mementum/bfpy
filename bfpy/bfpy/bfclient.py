@@ -26,14 +26,34 @@
 #
 ################################################################################
 '''
-BfPy main module. It imports the main objects to let them be re-imported
+BfClient object implementation.
 '''
 
-version = 0.54
+from bfapi2 import BfApi
+from bfservice import BfService
+import bfclientext 
 
-# import suds
 
-from betfair import *
-from bfapi import *
-from bferror import *
+class BfClient(BfApi):
 
+    __metaclass__ = BfService
+
+    # Methods that override base class non-data descriptors, are implemented
+    # as non-data descriptors also (simple override doesn't work)
+    serviceDefs = [
+        bfclientext.GetEvents(),
+        bfclientext.GetCurrentBets(),
+        bfclientext.PlaceBets(),
+        ]
+
+    def __init__(self, **kwargs):
+        BfApi.__init__(self, **kwargs)
+
+
+    def reLogin(self):
+        return self.login(username=self.username, password=self.password,
+                          productId=self.productId, vendorSoftwareId=self.vendorSoftwareId)
+
+
+# Alias to look like version 1 of the API
+Betfair = BfClient

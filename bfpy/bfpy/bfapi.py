@@ -71,6 +71,7 @@ freeApi = 82
 
 MarketTuple = namedtuple('MarketTuple', ('exchangeId', 'marketId'))
 
+
 class BfApi(object):
     '''
     The BfApi is a mere "objectization" of the betfair API. It creates the needed
@@ -88,7 +89,6 @@ class BfApi(object):
     @type bfClient: dict
     @ivar timeout: timeout to apply to network calls
     @type timeout: float
-
     '''
 
     # default send receive timeout
@@ -404,7 +404,40 @@ class BfApi(object):
 
 
     ############################################################
-    # Services
+    # Utility Functions
+    ############################################################
+    @staticmethod
+    def GetMinBet(currency):
+        '''
+        Returns the minimum stakes for standard, range and BSP liability
+
+        @param currency: the currency for which the minimum stakes are sought
+        @type currency: str (3 letter code)
+
+        @returns: the minimum stakes (minimumStake, minimumRangeStake, minimumBSPLayLiability
+        @rtype: namedtuple
+        '''
+        CurrencyMinStakes = namedtuple('CurrencyMinStakes', ('minimumStake', 'minimumRangeStake', 'minimumBSPLayLiability'))
+
+        # minimumStake, minimumRangeStake, minimumBSPLayLiability
+        MinBets = {
+            'AUD': CurrencyMinStakes(5.0, 3.0, 30.0),
+            'CAD': CurrencyMinStakes(6.0, 3.0, 30.0),
+            'DKK': CurrencyMinStakes(30.0, 15.0, 150.0),
+            'EUR': CurrencyMinStakes(2.0, 2.0, 20.0),
+            'HKD': CurrencyMinStakes(25.0, 15.0, 125.0),
+            'NOK': CurrencyMinStakes(30.0, 15.0, 150.0),
+            'SGD': CurrencyMinStakes(6.0, 1.0, 30.0),
+            'SEK': CurrencyMinStakes(30.0, 15.0, 150.0),
+            'GBP': CurrencyMinStakes(2.0, 1.0, 10.0),
+            'USD': CurrencyMinStakes(4.0, 2.0, 20.0),
+            }
+
+        return MinBets[currency]
+
+
+    ############################################################
+    # API Services
     ############################################################
 
     ############################################################
@@ -551,26 +584,6 @@ class BfApi(object):
     ############################################################
     # Read-Only Betting API Services
     ############################################################
-
-    @staticmethod
-    def GetMinBet(currency):
-
-        MinBets = {
-            'AUD': {'minimumStake': 5.0, 'minimumRangeStake': 3.0, 'minimumBSPLayLiability': 30.0},
-            'CAD': {'minimumStake': 6.0, 'minimumRangeStake': 3.0, 'minimumBSPLayLiability': 30.0},
-            'DKK': {'minimumStake': 30.0, 'minimumRangeStake': 15.0, 'minimumBSPLayLiability': 150.0},
-            'EUR': {'minimumStake': 2.0, 'minimumRangeStake': 2.0, 'minimumBSPLayLiability': 20.0},
-            'HKD': {'minimumStake': 25.0, 'minimumRangeStake': 15.0, 'minimumBSPLayLiability': 125.0},
-            'NOK': {'minimumStake': 30.0, 'minimumRangeStake': 15.0, 'minimumBSPLayLiability': 150.0},
-            'SGD': {'minimumStake': 6.0, 'minimumRangeStake': 1.0, 'minimumBSPLayLiability': 30.0},
-            'SEK': {'minimumStake': 30.0, 'minimumRangeStake': 15.0, 'minimumBSPLayLiability': 150.0},
-            'GBP': {'minimumStake': 2.0, 'minimumRangeStake': 1.0, 'minimumBSPLayLiability': 10.0},
-            'USD': {'minimumStake': 4.0, 'minimumRangeStake': 2.0, 'minimumBSPLayLiability': 20.0},
-            }
-
-        return MinBets[currency]
-
-
     def ConvertCurrency(self, amount, fromCurrency, toCurrency):
         '''
         Converts an amount from fromCurrentcy to toCurrentcy
