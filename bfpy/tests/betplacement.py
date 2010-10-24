@@ -28,12 +28,12 @@
 '''
 Test the following services
 
-  - login (at the beginning and to do relogin)
-  - logout
-  - keepAlive
-
+  - placeBets
+  - updateBets
+  - cancelBets
 '''
 import sys
+import time
 
 import bfpy
 import bfpy.bfclient as bfclient
@@ -47,14 +47,56 @@ loginInfo = sys.modules['__main__'].loginInfo
 response = bf.login(**loginInfo)
 print response
 
-response = bf.keepAlive()
+placeBet = bf.createPlaceBets()
+
+placeBet.asianLineId = 0
+# Man City
+placeBet.selectionId = 47999
+
+placeBet.price = 100.0
+placeBet.size = 2.0
+placeBet.bspLiability = 0.0
+
+placeBet.betType = 'B'
+placeBet.betCategoryType = 'E'
+
+placeBet.betPersistenceType = 'NONE'
+
+# English Premier League Winner 2010/2011
+placeBet.marketId = 101426972
+
+response = bf.placeBets(bfpy.ExchangeUK, bets=[placeBet])
 print response
 
-response = bf.login()
+
+print 'sleeping 5 seconds'
+time.sleep(5)
+
+bet = response.betResults[0]
+
+updateBet = bf.createUpdateBets()
+
+updateBet.betId = bet.betId
+updateBet.newBetPersistenceType = 'NONE'
+updateBet.newPrice = 200.0
+updateBet.newSize = 2.0
+
+updateBet.oldBetPersistenceType = 'NONE'
+updateBet.oldPrice = 100.0
+updateBet.oldSize = 2.0
+
+response = bf.updateBets(bfpy.ExchangeUK, bets=[updateBet])
 print response
 
-response = bf.logout()
+print 'sleeping 5 seconds'
+time.sleep(5)
+
+bet = response.betResults[0]
+
+cancelBet = bf.createCancelBets()
+cancelBet.betId = bet.newBetId
+
+response = bf.cancelBets(bfpy.ExchangeUK, bets=[cancelBet])
 print response
 
-response = bf.login()
-print response
+

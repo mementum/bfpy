@@ -78,7 +78,7 @@ class ServiceDescriptor(object):
         '''
         Pure virtual function to be implemented by Service implementation classes
 
-        @raise NotImplemented
+        @raise NotImplemented: pure virtual function
         '''
         raise NotImplemented
 
@@ -109,7 +109,7 @@ class ServiceDef(ServiceDescriptor):
     @ivar endPoint: location endPoint of the service (0 Global, 1 Exchange)
     @type endPoint: int
     @ivar methodName: name the method will be invoked by
-    @ivar methodName: str
+    @type methodName: str
     @ivar serviceName: name of the service to invoke
     @type serviceName: str
     @ivar requestName: name of the request to pass to the service
@@ -118,13 +118,16 @@ class ServiceDef(ServiceDescriptor):
     @type apiHeader: bool
     @ivar skipErrorCodes: errorCodes that will not signal an error
     @type skipErrorCodes: list
+    @ivar preProc: callables that will pre process a service request
+    @type preProc: list
     @ivar postProc: callables that will post process a service response
     @type postProc: list
     '''
 
     def __init__(self, endPoint,
                  methodName, serviceName=None, requestName=None,
-                 apiHeader=True, skipErrorCodes=None, postProc=None,
+                 apiHeader=True, skipErrorCodes=None,
+                 preProc=None, postProc=None,
                  **kwargs):
         '''
         Initializes the service and variables
@@ -141,6 +144,8 @@ class ServiceDef(ServiceDescriptor):
         @type apiHeader: bool
         @param skipErrorCodes: errorCodes that will not signal an error
         @type skipErrorCodes: list
+        @param preProc: callables that will pre process a service request
+        @type preProc: list
         @param postProc: callables that will post process a service response
         @type postProc: list
         @param kwargs: extra arguments (with values) to pass to the method
@@ -164,6 +169,10 @@ class ServiceDef(ServiceDescriptor):
         if skipErrorCodes:
             self.skipErrorCodes.extend(skipErrorCodes)
 
+        if preProc is None:
+            preProc = list()
+        self.preProc = preProc
+
         if postProc is None:
             postProc = list()
         self.postProc = postProc
@@ -171,7 +180,7 @@ class ServiceDef(ServiceDescriptor):
 
     def __call__(self, instance, *args, **kwargs):
         '''
-        Invokation of a service in a generic manner.
+        Invocation of a service in a generic manner.
 
         It is in charge of deciding the final endPoint (global or exchange,
         and if exchange, which one from the parameters), get a reference
@@ -204,18 +213,26 @@ class ServiceDef(ServiceDescriptor):
         # Update the dictionary with new args/updated args
         requestArgs.update(kwargs)
 
+        # Pre-process
+        if instance.preProcess:
+            for preProc in self.preProc:
+                preProc(request, requestArgs,
+                        instance=instance, service=service, exchangeId=endPoint,
+                        methodArgs=kwargs)
+
         # Fill in the defined argument values in the service request
         for name, value in requestArgs.iteritems():
             setattr(request, name, value)
 
+        print request
         # Execute the call and fetch the response
         response = instance.invoke(self.methodName, service, request, self.skipErrorCodes)
 
         # Post-Process the response if needed
         if instance.postProcess:
             for postProc in self.postProc:
-                postProc(response,
-                         instance=instance, exchangeId=endPoint, request=request)
+                postProc(response, instance=instance, service=service,exchangeId=endPoint,
+                         request=request)
 
         return response
 
@@ -228,7 +245,8 @@ class GlobalServiceDef(ServiceDef):
         
     def __init__(self,
                  methodName, serviceName=None, requestName=None,
-                 apiHeader=True, skipErrorCodes=None, postProc=None,
+                 apiHeader=True, skipErrorCodes=None,
+                 preProc=None, postProc=None,
                  **kwargs):
         '''
         Initializes the service and variables, setting the the
@@ -244,6 +262,8 @@ class GlobalServiceDef(ServiceDef):
         @type apiHeader: bool
         @param skipErrorCodes: errorCodes that will not signal an error
         @type skipErrorCodes: list
+        @param preProc: callables that will pre process a service request
+        @type preProc: list
         @param postProc: callables that will post process a service response
         @type postProc: list
         @param kwargs: extra arguments (with values) to pass to the method
@@ -252,7 +272,8 @@ class GlobalServiceDef(ServiceDef):
         ServiceDef.__init__(
             self, 0,
             methodName, serviceName=serviceName, requestName=requestName,
-            apiHeader=apiHeader, skipErrorCodes=skipErrorCodes, postProc=postProc,
+            apiHeader=apiHeader, skipErrorCodes=skipErrorCodes,
+            preProc=preProc, postProc=postProc,
             **kwargs)
 
 
@@ -264,7 +285,8 @@ class ExchangeServiceDef(ServiceDef):
 
     def __init__(self,
                  methodName, serviceName=None, requestName=None,
-                 apiHeader=True, skipErrorCodes=None, postProc=None,
+                 apiHeader=True, skipErrorCodes=None,
+                 preProc=None, postProc=None,
                  **kwargs):
         '''
         Initializes the service and variables, setting the the
@@ -280,6 +302,8 @@ class ExchangeServiceDef(ServiceDef):
         @type apiHeader: bool
         @param skipErrorCodes: errorCodes that will not signal an error
         @type skipErrorCodes: list
+        @param preProc: callables that will pre process a service request
+        @type preProc: list
         @param postProc: callables that will post process a service response
         @type postProc: list
         @param kwargs: extra arguments (with values) to pass to the method
@@ -288,7 +312,8 @@ class ExchangeServiceDef(ServiceDef):
         ServiceDef.__init__(
             self, 1,
             methodName, serviceName=serviceName, requestName=requestName,
-            apiHeader=apiHeader, skipErrorCodes=skipErrorCodes, postProc=postProc,
+            apiHeader=apiHeader, skipErrorCodes=skipErrorCodes,
+            preProc=preProc, postProc=postProc,
             **kwargs)
 
 
@@ -302,7 +327,7 @@ class ServiceObject(ServiceDescriptor):
     of the object
 
     @ivar methodName: name the method will be invoked by
-    @type: str
+    @type methodName: str
     @ivar endPoint: location endPoint of the service (0 Global, 1 Exchange)
     @type endPoint: int
     @ivar objectName: name of the object to be retrieved
@@ -343,7 +368,7 @@ class ServiceObject(ServiceDescriptor):
         objArgs.update(kwargs)
 
         # Fill in the object with the values
-        for name, value in self.objArgs.iteritems():
+        for name, value in objArgs.iteritems():
             setattr(serviceObject, name, value)
 
         return serviceObject
@@ -385,13 +410,13 @@ class ExchangeObject(ServiceObject):
 
 class BfService(type):
     '''
-    Metaclass for L{BfApi2} to initialize the non-data descriptor based
+    Metaclass for L{BfApi} to initialize the non-data descriptor based
     methods on instantiation
     '''
 
     def __new__(mcs, name, bases, dict):
         '''
-        On L{BfApi2} instantiation the service definitions present in the
+        On L{BfApi} instantiation the service definitions present in the
         class variable I{serviceDefs} are added to the dictionary of the
         instance to generate non-data descriptor based methods
         that allow the invocation of the Betfair API Services

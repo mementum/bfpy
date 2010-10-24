@@ -29,11 +29,23 @@
 BfPy main module. It imports the main objects to let them be re-imported
 '''
 
-version = 0.54
+version = 0.75
 
-# import suds
+import logging
+from util import NullHandler
 
-from betfair import *
+handler = NullHandler()
+
+# suds logging
+log = logging.getLogger('suds')
+log.setLevel(logging.ERROR)
+log.addHandler(handler)
+
+# transport logging
+log = logging.getLogger('bftransport')
+log.addHandler(handler)
+
+
 from bfapi import *
+from bfclient import *
 from bferror import *
-

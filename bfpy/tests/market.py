@@ -28,11 +28,10 @@
 '''
 Test the following services
 
-  - login (at the beginning and to do relogin)
-  - logout
-  - keepAlive
-
+  - getMarket
+  - getMarketInfo
 '''
+
 import sys
 
 import bfpy
@@ -47,14 +46,8 @@ loginInfo = sys.modules['__main__'].loginInfo
 response = bf.login(**loginInfo)
 print response
 
-response = bf.keepAlive()
+response = bf.getMarket(bfpy.ExchangeUK, marketId=101426972)
 print response
 
-response = bf.login()
-print response
-
-response = bf.logout()
-print response
-
-response = bf.login()
+response = bf.getMarketInfo(bfpy.ExchangeUK, marketId=101426972)
 print response

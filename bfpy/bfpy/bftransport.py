@@ -33,30 +33,18 @@ BfPy suds transport
 # Contains classes for a suds http(s) transport implementation
 #
 
-from copy import deepcopy
-from cStringIO import StringIO
-import logging
-from urlparse import urlparse
 
-import suds
-
-from util import NullHandler
-
-log = logging.getLogger(__name__)
-if False:
-    log.setLevel(logging.DEBUG)
-    formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s -\n%(message)s")
-    handler = logging.FileHandler('bftransport.log', mode='w')
-    handler.setFormatter(formatter)
-    handler.setLevel(logging.DEBUG)
-else:
-    handler = NullHandler()
-
-log.addHandler(handler)
 
 try:
+
     from httxlib import HttxManager, HttxRequest, HttxException, SocketException
     TransportException = SocketException
+
+    from copy import deepcopy
+    from cStringIO import StringIO
+    from urlparse import urlparse
+
+    import suds
 
     class BfTransport(suds.transport.Transport):
         '''
@@ -327,7 +315,6 @@ except ImportError:
 
         # This implementation of "open" and "send"
         # could make it to the base class "Transport"
-
         def open(self, request):
             """
             Open a file or url
@@ -513,7 +500,7 @@ except ImportError:
             @return: a cloned object
             @rtype: suds.transport.Transport
             """
-            return deepcopy(self)
+            return copy.deepcopy(self)
 
 
         # This function pre-processes the request before sending it

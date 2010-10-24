@@ -28,10 +28,9 @@
 '''
 Test the following services
 
-  - login (at the beginning and to do relogin)
-  - logout
-  - keepAlive
-
+  - getMarketPricesCompressed
+  - getMUBets
+  - getMarketProfitAndLoss
 '''
 import sys
 
@@ -47,14 +46,14 @@ loginInfo = sys.modules['__main__'].loginInfo
 response = bf.login(**loginInfo)
 print response
 
-response = bf.keepAlive()
+response = bf.getMarketPricesCompressed(bfpy.ExchangeUK, marketId=101426972)
 print response
 
-response = bf.login()
+response = bf.getMUBets(bfpy.ExchangeUK, marketId=101426972, betStatus='MU')
 print response
 
-response = bf.logout()
+response = bf.getMarketProfitAndLoss(bfpy.ExchangeUK, marketId=101426972)
 print response
 
-response = bf.login()
+response = bf.getCompleteMarketPricesCompressed(bfpy.ExchangeUK, marketId=101426972)
 print response

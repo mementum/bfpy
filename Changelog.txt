@@ -1,3 +1,20 @@
+0.75
+-- Version number bumped
+-- Full re-implementation with non-data descriptor
+-- Naming conventions camelCase for variables and functions/methods. Modules all lowercase and classes are CamelCase
+-- All methods now have the same name as the Betfair service
+-- All Exchange services must have the exchangeId as the first parameter
+-- In all services all other parameters must be named parameters (defaults are provided in many cases)
+-- Added a getMinStakes method
+-- re-login functionality implemented within the login method itself
+-- No longer are BfPythonError exceptions raised (the class has not been removed)
+-- Test units added
+-- Imports re-ordered in the BfTransport module
+-- getCompleteMarketPricesCompressed left out of re-implementation
+-- getMarketPrices not implemented and no longer an alias to getMarketPricesCompressed
+-- getCurrentBets has now betStatus MU as a default value
+-- nonInPlay re-placement of bets kept in placeBets, but to be removed in future versions
+
 0.53
 -- Added currency functions (ConvertCurrency, GetAllCurrencies, GetAllCurrenciesV2)
 -- Added a staticmethod to retrieve minimum bets per currency

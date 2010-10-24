@@ -32,27 +32,47 @@ BfApi method extensions to be inserted in BfClient
 from copy import copy
 from operator import attrgetter
 
-from bfapi2 import BfApi, eventRootId
+from bfapi import BfApi, eventRootId
 from bfservice import ServiceDescriptor
 
 
 class GetEvents(ServiceDescriptor):
+    '''
+    Implements a non-data descriptor for BfClient to extend the getEvents
+    service method by unifying getActiveEventTypes and getEvents to be able
+    to directly recurse downwards the list of events from a fictitious
+    eventRootId (-1)
+    '''
+
     def __init__(self, **kwargs):
+        '''
+        Initializes the non-data descritor by invoking the base class
+        L{ServiceDescriptor}
+
+        @param kwargs: keyword arguments to implement default arguments
+                       for the method
+        @type kwargs: dict
+        '''
         ServiceDescriptor.__init__(self, 'getEvents', **kwargs)
 
-    def __call__(self, instance, eventParentId=-1):
-        '''
-        Returns ActiveEvents and Events in a single call
 
-        @param eventParentId: id of the parent event for which to return
-                              eventItems/marketItems. Pass -1 for the top level items
-        @type eventParentId: int
+    def __call__(self, instance, *args, **kwargs):
+        '''
+        Returns getActiveEventTypes and getEvents in a single call.
+        The events returned by getActiveEventTypes are aliased to look like
+        an answer from getEvents
+
+        @param instance: object whose method is being called
+        @type instance: object (a L{BfApi} subclass)
 
         @returns: Betfair API answer
         @rtype: suds object
         '''
+        callArgs = self.kwargs.copy()
+        callArgs.update(**kwargs)
+        eventParentId = callArgs.get('eventParentId')
+
         if eventParentId == eventRootId:
-            print "cucu"
             response = instance.getActiveEventTypes()
             print response
             # Alias the .id and .name attributes to those of an event
@@ -62,10 +82,10 @@ class GetEvents(ServiceDescriptor):
                 event.eventName = event.name
                 del event.name
 
-                # Create the eventItems and marketItems alias
-                response.eventItems = response.eventTypeItems
-                del response.eventTypItems
-                response.marketItems = list()
+            # Create the eventItems and marketItems alias
+            response.eventItems = response.eventTypeItems
+            del response.eventTypeItems
+            response.marketItems = list()
 
             return response
 
@@ -73,20 +93,47 @@ class GetEvents(ServiceDescriptor):
 
 
 class GetCurrentBets(ServiceDescriptor):
+    '''
+    Implements a non-data descriptor for BfClient to extend the getCurrentBets
+    service method by allowing betStatus to be MU (return both Matched and
+    UnMatched bets in a single call) Betfair does not allow it, which is
+    odd.
+    '''
     def __init__(self, **kwargs):
+        '''
+        Initializes the non-data descritor by invoking the base class
+        L{ServiceDescriptor}
+
+        @param kwargs: keyword arguments to implement default arguments
+                       for the method
+        @type kwargs: dict
+        '''
         ServiceDescriptor.__init__(self, 'getCurrentBets', **kwargs)
 
 
-    def __call__(self, instance, exchangeId, **kwargs):
-        betStatus = kwargs.get('betStatus')
+    def __call__(self, instance, *args, **kwargs):
+        '''
+        Method implementation to allow MU (default also in the call) to be returned
 
-        if betStatus != 'MU':
-            return BfApi.getCurrentBets(instance, exchangeId, **kwargs)
+        @param instance: object whose method is being called
+        @type instance: object (a L{BfApi} subclass)
+        @param args: unnamed args
+        @type args: tuple
+        @param kwargs: named args
+        @type kwargs: dict
 
-        currentBetsArgs = kwargs.copy()
-        del currentBetsArgs['betSatus']
-        mResponse = BfApi.getCurrentBets(instance, exchangeId, betStatus='M', **currentBesArgs)
-        uResponse = BfApi.getCurrentBets(instance, exchangeId, betStatus='U', **currentBetsArgs)
+        @returns: Betfair API answer
+        @rtype: suds object
+        '''
+        currentBetsArgs = self.kwargs.copy()
+        currentBetsArgs.update(**kwargs)
+
+        if currentBetsArgs['betStatus'] != 'MU':
+            return BfApi.getCurrentBets(instance, *args, **currentBetsArgs)
+
+        del currentBetsArgs['betStatus']
+        mResponse = BfApi.getCurrentBets(instance, *args, betStatus='M', **currentBetsArgs)
+        uResponse = BfApi.getCurrentBets(instance, *args, betStatus='U', **currentBetsArgs)
 
         mResponse.totalRecordCount += uResponse.totalRecordCount
         mResponse.bets.extend(uResponse.bets)
@@ -104,13 +151,50 @@ class GetCurrentBets(ServiceDescriptor):
             
 
 class PlaceBets(ServiceDescriptor):
+    '''
+    Implements a non-data descriptor for BfClient to extend the placeBets
+    to re-place a bet if the betPersistence has not been speficied.
+
+    This is a hack to support Bf++, given that the "marketSummary" returned
+    by getEvents does not state if a market will turn in-ply or not. A call
+    to getAllMarkets is needed to find out.
+
+    This hack will be removed
+    '''
     def __init__(self, **kwargs):
+        '''
+        Initializes the non-data descritor by invoking the base class
+        L{ServiceDescriptor}
+
+        @param kwargs: keyword arguments to implement default arguments
+                       for the method
+        @type kwargs: dict
+        '''
         ServiceDescriptor.__init__(self, 'placeBets', **kwargs)
+
     
-    def __call__(self, instance, exchangeId, placeBets, nonIPRePlace=False):
-        response = BfApi.placeBets(instance, placeBets)
+    def __call__(self, instance, *args, **kwargs):
+        '''
+        if the parameter nonIPRePlace is passed to the call with a True
+        value, bets not placed due to an "INVALID_PERSISTENCE" error
+        will be returned
+
+        @param instance: object whose method is being called
+        @type instance: object (a L{BfApi} subclass)
+        @param args: unnamed args
+        @type args: tuple
+
+        @returns: Betfair API answer
+        @rtype: suds object
+        '''
+        response = BfApi.placeBets(instance, *args, **kwargs)
+
+        placeBetsArgs = self.kwargs.copy()
+        placeBetsArgs.update(**kwargs)
+        nonIPRePlace = placeBetsArgs.get('nonIPRePlace')
 
         if response.betResults and nonIPRePlace:
+            placeBets = placeBetsArgs.get('bets')
             toRePlaceBets = list()
             for i, betResult in enumerate(response.betResults[:]):
                 placeBet = placeBets[i]

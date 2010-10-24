@@ -34,150 +34,141 @@ It does initialize suds logging to a L{NullHandler} to avoid any logging output
 from copy import copy
 from collections import namedtuple
 from datetime import datetime
-import logging
 from socket import error as SocketError
-from threading import Lock
 
-import suds
+import suds.client
 
 import bferror
+from bfservice import BfService, GlobalServiceDef, ExchangeServiceDef, GlobalObject, ExchangeObject
+from bfprocessors import *
 import bftransport
 import bfwsdl
-from util import NullHandler
 
-# Logging configuration
-sudsLogger = logging.getLogger('suds')
-sudsLogger.setLevel(logging.ERROR)
+preProcess = True
+postProcess = True
+eventRootId = -1
 
-if False:
-    handler = logging.StreamHandler()
-    formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s -\n%(message)s")
-    handler.setFormatter(formatter)
-    handler.setLevel(logging.ERROR)
-else:
-    handler = NullHandler()
-
-sudsLogger.addHandler(handler)
-
-
-# Some defaults
-RootEventId = -1
-
-GlobalService = 0
-ExchangeUk = 1
+Global = 0
+ExchangeUK = 1
 ExchangeAus = 2
-
-freeApi = 82
-
-MarketTuple = namedtuple('MarketTuple', ('exchangeId', 'marketId'))
 
 
 class BfApi(object):
     '''
-    The BfApi is a mere "objectization" of the betfair API. It creates the needed
-    suds clients to communicate with the Betfair API and provides the framework to
-    easily create request objects and invoke methods, whilst also providing error
-    management.
+    The class implements a unified communication interface with the Betfair API Services
+    EndPoints (Global, ExchangeUK, ExchangeAus)
 
-    No processing of the answers received from the API is done
+    This is done by defining the the services and object retrieval methods by means of
+    non-data descriptors. The descriptors are added to the class by the metaclass {BfService}
 
-    @ivar sessionToken: holds the session information
-    @type sessionToken: str
-    @ivar transport: reference to the transport class to use with suds
-    @type transport: suds.transport.Transport
-    @ivar bfClient: references to suds clients (global and exchanges)
-    @type bfClient: dict
-    @ivar timeout: timeout to apply to network calls
-    @type timeout: float
+    The class can be configured to avoid any pre/post-processing of the requests and answers
+    by changing the module L{preProcess} and L{postProcess} variables or passing them as
+    named arguments to the constructor
+
+    @ivar preProcess: whether service requests will undergo pre-processing
+    @type preProcess: bool
+    @ivar postProcess: whether service requests will undergo post-processing
+    @type postProcess: bool
+    @ivar transport: a reference to the L{BfTransport} used to communicate (HTTP)
+                     with the Betfair servers
+    @type transport: L{BfTransport}
+    @ivar clients: the actual suds clients to generate, transport and proccess
+                   the service communication
+    @type clients: dict
+
+    @ivar serviceDefs: service definitions with non-data descriptors
+    @type clients: list
     '''
 
-    # default send receive timeout
-    classTimeout = 14
+    __metaclass__ = BfService
 
-    # socket.setdefaulttimeout(classTimeout)
-
-    WsdlFiles = {
-        GlobalService: bfwsdl.BFGlobalService,
-        ExchangeUk: bfwsdl.BFExchangeService,
+    wsdlDefs = {
+        Global: bfwsdl.BFGlobalService,
+        ExchangeUK: bfwsdl.BFExchangeService,
         ExchangeAus: bfwsdl.BFExchangeServiceAus
         }
 
-    def __init__(self, **kwargs):
-        '''
-        Constructor. Create the transport and the suds clients needed to talk
-        to the Betfair API.
 
-        @param kwargs: standard Python keywords arguments
-        @type kwargs: dict
-
-        @returns: a constructed object
-        @rtype: BfApi
+    def __init__(self, preProcess=preProcess, postProcess=postProcess):
         '''
-        self.timeout = kwargs.get('timeout', self.classTimeout)
+        Initializes the processing options, transport and service clients
+
+        @param preProcess: whether service requests will undergo pre-processing
+        @type preProcess: bool
+        @param postProcess: whether service requests will undergo post-processing
+        @type postProcess: bool
+        '''
+        self.preProcess = preProcess
+        self.postProcess = postProcess
+
+        self.transport = bftransport.BfTransport()
+        self.clients = dict()
+        for endPoint, wsdlDef in self.wsdlDefs.iteritems():
+            self.clients[endPoint] = suds.client.Client(wsdlDef, transport=self.transport.clone())
+
+
+    def clone(self):
+        '''
+        Returns an intelligent cloned object.
+
+        All objects are copied, then clients are also "cloned" themselves and
+        the sessionToken is ended
+
+        @return: a clone of itself
+        @rtype: L{BfApi}
+        '''
+        obj = copy.copy(self)
+
+        for endPoint, client in self.clients.iteritems():
+            obj.clients[endPoint] = client.clone()
+
         self.sessionToken = ''
 
-	# Initialize the Betfair communication objects
-        self.transport = bftransport.BfTransport()
-        # The proxy may be needed if the WSDLs are to be downloaded from the net
-        if 'proxydict' in kwargs:
-            self.transport.setproxy(kwargs['proxydict'])
-        self.bfClient = dict()
-        for key, val in self.WsdlFiles.iteritems():
-            self.bfClient[key] = suds.client.Client(val, transport=self.transport.clone(), timeout=self.timeout)
+        return obj
 
 
-    def __deepcopy__(self, memo):
+    def getService(self, endPoint, serviceName):
         '''
-        Clones the L{BfApi} object
+        Returns a service from an endPoint
 
-        @param memo: standard Python deepcopy param
-        @type memo: dict
+        @param endPoint: suds client to retrieve the service from
+        @type endPoint: int
+        @param serviceName: name of the service to be retrieved
+        @type serviceName: str
 
-        @returns: cloned self
-        @rtype: BfApi
+        @return: a service to be invoked
+        @rtype: method generated by suds from the WSDL definition
         '''
-        return self.Clone()
+        return getattr(self.clients[endPoint].service, serviceName)
 
 
-    def Clone(self):
+    def getObject(self, endPoint, objectName):
         '''
-        Clones the L{BfApi} object, taking clare of cloning the suds clients
+        Returns an object from an endPoint
 
-        @returns: cloned self
-        @rtype: BfApi
+        @param endPoint: suds client to retrieve the service from
+        @type endPoint: int
+        @param objectName: name of the object to be retrieved
+        @type objectName: str
+
+        @return: the requested object
+        @rtype: object generated by suds from the WSDL definitions
         '''
-        clone = copy(self)
-
-        clone.bfClient = dict()
-        for key, bfClient in self.bfClient.iteritems():
-            clone.bfClient[key] = bfClient.clone()
-                
-        clone.sessionToken = ''
-        return clone
+        return self.clients[endPoint].factory.create('ns1:%s' % objectName)
 
 
-    def GetAPIRequestHeader(self, reqObjName, bfServiceId):
+    def getHeader(self, endPoint):
         '''
-        Returns a new API Request Header, checking if a session logging exists and
-        raising an L{BfApiError} if no session is alive. Else, it fills the session
-        field
+        All methods (but login) add a header to the request. This method
+        retrieves the header object
 
-        @param reqObjName: Name of the request object that will hold the request header
-        @type reqObjName: str
-        @param bfServiceId: id of the WSDL object to use (Exchange or Global)
-        @type bfServiceId: int
+        @param endPoint: suds client to retrieve the service from
+        @type endPoint: int
 
-        @returns: APIRequestHeader
-        @rtype: suds object
-
-        @raise BfApiError: on no session available
+        @return: the API header
+        @rtype: object generated by suds from the WSDL definitions
         '''
-        # Check if we are logged in
-        if(self.sessionToken == ''):
-            raise bfapi.BfApiError(reqObjName[:-3], None, 'No Session Token available', 'NO_SESSION')
-
-	# Create the keepaliverequest and associated data objects
-        header = self.GetObject('APIRequestHeader', bfServiceId)
+        header = self.getObject(endPoint, 'APIRequestHeader')
 
 	header.clientStamp = 0
 	header.sessionToken = self.sessionToken
@@ -185,231 +176,98 @@ class BfApi(object):
         return header
 
 
-    def GetObject(self, objectName, bfServiceId):
+    def getRequest(self, endPoint, requestName, apiHeader=True): 
         '''
-        Proxy function to obtain an object from a suds wsdl client
+        All methods pass a request object to services. Because login does
+        not carry a header, we need to know if the header has to be added
+        retrieves the header object
 
-        @param objectName: Name of the object
-        @type objectName: str
-        @param bfServiceId: id of the suds wsdl client to use
-        @type bfServiceId: int
-
-        @returns: requested suds object
-        @rtype: suds object
-        '''
-        return self.bfClient[bfServiceId].factory.create('ns1:%s' % objectName)
-
-
-    def GetObjectExchange(self, objectName, exchangeId=ExchangeUk):
-        '''
-        Proxy function to obtain an object from a suds "exchange" wsdl client
-
-        Since both exchanges (UK and Aus) support the same set of objects, ExchangeUK
-        is provided as the default value to ease calling
-
-        @param objectName: Name of the object
-        @type objectName: str
-        @param exchangeId: id of the suds "exchange" wsdl client to use
-        @type exchangeId: int
-
-        @returns: requested suds "exchange" object
-        @rtype: suds object
-        '''
-        return self.GetObject(objectName, exchangeId)
-
-
-    def GetObjectGlobal(self, objectName):
-        '''
-        Proxy function to obtain an object from the suds "global" wsdl client
-
-        @param objectName: Name of the object
-        @type objectName: str
-
-        @returns: requested suds "global" object
-        @rtype: suds object
-        '''
-        return self.GetObject(objectName, GlobalService)
-
-
-    def GetRequestObject(self, reqObjectName, bfServiceId, addHeader=True):
-        '''
-        Proxy function to obtain a request object from a suds wsdl client, adding
-        an APIRequestHeader if needed
-
-        Some services (like Login) do not require a header and that is the reason
-        for the addHeader param
-
-        @param reqObjectName: Name of the request object
-        @type reqObjectName: str
-        @param bfServiceId: id of the suds wsdl client to use
-        @type bfServiceId: int
-        @param addHeader: whether a APIRequestHeader should be returned in the object
-        @type addHeader: bool
-
-        @returns: requested suds object
-        @rtype: suds object
-        '''
-        reqObject = self.GetObject(reqObjectName, bfServiceId)
-
-        if addHeader:
-            reqObject.header = self.GetAPIRequestHeader(reqObjectName, bfServiceId)
-
-        return reqObject
-
-
-    def GetRequestObjectGlobal(self, requestObjectName, addHeader=True):
-        '''
-        Helper Proxy function to obtain a request object from the suds "global" wsdl client
-
-        Some services (like Login) do not require a header and that is the reason
-        for the addHeader param
-
-        @param requestObjectName: Name of the request object
-        @type requestObjectName: str
-        @param addHeader: whether a APIRequestHeader should be returned in the object
-        @type addHeader: bool
-
-        @returns: requested suds "global" object
-        @rtype: suds object
-        '''
-        return self.GetRequestObject(requestObjectName, GlobalService, addHeader)
-
-
-    def GetRequestObjectExchange(self, requestObjectName, exchangeId=ExchangeUk):
-        '''
-        Helper Proxy function to obtain a request object from suds "exchange" wsdl client
-
-        Since both exchanges (UK and Aus) support the same set of objects, ExchangeUK
-        is provided as the default value to ease calling
-
-        So far all seen Exchange objects require a header. See L{GetRequestObjectGlobal}
-
-        @param requestObjectName: Name of the request object
-        @type requestObjectName: str
-        @param exchangeId: id of the suds "exchange" wsdl client to use
-        @type exchangeId: int
-
-        @returns: requested suds "exchange" object
-        @rtype: suds object
-        '''
-        return self.GetRequestObject(requestObjectName, exchangeId, addHeader=True)
-
-
-    def InvokeRequest(self, bfServiceId, requestName, requestArg, goodErrorCodes=None):
-        '''
-        Invokes a method by name, passing the supplied request argument by using specific
-        suds wsdl client (specified by bfServiceId)
-
-        The method checks for the existence of the method before invocation and raises
-        different exceptions in case errors happen.
-
-        If the call to the Betfair API succeeds but a high level errorCode is returned,
-        a list of goodErrorCodes is checked before raising the exception. This is so,
-        because the Betfair API may have errors (returning INVALID_MARKET instead of
-        MARKET_CLOSED in getProfitAndLoss) or because an error like
-        INVALID_LOCALE_DEFAULTING_TO_ENGLISH may be returned, which still provides the
-        requested info even if in a different language.
-
-        Suds raises some plain exceptions and its exceptions do not have a base
-        "SudsError" class. Therefore a catch-all "Exception" is implemented to try a
-        good error reporting to the calling application
-
-        @param bfServiceId: id of the suds wsdl client to use
-        @type bfServiceId: int
-        @param requestName: service to invoke
+        @param endPoint: suds client to retrieve the service from
+        @type endPoint: int
+        @param requestName: name of the object to be retrieved
         @type requestName: str
-        @param requestArg: object to be passed as param of the request
-        @type requestArg: suds object
-        @param goodErrorCodes: list of errorCodes to skip
-        @type goodErrorCodes: list
 
-        @returns: Betfair API answer
-        @rtype: suds object
-
-        @raise BfPythonError: if the method is not found in the suds client
-        @raise BfHttpError: if suds raises a WebFault
-        @raise BfNetworkError: on potential network errors
-        @raise BfError: on generic Exceptions
-        @raise BfApiError: if the API replies with a ApiHeader error
-        @raise BfServiceError: if the API replies with a Service error and
-                               the error is not overseen by goodErrorCodes
+        @return: the request object
+        @rtype: object generated by suds from the WSDL definitions
         '''
-        if hasattr(self.bfClient[bfServiceId].service, requestName):
-            method = getattr(self.bfClient[bfServiceId].service, requestName)
-        else:
-            raise bferror.BfPythonError(requestName, self.bfClient[bfServiceId], 'Method Not found')
+        request = self.getObject(endPoint, requestName)
 
+        if apiHeader:
+            request.header = self.getHeader(endPoint)
+
+        return request
+
+
+    def invoke(self, methodName, service, request, skipErrorCodes):
+        '''
+        Invokes a service with a given request and with a list of errors
+        that do not generate exceptions if returned
+
+        @param methodName: method name that has been used to invoke
+        @type methodName: str
+        @param service: name of the object to be retrieved
+        @type service: method generated by suds from the WSDL definition
+        @param skipErrorCodes: error codes that will not generate exceptions
+        @type skipErrorCodes: list
+
+        @return: the response object processed by suds
+        @rtype: object generated by suds from the WSDL definitions
+
+        @raise BfHttpError: if the server does not answer with 200 OK
+        @raise BfNetworkError: on (potential) network errors
+        @raise Exception: on other errors, due to the fact that suds does not
+                          generate all exceptions from a common base
+        @raise BfApiError: on specific API errors
+        @raise BfServiceError: on service errors (unless specified in skipErrorCodes)
+        '''
         try:
-            response = method(requestArg)
+            response = service(request)
         except suds.WebFault, e:
-            raise bferror.BfHttpError(requestName, e, str(e), e.fault, e.document)
+            raise bferror.BfHttpError(methodName, e, str(e), e.fault, e.document)
         except (SocketError, bftransport.TransportException), e:
-            # Summarise network errors into a generic notification
-            raise bferror.BfNetworkError(requestName, e, str(e), e.args)
+            # Summarise (all potential) network errors into a generic notification
+            raise bferror.BfNetworkError(methodName, e, str(e), e.args)
         except Exception, e:
-            # Catch all - needed because suds is inconsistent with error handling
-            raise bferror.BfError(requestName, e, str(e), e.args)
+            # Catch all - needed because suds doesn't have a root class Exception
+            # and also produces some standard exceptions
+            raise bferror.BfError(methodName, e, str(e), e.args)
 
-        # Response is returned
-
-        # First check API errors
+        # Analyze API errorCodes
         if response.header.errorCode != 'OK':
-            raise bferror.BfApiError(requestName, response, str(response), response.header.errorCode)
+            raise bferror.BfApiError(methodName, response, str(response), response.header.errorCode)
 
-        # Some services don't return errorCode, check before error checking
+        # Analyze Service errorCodes - keepAlive (at least) has no "errorCode" field
         if hasattr(response, 'errorCode'):
-            # if errorCode is present check it is ok or an accepted errorCode
-            if not (response.errorCode == 'OK' or (goodErrorCodes and response.errorCode in goodErrorCodes)):
-                raise bferror.BfServiceError(requestName, response, str(response), response.errorCode)
+            if response.errorCode != 'OK' and response.errorCode not in skipErrorCodes:
+                raise bferror.BfServiceError(methodName, response, str(response), response.errorCode)
 
-        # Save the "new" session token
+        # Save the latest session token
         self.sessionToken = response.header.sessionToken
+        
         return response
 
 
-    def InvokeRequestGlobal(self, requestName, requestArg, goodErrorCodes=None):
-        '''
-        Helper Proxy function to invoke "global" methods
+    MinStakes = namedtuple('CurrencyMinStakes', ('minimumStake', 'minimumRangeStake', 'minimumBSPLayLiability'))
+    # minimumStake, minimumRangeStake, minimumBSPLayLiability
+    MinBets = {
+        'AUD': MinStakes(5.0, 3.0, 30.0),
+        'CAD': MinStakes(6.0, 3.0, 30.0),
+        'DKK': MinStakes(30.0, 15.0, 150.0),
+        'EUR': MinStakes(2.0, 2.0, 20.0),
+        'HKD': MinStakes(25.0, 15.0, 125.0),
+        'NOK': MinStakes(30.0, 15.0, 150.0),
+        'SGD': MinStakes(6.0, 1.0, 30.0),
+        'SEK': MinStakes(30.0, 15.0, 150.0),
+        'GBP': MinStakes(2.0, 1.0, 10.0),
+        'USD': MinStakes(4.0, 2.0, 20.0),
+        }
 
-        @param requestName: service to invoke
-        @type requestName: str
-        @param requestArg: object to be passed as param of the request
-        @type requestArg: suds object
-        @param goodErrorCodes: list of errorCodes to skip
-        @type goodErrorCodes: list
-
-        @returns: Betfair API answer
-        @rtype: suds object
-        '''
-        return self.InvokeRequest(GlobalService, requestName, requestArg, goodErrorCodes)
-
-
-    def InvokeRequestExchange(self, exchangeId, requestName, requestParam, goodErrorCodes=None):
-        '''
-        Helper Proxy function to invoke "exchange" methods
-
-        @param exchangeId: id of the suds wsdl client to use
-        @type exchangeId: int
-        @param requestName: service to invoke
-        @type requestName: str
-        @param requestParam: object to be passed as param of the request
-        @type requestParam: suds object
-        @param goodErrorCodes: list of errorCodes to skip
-        @type goodErrorCodes: list
-
-        @returns: Betfair API answer
-        @rtype: suds object
-        '''
-        return self.InvokeRequest(exchangeId, requestName, requestParam, goodErrorCodes)
-
-
-    ############################################################
-    # Utility Functions
-    ############################################################
     @staticmethod
-    def GetMinBet(currency):
+    def getMinStakes(currency):
         '''
-        Returns the minimum stakes for standard, range and BSP liability
+        Returns the minimum stakes for standard bets, range and BSP liability
+
+        Useful for Free API applications that cannot call getAllCurrencies(V2)
 
         @param currency: the currency for which the minimum stakes are sought
         @type currency: str (3 letter code)
@@ -417,594 +275,108 @@ class BfApi(object):
         @returns: the minimum stakes (minimumStake, minimumRangeStake, minimumBSPLayLiability
         @rtype: namedtuple
         '''
-        CurrencyMinStakes = namedtuple('CurrencyMinStakes', ('minimumStake', 'minimumRangeStake', 'minimumBSPLayLiability'))
+        return self.MinBets[currency]
 
-        # minimumStake, minimumRangeStake, minimumBSPLayLiability
-        MinBets = {
-            'AUD': CurrencyMinStakes(5.0, 3.0, 30.0),
-            'CAD': CurrencyMinStakes(6.0, 3.0, 30.0),
-            'DKK': CurrencyMinStakes(30.0, 15.0, 150.0),
-            'EUR': CurrencyMinStakes(2.0, 2.0, 20.0),
-            'HKD': CurrencyMinStakes(25.0, 15.0, 125.0),
-            'NOK': CurrencyMinStakes(30.0, 15.0, 150.0),
-            'SGD': CurrencyMinStakes(6.0, 1.0, 30.0),
-            'SEK': CurrencyMinStakes(30.0, 15.0, 150.0),
-            'GBP': CurrencyMinStakes(2.0, 1.0, 10.0),
-            'USD': CurrencyMinStakes(4.0, 2.0, 20.0),
-            }
-
-        return MinBets[currency]
-
-
-    ############################################################
-    # API Services
-    ############################################################
-
-    ############################################################
-    # General API Services
-    ############################################################
-
-    def Login(self, username, password, productId=82, vendorSoftwareId=0):
-        '''
-        Login onto the Betfair API
-
-        @param username: username
-        @type username: str
-        @param password: password
-        @type password: str
-        @param productId: type of API access to use
-        @type productId: int
-        @param vendorSoftwareId: id assigned to software vendors
-        @type vendorSoftwareId: int
-
-        @returns: Betfair API answer
-        @rtype: suds object
-        '''
-        request = self.GetRequestObjectGlobal('LoginReq', addHeader=False)
-
-	request.username = username
-	request.password = password
-	request.productId = productId
-	request.vendorSoftwareId = vendorSoftwareId
-
-	request.ipAddress = '0'
-	request.locationId = 0
-
-        return self.InvokeRequestGlobal('login', request);
-
-
-    def Logout(self):
-        '''
-        Logout
-
-        @returns: Betfair API answer
-        @rtype: suds object
-        '''
-        request = self.GetRequestObjectGlobal('LogoutReq')
-        return self.InvokeRequestGlobal('logout', request);
-
-	
-    def KeepAlive(self):
-        '''
-        Keepalive
-
-        @returns: Betfair API answer
-        @rtype: suds object
-        '''
-        request = self.GetRequestObjectGlobal('KeepAliveReq')
-        return self.InvokeRequestGlobal('keepAlive', request);
-
-
-    ############################################################
-    # Bet Placement API Services
-    ############################################################
-
-    def PlaceBets(self, exchangeId, placeBets):
-        '''
-        Place a list of bets in an exchange
-
-        @param exchangeId: id of the suds "exchange" wsdl client to use
-        @type exchangeId: int
-        @param placeBets: list of bets to be placed
-        @type placeBets: list
-
-        @returns: Betfair API answer
-        @rtype: suds object
-        '''
-	# Create a request and fill the data
-        request = self.GetRequestObjectExchange('PlaceBetsReq')
-
-        request.bets.PlaceBets = placeBets
-        response = self.InvokeRequestExchange(exchangeId, 'placeBets', request)
-
-        return response
-
-
-    def CancelBets(self, exchangeId, cancelBets):
-        '''
-        Cancel a list of bets in an exchange
-
-        @param exchangeId: id of the suds "exchange" wsdl client to use
-        @type exchangeId: int
-        @param cancelBets: list of bets to be canceled
-        @type cancelBets: list
-
-        @returns: Betfair API answer
-        @rtype: suds object
-        '''
-	# Create a request and fill the data
-        request = self.GetRequestObjectExchange('CancelBetsReq')
-
-        request.bets.CancelBets = cancelBets
-        response = self.InvokeRequestExchange(exchangeId, 'cancelBets', request)
-
-        return response
-
-
-    def CancelBetsByMarket(self, exchangeId, markets):
-        '''
-        Cancel all bets on given markets
-
-        @param exchangeId: id of the suds "exchange" wsdl client to use
-        @type exchangeId: int
-        @param markets: list of market ids where to cancel bets
-        @type markets: list
-
-        @returns: Betfair API answer
-        @rtype: suds object
-        '''
-	# Create a request and fill the data
-        request = self.GetRequestObjectExchange('CancelBetsByMarketReq')
-        request.markets = markets
-
-        response = self.InvokeRequestExchange(exchangeId, 'cancelBetsByMarket', request)
-        return response
-
-
-    def UpdateBets(self, exchangeId, updateBets):
-        '''
-        Update a list of bets
-
-        @param exchangeId: id of the suds "exchange" wsdl client to use
-        @type exchangeId: int
-        @param updateBets: list of bets to be canceled
-        @type updateBets: list
-
-        @returns: Betfair API answer
-        @rtype: suds object
-        '''
-	# Create a request and fill the data
-        request = self.GetRequestObjectExchange('UpdateBetsReq')
-        request.bets.UpdateBets = updateBets
-
-        response = self.InvokeRequestExchange(exchangeId, 'updateBets', request)
-        return response
-
-
-    ############################################################
-    # Read-Only Betting API Services
-    ############################################################
-    def ConvertCurrency(self, amount, fromCurrency, toCurrency):
-        '''
-        Converts an amount from fromCurrentcy to toCurrentcy
-
-        @param amount: amount to be converted
-        @type amount: float
-        @param fromCurrency: source currency
-        @type fromCurrency: str
-        @param toCurrency: destination currency
-        @type toCurrency: str
-
-        @returns: Betfair API answer
-        @rtype: suds object
-        '''
-        request = self.GetRequestObjectGlobal('ConvertCurrencyReq')
-        request.amount = amount
-        request.fromCurrency = fromCurrency
-        request.toCurrency = toCurrency
+    serviceDefs = [
+        # ######################
+        # API Object Retrieval
+        # ######################
+        GlobalObject('Event', eventId=-1, eventName=''),
+        ExchangeObject('Market'),
+        ExchangeObject('Runner'),
+        ExchangeObject('MarketPrices'),
+        ExchangeObject('RunnerPrices'),
+        ExchangeObject('Price'),
+        ExchangeObject('PlaceBets', betCategoryType='E', bspLiability=0.0),
+        ExchangeObject('CancelBets'),
+        ExchangeObject('UpdateBets'),
         
-        return self.InvokeRequestGlobal('convertCurrency', request);
-
-
-    def GetAllCurrencies(self):
-        '''
-        Get a list of the currencies and the conversion rate to GBP
-
-        @returns: Betfair API answer
-        @rtype: suds object
-        '''
-        request = self.GetRequestObjectGlobal('GetCurrenciesReq')
-        return self.InvokeRequestGlobal('getAllCurrencies', request);
-
-
-    def GetAllCurrenciesV2(self):
-        '''
-        Get a list of the currencies and the conversion rate to GBP
-        and the minimum bet for each currency
-
-        @returns: Betfair API answer
-        @rtype: suds object
-        '''
-        request = self.GetRequestObjectGlobal('GetCurrenciesV2Req')
-        return self.InvokeRequestGlobal('getAllCurrenciesV2', request);
-
-
-    def GetActiveEventTypes(self):
-        '''
-        Retrieve the list of Active Event Types (top level events)
-
-        @returns: Betfair API answer
-        @rtype: suds object
-        '''
-	# Create a request and fill the data
-        request = self.GetRequestObjectGlobal('GetEventTypesReq')
-        return self.InvokeRequestGlobal('getActiveEventTypes', request,
-                                        ['INVALID_LOCALE_DEFAULTING_TO_ENGLISH', 'NO_RESULTS'])
-
-
-    def GetAllEventTypes(self):
-        '''
-        Retrieve the list of all Event Types (top level events)
-
-        @returns: Betfair API answer
-        @rtype: suds object
-        '''
-	# Create a request and fill the data
-        request = self.GetRequestObjectGlobal('GetEventTypesReq')
-
-        return self.InvokeRequestGlobal('getAllEventTypes', request,
-                                        ['INVALID_LOCALE_DEFAULTING_TO_ENGLISH', 'NO_RESULTS'])
-
-
-    def GetAllMarkets(self, exchangeId):
-        '''
-        Retrieve a list of objects with all available markets in an exchange
-
-        @param exchangeId: id of the suds "exchange" wsdl client to use
-        @type exchangeId: int
-
-        @returns: Betfair API answer
-        @rtype: suds object
-        '''
-        request = self.GetRequestObjectExchange('GetAllMarketsReq')
-        return self.InvokeRequestExchange(exchangeId, 'getAllMarkets', request)
-
-
-    def GetCompleteMarketPricesCompressed(self, exchangeId, marketId):
-        '''
-        Retrieve the complete market prices (compressed)
-
-        @param exchangeId: id of the suds "exchange" wsdl client to use
-        @type exchangeId: int
-        @param marketId: id of the market
-        @type marketId: int
-
-        @returns: Betfair API answer
-        @rtype: suds object
-        '''
-        request = self.GetRequestObjectExchange('GetCompleteMarketPricesCompressedReq')
-        return self.InvokeRequestExchange(exchangeId, 'getCompleteMarketPricesCompressed', request)
-
-
-    def GetEvents(self, parentEventId):
-        '''
-        Retrieve a list of eventItems/marketItems for a given Active Event
-        or eventItem
-
-        @param parentEventId: id of the parent event
-        @type parentEventId: int
-
-        @returns: Betfair API answer
-        @rtype: suds object
-        '''
-	# Create a request and fill the data
-        request = self.GetRequestObjectGlobal('GetEventsReq')
-
-        request.eventParentId = parentEventId
-
-        return self.InvokeRequestGlobal('getEvents', request,
-                                        ['INVALID_LOCALE_DEFAULTING_TO_ENGLISH', 'NO_RESULTS'])
-
-
-    def GetMarket(self, exchangeId, marketId):
-        '''
-        Retrieve a market object
-
-        @param exchangeId: id of the suds "exchange" wsdl client to use
-        @type exchangeId: int
-        @param marketId: id of the market
-        @type marketId: int
-
-        @returns: Betfair API answer
-        @rtype: suds object
-        '''
-        request = self.GetRequestObjectExchange('GetMarketReq')
-        request.marketId = marketId
-
-        # 'includeCouponLinks' is optional according to the docs
-        # but the server responds with an INTERNAL_ERROR if not set
-        request.includeCouponLinks = False
-
-
-        return self.InvokeRequestExchange(exchangeId,
-                                          'getMarket', request,
-                                          ['INVALID_LOCALE_DEFAULTING_TO_ENGLISH'])
-
-
-    def GetMarketInfo(self, exchangeId, marketId):
-        '''
-        Retrieve market information
-
-        @param exchangeId: id of the suds "exchange" wsdl client to use
-        @type exchangeId: int
-        @param marketId: id of the market
-        @type marketId: int
-
-        @returns: Betfair API answer
-        @rtype: suds object
-        '''
-        request = self.GetRequestObjectExchange('GetMarketInfoReq')
-        request.marketId = marketId
-
-        return self.InvokeRequestExchange(exchangeId,
-                                          'getMarketInfo', request,
-                                          ['INVALID_LOCALE_DEFAULTING_TO_ENGLISH'])
-
-
-    def GetMarketPrices(self, exchangeId, marketId):
-        '''
-        Retrieve the market prices
-
-        @param exchangeId: id of the suds "exchange" wsdl client to use
-        @type exchangeId: int
-        @param marketId: id of the market
-        @type marketId: int
-
-        @returns: Betfair API answer
-        @rtype: suds object
-        '''
-        return self.GetMarketPricesCompressed(exchangeId, marketId)
-
-
-    def GetMarketPricesCompressed(self, exchangeId, marketId):
-        '''
-        Retrieve the market prices (compressed)
-
-        @param exchangeId: id of the suds "exchange" wsdl client to use
-        @type exchangeId: int
-        @param marketId: id of the market
-        @type marketId: int
-
-        @returns: Betfair API answer
-        @rtype: suds object
-        '''
-        request = self.GetRequestObjectExchange('GetMarketPricesCompressedReq')
-        request.marketId = marketId
-
-        return self.InvokeRequestExchange(exchangeId, 'getMarketPricesCompressed', request)
-
-
-    def GetCurrentBets(self, exchangeId, betStatus, orderBy='NONE', marketId=0,
-                       startRecord=0, recordCount=0, noTotalRecordCount=True):
-        '''
-        Retrieve a list of current bets on an exchange, according to betStatus
-        marketId and ordered according to orderBy
-
-        @param exchangeId: id of the suds "exchange" wsdl client to use
-        @type exchangeId: int
-        @param betStatus: status of bets to be returned (matched, unmatched)
-        @type betStatus: string (Betfair enum)
-        @param orderBy: ordering criterion
-        @type orderBy: string (Betfair enum)
-        @param marketId: id of market to get current bets for. With 0, all bets
-                         in the selected exchange will be returned
-        @type marketId: int
-        @param startRecord: to enable paging through long lists
-        @type startRecord: int
-        @param recordCount: maximum number of records to retrieve (see matchedSince)
-        @type recordCount: int
-        @param noTotalRecordCount: whether the total record count should be returned
-        @type noTotalRecordCount: bool
-
-        @returns: Betfair API answer
-        @rtype: suds object
-        '''
-        request = self.GetRequestObjectExchange('GetCurrentBetsReq')
-
-        request.betStatus = betStatus
-        request.detailed = False
-        request.orderBy = orderBy
-        # Documentation says it is optional
-        # But the WSDL says "nillable=False" and indicates that a 0 has to be passed
-        # to get all bets in the exchange
-        request.marketId = marketId
-        request.recordCount = recordCount
-        request.startRecord = startRecord
-        request.noTotalRecordCount = noTotalRecordCount
-
-        return self.InvokeRequestExchange(exchangeId, 'getCurrentBets', request,
-                                          ['NO_RESULTS'])
-
-
-    # Long name in Betfair's documentation for GetMUBets
-    def GetMatchedAndUnmatchedBets(self, exchangeId, marketId=None,
-                                   betStatus='MU', orderBy='BET_ID', sortOrder='DESC',
-                                   startRecord=0, recordCount=200, excludeLastSecond=False,
-                                   useMatchedSince=False, matchedSince=None):
-        '''
-        Alias for GetMUBets
-
-        @param exchangeId: id of the suds "exchange" wsdl client to use
-        @type exchangeId: int
-        @param marketId: id of the market
-        @type marketId: int
-        @param betStatus: status of bets to be returned (matched, unmatched)
-        @type betStatus: string (Betfair enum)
-        @param orderBy: ordering criterion
-        @type orderBy: string (Betfair enum)
-        @param sortOrder: ordering criterion (asc/desc)
-        @type sortOrder: string (Betfair enum)
-        @param startRecord: to enable paging through long lists
-        @type startRecord: int
-        @param recordCount: maximum number of records to retrieve (see matchedSince)
-        @type recordCount: int
-        @param excludeLastSecond: exclude changes in the last second
-        @type excludeLastSecond: bool
-        @param useMatchedSince: whether to use the matched since param
-        @type useMatchedSince: bool
-        @param matchedSince: date to return bets since. It should void recordCounts
-        @type matchedSince: datetime
-
-        @returns: Betfair API answer
-        @rtype: suds object
-        '''
-        return self.GetMUBets(exchangeId, marketId=marketId,
-                              betStatus=betStatus, orderBy=orderBy, sortOrder=sortOrder,
-                              startRecord=startRecord, recordCount=recordCount,
-                              excludeLastSecond=excludeLastSecond,
-                              useMatchedSince=useMatchedSince, matchedSince=matchedSince)
-            
-
-    def GetMUBets(self, exchangeId, marketId=None, betIds=None,
-                  betStatus='MU', orderBy='BET_ID', sortOrder='DESC',
-                  startRecord=0, recordCount=200, excludeLastSecond=False,
-                  useMatchedSince=False, matchedSince=None):
-        '''
-        Get Matched and Unmatched bets for a given marketId
-
-        @param exchangeId: id of the suds "exchange" wsdl client to use
-        @type exchangeId: int
-        @param marketId: id of the market
-        @type marketId: int
-        @param betStatus: status of bets to be returned (matched, unmatched)
-        @type betStatus: string (Betfair enum)
-        @param orderBy: ordering criterion
-        @type orderBy: string (Betfair enum)
-        @param sortOrder: ordering criterion (asc/desc)
-        @type sortOrder: string (Betfair enum)
-        @param startRecord: to enable paging through long lists
-        @type startRecord: int
-        @param recordCount: maximum number of records to retrieve (see matchedSince)
-        @type recordCount: int
-        @param excludeLastSecond: exclude changes in the last second
-        @type excludeLastSecond: bool
-        @param useMatchedSince: whether to use the matched since param
-        @type useMatchedSince: bool
-        @param matchedSince: date to return bets since. It should void recordCounts
-        @type matchedSince: datetime
-
-        @returns: Betfair API answer
-        @rtype: suds object
-        '''
-        request = self.GetRequestObjectExchange('GetMUBetsReq')
-
-        request.betStatus = betStatus
-        if marketId is not None:
-            request.marketId = marketId
-        request.orderBy = orderBy
-        # Seems to be the limit according to GetMUBets (the non-lite version)
-        request.recordCount = recordCount
-        request.sortOrder = sortOrder
-        request.startRecord = startRecord
-
-        # In theory this is an optional field
-        request.excludeLastSecond = excludeLastSecond
-
-        # They seem to be really optional
-        if betIds is not None:
-            request.betIds = betIds
-
-        # In theory, specifying matchedSince eliminates 'recordCount' restrictions
-        if useMatchedSince:
-            if matchedSince is None:
-                # Use a sensible default
-                matchedSince = datetime(2001, 01, 01, 00, 00, 01)
-
-            request.matchedSince = matchedSince
-
-        return self.InvokeRequestExchange(exchangeId, 'getMUBets', request, ['NO_RESULTS'])
-
-
-    def GetMarketProfitAndLoss(self, exchangeId, marketId,
-                               includeBspBets=False,
-                               includeSettledBets=False,
-                               netOfCommission=False):
-        '''
-        Get Matched and Unmatched bets for a given marketId
-
-        The param netOfCommission is optional according to the docs
-
-        @param exchangeId: id of the suds "exchange" wsdl client to use
-        @type exchangeId: int
-        @param marketId: id of the market
-        @type marketId: int
-        @param includeBspBets: whether to include BspBets
-        @type includeBspBets: bool
-        @param includeSettledBets: whether to include settled bets
-        @type includeSettledBets: bool
-        @param netOfCommission: whether to include commision in profit and loss
-        @type netOfCommission: bool
-
-        @returns: Betfair API answer
-        @rtype: suds object
-        '''
-        request = self.GetRequestObjectExchange('GetMarketProfitAndLossReq')
-
-        # it is marketID unlike in the rest of the API calls, where it is marketId
-        # request.marketID = marketId
-        request.marketID = marketId
-        request.includeBspBets = includeBspBets
-        # Compulsory - Supposed to be optional according to the docs
-        request.includeSettledBets = includeSettledBets
-
-        # Compulsory - Supposed to be optional according to the docs
-        request.netOfCommission = netOfCommission
-
-        # For a closed market, the Api is returning 'INVALID_MARKET' instead of
-        # 'MARKET_CLOSED' as stated and as returned by calls that are usually executed
-        # together with this one like: GetMarketPricesCompressed/GetMarket/GetMUBets
-        return self.InvokeRequestExchange(exchangeId,
-                                          'getMarketProfitAndLoss', request,
-                                          ['MARKET_CLOSED', 'INVALID_MARKET'])
-
-
-    ############################################################
-    # Account Management Betting API Services
-    ############################################################
-
-    def GetAccountFunds(self, exchangeId):
-        '''
-        Get Account Funds from an exchange
-
-        @param exchangeId: id of the suds "exchange" wsdl client to use
-        @type exchangeId: int
-
-        @returns: Betfair API answer
-        @rtype: suds object
-        '''
-        request = self.GetRequestObjectExchange('GetAccountFundsReq')
-
-        return self.InvokeRequestExchange(exchangeId, 'getAccountFunds', request)
-
-
-    def TransferFunds(self, sourceWalletId, destWalletId, amount):
-        '''
-        Transfer funds amongst exchanges
-
-        @param sourceWalletId: id of the suds "exchange" to use as source
-        @type sourceWalletId: int
-        @param destWalletId: id of the suds "exchange" to use as destination
-        @type destWalletId: int
-        @param amount: amount to transfer
-        @type amount: float
-
-        @returns: Betfair API answer
-        @rtype: suds object
-        '''
-        request = self.GetRequestObjectGlobal('TransferFundsReq')
-
-        request.sourceWalletId = sourceWalletId
-        request.targetWalletId = destWalletId
-        request.amount = amount
-
-        return self.InvokeRequestGlobal('transferFunds', request);
+        # ######################
+        # General API Services
+        # ######################
+        GlobalServiceDef('login', apiHeader=False,
+                         preProc=[PreProcLogin()], postProc=[ProcLogin()],
+                         productId=82, vendorSoftwareId=0, ipAddress='0', locationId=0),
+        GlobalServiceDef('logout'),
+        GlobalServiceDef('keepAlive'),
+
+        # ######################
+        # Read-Only API Services
+        # ######################
+        GlobalServiceDef('convertCurrency'),
+        GlobalServiceDef('getActiveEventTypes', requestName='GetEventTypesReq', skipErrorCodes=['NO_RESULTS'],
+                         postProc=[ArrayFix('eventTypeItems', 'EventType')]),
+        GlobalServiceDef('getAllCurrencies', requestName='GetCurrenciesReq', postProc=[ArrayFix('currencyItems', 'Currency')]),
+        GlobalServiceDef('getAllCurrenciesV2', requestName='GetCurrenciesV2Req', postProc=[ArrayFix('currencyItems', 'CurrencyV2')]),
+        GlobalServiceDef('getAllEventTypes', requestName='GetEventTypesReq', skipErrorCodes=['NO_RESULTS'],
+                         postProc=[ArrayFix('eventTypeItems', 'EventType')]),
+        ExchangeServiceDef('getAllMarkets', postProc=[ProcAllMarkets()]),
+        # MISSING GetBet
+        # MISSING GetBetHistory
+        # MISSING GetBetLite
+        # MISSING GetBetMatchesLite
+        # ExchangeServiceDef('getCompleteMarketPricesCompressed', postProc=[ProcMarketPricesCompressed(True)]),
+        ExchangeServiceDef('getCurrentBets', skipErrorCodes=['NO_RESULTS'], postProc=[ArrayFix('bets', 'Bet'), ProcCurrentBets()],
+                           detailed=False, orderBy='NONE', marketId=0, recordCount=0, startRecord=0, noTotalRecordCount=True),
+        # MISSING GetCurrentBetsLite
+        # MISSING GetDetailAvailableMarketDepth
+        GlobalServiceDef('getEvents', skipErrorCodes=['NO_RESULTS'],
+                         postProc=[ArrayFix('eventItems', 'BFEvent'), ArrayFix('marketItems', 'MarketSummary')]),
+        # ExchangeServiceDef('getInPlayMarkets', postProc=[ProcAllMarkets()]),
+        # Documentation incorrectly states that includeCouponLinks is optional
+        ExchangeServiceDef('getMarket', postProc=[ProcMarket()], includeCouponLinks=False),
+        ExchangeServiceDef('getMarketInfo'),
+        # MISSING GetMarketPrices
+        ExchangeServiceDef('getMarketPricesCompressed', postProc=[ProcMarketPricesCompressed()]),
+        ExchangeServiceDef('getMUBets', postProc=[ArrayFix('bets', 'MUBet')],
+                           betStatus='MU', excludeLastSecond=False,
+                           matchedSince=datetime(2000, 01, 01, 00, 00, 00),
+                           orderBy='BET_ID', recordCount=200, sortOrder='ASC', startRecord=0),
+        # MISSING GetMUBetsLite
+        ExchangeServiceDef('getMarketProfitAndLoss',
+                           skipErrorCodes=['MARKET_CLOSED', 'INVALID_MARKET'],
+                           preProc=[PreProcMarketProfitAndLoss()],
+                           postProc=[ArrayFix('annotations', 'ProfitAndLoss'), ProcMarketProfitAndLoss()],
+                           includeBspBets=False, includeSettledBets=False, netOfCommission=False),
+        # MISSING GetMarketTradedVolume
+        # MISSING GetMarketTradedVolumeCompressed
+        # MISSING GetPrivateMarkets
+        # MISSING GetSilks
+        # MISSING GetSilkV2
+
+        # ######################,
+        # Bet Placement API Services
+        # ######################
+        ExchangeServiceDef('cancelBets', preProc=[ArrayUnfix('bets', 'CancelBets')],
+                           postProc=[ArrayFix('betResults', 'CancelBetsResult')]),
+        ExchangeServiceDef('cancelBetsByMarket', postProc=[ArrayFix('results', 'CancelBetsByMarketResults')]),
+        ExchangeServiceDef('placeBets', preProc=[ArrayUnfix('bets', 'PlaceBets')],
+                           postProc=[ArrayFix('betResults', 'PlaceBetsResult')]),
+        ExchangeServiceDef('updateBets', preProc=[ArrayUnfix('bets', 'UpdateBets')],
+                           postProc=[ArrayFix('betResults', 'UpdateBetsResult')]),
+
+        # ######################
+        # Acount Management API Services
+        # ######################
+        ExchangeServiceDef('getAccountFunds'),
+        GlobalServiceDef('transferFunds'),
+
+        # MISSING addPaymentCard
+        # MISSING deletePaymentCard
+        # MISSING depositFromPaymentCard
+        # MISSING forgotPassword
+        # MISSING getAccountStatement
+        # MISSING getPaymentCard
+        # MISSING getSubscriptionInfo
+        # MISSING modifyPassword
+        # MISSING modifyProfile
+        # MISSING retrieveLIMBMessage
+        # MISSING selfExclude
+        # MISSING setChatName
+        # MISSING submitLIMBMessage
+        # MISSING updatePaymentCard
+        # MISSING viewProfile
+        # MISSING viewProfileV2 ???
+        # MISSING viewReferAndEarn
+        # MISSING withdrawToPaymentCard
+        ]

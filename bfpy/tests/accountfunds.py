@@ -28,10 +28,8 @@
 '''
 Test the following services
 
-  - login (at the beginning and to do relogin)
-  - logout
-  - keepAlive
-
+  - getAccountFunds
+  - transferFunds
 '''
 import sys
 
@@ -47,14 +45,20 @@ loginInfo = sys.modules['__main__'].loginInfo
 response = bf.login(**loginInfo)
 print response
 
-response = bf.keepAlive()
+response = bf.getAccountFunds(bfpy.ExchangeUK)
 print response
 
-response = bf.login()
+response = bf.transferFunds(sourceWalletId=bfpy.ExchangeUK,
+                            targetWalletId=bfpy.ExchangeAus,
+                            amount=0.50)
 print response
 
-response = bf.logout()
+response = bf.getAccountFunds(bfpy.ExchangeUK)
 print response
 
-response = bf.login()
+response = bf.transferFunds(sourceWalletId=bfpy.ExchangeAus,
+                            targetWalletId=bfpy.ExchangeUK,
+                            amount=0.50)
+
+response = bf.getAccountFunds(bfpy.ExchangeUK)
 print response

@@ -85,6 +85,12 @@
     <li> <strong class="uidlink">object</strong>:
       <em class="summary">The most base type</em>
     <ul>
+    <li> <strong class="uidlink"><a href="bfpy.bfprocessors.ArrayFix-class.html">bfpy.bfprocessors.ArrayFix</a></strong>:
+      <em class="summary">Response processor</em>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.bfprocessors.ArrayUnfix-class.html">bfpy.bfprocessors.ArrayUnfix</a></strong>:
+      <em class="summary">Request processor</em>
+    </li>
     <li> <strong class="uidlink">exceptions.BaseException</strong>:
       <em class="summary">Common base class for all exceptions</em>
     <ul>
@@ -136,11 +142,13 @@
     </ul>
     </li>
     <li> <strong class="uidlink"><a href="bfpy.bfapi.BfApi-class.html">bfpy.bfapi.BfApi</a></strong>:
-      <em class="summary">The BfApi is a mere &quot;objectization&quot; of the betfair API.</em>
+      <em class="summary">The class implements a unified communication interface with the 
+        Betfair API Services EndPoints (Global, ExchangeUK, ExchangeAus)</em>
     <ul>
-    <li> <strong class="uidlink"><a href="bfpy.betfair.Betfair-class.html">bfpy.betfair.Betfair</a></strong>:
-      <em class="summary">The Betfair object processes Betfair API answers (if needed) and 
-        decompresses compressed answers into usable objects</em>
+    <li> <strong class="uidlink"><a href="bfpy.bfclient.BfClient-class.html">bfpy.bfclient.BfClient</a></strong>:
+      <em class="summary">The class defines a higher level interface over the <a 
+        href="bfpy.bfapi.BfApi-class.html" class="link">BfApi</a> parent 
+        class.</em>
     </li>
     </ul>
     </li>
@@ -148,12 +156,107 @@
       <em class="summary">Used to implement objects, like those arising from compressed 
         answers</em>
     </li>
+    <li> <strong class="uidlink"><a href="bfpy.bfprocessors.PatchAttr-class.html">bfpy.bfprocessors.PatchAttr</a></strong>:
+      <em class="summary">Response processor</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="bfpy.bfprocessors.PatchAttrExId-class.html">bfpy.bfprocessors.PatchAttrExId</a></strong>:
+      <em class="summary">Response processor</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.bfprocessors.PreProcLogin-class.html">bfpy.bfprocessors.PreProcLogin</a></strong>:
+      <em class="summary">Request processor</em>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.bfprocessors.PreProcMarketProfitAndLoss-class.html">bfpy.bfprocessors.PreProcMarketProfitAndLoss</a></strong>:
+      <em class="summary">Request processor</em>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.bfprocessors.ProcAllMarkets-class.html">bfpy.bfprocessors.ProcAllMarkets</a></strong>:
+      <em class="summary">Response processor</em>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.bfprocessors.ProcCurrentBets-class.html">bfpy.bfprocessors.ProcCurrentBets</a></strong>:
+      <em class="summary">Response processor</em>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.bfprocessors.ProcLogin-class.html">bfpy.bfprocessors.ProcLogin</a></strong>:
+      <em class="summary">Response processor</em>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.bfprocessors.ProcLogout-class.html">bfpy.bfprocessors.ProcLogout</a></strong>:
+      <em class="summary">Response processor</em>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.bfprocessors.ProcMarket-class.html">bfpy.bfprocessors.ProcMarket</a></strong>:
+      <em class="summary">Response processor</em>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.bfprocessors.ProcMarketPricesCompressed-class.html">bfpy.bfprocessors.ProcMarketPricesCompressed</a></strong>:
+      <em class="summary">Response processor</em>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.bfprocessors.ProcMarketProfitAndLoss-class.html">bfpy.bfprocessors.ProcMarketProfitAndLoss</a></strong>:
+      <em class="summary">Response processor</em>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.bfservice.ServiceDescriptor-class.html">bfpy.bfservice.ServiceDescriptor</a></strong>:
+      <em class="summary">Base abstract descriptor class for the implementation of the 
+        methods provided by the Betfair API</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="bfpy.bfclientext.GetCurrentBets-class.html">bfpy.bfclientext.GetCurrentBets</a></strong>:
+      <em class="summary">Implements a non-data descriptor for BfClient to extend the 
+        getCurrentBets service method by allowing betStatus to be MU 
+        (return both Matched and UnMatched bets in a single call) Betfair 
+        does not allow it, which is odd.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.bfclientext.GetEvents-class.html">bfpy.bfclientext.GetEvents</a></strong>:
+      <em class="summary">Implements a non-data descriptor for BfClient to extend the 
+        getEvents service method by unifying getActiveEventTypes and 
+        getEvents to be able to directly recurse downwards the list of 
+        events from a fictitious eventRootId (-1)</em>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.bfclientext.PlaceBets-class.html">bfpy.bfclientext.PlaceBets</a></strong>:
+      <em class="summary">Implements a non-data descriptor for BfClient to extend the 
+        placeBets to re-place a bet if the betPersistence has not been 
+        speficied.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.bfservice.ServiceDef-class.html">bfpy.bfservice.ServiceDef</a></strong>:
+      <em class="summary">Definition and implementation of a service.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="bfpy.bfservice.ExchangeServiceDef-class.html">bfpy.bfservice.ExchangeServiceDef</a></strong>:
+      <em class="summary">Service Definition for exchane services.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.bfservice.GlobalServiceDef-class.html">bfpy.bfservice.GlobalServiceDef</a></strong>:
+      <em class="summary">Service Definition for global services.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.bfservice.ServiceObject-class.html">bfpy.bfservice.ServiceObject</a></strong>:
+      <em class="summary">Service descriptor implementation to retrieve named objects defined
+        for the services.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="bfpy.bfservice.ExchangeObject-class.html">bfpy.bfservice.ExchangeObject</a></strong>:
+      <em class="summary">Subclass of ServiceObject to retrieve objects from the exchange 
+        endPoint (1)</em>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.bfservice.GlobalObject-class.html">bfpy.bfservice.GlobalObject</a></strong>:
+      <em class="summary">Subclass of ServiceObject to retrieve objects from the global 
+        endPoint (0)</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
     <li> <strong class="uidlink">tuple</strong>:
       <em class="summary">tuple() -&gt; empty tuple tuple(iterable) -&gt; tuple initialized 
         from iterable's items</em>
     <ul>
-    <li> <strong class="uidlink"><a href="bfpy.bfapi.MarketTuple-class.html">bfpy.bfapi.MarketTuple</a></strong>:
-      <em class="summary">MarketTuple(exchangeId, marketId)</em>
+    <li> <strong class="uidlink"><a href="bfpy.bfapi.BfApi.MinStakes-class.html">bfpy.bfapi.BfApi.MinStakes</a></strong>:
+      <em class="summary">CurrencyMinStakes(minimumStake, minimumRangeStake, 
+        minimumBSPLayLiability)</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink">type</strong>:
+      <em class="summary">type(object) -&gt; the object's type type(name, bases, dict) -&gt; 
+        a new type</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="bfpy.bfservice.BfService-class.html">bfpy.bfservice.BfService</a></strong>:
+      <em class="summary">Metaclass for <a href="bfpy.bfapi.BfApi-class.html" 
+        class="link">BfApi</a> to initialize the non-data descriptor based 
+        methods on instantiation</em>
     </li>
     </ul>
     </li>
@@ -205,7 +308,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Mon Oct 18 00:01:13 2010
+    Generated by Epydoc 3.0.1 on Sun Oct 24 23:28:17 2010
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

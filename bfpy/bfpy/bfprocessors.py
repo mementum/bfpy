@@ -25,6 +25,9 @@
 # along with BfPy. If not, see <http://www.gnu.org/licenses/>.
 #
 ################################################################################
+'''
+Implementation of BfApi request and response processors
+'''
 
 from datetime import datetime
 
@@ -33,7 +36,32 @@ from timezone import GMT, LocalTimezone
 from util import EmptyObject
 
 
+class ArrayUnfix(object):
+    '''
+    Request processor
+
+    Places an array a level lower than specified by the call
+    to add the array indirections present in the Betfair
+    WSDL definitions
+    '''
+    def __init__(self, attrName, subAttrName):
+        self.attrName = attrName
+        self.subAttrName = subAttrName
+
+
+    def __call__(self, request, requestArgs, **kwargs):
+        attr = getattr(request, self.attrName)
+        value = requestArgs.pop(self.attrName)
+        setattr(attr, self.subAttrName, value)
+
+
 class ArrayFix(object):
+    '''
+    Response processor
+
+    Remove one (or more) levels of indirection from the arrays
+    defined in the Betfair WSDLs
+    '''
     def __init__(self, attrName, subAttrName):
         self.attrNames = attrName.split('.')
         self.subAttrNames = subAttrName.split('.')
@@ -58,6 +86,13 @@ class ArrayFix(object):
 
 
 class PatchAttr(object):
+    '''
+    Response processor
+
+    An attribute can be added to an attribute of the response
+    one or several levels below the root, to have sensible
+    information added to a response
+    '''
     def __init__(self, attrName, subAttrName):
         self.attrNames = attrName.split('.')
         self.subAttrName = subAttrName
@@ -74,12 +109,24 @@ class PatchAttr(object):
 
 
 class PatchAttrExId(PatchAttr):
+    '''
+    Response processor
+
+    Specialization of PatchAttr that handles "exchangeId"
+    patching specifically
+    '''
     def __init__(self, attrName):
         PatchAttr.__init__(self, attrName, 'exchangeId')
 
 
 
 class ProcAllMarkets(object):
+    '''
+    Response processor
+
+    Parses and formats as objects the information returned by
+    getAllMarketData
+    '''
     def __call__(self, response, **kwargs):
         # Creat a placeholder for the marketItems to be parsed
         marketItems = list()
@@ -173,6 +220,12 @@ class ProcAllMarkets(object):
 
 
 class ProcCurrentBets(object):
+    '''
+    Response processor
+
+    Does some patching and correction to the bet information of
+    bets returned by getCurrentBets
+    '''
     def __call__(self, response, **kwargs):
         exchangeId = kwargs.get('exchangeId')
         for bet in response.bets:
@@ -185,25 +238,51 @@ class ProcCurrentBets(object):
                 bet.fullMarketName += '\\%s' % part.strip()
 
 
+class PreProcLogin(object):
+    '''
+    Request processor
+
+    Preprocesses a login request to enable re-login
+    functionality
+    '''
+    def __call__(self, request, requestArgs, **kwargs):
+        instance = kwargs.get('instance')
+        methodArgs = kwargs.get('methodArgs')
+
+        loginArgs = ['username', 'password', 'productId', 'vendorSoftwareId']
+
+        for loginArg in loginArgs:
+            if hasattr(instance, loginArg):
+                if loginArg not in methodArgs:
+                    loginArgValue = getattr(instance, loginArg)
+                    requestArgs[loginArg] = loginArgValue
+
+
 class ProcLogin(object):
+    '''
+    Response processor
+
+    Enables information storage for re-login functionality
+    '''
     def __call__(self, response, **kwargs):
         instance = kwargs.get('instance')
         request = kwargs.get('request')
 
-        instance.username = request.username
-        instance.password = request.password
-        instance.productId = request.productId
-        instance.vendorSoftwareId = request.vendorSoftwareId
+        loginArgs = ['username', 'password', 'productId', 'vendorSoftwareId']
 
-
-class ProcLogout(object):
-    def __call__(self, response, **kwargs):
-        instance = kwargs.get('instance')
-
-        instance.sessionToken = ''
+        for loginArg in loginArgs:
+            attrValue = getattr(request, loginArg)
+            setattr(instance, loginArg, attrValue)
 
 
 class ProcMarket(object):
+    '''
+    Response processor
+
+    Patches exchangeId in the market, removes some indirections
+    and adjusts the marketTime to have a timezone (and therefore be
+    manageable)
+    '''
     def __call__(self, response, **kwargs):
         exchangeId = kwargs.get('exchangeId')
 
@@ -238,6 +317,11 @@ class ProcMarket(object):
 
 
 class ProcMarketPricesCompressed(object):
+    '''
+    Response processor
+
+    Decompresses the answer and removes indirections in the decompressed answer
+    '''
     def __init__(self, completeCompressed=False):
         self.completeCompressed = completeCompressed
 
@@ -526,7 +610,31 @@ class ProcMarketPricesCompressed(object):
         return price
 
 
+class PreProcMarketProfitAndLoss(object):
+    '''
+    Request processor
+
+    The WSDLs have a typo for this call: marketID instead of marketId
+    like all other calls. This method corrects possible user mistakes
+    '''
+    def __call__(self, request, requestArgs, **kwargs):
+        try:
+            marketId = requestArgs.pop('marketId')
+            requestArgs['marketID'] = marketId
+        except KeyError:
+            pass
+
+
 class ProcMarketProfitAndLoss(object):
+    '''
+    Response processor
+
+    On closed markets, the call returns INVALID_MARKET (unlike getMUBets and
+    getMarketPricesXXXXX) and this call patches it if needed.
+
+    If the condition is not met, the exception that would have been raised during
+    invocation is raised
+    '''
     def __call__(self, response, **kwargs):
         if response.errorCode == 'INVALID_MARKET' and response.marketStatus == 'CLOSED':
             response.errorCode = 'MARKET_CLOSED' # OK could also be returned

@@ -29,31 +29,37 @@
 BfClient object implementation.
 '''
 
-from bfapi2 import BfApi
+from bfapi import *
 from bfservice import BfService
 import bfclientext 
 
 
 class BfClient(BfApi):
+    '''
+    The class defines a higher level interface over the L{BfApi} parent class.
+
+    The intention is to have some services redefine/extend the functionality
+    in a intelligent manner.
+    
+    As an example de redefined "getEvents" unifies getActiveEventTypes and getEvents
+    (it is used as such in the Bf++ application <http://code.google.com/p/bfplusplus>
+
+    The redefintion is made by means of non-data descriptors in the bfclientext
+    module
+
+    @ivar serviceDefs: service definitions with non-data descriptors
+    @type clients: list
+    '''
 
     __metaclass__ = BfService
 
     # Methods that override base class non-data descriptors, are implemented
     # as non-data descriptors also (simple override doesn't work)
     serviceDefs = [
-        bfclientext.GetEvents(),
-        bfclientext.GetCurrentBets(),
-        bfclientext.PlaceBets(),
+        bfclientext.GetEvents(eventParentId=-1),
+        bfclientext.GetCurrentBets(betStatus='MU'),
+        bfclientext.PlaceBets(nonIPRePlace=False),
         ]
 
     def __init__(self, **kwargs):
         BfApi.__init__(self, **kwargs)
-
-
-    def reLogin(self):
-        return self.login(username=self.username, password=self.password,
-                          productId=self.productId, vendorSoftwareId=self.vendorSoftwareId)
-
-
-# Alias to look like version 1 of the API
-Betfair = BfClient

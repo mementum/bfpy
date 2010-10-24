@@ -28,10 +28,7 @@
 '''
 Test the following services
 
-  - login (at the beginning and to do relogin)
-  - logout
-  - keepAlive
-
+  - currentBets
 '''
 import sys
 
@@ -47,14 +44,6 @@ loginInfo = sys.modules['__main__'].loginInfo
 response = bf.login(**loginInfo)
 print response
 
-response = bf.keepAlive()
+response = bf.getCurrentBets(bfpy.ExchangeUK)
 print response
 
-response = bf.login()
-print response
-
-response = bf.logout()
-print response
-
-response = bf.login()
-print response

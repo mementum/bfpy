@@ -46,7 +46,7 @@ class NullHandler(logging.Handler):
     '''
     def emit(self, record):
         '''
-        Simply discard the incoming with the incoming logging record
+        Simply discard the incoming param and does nothing
 
         @param record: logging record
         @type record: str
