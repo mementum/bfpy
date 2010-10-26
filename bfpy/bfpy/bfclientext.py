@@ -74,7 +74,6 @@ class GetEvents(ServiceDescriptor):
 
         if eventParentId == eventRootId:
             response = instance.getActiveEventTypes()
-            print response
             # Alias the .id and .name attributes to those of an event
             for event in response.eventTypeItems:
                 event.eventId = event.id
@@ -187,11 +186,11 @@ class PlaceBets(ServiceDescriptor):
         @returns: Betfair API answer
         @rtype: suds object
         '''
-        response = BfApi.placeBets(instance, *args, **kwargs)
-
         placeBetsArgs = self.kwargs.copy()
         placeBetsArgs.update(**kwargs)
-        nonIPRePlace = placeBetsArgs.get('nonIPRePlace')
+        nonIPRePlace = placeBetsArgs.pop('nonIPRePlace')
+
+        response = BfApi.placeBets(instance, *args, **placeBetsArgs)
 
         if response.betResults and nonIPRePlace:
             placeBets = placeBetsArgs.get('bets')

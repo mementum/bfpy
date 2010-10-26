@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>bfpy.bfclient.BfClient</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="bfpy-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.google.com/p/bfpy/">BfPy</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="bfpy-module.html">Package&nbsp;bfpy</a> ::
+        <a href="bfpy.bfclient-module.html">Module&nbsp;bfclient</a> ::
+        Class&nbsp;BfClient
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="bfpy.bfclient.BfClient-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class BfClient</h1><p class="nomargin-top"><span class="codelink"><a href="bfpy.bfclient-pysrc.html#BfClient">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+ object --+    
+          |    
+<a href="bfpy.bfapi.BfApi-class.html">bfapi.BfApi</a> --+
+              |
+             <strong class="uidshort">BfClient</strong>
+</pre>
+
+<hr />
+<p>The class defines a higher level interface over the <a 
+  href="bfpy.bfapi.BfApi-class.html" class="link">BfApi</a> parent 
+  class.</p>
+  <p>The intention is to have some services redefine/extend the 
+  functionality in a intelligent manner.</p>
+  <p>As an example de redefined &quot;getEvents&quot; unifies 
+  getActiveEventTypes and getEvents (it is used as such in the Bf++ 
+  application &lt;http://code.google.com/p/bfplusplus&gt;</p>
+  <p>The redefintion is made by means of non-data descriptors in the 
+  bfclientext module</p>
+
+<!-- ==================== NESTED CLASSES ==================== -->
+<a name="section-NestedClasses"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Nested Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-NestedClasses"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="bfpy.bfapi.BfApi-class.html">bfapi.BfApi</a></code></b>:
+      <code><a href="bfpy.bfapi.BfApi.MinStakes-class.html">MinStakes</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.bfclient.BfClient-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Initializes the processing options, transport and service clients</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bfclient-pysrc.html#BfClient.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.bfclient.BfClient-class.html#getCurrentBets" class="summary-sig-name">getCurrentBets</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      Implements a non-data descriptor for BfClient to extend the 
+      getCurrentBets service method by allowing betStatus to be MU (return 
+      both Matched and UnMatched bets in a single call) Betfair does not 
+      allow it, which is odd.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bfclientext-pysrc.html">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.bfclient.BfClient-class.html#getEvents" class="summary-sig-name">getEvents</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      Implements a non-data descriptor for BfClient to extend the getEvents
+      service method by unifying getActiveEventTypes and getEvents to be 
+      able to directly recurse downwards the list of events from a 
+      fictitious eventRootId (-1)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bfclientext-pysrc.html">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.bfclient.BfClient-class.html#placeBets" class="summary-sig-name">placeBets</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      Implements a non-data descriptor for BfClient to extend the placeBets
+      to re-place a bet if the betPersistence has not been speficied.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bfclientext-pysrc.html">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="bfpy.bfapi.BfApi-class.html">bfapi.BfApi</a></code></b>:
+      <code><a href="bfpy.bfapi.BfApi-class.html#cancelBets">cancelBets</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#cancelBetsByMarket">cancelBetsByMarket</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#clone">clone</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#convertCurrency">convertCurrency</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#createBFEvent">createBFEvent</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#createCancelBets">createCancelBets</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#createMarket">createMarket</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#createMarketPrices">createMarketPrices</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#createPlaceBets">createPlaceBets</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#createPrice">createPrice</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#createRunner">createRunner</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#createRunnerPrices">createRunnerPrices</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#createUpdateBets">createUpdateBets</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#getAccountFunds">getAccountFunds</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#getActiveEventTypes">getActiveEventTypes</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#getAllCurrencies">getAllCurrencies</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#getAllCurrenciesV2">getAllCurrenciesV2</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#getAllEventTypes">getAllEventTypes</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#getAllMarkets">getAllMarkets</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#getHeader">getHeader</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#getMUBets">getMUBets</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#getMarket">getMarket</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#getMarketInfo">getMarketInfo</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#getMarketPricesCompressed">getMarketPricesCompressed</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#getMarketProfitAndLoss">getMarketProfitAndLoss</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#getObject">getObject</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#getRequest">getRequest</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#getService">getService</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#invoke">invoke</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#keepAlive">keepAlive</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#login">login</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#logout">logout</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#transferFunds">transferFunds</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#updateBets">updateBets</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Static Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-StaticMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="bfpy.bfapi.BfApi-class.html">bfapi.BfApi</a></code></b>:
+      <code><a href="bfpy.bfapi.BfApi-class.html#getMinStakes">getMinStakes</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__metaclass__"></a><span class="summary-name">__metaclass__</span> = <code title="BfService">BfService</code><br />
+      Metaclass for <a href="bfpy.bfapi.BfApi-class.html" 
+        class="link">BfApi</a> to initialize the non-data descriptor based 
+        methods on instantiation
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="bfpy.bfapi.BfApi-class.html">bfapi.BfApi</a></code></b>:
+      <code><a href="bfpy.bfapi.BfApi-class.html#MinBets">MinBets</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#wsdlDefs">wsdlDefs</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="bfpy.bfclient.BfClient-class.html#serviceDefs" class="summary-name">serviceDefs</a> = <code title="[bfclientext.GetEvents(eventParentId=-1), bfclientext.GetCurrentBets(b\
+etStatus= 'MU'), bfclientext.PlaceBets(nonIPRePlace= False),]">[bfclientext.GetEvents(eventParentId=-1), bfclie<code class="variable-ellipsis">...</code></code><br />
+      service definitions with non-data descriptors
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="bfpy.bfapi.BfApi-class.html">bfapi.BfApi</a></code></b>:
+      <code><a href="bfpy.bfapi.BfApi-class.html#clients">clients</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#postProcess">postProcess</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#preProcess">preProcess</a></code>,
+      <code><a href="bfpy.bfapi.BfApi-class.html#transport">transport</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bfclient-pysrc.html#BfClient.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Initializes the processing options, transport and service clients</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>preProcess</code></strong> - whether service requests will undergo pre-processing</li>
+        <li><strong class="pname"><code>postProcess</code></strong> - whether service requests will undergo post-processing</li>
+    </ul></dd>
+    <dt>Overrides:
+        object.__init__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getCurrentBets"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getCurrentBets</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bfclientext-pysrc.html">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Implements a non-data descriptor for BfClient to extend the 
+  getCurrentBets service method by allowing betStatus to be MU (return both
+  Matched and UnMatched bets in a single call) Betfair does not allow it, 
+  which is odd.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="bfpy.bfapi.BfApi-class.html#getCurrentBets">bfapi.BfApi.getCurrentBets</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getEvents"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getEvents</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bfclientext-pysrc.html">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Implements a non-data descriptor for BfClient to extend the getEvents 
+  service method by unifying getActiveEventTypes and getEvents to be able 
+  to directly recurse downwards the list of events from a fictitious 
+  eventRootId (-1)</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="bfpy.bfapi.BfApi-class.html#getEvents">bfapi.BfApi.getEvents</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="placeBets"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">placeBets</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bfclientext-pysrc.html">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Implements a non-data descriptor for BfClient to extend the placeBets 
+  to re-place a bet if the betPersistence has not been speficied.</p>
+  <p>This is a hack to support Bf++, given that the 
+  &quot;marketSummary&quot; returned by getEvents does not state if a 
+  market will turn in-ply or not. A call to getAllMarkets is needed to find
+  out.</p>
+  <p>This hack will be removed</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="bfpy.bfapi.BfApi-class.html#placeBets">bfapi.BfApi.placeBets</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== INSTANCE VARIABLE DETAILS ==================== -->
+<a name="section-InstanceVariableDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Variable Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceVariableDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="serviceDefs"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">serviceDefs</h3>
+  service definitions with non-data descriptors
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+[bfclientext.GetEvents(eventParentId=-1), bfclientext.GetCurrentBets(b<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+etStatus= 'MU'), bfclientext.PlaceBets(nonIPRePlace= False),]
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="bfpy-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.google.com/p/bfpy/">BfPy</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Tue Oct 26 16:47:55 2010
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

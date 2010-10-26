@@ -1,2 +1,2 @@
 #! /bin/sh
-python epydoc.py -v --config=epydoc.config
+python /c/Python26/Scripts/epydoc.py -v --config=epydoc.config

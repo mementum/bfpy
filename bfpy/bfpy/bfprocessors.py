@@ -636,7 +636,11 @@ class ProcMarketProfitAndLoss(object):
     invocation is raised
     '''
     def __call__(self, response, **kwargs):
-        if response.errorCode == 'INVALID_MARKET' and response.marketStatus == 'CLOSED':
-            response.errorCode = 'MARKET_CLOSED' # OK could also be returned
-        else:
-            raise bferror.BfServiceError('getMarketProfitAndLoss', response, str(response), response.errorCode)
+        '''
+        @raise BfServiceError: if INVALID_MARKET is received with a MARKET_CLOSED status
+        '''
+        if response.errorCode == 'INVALID_MARKET':
+            if response.marketStatus == 'CLOSED':
+                response.errorCode = 'MARKET_CLOSED' # OK could also be returned
+            else:
+                raise bferror.BfServiceError('getMarketProfitAndLoss', response, str(response), response.errorCode)

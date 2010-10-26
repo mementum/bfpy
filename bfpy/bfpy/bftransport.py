@@ -33,7 +33,14 @@ BfPy suds transport
 # Contains classes for a suds http(s) transport implementation
 #
 
+import logging
+from util import NullHandler
 
+handler = NullHandler()
+
+# transport logging
+log = logging.getLogger('bftransport')
+log.addHandler(handler)
 
 try:
 

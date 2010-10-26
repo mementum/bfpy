@@ -47,6 +47,7 @@ import bfwsdl
 preProcess = True
 postProcess = True
 eventRootId = -1
+freeApiId = 82
 
 Global = 0
 ExchangeUK = 1
@@ -78,6 +79,78 @@ class BfApi(object):
 
     @ivar serviceDefs: service definitions with non-data descriptors
     @type clients: list
+
+    The description below states if a service diverts from the standard
+    behaviour and what default values have may be assigned to some variables
+    to ease the usage of the services.
+
+    The Betfair API Documentation has to be checked to call those services.
+
+    To call a service, pass the name of the fields the service request object
+    has in the Betfair docs, as named parameters. If a service request needs a
+    "username" parameters, simply: service(username=myusername)
+
+    For Exchange services, pass the exchangeId as the first parameter. It must
+    be unnamed. The reason is "consistency". All Exchange services will always
+    have the exchangeId as the first parameter
+
+    The following services are defined:
+
+        - login
+          Default values:
+          productId=82, vendorSoftwareId=0, ipAddress='0', locationId=0
+
+          If a sucessfull login has been achieved, calling the function with no
+          parameters will perform a re-login
+
+        - logout
+        - keepAlive
+
+        - convertCurrency
+        - getActiveEventTypes
+        - getAllCurrencies
+        - getAllCurrenciesV2
+        - getAllEventTypes
+        - getAllMarkets
+        - getCurrentBets
+
+          Default values:
+          detailed=False, orderBy='NONE',
+          marketId=0, recordCount=0,
+          startRecord=0, noTotalRecordCount=True
+
+        - getEvents
+        - getMarket:
+
+          Default values: includeCouponLinks=False
+
+        - getMarketInfo
+        - getMarketPricesCompressed
+        - getMUBets:
+
+          Default values:
+          betStatus='MU', excludeLastSecond=False,
+          matchedSince=datetime(2000, 01, 01, 00, 00, 00),
+          orderBy='BET_ID', recordCount=200,
+          sortOrder='ASC', startRecord=0
+
+        - getMarketProfitAndLoss
+
+          This function is preprocessed to try avoid an error if the user
+          passes a "marketId" parameter, given the obvious typo made when
+          the service was created at Betfair: it requires a marketID parameter.
+
+          Default values:
+          includeBspBets=False,
+          includeSettledBets=False, netOfCommission=False),
+
+        - cancelBets
+        - cancelBetsByMarket
+        - placeBets
+        - updateBets
+
+        - getAccountFunds
+        - transferFunds
     '''
 
     __metaclass__ = BfService
@@ -89,7 +162,7 @@ class BfApi(object):
         }
 
 
-    def __init__(self, preProcess=preProcess, postProcess=postProcess):
+    def __init__(self, preProcess=preProcess, postProcess=postProcess, **kwargs):
         '''
         Initializes the processing options, transport and service clients
 
@@ -102,6 +175,10 @@ class BfApi(object):
         self.postProcess = postProcess
 
         self.transport = bftransport.BfTransport()
+        # The proxy may be needed early if the WSDLs are to be downloaded from the net
+        if 'proxydict' in kwargs:
+            self.transport.setproxy(kwargs['proxydict'])
+
         self.clients = dict()
         for endPoint, wsdlDef in self.wsdlDefs.iteritems():
             self.clients[endPoint] = suds.client.Client(wsdlDef, transport=self.transport.clone())
@@ -109,7 +186,7 @@ class BfApi(object):
 
     def clone(self):
         '''
-        Returns an intelligent cloned object.
+        Returns smartly cloned object.
 
         All objects are copied, then clients are also "cloned" themselves and
         the sessionToken is ended
@@ -117,12 +194,12 @@ class BfApi(object):
         @return: a clone of itself
         @rtype: L{BfApi}
         '''
-        obj = copy.copy(self)
+        obj = copy(self)
 
         for endPoint, client in self.clients.iteritems():
             obj.clients[endPoint] = client.clone()
 
-        self.sessionToken = ''
+        obj.sessionToken = ''
 
         return obj
 
@@ -243,7 +320,7 @@ class BfApi(object):
 
         # Save the latest session token
         self.sessionToken = response.header.sessionToken
-        
+
         return response
 
 
@@ -263,7 +340,7 @@ class BfApi(object):
         }
 
     @staticmethod
-    def getMinStakes(currency):
+    def getMinStakes(currency, which=None):
         '''
         Returns the minimum stakes for standard bets, range and BSP liability
 
@@ -271,17 +348,24 @@ class BfApi(object):
 
         @param currency: the currency for which the minimum stakes are sought
         @type currency: str (3 letter code)
+        @param which: indicates if a specific stake should be returned
+        @type which: str
 
         @returns: the minimum stakes (minimumStake, minimumRangeStake, minimumBSPLayLiability
         @rtype: namedtuple
         '''
-        return self.MinBets[currency]
+        minBets = BfApi.MinBets[currency]
+        if not which:
+            return minBets
+
+        return getattr(minBets, which)
+
 
     serviceDefs = [
         # ######################
         # API Object Retrieval
         # ######################
-        GlobalObject('Event', eventId=-1, eventName=''),
+        GlobalObject('BFEvent', eventId=-1, eventName=''),
         ExchangeObject('Market'),
         ExchangeObject('Runner'),
         ExchangeObject('MarketPrices'),
@@ -296,7 +380,7 @@ class BfApi(object):
         # ######################
         GlobalServiceDef('login', apiHeader=False,
                          preProc=[PreProcLogin()], postProc=[ProcLogin()],
-                         productId=82, vendorSoftwareId=0, ipAddress='0', locationId=0),
+                         productId=freeApiId, vendorSoftwareId=0, ipAddress='0', locationId=0),
         GlobalServiceDef('logout'),
         GlobalServiceDef('keepAlive'),
 
@@ -329,6 +413,7 @@ class BfApi(object):
         # MISSING GetMarketPrices
         ExchangeServiceDef('getMarketPricesCompressed', postProc=[ProcMarketPricesCompressed()]),
         ExchangeServiceDef('getMUBets', postProc=[ArrayFix('bets', 'MUBet')],
+                           skipErrorCodes=['NO_RESULTS'],
                            betStatus='MU', excludeLastSecond=False,
                            matchedSince=datetime(2000, 01, 01, 00, 00, 00),
                            orderBy='BET_ID', recordCount=200, sortOrder='ASC', startRecord=0),

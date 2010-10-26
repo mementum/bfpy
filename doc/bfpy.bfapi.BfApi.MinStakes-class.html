@@ -3,7 +3,7 @@
           "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>bfpy.bfapi.MarketTuple</title>
+  <title>bfpy.bfapi.BfApi.MinStakes</title>
   <link rel="stylesheet" href="epydoc.css" type="text/css" />
   <script type="text/javascript" src="epydoc.js"></script>
 </head>
@@ -44,7 +44,8 @@
       <span class="breadcrumbs">
         <a href="bfpy-module.html">Package&nbsp;bfpy</a> ::
         <a href="bfpy.bfapi-module.html">Module&nbsp;bfapi</a> ::
-        Class&nbsp;MarketTuple
+        <a href="bfpy.bfapi.BfApi-class.html">Class&nbsp;BfApi</a> ::
+        Class&nbsp;MinStakes
       </span>
     </td>
     <td>
@@ -54,24 +55,25 @@
     onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
         <tr><td align="right"><span class="options"
             >[<a href="frames.html" target="_top">frames</a
-            >]&nbsp;|&nbsp;<a href="bfpy.bfapi.MarketTuple-class.html"
+            >]&nbsp;|&nbsp;<a href="bfpy.bfapi.BfApi.MinStakes-class.html"
             target="_top">no&nbsp;frames</a>]</span></td></tr>
       </table>
     </td>
   </tr>
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
-<h1 class="epydoc">Class MarketTuple</h1><p class="nomargin-top"><span class="codelink"><a href="bfpy.bfapi-pysrc.html#MarketTuple">source&nbsp;code</a></span></p>
+<h1 class="epydoc">Class MinStakes</h1><p class="nomargin-top"><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.MinStakes">source&nbsp;code</a></span></p>
 <pre class="base-tree">
 object --+    
          |    
      tuple --+
              |
-            <strong class="uidshort">MarketTuple</strong>
+            <strong class="uidshort">BfApi.MinStakes</strong>
 </pre>
 
 <hr />
-<p>MarketTuple(exchangeId, marketId)</p>
+<p>CurrencyMinStakes(minimumStake, minimumRangeStake, 
+  minimumBSPLayLiability)</p>
 
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -96,9 +98,9 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfapi.MarketTuple-class.html#__getnewargs__" class="summary-sig-name">__getnewargs__</a>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi.MinStakes-class.html#__getnewargs__" class="summary-sig-name">__getnewargs__</a>(<span class="summary-sig-arg">self</span>)</span></td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#MarketTuple.__getnewargs__">source&nbsp;code</a></span>
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.MinStakes.__getnewargs__">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -112,10 +114,10 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfapi.MarketTuple-class.html#__repr__" class="summary-sig-name">__repr__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi.MinStakes-class.html#__repr__" class="summary-sig-name">__repr__</a>(<span class="summary-sig-arg">self</span>)</span><br />
       repr(x)</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#MarketTuple.__repr__">source&nbsp;code</a></span>
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.MinStakes.__repr__">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -132,7 +134,7 @@ object --+
           <td><span class="summary-sig"><a name="_asdict"></a><span class="summary-sig-name">_asdict</span>(<span class="summary-sig-arg">t</span>)</span><br />
       Return a new dict which maps field names to their values</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#MarketTuple._asdict">source&nbsp;code</a></span>
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.MinStakes._asdict">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -148,10 +150,10 @@ object --+
         <tr>
           <td><span class="summary-sig"><a name="_replace"></a><span class="summary-sig-name">_replace</span>(<span class="summary-sig-arg">_self</span>,
         <span class="summary-sig-arg">**kwds</span>)</span><br />
-      Return a new MarketTuple object replacing specified fields with new 
-      values</td>
+      Return a new CurrencyMinStakes object replacing specified fields with
+      new values</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#MarketTuple._replace">source&nbsp;code</a></span>
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.MinStakes._replace">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -222,9 +224,9 @@ object --+
         <span class="summary-sig-arg">iterable</span>,
         <span class="summary-sig-arg">new</span>=<span class="summary-sig-default">&lt;built-in method __new__ of type object at 0x1E1CF0F8&gt;</span>,
         <span class="summary-sig-arg">len</span>=<span class="summary-sig-default">&lt;built-in function len&gt;</span>)</span><br />
-      Make a new MarketTuple object from a sequence or iterable</td>
+      Make a new CurrencyMinStakes object from a sequence or iterable</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#MarketTuple._make">source&nbsp;code</a></span>
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.MinStakes._make">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -256,11 +258,12 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfapi.MarketTuple-class.html#__new__" class="summary-sig-name">__new__</a>(<span class="summary-sig-arg">_cls</span>,
-        <span class="summary-sig-arg">exchangeId</span>,
-        <span class="summary-sig-arg">marketId</span>)</span></td>
+          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi.MinStakes-class.html#__new__" class="summary-sig-name">__new__</a>(<span class="summary-sig-arg">_cls</span>,
+        <span class="summary-sig-arg">minimumStake</span>,
+        <span class="summary-sig-arg">minimumRangeStake</span>,
+        <span class="summary-sig-arg">minimumBSPLayLiability</span>)</span></td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#MarketTuple.__new__">source&nbsp;code</a></span>
+            <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.MinStakes.__new__">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -290,7 +293,7 @@ object --+
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="_fields"></a><span class="summary-name">_fields</span> = <code title="('exchangeId', 'marketId')"><code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">exchangeId</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">marketId</code><code class="variable-quote">'</code><code class="variable-group">)</code></code>
+        <a href="bfpy.bfapi.BfApi.MinStakes-class.html#_fields" class="summary-name" onclick="show_private();">_fields</a> = <code title="('minimumStake', 'minimumRangeStake', 'minimumBSPLayLiability')"><code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">minimumStake</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">minimumRangeStake</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">minimumBSPLay</code><code class="variable-ellipsis">...</code></code>
     </td>
   </tr>
 </table>
@@ -315,7 +318,7 @@ object --+
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="bfpy.bfapi.MarketTuple-class.html#exchangeId" class="summary-name">exchangeId</a><br />
+        <a href="bfpy.bfapi.BfApi.MinStakes-class.html#minimumBSPLayLiability" class="summary-name">minimumBSPLayLiability</a><br />
       itemgetter(item, ...) --&gt; itemgetter object
     </td>
   </tr>
@@ -323,7 +326,15 @@ object --+
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="bfpy.bfapi.MarketTuple-class.html#marketId" class="summary-name">marketId</a><br />
+        <a href="bfpy.bfapi.BfApi.MinStakes-class.html#minimumRangeStake" class="summary-name">minimumRangeStake</a><br />
+      itemgetter(item, ...) --&gt; itemgetter object
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="bfpy.bfapi.BfApi.MinStakes-class.html#minimumStake" class="summary-name">minimumStake</a><br />
       itemgetter(item, ...) --&gt; itemgetter object
     </td>
   </tr>
@@ -363,7 +374,7 @@ object --+
   <h3 class="epydoc"><span class="sig"><span class="sig-name">__getnewargs__</span>(<span class="sig-arg">self</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#MarketTuple.__getnewargs__">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.MinStakes.__getnewargs__">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
@@ -383,12 +394,13 @@ object --+
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
   <h3 class="epydoc"><span class="sig"><span class="sig-name">__new__</span>(<span class="sig-arg">_cls</span>,
-        <span class="sig-arg">exchangeId</span>,
-        <span class="sig-arg">marketId</span>)</span>
+        <span class="sig-arg">minimumStake</span>,
+        <span class="sig-arg">minimumRangeStake</span>,
+        <span class="sig-arg">minimumBSPLayLiability</span>)</span>
     <br /><em class="fname">Static Method</em>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#MarketTuple.__new__">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.MinStakes.__new__">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
@@ -413,7 +425,7 @@ object --+
     <br /><em class="fname">(Representation operator)</em>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#MarketTuple.__repr__">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.MinStakes.__repr__">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
@@ -423,6 +435,43 @@ object --+
         object.__repr__
         <dd><em class="note">(inherited documentation)</em></dd>
     </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== CLASS VARIABLE DETAILS ==================== -->
+<a name="section-ClassVariableDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variable Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariableDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="_fields"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">_fields</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">minimumStake</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">minimumRangeStake</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">minimumBSPLayLiability</code><code class="variable-quote">'</code><code class="variable-group">)</code>
+</pre></td></tr></table>
+</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -445,12 +494,12 @@ object --+
   </td>
 </tr>
 </table>
-<a name="exchangeId"></a>
+<a name="minimumBSPLayLiability"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
-  <h3 class="epydoc">exchangeId</h3>
+  <h3 class="epydoc">minimumBSPLayLiability</h3>
   <p>itemgetter(item, ...) --&gt; itemgetter object</p>
   <p>Return a callable object that fetches the given item(s) from its 
   operand. After, f=itemgetter(2), the call f(r) returns r[2]. After, 
@@ -458,19 +507,19 @@ object --+
   <dl class="fields">
     <dt>Get Method:</dt>
     <dd class="value"><table><tr><td><pre class="variable">
-&lt;operator.itemgetter object at 0x00F6A230&gt;
+&lt;operator.itemgetter object at 0x00F0E0F0&gt;
 </pre></td></tr></table>
 
     </dd>
   </dl>
 </td></tr></table>
 </div>
-<a name="marketId"></a>
+<a name="minimumRangeStake"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
-  <h3 class="epydoc">marketId</h3>
+  <h3 class="epydoc">minimumRangeStake</h3>
   <p>itemgetter(item, ...) --&gt; itemgetter object</p>
   <p>Return a callable object that fetches the given item(s) from its 
   operand. After, f=itemgetter(2), the call f(r) returns r[2]. After, 
@@ -478,7 +527,27 @@ object --+
   <dl class="fields">
     <dt>Get Method:</dt>
     <dd class="value"><table><tr><td><pre class="variable">
-&lt;operator.itemgetter object at 0x00F09250&gt;
+&lt;operator.itemgetter object at 0x00F0E0D0&gt;
+</pre></td></tr></table>
+
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="minimumStake"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">minimumStake</h3>
+  <p>itemgetter(item, ...) --&gt; itemgetter object</p>
+  <p>Return a callable object that fetches the given item(s) from its 
+  operand. After, f=itemgetter(2), the call f(r) returns r[2]. After, 
+  g=itemgetter(2,5,3), the call g(r) returns (r[2], r[5], r[3])</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><table><tr><td><pre class="variable">
+&lt;operator.itemgetter object at 0x00EF73B0&gt;
 </pre></td></tr></table>
 
     </dd>
@@ -517,7 +586,7 @@ object --+
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Mon Oct 18 00:01:13 2010
+    Generated by Epydoc 3.0.1 on Tue Oct 26 16:47:55 2010
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

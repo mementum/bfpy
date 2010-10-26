@@ -2,6 +2,7 @@ bfpy	bfpy-module.html
 bfpy.postProcess	bfpy-module.html#postProcess
 bfpy.ExchangeUK	bfpy-module.html#ExchangeUK
 bfpy.eventRootId	bfpy-module.html#eventRootId
+bfpy.freeApiId	bfpy-module.html#freeApiId
 bfpy.log	bfpy-module.html#log
 bfpy.__package__	bfpy-module.html#__package__
 bfpy.handler	bfpy-module.html#handler
@@ -13,6 +14,7 @@ bfpy.bfapi	bfpy.bfapi-module.html
 bfpy.bfapi.postProcess	bfpy.bfapi-module.html#postProcess
 bfpy.bfapi.ExchangeUK	bfpy.bfapi-module.html#ExchangeUK
 bfpy.bfapi.eventRootId	bfpy.bfapi-module.html#eventRootId
+bfpy.bfapi.freeApiId	bfpy.bfapi-module.html#freeApiId
 bfpy.bfapi.__package__	bfpy.bfapi-module.html#__package__
 bfpy.bfapi.preProcess	bfpy.bfapi-module.html#preProcess
 bfpy.bfapi.ExchangeAus	bfpy.bfapi-module.html#ExchangeAus
@@ -21,6 +23,7 @@ bfpy.bfclient	bfpy.bfclient-module.html
 bfpy.bfclient.postProcess	bfpy.bfclient-module.html#postProcess
 bfpy.bfclient.ExchangeUK	bfpy.bfclient-module.html#ExchangeUK
 bfpy.bfclient.eventRootId	bfpy.bfclient-module.html#eventRootId
+bfpy.bfclient.freeApiId	bfpy.bfclient-module.html#freeApiId
 bfpy.bfclient.__package__	bfpy.bfclient-module.html#__package__
 bfpy.bfclient.preProcess	bfpy.bfclient-module.html#preProcess
 bfpy.bfclient.ExchangeAus	bfpy.bfclient-module.html#ExchangeAus
@@ -36,6 +39,7 @@ bfpy.bfservice.__package__	bfpy.bfservice-module.html#__package__
 bfpy.bftransport	bfpy.bftransport-module.html
 bfpy.bftransport.__package__	bfpy.bftransport-module.html#__package__
 bfpy.bftransport.TransportException	bfpy.bftransport-module.html#TransportException
+bfpy.bftransport.handler	bfpy.bftransport-module.html#handler
 bfpy.bftransport.log	bfpy.bftransport-module.html#log
 bfpy.bfwsdl	bfpy.bfwsdl-module.html
 bfpy.bfwsdl.BFExchangeServiceAus	bfpy.bfwsdl-module.html#BFExchangeServiceAus
@@ -54,7 +58,7 @@ bfpy.bfapi.BfApi.__metaclass__	bfpy.bfservice.BfService-class.html
 bfpy.bfapi.BfApi.updateBets	bfpy.bfapi.BfApi-class.html#updateBets
 bfpy.bfapi.BfApi.getAllCurrenciesV2	bfpy.bfapi.BfApi-class.html#getAllCurrenciesV2
 bfpy.bfapi.BfApi.getObject	bfpy.bfapi.BfApi-class.html#getObject
-bfpy.bfapi.BfApi.preProcess	bfpy.bfapi.BfApi-class.html#preProcess
+bfpy.bfapi.BfApi.createBFEvent	bfpy.bfapi.BfApi-class.html#createBFEvent
 bfpy.bfapi.BfApi.getMarketPricesCompressed	bfpy.bfapi.BfApi-class.html#getMarketPricesCompressed
 bfpy.bfapi.BfApi.postProcess	bfpy.bfapi.BfApi-class.html#postProcess
 bfpy.bfapi.BfApi.placeBets	bfpy.bfapi.BfApi-class.html#placeBets
@@ -67,7 +71,7 @@ bfpy.bfapi.BfApi.getAllMarkets	bfpy.bfapi.BfApi-class.html#getAllMarkets
 bfpy.bfapi.BfApi.createRunnerPrices	bfpy.bfapi.BfApi-class.html#createRunnerPrices
 bfpy.bfapi.BfApi.createMarket	bfpy.bfapi.BfApi-class.html#createMarket
 bfpy.bfapi.BfApi.__init__	bfpy.bfapi.BfApi-class.html#__init__
-bfpy.bfapi.BfApi.keepAlive	bfpy.bfapi.BfApi-class.html#keepAlive
+bfpy.bfapi.BfApi.preProcess	bfpy.bfapi.BfApi-class.html#preProcess
 bfpy.bfapi.BfApi.getActiveEventTypes	bfpy.bfapi.BfApi-class.html#getActiveEventTypes
 bfpy.bfapi.BfApi.getEvents	bfpy.bfapi.BfApi-class.html#getEvents
 bfpy.bfapi.BfApi.getMinStakes	bfpy.bfapi.BfApi-class.html#getMinStakes
@@ -91,10 +95,10 @@ bfpy.bfapi.BfApi.createUpdateBets	bfpy.bfapi.BfApi-class.html#createUpdateBets
 bfpy.bfapi.BfApi.transferFunds	bfpy.bfapi.BfApi-class.html#transferFunds
 bfpy.bfapi.BfApi.login	bfpy.bfapi.BfApi-class.html#login
 bfpy.bfapi.BfApi.serviceDefs	bfpy.bfapi.BfApi-class.html#serviceDefs
-bfpy.bfapi.BfApi.MinBets	bfpy.bfapi.BfApi-class.html#MinBets
+bfpy.bfapi.BfApi.keepAlive	bfpy.bfapi.BfApi-class.html#keepAlive
 bfpy.bfapi.BfApi.getMarketInfo	bfpy.bfapi.BfApi-class.html#getMarketInfo
 bfpy.bfapi.BfApi.transport	bfpy.bfapi.BfApi-class.html#transport
-bfpy.bfapi.BfApi.createEvent	bfpy.bfapi.BfApi-class.html#createEvent
+bfpy.bfapi.BfApi.MinBets	bfpy.bfapi.BfApi-class.html#MinBets
 bfpy.bfapi.BfApi.MinStakes	bfpy.bfapi.BfApi.MinStakes-class.html
 bfpy.bfapi.BfApi.MinStakes._make	bfpy.bfapi.BfApi.MinStakes-class.html#_make
 bfpy.bfapi.BfApi.MinStakes._asdict	bfpy.bfapi.BfApi.MinStakes-class.html#_asdict
@@ -113,10 +117,10 @@ bfpy.bfclient.BfClient.__metaclass__	bfpy.bfclient.BfClient-class.html#__metacla
 bfpy.bfapi.BfApi.updateBets	bfpy.bfapi.BfApi-class.html#updateBets
 bfpy.bfapi.BfApi.getAllCurrenciesV2	bfpy.bfapi.BfApi-class.html#getAllCurrenciesV2
 bfpy.bfapi.BfApi.getObject	bfpy.bfapi.BfApi-class.html#getObject
-bfpy.bfclient.BfClient.placeBets	bfpy.bfclient.BfClient-class.html#placeBets
+bfpy.bfapi.BfApi.createBFEvent	bfpy.bfapi.BfApi-class.html#createBFEvent
 bfpy.bfapi.BfApi.getMarketPricesCompressed	bfpy.bfapi.BfApi-class.html#getMarketPricesCompressed
 bfpy.bfapi.BfApi.postProcess	bfpy.bfapi.BfApi-class.html#postProcess
-bfpy.bfapi.BfApi.preProcess	bfpy.bfapi.BfApi-class.html#preProcess
+bfpy.bfclient.BfClient.placeBets	bfpy.bfclient.BfClient-class.html#placeBets
 bfpy.bfapi.BfApi.getMarket	bfpy.bfapi.BfApi-class.html#getMarket
 bfpy.bfapi.BfApi.getMarketProfitAndLoss	bfpy.bfapi.BfApi-class.html#getMarketProfitAndLoss
 bfpy.bfapi.BfApi.cancelBets	bfpy.bfapi.BfApi-class.html#cancelBets
@@ -127,6 +131,7 @@ bfpy.bfapi.BfApi.createRunnerPrices	bfpy.bfapi.BfApi-class.html#createRunnerPric
 bfpy.bfapi.BfApi.createMarket	bfpy.bfapi.BfApi-class.html#createMarket
 bfpy.bfapi.BfApi.getMUBets	bfpy.bfapi.BfApi-class.html#getMUBets
 bfpy.bfclient.BfClient.__init__	bfpy.bfclient.BfClient-class.html#__init__
+bfpy.bfapi.BfApi.preProcess	bfpy.bfapi.BfApi-class.html#preProcess
 bfpy.bfapi.BfApi.getActiveEventTypes	bfpy.bfapi.BfApi-class.html#getActiveEventTypes
 bfpy.bfclient.BfClient.getEvents	bfpy.bfclient.BfClient-class.html#getEvents
 bfpy.bfapi.BfApi.getAllEventTypes	bfpy.bfapi.BfApi-class.html#getAllEventTypes
@@ -147,7 +152,6 @@ bfpy.bfapi.BfApi.getHeader	bfpy.bfapi.BfApi-class.html#getHeader
 bfpy.bfapi.BfApi.clients	bfpy.bfapi.BfApi-class.html#clients
 bfpy.bfapi.BfApi.getRequest	bfpy.bfapi.BfApi-class.html#getRequest
 bfpy.bfapi.BfApi.createUpdateBets	bfpy.bfapi.BfApi-class.html#createUpdateBets
-bfpy.bfapi.BfApi.createEvent	bfpy.bfapi.BfApi-class.html#createEvent
 bfpy.bfapi.BfApi.transferFunds	bfpy.bfapi.BfApi-class.html#transferFunds
 bfpy.bfapi.BfApi.login	bfpy.bfapi.BfApi-class.html#login
 bfpy.bfclient.BfClient.serviceDefs	bfpy.bfclient.BfClient-class.html#serviceDefs
@@ -278,8 +282,6 @@ bfpy.bfprocessors.ProcCurrentBets	bfpy.bfprocessors.ProcCurrentBets-class.html
 bfpy.bfprocessors.ProcCurrentBets.__call__	bfpy.bfprocessors.ProcCurrentBets-class.html#__call__
 bfpy.bfprocessors.ProcLogin	bfpy.bfprocessors.ProcLogin-class.html
 bfpy.bfprocessors.ProcLogin.__call__	bfpy.bfprocessors.ProcLogin-class.html#__call__
-bfpy.bfprocessors.ProcLogout	bfpy.bfprocessors.ProcLogout-class.html
-bfpy.bfprocessors.ProcLogout.__call__	bfpy.bfprocessors.ProcLogout-class.html#__call__
 bfpy.bfprocessors.ProcMarket	bfpy.bfprocessors.ProcMarket-class.html
 bfpy.bfprocessors.ProcMarket.__call__	bfpy.bfprocessors.ProcMarket-class.html#__call__
 bfpy.bfprocessors.ProcMarketPricesCompressed	bfpy.bfprocessors.ProcMarketPricesCompressed-class.html

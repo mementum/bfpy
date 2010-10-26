@@ -3,7 +3,7 @@
           "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>bfpy.betfair</title>
+  <title>bfpy.bfservice</title>
   <link rel="stylesheet" href="epydoc.css" type="text/css" />
   <script type="text/javascript" src="epydoc.js"></script>
 </head>
@@ -43,7 +43,7 @@
     <td width="100%">
       <span class="breadcrumbs">
         <a href="bfpy-module.html">Package&nbsp;bfpy</a> ::
-        Module&nbsp;betfair
+        Module&nbsp;bfservice
       </span>
     </td>
     <td>
@@ -53,14 +53,17 @@
     onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
         <tr><td align="right"><span class="options"
             >[<a href="frames.html" target="_top">frames</a
-            >]&nbsp;|&nbsp;<a href="bfpy.betfair-module.html"
+            >]&nbsp;|&nbsp;<a href="bfpy.bfservice-module.html"
             target="_top">no&nbsp;frames</a>]</span></td></tr>
       </table>
     </td>
   </tr>
 </table>
 <!-- ==================== MODULE DESCRIPTION ==================== -->
-<h1 class="epydoc">Module betfair</h1><p class="nomargin-top"><span class="codelink"><a href="bfpy.betfair-pysrc.html">source&nbsp;code</a></span></p>
+<h1 class="epydoc">Module bfservice</h1><p class="nomargin-top"><span class="codelink"><a href="bfpy.bfservice-pysrc.html">source&nbsp;code</a></span></p>
+<p>Definition of services and metaclass to install them in an API 
+  provider</p>
+
 <!-- ==================== CLASSES ==================== -->
 <a name="section-Classes"></a>
 <table class="summary" border="1" cellpadding="3"
@@ -82,9 +85,70 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="bfpy.betfair.Betfair-class.html" class="summary-name">Betfair</a><br />
-      The Betfair object processes Betfair API answers (if needed) and 
-        decompresses compressed answers into usable objects
+        <a href="bfpy.bfservice.ServiceDescriptor-class.html" class="summary-name">ServiceDescriptor</a><br />
+      Base abstract descriptor class for the implementation of the 
+        methods provided by the Betfair API
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="bfpy.bfservice.ServiceDef-class.html" class="summary-name">ServiceDef</a><br />
+      Definition and implementation of a service.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="bfpy.bfservice.GlobalServiceDef-class.html" class="summary-name">GlobalServiceDef</a><br />
+      Service Definition for global services.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="bfpy.bfservice.ExchangeServiceDef-class.html" class="summary-name">ExchangeServiceDef</a><br />
+      Service Definition for exchane services.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="bfpy.bfservice.ServiceObject-class.html" class="summary-name">ServiceObject</a><br />
+      Service descriptor implementation to retrieve named objects defined
+        for the services.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="bfpy.bfservice.GlobalObject-class.html" class="summary-name">GlobalObject</a><br />
+      Subclass of ServiceObject to retrieve objects from the global 
+        endPoint (0)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="bfpy.bfservice.ExchangeObject-class.html" class="summary-name">ExchangeObject</a><br />
+      Subclass of ServiceObject to retrieve objects from the exchange 
+        endPoint (1)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="bfpy.bfservice.BfService-class.html" class="summary-name">BfService</a><br />
+      Metaclass for <a href="bfpy.bfapi.BfApi-class.html" 
+        class="link">BfApi</a> to initialize the non-data descriptor based 
+        methods on instantiation
     </td>
   </tr>
 </table>
@@ -105,13 +169,6 @@
     </table>
   </td>
 </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a name="MinBet"></a><span class="summary-name">MinBet</span> = <code title="2.0">2.0</code>
-    </td>
-  </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
@@ -151,7 +208,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Mon Oct 18 00:01:13 2010
+    Generated by Epydoc 3.0.1 on Tue Oct 26 16:47:55 2010
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

@@ -49,6 +49,33 @@ class BfClient(BfApi):
 
     @ivar serviceDefs: service definitions with non-data descriptors
     @type clients: list
+
+    The following services are redefined here (see L{BfApi} for the originals):
+
+        - getCurrentBets
+
+          Enables 'MU' as parameter for betStatus, by issuing a call with 'M'
+          and a call with 'U' and returning a unified answer
+
+          Default values: betStatus='MU'
+
+        - getEvents:
+
+          Unifies getEvents and getActiveTypeEvents. The results of the second
+          are aliased to look like the results of the first
+
+          Default values: eventParentId = -1 (return getActiveTypeEvents)
+          
+        - placeBets
+
+          Hack to enable re-placement of bets if they fail with an "INVALID_PERSISTENCE"
+          given that the results from getEvents do not say if a market will turn
+          in-play or not
+
+          This is a hack and will be removed
+
+          Default values: nonIPRePlace=False
+
     '''
 
     __metaclass__ = BfService

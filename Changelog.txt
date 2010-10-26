@@ -1,3 +1,14 @@
+0.76
+-- Changed MinBets to be able to retrieve an individual field instead of the object with the different types of minbets
+-- MarketTuple no longer defined in this library
+-- Re-introduced proxy assignment (if passed as arg) to transport during BfClient instantiation
+-- Corrected getMinStakes. As staticmethod it can't reference a self
+-- Corrected clone. It was clearing the session token of the cloned object and not that of the clone
+-- Added NO_RESULTS as coded error to skip in getMUBets
+-- Corrected getMarketProfitAndLoss post-processing logic to raise an exception
+-- Removed 2 leftover print statements used during debugging
+-- Corrected the placeBets hack
+
 0.75
 -- Version number bumped
 -- Full re-implementation with non-data descriptor

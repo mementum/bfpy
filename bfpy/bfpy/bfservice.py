@@ -224,7 +224,6 @@ class ServiceDef(ServiceDescriptor):
         for name, value in requestArgs.iteritems():
             setattr(request, name, value)
 
-        print request
         # Execute the call and fetch the response
         response = instance.invoke(self.methodName, service, request, self.skipErrorCodes)
 

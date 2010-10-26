@@ -41,11 +41,6 @@ log = logging.getLogger('suds')
 log.setLevel(logging.ERROR)
 log.addHandler(handler)
 
-# transport logging
-log = logging.getLogger('bftransport')
-log.addHandler(handler)
-
-
 from bfapi import *
 from bfclient import *
 from bferror import *

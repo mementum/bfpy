@@ -149,7 +149,8 @@ object --+
         <tr>
           <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">preProcess</span>=<span class="summary-sig-default">True</span>,
-        <span class="summary-sig-arg">postProcess</span>=<span class="summary-sig-default">True</span>)</span><br />
+        <span class="summary-sig-arg">postProcess</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
       Initializes the processing options, transport and service clients</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.__init__">source&nbsp;code</a></span>
@@ -201,7 +202,7 @@ object --+
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#clone" class="summary-sig-name">clone</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Returns an intelligent cloned object.</td>
+      Returns smartly cloned object.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.clone">source&nbsp;code</a></span>
             
@@ -234,9 +235,9 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="createCancelBets"></a><span class="summary-sig-name">createCancelBets</span>(<span class="summary-sig-arg">...</span>)</span><br />
-      Subclass of ServiceObject to retrieve objects from the exchange 
-      endPoint (1)</td>
+          <td><span class="summary-sig"><a name="createBFEvent"></a><span class="summary-sig-name">createBFEvent</span>(<span class="summary-sig-arg">...</span>)</span><br />
+      Subclass of ServiceObject to retrieve objects from the global 
+      endPoint (0)</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="bfpy.bfservice-pysrc.html">source&nbsp;code</a></span>
             
@@ -252,9 +253,9 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="createEvent"></a><span class="summary-sig-name">createEvent</span>(<span class="summary-sig-arg">...</span>)</span><br />
-      Subclass of ServiceObject to retrieve objects from the global 
-      endPoint (0)</td>
+          <td><span class="summary-sig"><a name="createCancelBets"></a><span class="summary-sig-name">createCancelBets</span>(<span class="summary-sig-arg">...</span>)</span><br />
+      Subclass of ServiceObject to retrieve objects from the exchange 
+      endPoint (1)</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="bfpy.bfservice-pysrc.html">source&nbsp;code</a></span>
             
@@ -853,7 +854,8 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#getMinStakes" class="summary-sig-name">getMinStakes</a>(<span class="summary-sig-arg">currency</span>)</span><br />
+          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#getMinStakes" class="summary-sig-name">getMinStakes</a>(<span class="summary-sig-arg">currency</span>,
+        <span class="summary-sig-arg">which</span>=<span class="summary-sig-default">None</span>)</span><br />
       Returns the minimum stakes for standard bets, range and BSP liability</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="bfpy.bfapi-pysrc.html#BfApi.getMinStakes">source&nbsp;code</a></span>
@@ -959,15 +961,15 @@ The presentation, distribution or other dissemination of the informati\
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="bfpy.bfapi.BfApi-class.html#serviceDefs" class="summary-name">serviceDefs</a> = <code title="[GlobalObject('Event', eventId=-1, eventName= ''), ExchangeObject('Mar\
-ket'), ExchangeObject('Runner'), ExchangeObject('MarketPrices'), Excha\
-ngeObject('RunnerPrices'), ExchangeObject('Price'), ExchangeObject('Pl\
-aceBets', betCategoryType= 'E', bspLiability= 0.0), ExchangeObject('Ca\
-ncelBets'), ExchangeObject('UpdateBets'), GlobalServiceDef('login', ap\
-iHeader= False, preProc= [PreProcLogin()], postProc= [ProcLogin()], pr\
-oductId= 82, vendorSoftwareId= 0, ipAddress= '0', locationId= 0), Glob\
-alServiceDef('logout', postProc= [ProcLogout()]), GlobalServiceDef('ke\
-...">[GlobalObject('Event', eventId=-1, eventName= ''<code class="variable-ellipsis">...</code></code><br />
+        <a href="bfpy.bfapi.BfApi-class.html#serviceDefs" class="summary-name">serviceDefs</a> = <code title="[GlobalObject('BFEvent', eventId=-1, eventName= ''), ExchangeObject('M\
+arket'), ExchangeObject('Runner'), ExchangeObject('MarketPrices'), Exc\
+hangeObject('RunnerPrices'), ExchangeObject('Price'), ExchangeObject('\
+PlaceBets', betCategoryType= 'E', bspLiability= 0.0), ExchangeObject('\
+CancelBets'), ExchangeObject('UpdateBets'), GlobalServiceDef('login', \
+apiHeader= False, preProc= [PreProcLogin()], postProc= [ProcLogin()], \
+productId= freeApiId, vendorSoftwareId= 0, ipAddress= '0', locationId=\
+ 0), GlobalServiceDef('logout'), GlobalServiceDef('keepAlive'), Global\
+...">[GlobalObject('BFEvent', eventId=-1, eventName= <code class="variable-ellipsis">...</code></code><br />
       service definitions with non-data descriptors
     </td>
   </tr>
@@ -1035,7 +1037,8 @@ alServiceDef('logout', postProc= [ProcLogout()]), GlobalServiceDef('ke\
   <tr valign="top"><td>
   <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
         <span class="sig-arg">preProcess</span>=<span class="sig-default">True</span>,
-        <span class="sig-arg">postProcess</span>=<span class="sig-default">True</span>)</span>
+        <span class="sig-arg">postProcess</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
     <br /><em class="fname">(Constructor)</em>
   </h3>
   </td><td align="right" valign="top"
@@ -1110,7 +1113,7 @@ alServiceDef('logout', postProc= [ProcLogout()]), GlobalServiceDef('ke\
     </td>
   </tr></table>
   
-  <p>Returns an intelligent cloned object.</p>
+  <p>Returns smartly cloned object.</p>
   <p>All objects are copied, then clients are also &quot;cloned&quot; 
   themselves and the sessionToken is ended</p>
   <dl class="fields">
@@ -1433,7 +1436,8 @@ alServiceDef('logout', postProc= [ProcLogout()]), GlobalServiceDef('ke\
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">getMinStakes</span>(<span class="sig-arg">currency</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getMinStakes</span>(<span class="sig-arg">currency</span>,
+        <span class="sig-arg">which</span>=<span class="sig-default">None</span>)</span>
     <br /><em class="fname">Static Method</em>
   </h3>
   </td><td align="right" valign="top"
@@ -1449,6 +1453,7 @@ alServiceDef('logout', postProc= [ProcLogout()]), GlobalServiceDef('ke\
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>currency</code></strong> (str (3 letter code)) - the currency for which the minimum stakes are sought</li>
+        <li><strong class="pname"><code>which</code></strong> (str) - indicates if a specific stake should be returned</li>
     </ul></dd>
     <dt>Returns: namedtuple</dt>
         <dd>the minimum stakes (minimumStake, minimumRangeStake, 
@@ -1806,14 +1811,14 @@ imumBSPLayLiability=20.0)<code class="variable-op">,</code>
   <dl class="fields">
     <dt>Value:</dt>
       <dd><table><tr><td><pre class="variable">
-[GlobalObject('Event', eventId=-1, eventName= ''), ExchangeObject('Mar<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
-ket'), ExchangeObject('Runner'), ExchangeObject('MarketPrices'), Excha<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
-ngeObject('RunnerPrices'), ExchangeObject('Price'), ExchangeObject('Pl<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
-aceBets', betCategoryType= 'E', bspLiability= 0.0), ExchangeObject('Ca<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
-ncelBets'), ExchangeObject('UpdateBets'), GlobalServiceDef('login', ap<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
-iHeader= False, preProc= [PreProcLogin()], postProc= [ProcLogin()], pr<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
-oductId= 82, vendorSoftwareId= 0, ipAddress= '0', locationId= 0), Glob<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
-alServiceDef('logout', postProc= [ProcLogout()]), GlobalServiceDef('ke<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+[GlobalObject('BFEvent', eventId=-1, eventName= ''), ExchangeObject('M<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+arket'), ExchangeObject('Runner'), ExchangeObject('MarketPrices'), Exc<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+hangeObject('RunnerPrices'), ExchangeObject('Price'), ExchangeObject('<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+PlaceBets', betCategoryType= 'E', bspLiability= 0.0), ExchangeObject('<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+CancelBets'), ExchangeObject('UpdateBets'), GlobalServiceDef('login', <span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+apiHeader= False, preProc= [PreProcLogin()], postProc= [ProcLogin()], <span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+productId= freeApiId, vendorSoftwareId= 0, ipAddress= '0', locationId=<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+ 0), GlobalServiceDef('logout'), GlobalServiceDef('keepAlive'), Global<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
 <code class="variable-ellipsis">...</code>
 </pre></td></tr></table>
 </dd>
@@ -1852,7 +1857,7 @@ alServiceDef('logout', postProc= [ProcLogout()]), GlobalServiceDef('ke<span clas
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Sun Oct 24 23:28:17 2010
+    Generated by Epydoc 3.0.1 on Tue Oct 26 16:47:55 2010
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
