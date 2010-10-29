@@ -39,6 +39,15 @@ class TpLinker(AutoLinker):
             tp = Unskin(next.options)
             properties.link(tp)
 
+    # DRo - clone idea to avoid circular references
+    from copy import deepcopy
+    def clone(self, obj):
+        cloneobj = deepcopy(obj)
+        tp = Unskin(cloneobj.options)
+        tp.links = []
+
+        return cloneobj
+
 
 class Options(Skin):
     """

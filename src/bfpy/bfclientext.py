@@ -206,7 +206,8 @@ class PlaceBets(ServiceDescriptor):
                     response.betResults.pop(i)
 
             if toRePlaceBets:
-                rePlaceResponse = BfApi.placeBets(instance, exchangeId, toRePlaceBets)
+                placeBetsArgs['bets'] = toRePlaceBets
+                rePlaceResponse = BfApi.placeBets(instance, *args, **placeBetsArgs)
                 response.betResults.extend(rePlaceResponse.betResults)
 
         return response

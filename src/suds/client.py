@@ -177,9 +177,12 @@ class Client(object):
                 pass
         clone = Uninitialized()
         clone.options = Options()
-        cp = Unskin(clone.options)
         mp = Unskin(self.options)
-        cp.update(deepcopy(mp))
+        # DRo - support for cloning without circular references
+        # cp = Unskin(clone.options)
+        # cp.update(deepcopy(mp))
+        # and references to duplicate domains or keys
+        clone.options.__pts__ = deepcopy(mp)
         clone.wsdl = self.wsdl
         clone.factory = self.factory
         clone.service = ServiceSelector(clone, self.wsdl.services)

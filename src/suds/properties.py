@@ -38,6 +38,11 @@ class AutoLinker(object):
         """
         pass
 
+    # DRo - clone class idea to avoid deepcopy with circular references
+    from copy import deepcopy
+    def clone(self, obj):
+        return deepcopy(obj)
+
 
 class Link(object):
     """
@@ -212,6 +217,17 @@ class Properties:
     @ivar defined: A dict of property values.
     @type defined: dict 
     """
+    # DRo - deepcopy support for properties
+    def __deepcopy__(self, memo={}):
+        defined = {}
+        for name, value in self.defined.iteritems():
+            linker = self.definitions[name].linker
+            clonedValue = linker.clone(value)
+            defined[name] = clonedValue
+
+        clone = self.__class__(self.domain, self.definitions.itervalues(), defined)
+        return clone
+
     def __init__(self, domain, definitions, kwargs):
         """
         @param domain: The property domain name.
