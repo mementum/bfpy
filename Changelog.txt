@@ -1,6 +1,10 @@
+0.78
+-- Final correction to suds non-DST datetime. Removed GMT and UTC timezone classes
+
 0.77
 -- Corrected the placeBets hack
 -- Patched suds to let it work in a multithreaded environment with clones, by avoiding cloning circular references
+-- bfpy working in MacOS in multithreaded environment with clones
 
 0.76
 -- Changed MinBets to be able to retrieve an individual field instead of the object with the different types of minbets

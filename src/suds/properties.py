@@ -22,6 +22,7 @@ from logging import getLogger
 
 log = getLogger(__name__)
 
+from copy import deepcopy
 
 class AutoLinker(object):
     """
@@ -39,7 +40,6 @@ class AutoLinker(object):
         pass
 
     # DRo - clone class idea to avoid deepcopy with circular references
-    from copy import deepcopy
     def clone(self, obj):
         return deepcopy(obj)
 

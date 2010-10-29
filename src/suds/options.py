@@ -24,6 +24,7 @@ from suds.xsd.doctor import Doctor
 from suds.transport import Transport
 from suds.cache import Cache, NoCache
 
+from copy import deepcopy
 
 class TpLinker(AutoLinker):
     """
@@ -40,7 +41,6 @@ class TpLinker(AutoLinker):
             properties.link(tp)
 
     # DRo - clone idea to avoid circular references
-    from copy import deepcopy
     def clone(self, obj):
         cloneobj = deepcopy(obj)
         tp = Unskin(cloneobj.options)

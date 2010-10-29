@@ -32,7 +32,7 @@ Implementation of BfApi request and response processors
 from datetime import datetime
 
 import bferror
-from timezone import GMT, LocalTimezone
+from timezone import LocalTimezone
 from util import EmptyObject
 
 
@@ -303,6 +303,12 @@ class ProcMarket(object):
             response.market.eventHierarchy = list()
 
         # Adjust the marketTime to the system local time
+        # The original object is naive and suds fails to identify DST settings
+        localTimezone = LocalTimezone()
+        daylight = localTimezone.dst(response.market.marketTime)
+        response.market.marketTime += daylight
+
+        # Adjust the marketTime to the system local time
         # The original object is naive and apparently in UK Time
         marketTime = datetime(response.market.marketTime.year,
                               response.market.marketTime.month,
@@ -310,10 +316,7 @@ class ProcMarket(object):
                               response.market.marketTime.hour,
                               response.market.marketTime.minute,
                               response.market.marketTime.second,
-                              tzinfo=GMT(0))
-
-        # Return it in the local time zone
-        response.market.marketTime = marketTime.astimezone(LocalTimezone())
+                              tzinfo=localTimezone)
 
 
 class ProcMarketPricesCompressed(object):
