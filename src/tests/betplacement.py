@@ -53,7 +53,7 @@ placeBet.asianLineId = 0
 # Man City
 placeBet.selectionId = 47999
 
-placeBet.price = 100.0
+placeBet.price = 500.0
 placeBet.size = 2.0
 placeBet.bspLiability = 0.0
 
@@ -78,11 +78,11 @@ updateBet = bf.createUpdateBets()
 
 updateBet.betId = bet.betId
 updateBet.newBetPersistenceType = 'NONE'
-updateBet.newPrice = 200.0
+updateBet.newPrice = 1000.0
 updateBet.newSize = 2.0
 
 updateBet.oldBetPersistenceType = 'NONE'
-updateBet.oldPrice = 100.0
+updateBet.oldPrice = 500.0
 updateBet.oldSize = 2.0
 
 response = bf.updateBets(bfpy.ExchangeUK, bets=[updateBet])

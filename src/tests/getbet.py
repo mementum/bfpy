@@ -28,10 +28,11 @@
 '''
 Test the following services
 
-  - getMarket
-  - getMarketInfo
+  - getBet
+  - getBetLite
+  - getBetMatchesLite
+  - getBetHistory
 '''
-
 import sys
 
 import bfpy
@@ -46,15 +47,16 @@ loginInfo = sys.modules['__main__'].loginInfo
 response = bf.login(**loginInfo)
 print response
 
-response = bf.getMarket(bfpy.ExchangeUK, marketId=101426972)
+betId=11485161308
+
+response = bf.getBet(bfpy.ExchangeUK, betId=betId)
 print response
 
-response = bf.getMarketInfo(bfpy.ExchangeUK, marketId=101426972)
+response = bf.getBetLite(bfpy.ExchangeUK, betId=betId)
 print response
 
-response = bf.getSilks(bfpy.ExchangeUK, markets=[102021854, 102021856])
+response = bf.getBetMatchesLite(bfpy.ExchangeUK, betId=betId)
 print response
 
-response = bf.getSilksV2(bfpy.ExchangeUK, markets=[102021854, 102021856])
+response = bf.getBetHistory(bfpy.ExchangeUK, betTypesIncluded='M')
 print response
-

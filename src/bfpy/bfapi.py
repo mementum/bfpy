@@ -33,7 +33,7 @@ It does initialize suds logging to a L{NullHandler} to avoid any logging output
 
 from copy import copy
 from collections import namedtuple
-from datetime import datetime
+from datetime import datetime, timedelta
 from socket import error as SocketError
 
 import suds.client
@@ -112,30 +112,46 @@ class BfApi(object):
         - getAllCurrenciesV2
         - getAllEventTypes
         - getAllMarkets
-        - getCurrentBets
+        - getBet
+        - getBetHistory
+          Default values:
+          detailed=False, orderBy='BET_ID', eventTypesId=None,
+          marketId=0, marketTypesIncluded=['A', 'L', 'O', 'R'],
+          startRecord=0, recordCount=0,
+          placedDateFrom=now() - 1 day, placedDateTo=now(), 
 
+        - getBetLite
+        - getBetMatchesLite
+        - getCompleteMarketPricesCompressed
+        - getCurrentBets
           Default values:
           detailed=False, orderBy='NONE',
           marketId=0, recordCount=0,
           startRecord=0, noTotalRecordCount=True
 
+        - getCurrentBetsLite
+          Default values:
+          detailed=False, orderBy='NONE',
+          marketId=0, recordCount=1000,
+          startRecord=0, noTotalRecordCount=True
+
+          Unlike getCurrentBets recordCount=0 does not return all
+          current bets
+
+        - getDetailAvailableMarketDepth
+          Default values:
+          asianLineId=0
+          
         - getEvents
         - getMarket:
-
           Default values: includeCouponLinks=False
 
+        - getInPlayMarkets  
         - getMarketInfo
+        - getMarketPrices
         - getMarketPricesCompressed
-        - getMUBets:
-
-          Default values:
-          betStatus='MU', excludeLastSecond=False,
-          matchedSince=datetime(2000, 01, 01, 00, 00, 00),
-          orderBy='BET_ID', recordCount=200,
-          sortOrder='ASC', startRecord=0
 
         - getMarketProfitAndLoss
-
           This function is preprocessed to try avoid an error if the user
           passes a "marketId" parameter, given the obvious typo made when
           the service was created at Betfair: it requires a marketID parameter.
@@ -143,6 +159,33 @@ class BfApi(object):
           Default values:
           includeBspBets=False,
           includeSettledBets=False, netOfCommission=False),
+
+        - getMarketTradedVolume
+          Default values:
+          asianLineId=0
+
+        - getMarketTradedVolumeCompressed
+
+        - getMUBets:
+          Default values:
+          betStatus='MU', excludeLastSecond=False,
+          matchedSince=datetime(2000, 01, 01, 00, 00, 00),
+          orderBy='BET_ID', recordCount=200,
+          sortOrder='ASC', startRecord=0
+
+        - getMUBetsLite:
+          Default values:
+          betStatus='MU', excludeLastSecond=False,
+          matchedSince=datetime(2000, 01, 01, 00, 00, 00),
+          orderBy='BET_ID', recordCount=200,
+          sortOrder='ASC', startRecord=0
+
+        - getPrivateMarkets  
+          Default values:
+          marketType='O'
+
+        - getSilks
+        - getsilksV2
 
         - cancelBets
         - cancelBetsByMarket
@@ -394,47 +437,69 @@ class BfApi(object):
         GlobalServiceDef('getAllCurrenciesV2', requestName='GetCurrenciesV2Req', postProc=[ArrayFix('currencyItems', 'CurrencyV2')]),
         GlobalServiceDef('getAllEventTypes', requestName='GetEventTypesReq', skipErrorCodes=['NO_RESULTS'],
                          postProc=[ArrayFix('eventTypeItems', 'EventType')]),
-        ExchangeServiceDef('getAllMarkets', postProc=[ProcAllMarkets()]),
-        # MISSING GetBet
-        # MISSING GetBetHistory
-        # MISSING GetBetLite
-        # MISSING GetBetMatchesLite
-        # ExchangeServiceDef('getCompleteMarketPricesCompressed', postProc=[ProcMarketPricesCompressed(True)]),
+        ExchangeServiceDef('getAllMarkets', preProc=[ArrayUnfix('eventTypeIds', 'int'), ArrayUnfix('countries', 'Country')],
+                           postProc=[ProcAllMarkets()]),
+        ExchangeServiceDef('getBet', skipErrorCodes=['NO_RESULTS'], postProc=[ArrayFix('bet.matches', 'Match')]),
+        ExchangeServiceDef('getBetHistory', skipErrorCodes=['NO_RESULTS'],
+                           preProc=[ArrayUnfix('marketTypesIncluded', 'MarketTypeEnum'), ArrayUnfix('eventTypeIds', 'int')],
+                           marketId=0, detailed=False, marketTypesIncluded=['A', 'L', 'O', 'R'],
+                           placedDateFrom=datetime.now() - timedelta(days=1), placedDateTo=datetime.now(),
+                           recordCount=100, sortBetsBy='BET_ID', startRecord=0),
+        ExchangeServiceDef('getBetLite', skipErrorCodes=['NO_RESULTS']),
+        ExchangeServiceDef('getBetMatchesLite', skipErrorCodes=['NO_RESULTS'], postProc=[ArrayFix('matchLites', 'MatchLite')]),
+        ExchangeServiceDef('getCompleteMarketPricesCompressed', postProc=[ProcMarketPricesCompressed(True)]),
         ExchangeServiceDef('getCurrentBets', skipErrorCodes=['NO_RESULTS'], postProc=[ArrayFix('bets', 'Bet'), ProcCurrentBets()],
                            detailed=False, orderBy='NONE', marketId=0, recordCount=0, startRecord=0, noTotalRecordCount=True),
-        # MISSING GetCurrentBetsLite
-        # MISSING GetDetailAvailableMarketDepth
+        ExchangeServiceDef('getCurrentBetsLite', skipErrorCodes=['NO_RESULTS'], postProc=[ArrayFix('betLites', 'BetLite')],
+                           orderBy='NONE', marketId=0, recordCount=1000, startRecord=0, noTotalRecordCount=True),
+        ExchangeServiceDef('getDetailAvailableMarketDepth', serviceName='getDetailAvailableMktDepth',
+                           requestName='GetDetailedAvailableMktDepthReq',
+                           skipErrorCodes=['NO_RESULTS', 'SUSPENDED_MARKET'],
+                           postProc=[ArrayFix('priceItems', 'AvailabilityInfo')],
+                           asianLineId=0),
         GlobalServiceDef('getEvents', skipErrorCodes=['NO_RESULTS'],
                          postProc=[ArrayFix('eventItems', 'BFEvent'), ArrayFix('marketItems', 'MarketSummary')]),
-        # ExchangeServiceDef('getInPlayMarkets', postProc=[ProcAllMarkets()]),
+        ExchangeServiceDef('getInPlayMarkets', postProc=[ProcAllMarkets()]),
         # Documentation incorrectly states that includeCouponLinks is optional
         ExchangeServiceDef('getMarket', postProc=[ProcMarket()], includeCouponLinks=False),
         ExchangeServiceDef('getMarketInfo'),
-        # MISSING GetMarketPrices
+        ExchangeServiceDef('getMarketPrices', postProc=[ProcMarketPrices()]),
         ExchangeServiceDef('getMarketPricesCompressed', postProc=[ProcMarketPricesCompressed()]),
-        ExchangeServiceDef('getMUBets', postProc=[ArrayFix('bets', 'MUBet')],
+        ExchangeServiceDef('getMarketTradedVolume', skipErrorCodes=['NO_RESULTS', 'MARKET_CLOSED'],
+                           postProc=[ArrayFix('priceItems', 'VolumeInfo')],
+                           asianLineId=0),
+        ExchangeServiceDef('getMarketTradedVolumeCompressed', skipErrorCodes=['EVENT_SUSPENDED', 'EVENT_CLOSED'],
+                           postProc=[ProcMarketTradedVolumeCompressed()]),
+        ExchangeServiceDef('getMUBets', preProc=[ArrayUnfix('betIds', 'betId')],
+                           postProc=[ArrayFix('bets', 'MUBet')],
                            skipErrorCodes=['NO_RESULTS'],
                            betStatus='MU', excludeLastSecond=False,
                            matchedSince=datetime(2000, 01, 01, 00, 00, 00),
                            orderBy='BET_ID', recordCount=200, sortOrder='ASC', startRecord=0),
-        # MISSING GetMUBetsLite
+        ExchangeServiceDef('getMUBetsLite', preProc=[ArrayUnfix('betIds', 'betId')],
+                           postProc=[ArrayFix('betLites', 'MUBetLite')],
+                           skipErrorCodes=['NO_RESULTS'],
+                           betStatus='MU', excludeLastSecond=False,
+                           matchedSince=datetime(2000, 01, 01, 00, 00, 00),
+                           orderBy='BET_ID', recordCount=200, sortOrder='ASC', startRecord=0),
         ExchangeServiceDef('getMarketProfitAndLoss',
                            skipErrorCodes=['MARKET_CLOSED', 'INVALID_MARKET'],
                            preProc=[PreProcMarketProfitAndLoss()],
                            postProc=[ArrayFix('annotations', 'ProfitAndLoss'), ProcMarketProfitAndLoss()],
                            includeBspBets=False, includeSettledBets=False, netOfCommission=False),
-        # MISSING GetMarketTradedVolume
-        # MISSING GetMarketTradedVolumeCompressed
-        # MISSING GetPrivateMarkets
-        # MISSING GetSilks
-        # MISSING GetSilkV2
+        ExchangeServiceDef('getPrivateMarkets', skipErrorCodes=['NO_RESULTS'],
+                           preProc=[PreProcPrivateMarkets()], postProc=[ArrayFix('privateMarkets', 'PrivateMarket')],
+                           marketType='O'),
+        ExchangeServiceDef('getSilks', preProc=[ArrayUnfix('markets', 'int')], postProc=[ProcSilks()]),
+        ExchangeServiceDef('getSilksV2', preProc=[ArrayUnfix('markets', 'int')], postProc=[ProcSilks()]),
 
         # ######################,
         # Bet Placement API Services
         # ######################
         ExchangeServiceDef('cancelBets', preProc=[ArrayUnfix('bets', 'CancelBets')],
                            postProc=[ArrayFix('betResults', 'CancelBetsResult')]),
-        ExchangeServiceDef('cancelBetsByMarket', postProc=[ArrayFix('results', 'CancelBetsByMarketResults')]),
+        ExchangeServiceDef('cancelBetsByMarket', preProc=[ArrayUnfix('markets', 'int')],
+                           postProc=[ArrayFix('results', 'CancelBetsByMarketResults')]),
         ExchangeServiceDef('placeBets', preProc=[ArrayUnfix('bets', 'PlaceBets')],
                            postProc=[ArrayFix('betResults', 'PlaceBetsResult')]),
         ExchangeServiceDef('updateBets', preProc=[ArrayUnfix('bets', 'UpdateBets')],

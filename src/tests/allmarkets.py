@@ -28,7 +28,9 @@
 '''
 Test the following services
 
-  - allmarkets
+  - getAllMarkets
+  - getInPlayMarkets
+  - getPrivateMarkets
 '''
 
 import sys
@@ -45,6 +47,11 @@ loginInfo = sys.modules['__main__'].loginInfo
 response = bf.login(**loginInfo)
 print response
 
-response = bf.getAllMarkets(bfpy.ExchangeUK)
+response = bf.getInPlayMarkets(bfpy.ExchangeUK)
 print response
 
+response = bf.getPrivateMarkets(bfpy.ExchangeUK, eventTypeId=1)
+print response
+
+response = bf.getAllMarkets(bfpy.ExchangeUK)
+print response

@@ -29,6 +29,7 @@
 Test the following services
 
   - currentBets
+  - currentBetsLite
 '''
 import sys
 
@@ -47,3 +48,5 @@ print response
 response = bf.getCurrentBets(bfpy.ExchangeUK)
 print response
 
+response = bf.getCurrentBetsLite(bfpy.ExchangeUK, betStatus='M')
+print response

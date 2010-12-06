@@ -48,11 +48,14 @@ class ArrayUnfix(object):
         self.attrName = attrName
         self.subAttrName = subAttrName
 
-
     def __call__(self, request, requestArgs, **kwargs):
         attr = getattr(request, self.attrName)
-        value = requestArgs.pop(self.attrName)
-        setattr(attr, self.subAttrName, value)
+        try:
+            value = requestArgs.pop(self.attrName)
+            setattr(attr, self.subAttrName, value)
+        except KeyError:
+            # Do nothing if the param has not been specified
+            pass
 
 
 class ArrayFix(object):
@@ -308,8 +311,8 @@ class ProcMarket(object):
         daylight = localTimezone.dst(response.market.marketTime)
         response.market.marketTime += daylight
 
-        # Adjust the marketTime to the system local time
-        # The original object is naive and apparently in UK Time
+        # Return a non-naive datetime object (in case the calling app wanted to
+        # move it to another timezone
         marketTime = datetime(response.market.marketTime.year,
                               response.market.marketTime.month,
                               response.market.marketTime.day,
@@ -329,7 +332,10 @@ class ProcMarketPricesCompressed(object):
         self.completeCompressed = completeCompressed
 
     def __call__(self, response, **kwargs):
-        response.marketPrices = self.ParseMarketPricesCompressed(response.marketPrices, self.completeCompressed)
+        if not self.completeCompressed:
+            response.marketPrices = self.ParseMarketPricesCompressed(response.marketPrices, self.completeCompressed)
+        else:
+            response.completeMarketPrices = self.ParseMarketPricesCompressed(response.completeMarketPrices, self.completeCompressed)
 
         # Array Fixes of the "decompressed prices" string - Can't be done before
         if self.completeCompressed:
@@ -511,9 +517,9 @@ class ProcMarketPricesCompressed(object):
                 index = i * numFieldsPerPrice
 
                 # numFieldsPerPrice has to be added to the index to include the last element.
-                price = self.ParseMarketPricesCompressedRunnerAvailabilityInfo(partsPrices[index:index + numFieldsPerPrice])
+                price = self.ParseMarketPricesRunnerCompressedAvailabilityInfo(partsPrices[index:index + numFieldsPerPrice])
 
-                runner.Price.append(price)
+                runner.Prices.append(price)
         else:
 
             numFieldsPerPrice = 4
@@ -647,3 +653,104 @@ class ProcMarketProfitAndLoss(object):
                 response.errorCode = 'MARKET_CLOSED' # OK could also be returned
             else:
                 raise bferror.BfServiceError('getMarketProfitAndLoss', response, str(response), response.errorCode)
+
+
+class ProcMarketPrices(object):
+    '''
+    Response processor
+
+    Removes several possible array indirections from a GetMarketPricesResp
+    '''
+    def __call__(self, response, **kwargs):
+
+        mktPrices = response.marketPrices
+
+        if mktPrices.runnerPrices is not None:
+            mktPrices.runnerPrices = mktPrices.runnerPrices.RunnerPrices
+        else:
+            mktPrices.runnerPrices = list()
+
+        for runnerPrice in mktPrices.runnerPrices:
+            if runnerPrice.bestPricesToBack is not None:
+                runnerPrice.bestPricesToBack = runnerPrice.bestPricesToBack.Price
+            else:
+                runnerPrice.bestPricesToBack = list()
+
+            if runnerPrice.bestPricesToLay is not None:
+                runnerPrice.bestPricesToLay = runnerPrice.bestPricesToLay.Price
+            else:
+                runnerPrice.bestPricesToLay = list()
+
+
+class ProcMarketTradedVolumeCompressed(object):
+    '''
+    Response processor
+
+    Removes several possible array indirections from a GetMarketPricesResp
+    '''
+    def __call__(self, response, **kwargs):
+        tradedVolume = list()
+
+        runnerInfosStr = response.tradedVolume.split(':')
+        for runnerInfoStr in runnerInfosStr[1:]:
+            runnerInfo = EmptyObject()
+
+            runnerInfoParts = runnerInfoStr.split('|')
+
+            runnerDetails = runnerInfoParts[0].split('~')
+            runnerInfo.selectionId = int(runnerDetails[0])
+            runnerInfo.asianLineId = int(runnerDetails[1])
+            runnerInfo.actualBSP = float(runnerDetails[2])
+            runnerInfo.totalBspBackMatchedAmmount = float(runnerDetails[3])
+            runnerInfo.totalBspLiabilityMatchedAmount = float(runnerDetails[4])
+
+            runnerInfo.priceItems = list()
+            for priceItemStr in runnerInfoParts[1:]:
+                priceItemParts = priceItemStr.split('~')
+
+                priceItem = EmptyObject()
+                priceItem.odds = float(priceItemParts[0])
+                priceItem.totalMatchedAmount = float(priceItemParts[1])
+
+                runnerInfo.priceItems.append(priceItem)
+
+            tradedVolume.append(runnerInfo)
+
+        response.tradedVolume = tradedVolume
+
+
+class PreProcPrivateMarkets(object):
+    '''
+    Request processor
+
+    The docs have a typo for this call: EventTypeID for a paramenter
+    instead of the usual spelling eventTypeId (which is the name in
+    the WSDL)
+    This method corrects possible user mistakes
+    '''
+    def __call__(self, request, requestArgs, **kwargs):
+        try:
+            eventTypeId = requestArgs.pop('EventTypeID')
+            requestArgs['eventTypeId'] = eventTypeId
+        except KeyError:
+            pass
+
+
+class ProcSilks(object):
+    '''
+    Response processor
+
+    Removes several possible array indirections from a GetSilksResp/GetSilksRespV2
+    '''
+    def __call__(self, response, **kwargs):
+
+        if response.marketDisplayDetails is not None:
+            response.marketDisplayDetails = response.marketDisplayDetails.MarketDisplayDetail
+        else:
+            response.marketDisplayDetails = list()
+
+        for marketDisplayDetails in response.marketDisplayDetails:
+            if marketDisplayDetails.racingSilks is not None:
+                marketDisplayDetails.racingSilks = marketDisplayDetails.racingSilks.RacingSilk
+            else:
+                marketDisplayDetails.racingSilks = list()

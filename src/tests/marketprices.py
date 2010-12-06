@@ -28,9 +28,14 @@
 '''
 Test the following services
 
+  - getMarketPrices
   - getMarketPricesCompressed
   - getMUBets
+  - getMUBetsLite
   - getMarketProfitAndLoss
+  - getCompleteMarketPricesCompressed
+  - getMarketTradedVolume
+  - getMarketTradedVolumeCompressed
 '''
 import sys
 
@@ -46,14 +51,33 @@ loginInfo = sys.modules['__main__'].loginInfo
 response = bf.login(**loginInfo)
 print response
 
-response = bf.getMarketPricesCompressed(bfpy.ExchangeUK, marketId=101426972)
+# English Premier League Winner 2010/11
+longTermId=101426972
+# Chelsea = 55190
+
+response = bf.getMarketPrices(bfpy.ExchangeUK, marketId=longTermId)
 print response
 
-response = bf.getMUBets(bfpy.ExchangeUK, marketId=101426972, betStatus='MU')
+response = bf.getMarketPricesCompressed(bfpy.ExchangeUK, marketId=longTermId)
 print response
 
-response = bf.getMarketProfitAndLoss(bfpy.ExchangeUK, marketId=101426972)
+response = bf.getMUBets(bfpy.ExchangeUK, marketId=longTermId, betStatus='MU')
 print response
 
-response = bf.getCompleteMarketPricesCompressed(bfpy.ExchangeUK, marketId=101426972)
+response = bf.getMUBetsLite(bfpy.ExchangeUK, marketId=longTermId, betStatus='MU')
+print response
+
+response = bf.getMarketProfitAndLoss(bfpy.ExchangeUK, marketId=longTermId)
+print response
+
+response = bf.getCompleteMarketPricesCompressed(bfpy.ExchangeUK, marketId=longTermId)
+print response
+
+response = bf.getDetailAvailableMarketDepth(bfpy.ExchangeUK, marketId=longTermId, selectionId=55190)
+print response
+
+response = bf.getMarketTradedVolume(bfpy.ExchangeUK, marketId=longTermId, selectionId=55190)
+print response
+
+response = bf.getMarketTradedVolumeCompressed(bfpy.ExchangeUK, marketId=longTermId)
 print response
