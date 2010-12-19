@@ -33,7 +33,7 @@ It does initialize suds logging to a L{NullHandler} to avoid any logging output
 
 from copy import copy
 from collections import namedtuple
-from datetime import datetime, timedelta
+from datetime import datetime
 from socket import error as SocketError
 
 import suds.client
@@ -192,12 +192,31 @@ class BfApi(object):
         - placeBets
         - updateBets
 
-        - getAccountFunds
-        - transferFunds
         - addPaymentCard
           Default values:
           cardStatus='UNLOCKED'
+          itemsIncluded='EXCHANGE', startRecord=0, recordCount=0
+          startDate=datetime.now() - timedelta(days=1), endDate=datetime.now()),
         - deletePaymentCard  
+        - depositFromPaymentCard
+        - forgotPassword,
+        - getAccountFunds
+        - getAccountStatement
+          Default values:
+
+        - getSubscriptionInfo
+        - modifyPassword
+        - modifyProfile
+        - retrieveLIMBMessage
+        - selfExclude
+        - setChatName
+        - submitLIMBMessage
+        - transferFunds
+        - updatePaymentCard
+        - viewProfile
+        - viewProfileV2
+        - viewReferAndEarn
+        - withdrawToPaymentCard
     '''
 
     __metaclass__ = BfService
@@ -445,9 +464,10 @@ class BfApi(object):
                            postProc=[ProcAllMarkets()]),
         ExchangeServiceDef('getBet', skipErrorCodes=['NO_RESULTS'], postProc=[ArrayFix('bet.matches', 'Match')]),
         ExchangeServiceDef('getBetHistory', skipErrorCodes=['NO_RESULTS'],
-                           preProc=[ArrayUnfix('marketTypesIncluded', 'MarketTypeEnum'), ArrayUnfix('eventTypeIds', 'int')],
+                           preProc=[ArrayUnfix('marketTypesIncluded', 'MarketTypeEnum'),
+                                    ArrayUnfix('eventTypeIds', 'int'),
+                                    PreBetHistory()],
                            marketId=0, detailed=False, marketTypesIncluded=['A', 'L', 'O', 'R'],
-                           placedDateFrom=datetime.now() - timedelta(days=1), placedDateTo=datetime.now(),
                            recordCount=100, sortBetsBy='BET_ID', startRecord=0),
         ExchangeServiceDef('getBetLite', skipErrorCodes=['NO_RESULTS']),
         ExchangeServiceDef('getBetMatchesLite', skipErrorCodes=['NO_RESULTS'], postProc=[ArrayFix('matchLites', 'MatchLite')]),
@@ -475,6 +495,7 @@ class BfApi(object):
         ExchangeServiceDef('getMarketTradedVolumeCompressed', skipErrorCodes=['EVENT_SUSPENDED', 'EVENT_CLOSED'],
                            postProc=[ProcMarketTradedVolumeCompressed()]),
         ExchangeServiceDef('getMUBets', preProc=[ArrayUnfix('betIds', 'betId')],
+                           preProc=[PreMUBets()]
                            postProc=[ArrayFix('bets', 'MUBet')],
                            skipErrorCodes=['NO_RESULTS'],
                            betStatus='MU', excludeLastSecond=False,
@@ -518,9 +539,9 @@ class BfApi(object):
         GlobalServiceDef('forgotPassword'),
         ExchangeServiceDef('getAccountFunds'),
         ExchangeServiceDef('getAccountStatement', skipErrorCodes=['NO_RESULTS'],
+                           preProc=[PreAccountStatement()],
                            postProc=[ArrayFix('items', 'AccountStatementItem')],
-                           itemsIncluded='EXCHANGE', startRecord=0, recordCount=0
-                           startDate=datetime.now() - timedelta(days=1), endDate=datetime.now()),
+                           itemsIncluded='EXCHANGE', startRecord=0, recordCount=0),
         GlobalServiceDef('getPaymentCard', postProc=[ArrayFix('paymentCardItems', 'PaymentCard')]),
         GlobalServiceDef('getSubscriptionInfo', postProc=[ArrayFix('subscription', 'Subscription'),
                                                           ArrayFix('subscription.services', 'ServiceCall')]),

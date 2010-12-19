@@ -29,7 +29,7 @@
 Implementation of BfApi request and response processors
 '''
 
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import bferror
 from timezone import LocalTimezone
@@ -754,3 +754,50 @@ class ProcSilks(object):
                 marketDisplayDetails.racingSilks = marketDisplayDetails.racingSilks.RacingSilk
             else:
                 marketDisplayDetails.racingSilks = list()
+
+
+class PreBetHistory(object):
+    '''
+    Request processor
+
+    Provide a default 24 hour BetHistory request
+    '''
+    def __call__(self, request, requestArgs, **kwargs):
+        if 'placedDateFrom' not in requestArgs:
+            placedDateFrom = datetime.now() - timedelta(days=1)
+            requestArgs['placedDateFrom'] = placedDateFrom
+
+        if 'placedDateTo' not in requestArgs:
+            placedDateTo = datetime.now()
+            requestArgs['placedDateTo'] = placedDateTo
+
+class PreMUBets(object):
+    '''
+    Request processor
+
+    Provide a default 24 hour getMUBets request
+    '''
+    def __call__(self, request, requestArgs, **kwargs):
+        if 'placedDateFrom' not in requestArgs:
+            placedDateFrom = datetime.now() - timedelta(days=1)
+            requestArgs['placedDateFrom'] = placedDateFrom
+
+        if 'placedDateTo' not in requestArgs:
+            placedDateTo = datetime.now()
+            requestArgs['placedDateTo'] = placedDateTo
+
+
+class PreAccountStatement(object):
+    '''
+    Request processor
+
+    Provide a default 24 hour getMUBets request
+    '''
+    def __call__(self, request, requestArgs, **kwargs):
+        if 'startDate' not in requestArgs:
+            startDate = datetime.now() - timedelta(days=1)
+            requestArgs['startDate'] = startDate
+
+        if 'endDate' not in requestArgs:
+            endDate = datetime.now()
+            requestArgs['endDate'] = endDate
