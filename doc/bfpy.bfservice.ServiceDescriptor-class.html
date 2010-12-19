@@ -71,7 +71,7 @@ object --+
 <dl><dt>Known Subclasses:</dt>
 <dd>
       <ul class="subclass-list">
-<li><a href="bfpy.bfclientext.GetCurrentBets-class.html">bfclientext.GetCurrentBets</a></li><li>, <a href="bfpy.bfclientext.GetEvents-class.html">bfclientext.GetEvents</a></li><li>, <a href="bfpy.bfclientext.PlaceBets-class.html">bfclientext.PlaceBets</a></li><li>, <a href="bfpy.bfservice.ServiceObject-class.html">ServiceObject</a></li><li>, <a href="bfpy.bfservice.ServiceDef-class.html">ServiceDef</a></li>  </ul>
+<li><a href="bfpy.bfservice.ServiceObject-class.html">ServiceObject</a></li><li>, <a href="bfpy.bfservice.ServiceDef-class.html">ServiceDef</a></li><li>, <a href="bfpy.bfclientext.GetCurrentBets-class.html">bfclientext.GetCurrentBets</a></li><li>, <a href="bfpy.bfclientext.GetEvents-class.html">bfclientext.GetEvents</a></li><li>, <a href="bfpy.bfclientext.PlaceBets-class.html">bfclientext.PlaceBets</a></li>  </ul>
 </dd></dl>
 
 <hr />
@@ -101,13 +101,13 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfservice.ServiceDescriptor-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">methodName</span>,
+          <td><span class="summary-sig"><a href="bfpy.bfservice.ServiceDescriptor-class.html#__call__" class="summary-sig-name">__call__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
         <span class="summary-sig-arg">**kwargs</span>)</span><br />
-      Initialize the cache of instances and make a copy of the extra 
-      arguments</td>
+      Pure virtual function to be implemented by Service implementation 
+      classes</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfservice-pysrc.html#ServiceDescriptor.__init__">source&nbsp;code</a></span>
+            <span class="codelink"><a href="bfpy.bfservice-pysrc.html#ServiceDescriptor.__call__">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -140,13 +140,13 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfservice.ServiceDescriptor-class.html#__call__" class="summary-sig-name">__call__</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">*args</span>,
+          <td><span class="summary-sig"><a href="bfpy.bfservice.ServiceDescriptor-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">methodName</span>,
         <span class="summary-sig-arg">**kwargs</span>)</span><br />
-      Pure virtual function to be implemented by Service implementation 
-      classes</td>
+      Initialize the cache of instances and make a copy of the extra 
+      arguments</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfservice-pysrc.html#ServiceDescriptor.__call__">source&nbsp;code</a></span>
+            <span class="codelink"><a href="bfpy.bfservice-pysrc.html#ServiceDescriptor.__init__">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -258,6 +258,56 @@ object --+
   </td>
 </tr>
 </table>
+<a name="__call__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__call__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+    <br /><em class="fname">(Call operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bfservice-pysrc.html#ServiceDescriptor.__call__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Pure virtual function to be implemented by Service implementation 
+  classes</p>
+  <dl class="fields">
+    <dt>Raises:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code><strong class='fraise'>NotImplemented</strong></code> - pure virtual function</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__get__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__get__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">instance</span>,
+        <span class="sig-arg">owner</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bfservice-pysrc.html#ServiceDescriptor.__get__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Non-data descriptor implementation.</p>
+  <p>It returns a method type pointing to itself. This forces the 
+  invocation of __call__</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
 <a name="__init__"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
@@ -286,56 +336,6 @@ object --+
     <dt>Overrides:
         object.__init__
     </dt>
-  </dl>
-</td></tr></table>
-</div>
-<a name="__get__"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">__get__</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">instance</span>,
-        <span class="sig-arg">owner</span>=<span class="sig-default">None</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfservice-pysrc.html#ServiceDescriptor.__get__">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Non-data descriptor implementation.</p>
-  <p>It returns a method type pointing to itself. This forces the 
-  invocation of __call__</p>
-  <dl class="fields">
-  </dl>
-</td></tr></table>
-</div>
-<a name="__call__"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">__call__</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">*args</span>,
-        <span class="sig-arg">**kwargs</span>)</span>
-    <br /><em class="fname">(Call operator)</em>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfservice-pysrc.html#ServiceDescriptor.__call__">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Pure virtual function to be implemented by Service implementation 
-  classes</p>
-  <dl class="fields">
-    <dt>Raises:</dt>
-    <dd><ul class="nomargin-top">
-        <li><code><strong class='fraise'>NotImplemented</strong></code> - pure virtual function</li>
-    </ul></dd>
   </dl>
 </td></tr></table>
 </div>
@@ -371,7 +371,7 @@ object --+
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Thu Oct 28 16:21:39 2010
+    Generated by Epydoc 3.0.1 on Sun Dec 19 16:40:52 2010
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

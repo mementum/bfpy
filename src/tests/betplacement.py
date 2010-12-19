@@ -31,6 +31,7 @@ Test the following services
   - placeBets
   - updateBets
   - cancelBets
+  - cancelBetsByMarket
 '''
 import sys
 import time
@@ -46,6 +47,9 @@ loginInfo = sys.modules['__main__'].loginInfo
 
 response = bf.login(**loginInfo)
 print response
+
+# response = bf.cancelBetsByMarket(bfpy.ExchangeUK, markets=[101426972])
+# print response
 
 placeBet = bf.createPlaceBets()
 

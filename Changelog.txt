@@ -1,5 +1,6 @@
 0.80
 -- Added all missing Account Management calls
+-- Improved default parameters for any calls with a time parameters (from->to)
 
 0.79
 -- Added all API services except Account Management (getAccountFunds and TransferFunds were already included)

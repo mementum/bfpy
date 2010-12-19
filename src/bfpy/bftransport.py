@@ -177,6 +177,7 @@ try:
                     return None if not retFile else StringIO('')
 
                 if httxresponse.status < 200 and httxresponse.status >= 300:
+                    print "hey hey"
                     raise suds.transport.TransportError(httxresponse.reason, httxresponse.status, httxresponse.bodyfile)
 
                 if not httxresponse.body.startswith('<?xml'):
@@ -370,11 +371,10 @@ except ImportError:
         # this would be the definition of "invoke"
         # called by either open or send
         #
-        # def invoke(self, request, retfile = False):
-        #     raise NotImplementedError
         def invoke(self, request, retfile=False):
             """
-            Open a connection.
+            Open a connection
+            
             @param request: A suds Request
             @type request: suds.transport.Request
             @param retfile: indicates if a file-like object is to be returned

@@ -32,6 +32,7 @@ BfPy main module. It imports the main objects to let them be re-imported
 version = 0.80
 
 import logging
+# logging.basicConfig(level=logging.INFO)
 from util import NullHandler
 
 handler = NullHandler()

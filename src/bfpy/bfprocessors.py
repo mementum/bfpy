@@ -70,6 +70,40 @@ class ArrayFix(object):
         self.subAttrNames = subAttrName.split('.')
 
     def __call__(self, response, **kwargs):
+        parentAttrs = response
+
+        targetName = self.attrNames[-1]
+        if len(self.attrNames) > 1:
+            for attrName in self.attrNames[:-1]:
+                parentAttrs = getattr(parentAttrs, attrName)
+
+        if not isinstance(parentAttrs, list):
+            parentAttrs = [parentAttrs]
+
+        for parentAttr in parentAttrs:
+            targetAttr = getattr(parentAttr, targetName)
+            if targetAttr is not None:
+                subAttr = targetAttr
+                for subAttrName in self.subAttrNames:
+                    subAttr = getattr(subAttr, subAttrName)
+            else:
+                subAttr = list()
+
+            setattr(parentAttr, targetName, subAttr)
+
+
+class ArrayFix2(object):
+    '''
+    Response processor
+
+    Remove one (or more) levels of indirection from the arrays
+    defined in the Betfair WSDLs
+    '''
+    def __init__(self, attrName, subAttrName):
+        self.attrNames = attrName.split('.')
+        self.subAttrNames = subAttrName.split('.')
+
+    def __call__(self, response, **kwargs):
         parentAttr = response
         if len(self.attrNames) > 1:
             for attrName in self.attrNames[:-1]:
@@ -284,7 +318,7 @@ class ProcMarket(object):
 
     Patches exchangeId in the market, removes some indirections
     and adjusts the marketTime to have a timezone (and therefore be
-    manageable)
+    manageable) and to match the daylight savings
     '''
     def __call__(self, response, **kwargs):
         exchangeId = kwargs.get('exchangeId')
@@ -686,7 +720,7 @@ class ProcMarketTradedVolumeCompressed(object):
     '''
     Response processor
 
-    Removes several possible array indirections from a GetMarketPricesResp
+    Decompresses de Market Traded Volume response
     '''
     def __call__(self, response, **kwargs):
         tradedVolume = list()
@@ -764,40 +798,21 @@ class PreBetHistory(object):
     '''
     def __call__(self, request, requestArgs, **kwargs):
         if 'placedDateFrom' not in requestArgs:
-            placedDateFrom = datetime.now() - timedelta(days=1)
-            requestArgs['placedDateFrom'] = placedDateFrom
+            requestArgs['placedDateFrom'] = datetime.now() - timedelta(days=1)
 
         if 'placedDateTo' not in requestArgs:
-            placedDateTo = datetime.now()
-            requestArgs['placedDateTo'] = placedDateTo
-
-class PreMUBets(object):
-    '''
-    Request processor
-
-    Provide a default 24 hour getMUBets request
-    '''
-    def __call__(self, request, requestArgs, **kwargs):
-        if 'placedDateFrom' not in requestArgs:
-            placedDateFrom = datetime.now() - timedelta(days=1)
-            requestArgs['placedDateFrom'] = placedDateFrom
-
-        if 'placedDateTo' not in requestArgs:
-            placedDateTo = datetime.now()
-            requestArgs['placedDateTo'] = placedDateTo
+            requestArgs['placedDateTo'] = datetime.now()
 
 
 class PreAccountStatement(object):
     '''
     Request processor
 
-    Provide a default 24 hour getMUBets request
+    Provide a default 24 hour request
     '''
     def __call__(self, request, requestArgs, **kwargs):
         if 'startDate' not in requestArgs:
-            startDate = datetime.now() - timedelta(days=1)
-            requestArgs['startDate'] = startDate
+            requestArgs['startDate'] = datetime.now() - timedelta(days=1)
 
         if 'endDate' not in requestArgs:
-            endDate = datetime.now()
-            requestArgs['endDate'] = endDate
+            requestArgs['endDate'] = datetime.now()

@@ -91,27 +91,28 @@
 <a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"><tt class="py-docstring">BfPy main module. It imports the main objects to let them be re-imported</tt> </tt>
 <a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
 <a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"> </tt>
-<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"><tt id="link-0" class="py-name" targets="Variable bfpy.version=bfpy-module.html#version"><a title="bfpy.version" class="py-name" href="#" onclick="return doclink('link-0', 'version', 'link-0');">version</a></tt> <tt class="py-op">=</tt> <tt class="py-number">0.77</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"><tt id="link-0" class="py-name" targets="Variable bfpy.version=bfpy-module.html#version"><a title="bfpy.version" class="py-name" href="#" onclick="return doclink('link-0', 'version', 'link-0');">version</a></tt> <tt class="py-op">=</tt> <tt class="py-number">0.80</tt> </tt>
 <a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"> </tt>
 <a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">logging</tt> </tt>
-<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-1" class="py-name" targets="Module bfpy.util=bfpy.util-module.html"><a title="bfpy.util" class="py-name" href="#" onclick="return doclink('link-1', 'util', 'link-1');">util</a></tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Class bfpy.util.NullHandler=bfpy.util.NullHandler-class.html"><a title="bfpy.util.NullHandler" class="py-name" href="#" onclick="return doclink('link-2', 'NullHandler', 'link-2');">NullHandler</a></tt> </tt>
-<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"> </tt>
-<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"><tt id="link-3" class="py-name" targets="Variable bfpy.bftransport.handler=bfpy.bftransport-module.html#handler,Variable bfpy.handler=bfpy-module.html#handler"><a title="bfpy.bftransport.handler
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"><tt class="py-comment"># logging.basicConfig(level=logging.INFO)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-1" class="py-name" targets="Module bfpy.util=bfpy.util-module.html"><a title="bfpy.util" class="py-name" href="#" onclick="return doclink('link-1', 'util', 'link-1');">util</a></tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Class bfpy.util.NullHandler=bfpy.util.NullHandler-class.html"><a title="bfpy.util.NullHandler" class="py-name" href="#" onclick="return doclink('link-2', 'NullHandler', 'link-2');">NullHandler</a></tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"><tt id="link-3" class="py-name" targets="Variable bfpy.bftransport.handler=bfpy.bftransport-module.html#handler,Variable bfpy.handler=bfpy-module.html#handler"><a title="bfpy.bftransport.handler
 bfpy.handler" class="py-name" href="#" onclick="return doclink('link-3', 'handler', 'link-3');">handler</a></tt> <tt class="py-op">=</tt> <tt id="link-4" class="py-name"><a title="bfpy.util.NullHandler" class="py-name" href="#" onclick="return doclink('link-4', 'NullHandler', 'link-2');">NullHandler</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
-<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"> </tt>
-<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"><tt class="py-comment"># suds logging</tt> </tt>
-<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"><tt id="link-5" class="py-name" targets="Variable bfpy.bftransport.log=bfpy.bftransport-module.html#log,Variable bfpy.log=bfpy-module.html#log"><a title="bfpy.bftransport.log
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"><tt class="py-comment"># suds logging</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"><tt id="link-5" class="py-name" targets="Variable bfpy.bftransport.log=bfpy.bftransport-module.html#log,Variable bfpy.log=bfpy-module.html#log"><a title="bfpy.bftransport.log
 bfpy.log" class="py-name" href="#" onclick="return doclink('link-5', 'log', 'link-5');">log</a></tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">getLogger</tt><tt class="py-op">(</tt><tt class="py-string">'suds'</tt><tt class="py-op">)</tt> </tt>
-<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"><tt id="link-6" class="py-name"><a title="bfpy.bftransport.log
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"><tt id="link-6" class="py-name"><a title="bfpy.bftransport.log
 bfpy.log" class="py-name" href="#" onclick="return doclink('link-6', 'log', 'link-5');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">setLevel</tt><tt class="py-op">(</tt><tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">ERROR</tt><tt class="py-op">)</tt> </tt>
-<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"><tt id="link-7" class="py-name"><a title="bfpy.bftransport.log
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line"><tt id="link-7" class="py-name"><a title="bfpy.bftransport.log
 bfpy.log" class="py-name" href="#" onclick="return doclink('link-7', 'log', 'link-5');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">addHandler</tt><tt class="py-op">(</tt><tt id="link-8" class="py-name"><a title="bfpy.bftransport.handler
 bfpy.handler" class="py-name" href="#" onclick="return doclink('link-8', 'handler', 'link-3');">handler</a></tt><tt class="py-op">)</tt> </tt>
-<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line"> </tt>
-<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-9" class="py-name" targets="Module bfpy.bfapi=bfpy.bfapi-module.html"><a title="bfpy.bfapi" class="py-name" href="#" onclick="return doclink('link-9', 'bfapi', 'link-9');">bfapi</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
-<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-10" class="py-name" targets="Module bfpy.bfclient=bfpy.bfclient-module.html"><a title="bfpy.bfclient" class="py-name" href="#" onclick="return doclink('link-10', 'bfclient', 'link-10');">bfclient</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
-<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-11" class="py-name" targets="Module bfpy.bferror=bfpy.bferror-module.html"><a title="bfpy.bferror" class="py-name" href="#" onclick="return doclink('link-11', 'bferror', 'link-11');">bferror</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
-<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-9" class="py-name" targets="Module bfpy.bfapi=bfpy.bfapi-module.html"><a title="bfpy.bfapi" class="py-name" href="#" onclick="return doclink('link-9', 'bfapi', 'link-9');">bfapi</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-10" class="py-name" targets="Module bfpy.bfclient=bfpy.bfclient-module.html"><a title="bfpy.bfclient" class="py-name" href="#" onclick="return doclink('link-10', 'bfclient', 'link-10');">bfclient</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-11" class="py-name" targets="Module bfpy.bferror=bfpy.bferror-module.html"><a title="bfpy.bferror" class="py-name" href="#" onclick="return doclink('link-11', 'bferror', 'link-11');">bferror</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line"> </tt><script type="text/javascript">
 <!--
 expandto(location.href);
 // -->
@@ -149,7 +150,7 @@ expandto(location.href);
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Thu Oct 28 16:21:39 2010
+    Generated by Epydoc 3.0.1 on Sun Dec 19 16:40:52 2010
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

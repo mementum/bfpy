@@ -195,7 +195,7 @@ class BfApi(object):
         - addPaymentCard
           Default values:
           cardStatus='UNLOCKED'
-          itemsIncluded='EXCHANGE', startRecord=0, recordCount=0
+          itemsIncluded='EXCHANGE', startRecord=0, recordCount=1000
           startDate=datetime.now() - timedelta(days=1), endDate=datetime.now()),
         - deletePaymentCard  
         - depositFromPaymentCard
@@ -203,6 +203,9 @@ class BfApi(object):
         - getAccountFunds
         - getAccountStatement
           Default values:
+          itemsIncluded='EXCHANGE',
+          startRecord=0, recordCount=0,
+          ignoreAutoTransfers=True,
 
         - getSubscriptionInfo
         - modifyPassword
@@ -495,11 +498,11 @@ class BfApi(object):
         ExchangeServiceDef('getMarketTradedVolumeCompressed', skipErrorCodes=['EVENT_SUSPENDED', 'EVENT_CLOSED'],
                            postProc=[ProcMarketTradedVolumeCompressed()]),
         ExchangeServiceDef('getMUBets', preProc=[ArrayUnfix('betIds', 'betId')],
-                           preProc=[PreMUBets()]
                            postProc=[ArrayFix('bets', 'MUBet')],
+                           matchedSince=datetime(2000, 01, 01, 00, 00, 00),
                            skipErrorCodes=['NO_RESULTS'],
                            betStatus='MU', excludeLastSecond=False,
-                           matchedSince=datetime(2000, 01, 01, 00, 00, 00),
+
                            orderBy='BET_ID', recordCount=200, sortOrder='ASC', startRecord=0),
         ExchangeServiceDef('getMUBetsLite', preProc=[ArrayUnfix('betIds', 'betId')],
                            postProc=[ArrayFix('betLites', 'MUBetLite')],
@@ -524,7 +527,7 @@ class BfApi(object):
         ExchangeServiceDef('cancelBets', preProc=[ArrayUnfix('bets', 'CancelBets')],
                            postProc=[ArrayFix('betResults', 'CancelBetsResult')]),
         ExchangeServiceDef('cancelBetsByMarket', preProc=[ArrayUnfix('markets', 'int')],
-                           postProc=[ArrayFix('results', 'CancelBetsByMarketResults')]),
+                           postProc=[ArrayFix('results', 'CancelBetsByMarketResult')]),
         ExchangeServiceDef('placeBets', preProc=[ArrayUnfix('bets', 'PlaceBets')],
                            postProc=[ArrayFix('betResults', 'PlaceBetsResult')]),
         ExchangeServiceDef('updateBets', preProc=[ArrayUnfix('bets', 'UpdateBets')],
@@ -541,10 +544,10 @@ class BfApi(object):
         ExchangeServiceDef('getAccountStatement', skipErrorCodes=['NO_RESULTS'],
                            preProc=[PreAccountStatement()],
                            postProc=[ArrayFix('items', 'AccountStatementItem')],
-                           itemsIncluded='EXCHANGE', startRecord=0, recordCount=0),
+                           itemsIncluded='EXCHANGE', startRecord=0, recordCount=1, ignoreAutoTransfers=True),
         GlobalServiceDef('getPaymentCard', postProc=[ArrayFix('paymentCardItems', 'PaymentCard')]),
-        GlobalServiceDef('getSubscriptionInfo', postProc=[ArrayFix('subscription', 'Subscription'),
-                                                          ArrayFix('subscription.services', 'ServiceCall')]),
+        GlobalServiceDef('getSubscriptionInfo', postProc=[ArrayFix('subscriptions', 'Subscription'),
+                                                          ArrayFix('subscriptions.services', 'ServiceCall')]),
 
         GlobalServiceDef('modifyPassword'),
         GlobalServiceDef('modifyProfile'),
@@ -558,6 +561,6 @@ class BfApi(object):
         GlobalServiceDef('updatePaymentCard'),
         GlobalServiceDef('viewProfile'),
         GlobalServiceDef('viewProfileV2'),
-        GlobalServiceDef('viewReferAndEarn', skipErrorCodes['NO_RESULTS']),
+        GlobalServiceDef('viewReferAndEarn', skipErrorCodes=['NO_RESULTS']),
         GlobalServiceDef('withdrawToPaymentCard'),
         ]

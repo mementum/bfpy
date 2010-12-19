@@ -28,12 +28,8 @@
 '''
 Test the following services
 
-  - getMarket
-  - getMarketInfo
-  - getSilks
-  - getSilksV2
+  - viewReferAndEarn
 '''
-
 import sys
 
 import bfpy
@@ -48,15 +44,22 @@ loginInfo = sys.modules['__main__'].loginInfo
 response = bf.login(**loginInfo)
 print response
 
-response = bf.getMarket(bfpy.ExchangeUK, marketId=101426972)
+response = bf.getAccountStatement(bfpy.ExchangeUK)
+print response
+sys.exit(0)
+
+# Possibly a full set of fields is needed and not just one field
+# response = bf.modifyProfile(password='yourPass', homeTelephone='aTelephone')
+# print response
+
+# reponse = bf.modifyPassword(password='yourPass', newPassword='newPass', newPasswordRepeat='newPass')
+# print response
+
+response = bf.getSubscriptionInfo()
 print response
 
-response = bf.getMarketInfo(bfpy.ExchangeUK, marketId=101426972)
+response = bf.viewProfile()
 print response
 
-response = bf.getSilks(bfpy.ExchangeUK, markets=[102021854, 102021856])
+response = bf.viewReferAndEarn()
 print response
-
-response = bf.getSilksV2(bfpy.ExchangeUK, markets=[102021854, 102021856])
-print response
-

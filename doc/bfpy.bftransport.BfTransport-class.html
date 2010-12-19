@@ -69,8 +69,9 @@ suds.transport.Transport --+
 </pre>
 
 <hr />
-<p>HTTP transport using urllib2.  Provided basic http transport that 
-  provides for cookies, proxies but no authentication.</p>
+<p>HTTP transport using httxlib. Provides http/https transport with 
+  cookies, authentication (basic and digest), redirection, certificate 
+  support and certificate validation and proxy support</p>
 
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -96,8 +97,9 @@ suds.transport.Transport --+
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="bfpy.bftransport.BfTransport-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">httxmanager</span>=<span class="summary-sig-default">None</span>,
         <span class="summary-sig-arg">**kwargs</span>)</span><br />
-      Initialize.</td>
+      Initialize the transport.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="bfpy.bftransport-pysrc.html#BfTransport.__init__">source&nbsp;code</a></span>
             
@@ -307,13 +309,13 @@ suds.transport.Transport --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">suds.transport.Transport</span>
+      <span class="summary-type">HttxTransport</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="bfpy.bftransport.BfTransport-class.html#__deepcopy__" class="summary-sig-name">__deepcopy__</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">memo</span>=<span class="summary-sig-default"><code class="variable-group">{</code><code class="variable-group">}</code></span>)</span><br />
-      Do a deepcopy of self</td>
+        <span class="summary-sig-arg">memo</span>)</span><br />
+      Deepcopy support</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="bfpy.bftransport-pysrc.html#BfTransport.__deepcopy__">source&nbsp;code</a></span>
             
@@ -325,12 +327,12 @@ suds.transport.Transport --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">suds.transport.Transport</span>
+      <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="bfpy.bftransport.BfTransport-class.html#clone" class="summary-sig-name">clone</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Easy alias for clone</td>
+          <td><span class="summary-sig"><a name="clone"></a><span class="summary-sig-name">clone</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Just an alias for __deepcopy__</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="bfpy.bftransport-pysrc.html#BfTransport.clone">source&nbsp;code</a></span>
             
@@ -403,6 +405,7 @@ suds.transport.Transport --+
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
   <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">httxmanager</span>=<span class="sig-default">None</span>,
         <span class="sig-arg">**kwargs</span>)</span>
     <br /><em class="fname">(Constructor)</em>
   </h3>
@@ -411,38 +414,14 @@ suds.transport.Transport --+
     </td>
   </tr></table>
   
-  <p>Initialize. It adds some options to the standard options from suds and
-  forces them to the default values (useragent, compression and compression
-  methods)</p>
+  <p>Initialize the transport.</p>
+  <p>If an httxmanager is passed it will be used as the underlying 
+  transport else a new one will be created</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>kwargs</code></strong> - Keyword arguments.
-          <ul>
-            <li>
-              <b>proxy</b> - An http proxy to be specified on requests. The
-              proxy is defined as {protocol:proxy,}
-              <ul>
-                <li>
-                  type: <i>dict</i>
-                </li>
-                <li>
-                  default: {}
-                </li>
-              </ul>
-            </li>
-            <li>
-              <b>timeout</b> - Set the url open timeout (seconds).
-              <ul>
-                <li>
-                  type: <i>float</i>
-                </li>
-                <li>
-                  default: 90
-                </li>
-              </ul>
-            </li>
-          </ul></li>
+        <li><strong class="pname"><code>httxmanager</code></strong> (HttxManager) - A HttxManager object to do actual transport</li>
+        <li><strong class="pname"><code>kwargs</code></strong> (dict) - keyword arguments</li>
     </ul></dd>
     <dt>Overrides:
         suds.transport.Transport.__init__
@@ -542,7 +521,8 @@ suds.transport.Transport --+
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>request</code></strong> (suds.transport.Request) - A suds Request</li>
+        <li><strong class="pname"><code>request</code></strong> - A suds Request</li>
+        <li><strong class="pname"><code>Request</code></strong> (suds.transport.Request)</li>
     </ul></dd>
     <dt>Returns: file</dt>
         <dd>A file-like object</dd>
@@ -575,7 +555,8 @@ suds.transport.Transport --+
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>request</code></strong> (suds.transport.Request) - A suds Request</li>
+        <li><strong class="pname"><code>request</code></strong> - A suds Request</li>
+        <li><strong class="pname"><code>Request</code></strong> (suds.transport.Request)</li>
     </ul></dd>
     <dt>Returns: suds.transport.Reply</dt>
         <dd>suds Reply</dd>
@@ -609,8 +590,9 @@ suds.transport.Transport --+
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>request</code></strong> (suds.transport.Request) - A suds Request</li>
-        <li><strong class="pname"><code>retfile</code></strong> (bool) - indicates if a file-like object is to be returned</li>
+        <li><strong class="pname"><code>request</code></strong> - A suds Request</li>
+        <li><strong class="pname"><code>retfile</code></strong> - indicates if a file-like object is to be returned</li>
+        <li><strong class="pname"><code>Request</code></strong> (suds.transport.Request)</li>
     </ul></dd>
     <dt>Returns: file or suds.transport.Reply</dt>
         <dd>A file-like object or a suds Reply</dd>
@@ -739,37 +721,23 @@ suds.transport.Transport --+
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
   <h3 class="epydoc"><span class="sig"><span class="sig-name">__deepcopy__</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">memo</span>=<span class="sig-default"><code class="variable-group">{</code><code class="variable-group">}</code></span>)</span>
+        <span class="sig-arg">memo</span>)</span>
   </h3>
   </td><td align="right" valign="top"
     ><span class="codelink"><a href="bfpy.bftransport-pysrc.html#BfTransport.__deepcopy__">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Do a deepcopy of self</p>
+  <p>Deepcopy support</p>
+  <p>It does a copy of itself with the existing HttxManager object because 
+  the httxmanager is already multithreaded safe and can handle multiple 
+  connections</p>
   <dl class="fields">
-    <dt>Returns: suds.transport.Transport</dt>
-        <dd>a cloned object</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="clone"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">clone</span>(<span class="sig-arg">self</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bftransport-pysrc.html#BfTransport.clone">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Easy alias for clone</p>
-  <dl class="fields">
-    <dt>Returns: suds.transport.Transport</dt>
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>memo</code></strong> (dict) - Standard deepcopy memo parameter to avoid loops</li>
+    </ul></dd>
+    <dt>Returns: HttxTransport</dt>
         <dd>a cloned object</dd>
   </dl>
 </td></tr></table>
@@ -858,7 +826,7 @@ suds.transport.Transport --+
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Thu Oct 28 16:21:39 2010
+    Generated by Epydoc 3.0.1 on Sun Dec 19 16:40:52 2010
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
