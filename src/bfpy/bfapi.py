@@ -194,6 +194,10 @@ class BfApi(object):
 
         - getAccountFunds
         - transferFunds
+        - addPaymentCard
+          Default values:
+          cardStatus='UNLOCKED'
+        - deletePaymentCard  
     '''
 
     __metaclass__ = BfService
@@ -508,25 +512,31 @@ class BfApi(object):
         # ######################
         # Acount Management API Services
         # ######################
+        GlobalServiceDef('addPaymentCard', cardStatus='UNLOCKED'),
+        GlobalServiceDef('deletePaymentCard'),
+        GlobalServiceDef('depositFromPaymentCard'),
+        GlobalServiceDef('forgotPassword'),
         ExchangeServiceDef('getAccountFunds'),
-        GlobalServiceDef('transferFunds'),
+        ExchangeServiceDef('getAccountStatement', skipErrorCodes=['NO_RESULTS'],
+                           postProc=[ArrayFix('items', 'AccountStatementItem')],
+                           itemsIncluded='EXCHANGE', startRecord=0, recordCount=0
+                           startDate=datetime.now() - timedelta(days=1), endDate=datetime.now()),
+        GlobalServiceDef('getPaymentCard', postProc=[ArrayFix('paymentCardItems', 'PaymentCard')]),
+        GlobalServiceDef('getSubscriptionInfo', postProc=[ArrayFix('subscription', 'Subscription'),
+                                                          ArrayFix('subscription.services', 'ServiceCall')]),
 
-        # MISSING addPaymentCard
-        # MISSING deletePaymentCard
-        # MISSING depositFromPaymentCard
-        # MISSING forgotPassword
-        # MISSING getAccountStatement
-        # MISSING getPaymentCard
-        # MISSING getSubscriptionInfo
-        # MISSING modifyPassword
-        # MISSING modifyProfile
-        # MISSING retrieveLIMBMessage
-        # MISSING selfExclude
-        # MISSING setChatName
-        # MISSING submitLIMBMessage
-        # MISSING updatePaymentCard
-        # MISSING viewProfile
-        # MISSING viewProfileV2 ???
-        # MISSING viewReferAndEarn
-        # MISSING withdrawToPaymentCard
+        GlobalServiceDef('modifyPassword'),
+        GlobalServiceDef('modifyProfile'),
+        GlobalServiceDef('retrieveLIMBMessage',
+                         postProc=[ArrayFix('retrieveCardBillingAddressCheckItems', 'retrieveCardBillingAddressCheckLIMBMessage')]),
+        GlobalServiceDef('selfExclude'),
+        GlobalServiceDef('setChatName'),
+        GlobalServiceDef('submitLIMBMessage', preProc=[ArrayUnfix('submitCardBillingAddressCheckItems',
+                                                                  'SubmitCardBillingAddressCheckLIMBMessage')]),
+        GlobalServiceDef('transferFunds'),
+        GlobalServiceDef('updatePaymentCard'),
+        GlobalServiceDef('viewProfile'),
+        GlobalServiceDef('viewProfileV2'),
+        GlobalServiceDef('viewReferAndEarn', skipErrorCodes['NO_RESULTS']),
+        GlobalServiceDef('withdrawToPaymentCard'),
         ]
