@@ -8,6 +8,7 @@ bfpy.freeApiId	bfpy-module.html#freeApiId
 bfpy.log	bfpy-module.html#log
 bfpy.handler	bfpy-module.html#handler
 bfpy.version	bfpy-module.html#version
+bfpy.Exchanges	bfpy-module.html#Exchanges
 bfpy.preProcess	bfpy-module.html#preProcess
 bfpy.ExchangeAus	bfpy-module.html#ExchangeAus
 bfpy.Global	bfpy-module.html#Global
@@ -18,6 +19,7 @@ bfpy.bfapi.postProcess	bfpy.bfapi-module.html#postProcess
 bfpy.bfapi.ExchangeUK	bfpy.bfapi-module.html#ExchangeUK
 bfpy.bfapi.eventRootId	bfpy.bfapi-module.html#eventRootId
 bfpy.bfapi.freeApiId	bfpy.bfapi-module.html#freeApiId
+bfpy.bfapi.Exchanges	bfpy.bfapi-module.html#Exchanges
 bfpy.bfapi.preProcess	bfpy.bfapi-module.html#preProcess
 bfpy.bfapi.ExchangeAus	bfpy.bfapi-module.html#ExchangeAus
 bfpy.bfapi.Global	bfpy.bfapi-module.html#Global
@@ -27,6 +29,7 @@ bfpy.bfclient.postProcess	bfpy.bfclient-module.html#postProcess
 bfpy.bfclient.ExchangeUK	bfpy.bfclient-module.html#ExchangeUK
 bfpy.bfclient.eventRootId	bfpy.bfclient-module.html#eventRootId
 bfpy.bfclient.freeApiId	bfpy.bfclient-module.html#freeApiId
+bfpy.bfclient.Exchanges	bfpy.bfclient-module.html#Exchanges
 bfpy.bfclient.preProcess	bfpy.bfclient-module.html#preProcess
 bfpy.bfclient.ExchangeAus	bfpy.bfclient-module.html#ExchangeAus
 bfpy.bfclient.Global	bfpy.bfclient-module.html#Global
@@ -347,6 +350,10 @@ bfpy.bfprocessors.PreAccountStatement	bfpy.bfprocessors.PreAccountStatement-clas
 bfpy.bfprocessors.PreAccountStatement.__call__	bfpy.bfprocessors.PreAccountStatement-class.html#__call__
 bfpy.bfprocessors.PreBetHistory	bfpy.bfprocessors.PreBetHistory-class.html
 bfpy.bfprocessors.PreBetHistory.__call__	bfpy.bfprocessors.PreBetHistory-class.html#__call__
+bfpy.bfprocessors.PreCompleteMarketPricesCompressed	bfpy.bfprocessors.PreCompleteMarketPricesCompressed-class.html
+bfpy.bfprocessors.PreCompleteMarketPricesCompressed.__call__	bfpy.bfprocessors.PreCompleteMarketPricesCompressed-class.html#__call__
+bfpy.bfprocessors.PreMarketTradedVolumeCompressed	bfpy.bfprocessors.PreMarketTradedVolumeCompressed-class.html
+bfpy.bfprocessors.PreMarketTradedVolumeCompressed.__call__	bfpy.bfprocessors.PreMarketTradedVolumeCompressed-class.html#__call__
 bfpy.bfprocessors.PreProcLogin	bfpy.bfprocessors.PreProcLogin-class.html
 bfpy.bfprocessors.PreProcLogin.__call__	bfpy.bfprocessors.PreProcLogin-class.html#__call__
 bfpy.bfprocessors.PreProcMarketProfitAndLoss	bfpy.bfprocessors.PreProcMarketProfitAndLoss-class.html
