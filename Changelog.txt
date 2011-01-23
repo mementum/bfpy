@@ -1,3 +1,13 @@
+0.81
+-- Added default asianLineId (0) value for getMarketTradedVolumeCompressed
+-- Added daylight correction for getAllMarkets
+-- Included httxlib
+-- Added GetPriceTicks (Up/Down and Bet dependent) to get price increments from a price
+-- Error protection for some calls before attempting a split on a string (like getCompleteMarketPricesCompressed and getMarketTradedVolumeCompressed)
+-- Added non-capitalized alias (price) for "Price" in bestPricesToBack and bestPricesToLay
+-- Save currency of the account in "currency" member
+-- Added an array "Exchanges" to the module with the list of available exchanges
+
 0.80
 -- Added all missing Account Management calls
 -- Improved default parameters for any calls with a time parameters (from->to)

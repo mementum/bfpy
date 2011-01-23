@@ -169,6 +169,10 @@ class ProcAllMarkets(object):
         marketItems = list()
 
         # Parse the marketItems data string - separate major fields
+        if not response.marketData:
+            response.marketData = list()
+            return
+        
         marketDataParts = response.marketData.split(':')
 
         # First element is always empty ... pop it out because Betfair places a delimiter at the beginning
@@ -213,6 +217,10 @@ class ProcAllMarkets(object):
             marketItem.marketType = marketItemFields[2]
             marketItem.marketStatus = marketItemFields[3]
             marketItem.marketTime = datetime.fromtimestamp(long(marketItemFields[4]) / 1000)
+
+            localTimezone = LocalTimezone()
+            daylight = localTimezone.dst(marketItem.marketTime)
+            marketItem.marketTime += daylight
             
             menuPathParts = list()
             menuParts = marketItemFields[5].split('\\')
@@ -311,6 +319,9 @@ class ProcLogin(object):
             attrValue = getattr(request, loginArg)
             setattr(instance, loginArg, attrValue)
 
+        # Write down thee currency code
+        instance.currency = response.currency
+
 
 class ProcMarket(object):
     '''
@@ -395,6 +406,12 @@ class ProcMarketPricesCompressed(object):
         @rtype: suds MarketPrices/CompleteMarketPrices object
         '''
         # Split the string in main MarketPrices object + Runner Objects
+        if compressedPrices is None:
+            marketPrices = EmptyObject()
+            marketPrices.runnerPrices = EmptyObject()
+            marketPrices.runnerPrices.RunnerPrices = list()
+            return marketPrices
+
         parts = compressedPrices.split(':')
 
         # join the first fields that were separated due
@@ -502,8 +519,10 @@ class ProcMarketPricesCompressed(object):
         runner = EmptyObject()
         runner.bestPricesToBack = EmptyObject()
         runner.bestPricesToBack.Price = list()
+        runner.bestPricesToBack.price = runner.bestPricesToBack.Price
         runner.bestPricesToLay = EmptyObject()
         runner.bestPricesToLay.Price = list()
+        runner.bestPricesToLay.price = runner.bestPricesToLay.Price
 
         # Parse the runner main fields, header + 2xPrices
         partsRunner = marketPricesRunner.split('|')
@@ -542,7 +561,6 @@ class ProcMarketPricesCompressed(object):
             # Delete the non-used 'bestpricesToXXXX' lists
             # del runner.bestPricesToBack
             # del runner.bestPricesToLay
-
             partsPrices = partsRunner[1].split('~')
             numPrices = len(partsPrices) / numFieldsPerPrice
 
@@ -554,6 +572,7 @@ class ProcMarketPricesCompressed(object):
                 price = self.ParseMarketPricesRunnerCompressedAvailabilityInfo(partsPrices[index:index + numFieldsPerPrice])
 
                 runner.Prices.append(price)
+            runner.prices = runner.Prices
         else:
 
             numFieldsPerPrice = 4
@@ -716,6 +735,28 @@ class ProcMarketPrices(object):
                 runnerPrice.bestPricesToLay = list()
 
 
+class PreCompleteMarketPricesCompressed(object):
+    '''
+    Request processor
+
+    Adds the currency code
+    '''
+    def __call__(self, request, requestArgs, **kwargs):
+        instance = kwargs.get('instance')
+        requestArgs['currencyCode'] = instance.currency
+
+
+class PreMarketTradedVolumeCompressed(object):
+    '''
+    Request processor
+
+    Adds the currency code
+    '''
+    def __call__(self, request, requestArgs, **kwargs):
+        instance = kwargs.get('instance')
+        requestArgs['currencyCode'] = instance.currency
+    
+
 class ProcMarketTradedVolumeCompressed(object):
     '''
     Response processor
@@ -725,12 +766,20 @@ class ProcMarketTradedVolumeCompressed(object):
     def __call__(self, response, **kwargs):
         tradedVolume = list()
 
+        if not response.tradedVolume:
+            response.tradedVolume = tradedVolume
+            return
+        
         runnerInfosStr = response.tradedVolume.split(':')
         for runnerInfoStr in runnerInfosStr[1:]:
             runnerInfo = EmptyObject()
 
             runnerInfoParts = runnerInfoStr.split('|')
+            if runnerInfoParts is None:
+                continue
 
+            if runnerInfoParts[0] is None:
+                continue
             runnerDetails = runnerInfoParts[0].split('~')
             runnerInfo.selectionId = int(runnerDetails[0])
             runnerInfo.asianLineId = int(runnerDetails[1])
@@ -740,6 +789,8 @@ class ProcMarketTradedVolumeCompressed(object):
 
             runnerInfo.priceItems = list()
             for priceItemStr in runnerInfoParts[1:]:
+                if priceItemStr is None:
+                    continue
                 priceItemParts = priceItemStr.split('~')
 
                 priceItem = EmptyObject()

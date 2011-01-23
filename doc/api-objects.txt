@@ -1,6 +1,8 @@
 bfpy	bfpy-module.html
 bfpy.postProcess	bfpy-module.html#postProcess
 bfpy.ExchangeUK	bfpy-module.html#ExchangeUK
+bfpy.GetPriceTicks	bfpy-module.html#GetPriceTicks
+bfpy.GetPriceTicksUp	bfpy-module.html#GetPriceTicksUp
 bfpy.eventRootId	bfpy-module.html#eventRootId
 bfpy.freeApiId	bfpy-module.html#freeApiId
 bfpy.log	bfpy-module.html#log
@@ -9,6 +11,7 @@ bfpy.version	bfpy-module.html#version
 bfpy.preProcess	bfpy-module.html#preProcess
 bfpy.ExchangeAus	bfpy-module.html#ExchangeAus
 bfpy.Global	bfpy-module.html#Global
+bfpy.GetPriceTicksDown	bfpy-module.html#GetPriceTicksDown
 bfpy.__package__	bfpy-module.html#__package__
 bfpy.bfapi	bfpy.bfapi-module.html
 bfpy.bfapi.postProcess	bfpy.bfapi-module.html#postProcess

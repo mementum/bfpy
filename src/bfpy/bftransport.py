@@ -177,7 +177,6 @@ try:
                     return None if not retFile else StringIO('')
 
                 if httxresponse.status < 200 and httxresponse.status >= 300:
-                    print "hey hey"
                     raise suds.transport.TransportError(httxresponse.reason, httxresponse.status, httxresponse.bodyfile)
 
                 if not httxresponse.body.startswith('<?xml'):

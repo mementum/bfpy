@@ -29,7 +29,7 @@
 BfPy main module. It imports the main objects to let them be re-imported
 '''
 
-version = 0.80
+version = 0.81
 
 import logging
 # logging.basicConfig(level=logging.INFO)
@@ -45,3 +45,65 @@ log.addHandler(handler)
 from bfapi import *
 from bfclient import *
 from bferror import *
+
+def GetPriceTicksUp(price, ticks):
+    priceTicks = {
+        2.0: 0.01, 3.0: 0.02, 4.0: 0.05, 6.0: 0.1,
+        10.0: 0.2, 20.0: 0.5, 30.0: 1.0, 50.0: 2.0,
+        100.0: 5.0, 1000.0: 10.0
+        }
+
+    # Price is assumed to be well formed
+    limits = priceTicks.keys()
+    limits.sort()
+    for limit in limits:
+        inc = priceTicks[limit]
+        if price < limit:
+            while ticks:
+                ticks -= 1
+                price += inc
+                if price == limit:
+                    break;
+            if not ticks:
+                return price
+    return price
+
+
+def GetPriceTicksDown(price, ticks):
+    priceTicksDown = {
+        100.0: 10.0, 50.0: 5.0, 30.0: 2.0,
+        20.0: 1.0, 10.0: 0.5, 6.0: 0.2,
+        4.0: 0.1, 3.0: 0.05, 2.0: 0.02,
+        1.01: 0.01
+        }
+
+    # Price is assumed to be well formed
+    limits = priceTicksDown.keys()
+    limits.sort(reverse=True)
+    for limit in limits:
+        inc = priceTicksDown[limit]
+        if price > limit:
+            while ticks:
+                ticks -= 1
+                price -= inc
+                if price == limit:
+                    break
+            if not ticks:
+                return price
+    return price
+
+
+def GetPriceTicks(price, ticks, betType):
+    if not ticks:
+        return price
+
+    if betType == 'B':
+        if ticks > 0:
+            return GetPriceTicksUp(price, ticks)
+        else:
+            return GetPriceTicksDown(price, abs(ticks))
+    else:
+        if ticks < 0:
+            return GetPriceTicksUp(price, ticks)
+        else:
+            return GetPriceTicksDown(price, abs(ticks))

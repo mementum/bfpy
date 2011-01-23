@@ -42,7 +42,7 @@ class BfClient(BfApi):
     in a intelligent manner.
     
     As an example de redefined "getEvents" unifies getActiveEventTypes and getEvents
-    (it is used as such in the Bf++ application <http://code.google.com/p/bfplusplus>
+    (it is used as such in the Bfplusplus application <http://code.google.com/p/bfplusplus>
 
     The redefintion is made by means of non-data descriptors in the bfclientext
     module

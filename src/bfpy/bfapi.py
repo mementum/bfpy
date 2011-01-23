@@ -53,6 +53,8 @@ Global = 0
 ExchangeUK = 1
 ExchangeAus = 2
 
+Exchanges = [ExchangeUK, ExchangeAus]
+
 
 class BfApi(object):
     '''
@@ -474,7 +476,10 @@ class BfApi(object):
                            recordCount=100, sortBetsBy='BET_ID', startRecord=0),
         ExchangeServiceDef('getBetLite', skipErrorCodes=['NO_RESULTS']),
         ExchangeServiceDef('getBetMatchesLite', skipErrorCodes=['NO_RESULTS'], postProc=[ArrayFix('matchLites', 'MatchLite')]),
-        ExchangeServiceDef('getCompleteMarketPricesCompressed', postProc=[ProcMarketPricesCompressed(True)]),
+        ExchangeServiceDef('getCompleteMarketPricesCompressed',
+                           skipErrorCodes=['EVENT_CLOSED', 'EVENT_SUSPENDED', 'EVENT_INACTIVE'],
+                           preProc=[PreCompleteMarketPricesCompressed()],
+                           postProc=[ProcMarketPricesCompressed(True)]),
         ExchangeServiceDef('getCurrentBets', skipErrorCodes=['NO_RESULTS'], postProc=[ArrayFix('bets', 'Bet'), ProcCurrentBets()],
                            detailed=False, orderBy='NONE', marketId=0, recordCount=0, startRecord=0, noTotalRecordCount=True),
         ExchangeServiceDef('getCurrentBetsLite', skipErrorCodes=['NO_RESULTS'], postProc=[ArrayFix('betLites', 'BetLite')],
@@ -496,6 +501,7 @@ class BfApi(object):
                            postProc=[ArrayFix('priceItems', 'VolumeInfo')],
                            asianLineId=0),
         ExchangeServiceDef('getMarketTradedVolumeCompressed', skipErrorCodes=['EVENT_SUSPENDED', 'EVENT_CLOSED'],
+                           preProc=[PreMarketTradedVolumeCompressed()],
                            postProc=[ProcMarketTradedVolumeCompressed()]),
         ExchangeServiceDef('getMUBets', preProc=[ArrayUnfix('betIds', 'betId')],
                            postProc=[ArrayFix('bets', 'MUBet')],

@@ -31,6 +31,7 @@ BfApi method extensions to be inserted in BfClient
 
 from copy import copy
 from operator import attrgetter
+import time
 
 from bfapi import BfApi, eventRootId
 from bfservice import ServiceDescriptor
@@ -76,6 +77,7 @@ class GetEvents(ServiceDescriptor):
             response = instance.getActiveEventTypes()
             # Alias the .id and .name attributes to those of an event
             for event in response.eventTypeItems:
+                event.eventTypeId = event.id
                 event.eventId = event.id
                 del event.id
                 event.eventName = event.name
@@ -154,7 +156,7 @@ class PlaceBets(ServiceDescriptor):
     Implements a non-data descriptor for BfClient to extend the placeBets
     to re-place a bet if the betPersistence has not been speficied.
 
-    This is a hack to support Bf++, given that the "marketSummary" returned
+    This is a hack to support Bfplusplus, given that the "marketSummary" returned
     by getEvents does not state if a market will turn in-ply or not. A call
     to getAllMarkets is needed to find out.
 
