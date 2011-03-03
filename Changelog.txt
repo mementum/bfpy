@@ -1,3 +1,6 @@
+0.82
+-- Adapted (and adopted) object printing code from suds to let the on-the-fly-created "EmptyObjects" (example: response in getAllMarkets) to be printed and therefore easily see the references
+
 0.81
 -- Added default asianLineId (0) value for getMarketTradedVolumeCompressed
 -- Added daylight correction for getAllMarkets
