@@ -1,5 +1,6 @@
 0.82
 -- Adapted (and adopted) object printing code from suds to let the on-the-fly-created "EmptyObjects" (example: response in getAllMarkets) to be printed and therefore easily see the references
+-- Added a Data Counter and Throttler for the data charges calls. Default max requests per second: 20, to comply with Betfair's policy. Cloned BfApi/BfClient instances (usually in a multi-threaded environment) share the data counter
 
 0.81
 -- Added default asianLineId (0) value for getMarketTradedVolumeCompressed

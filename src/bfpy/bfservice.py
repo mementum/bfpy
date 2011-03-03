@@ -5,7 +5,8 @@
 # This file is part of BfPy
 #
 # BfPy is a Python library to communicate with the Betfair Betting Exchange
-# Copyright (C) 2010  Daniel Rodriguez (aka Daniel Rodriksson)
+# Copyright (C) 2010 Daniel Rodriguez (aka Daniel Rodriksson)
+# Copyright (C) 2011 Sensible Odds Ltd.
 #
 # You can learn more and contact the author at:
 #
@@ -127,7 +128,7 @@ class ServiceDef(ServiceDescriptor):
     def __init__(self, endPoint,
                  methodName, serviceName=None, requestName=None,
                  apiHeader=True, skipErrorCodes=None,
-                 preProc=None, postProc=None,
+                 preProc=None, postProc=None, weight=0,
                  **kwargs):
         '''
         Initializes the service and variables
@@ -148,6 +149,9 @@ class ServiceDef(ServiceDescriptor):
         @type preProc: list
         @param postProc: callables that will post process a service response
         @type postProc: list
+        @param weight: weight count into data charges. Negative values are assumed
+                       to be multiplied by 5 (and passed as positive)
+        @type weight: int
         @param kwargs: extra arguments (with values) to pass to the method
         @type kwargs: dict
         '''
@@ -176,6 +180,8 @@ class ServiceDef(ServiceDescriptor):
         if postProc is None:
             postProc = list()
         self.postProc = postProc
+
+        self.weight = weight
 
 
     def __call__(self, instance, *args, **kwargs):
@@ -224,6 +230,22 @@ class ServiceDef(ServiceDescriptor):
         for name, value in requestArgs.iteritems():
             setattr(request, name, value)
 
+        # Calculate the data charges weight
+        if self.weight < 0:
+            # A marketId parameter is supposed to be in place
+            try:
+                if not request.marketId:
+                    weight = 5 * -self.weight
+                else:
+                    weight = -self.weight
+            except:
+                weight = 5 * -self.weight
+        else:
+            weight = self.weight
+            
+        # Add the weight to the instance - blocking the call if needed
+        instance.addDataWeight(endPoint, weight)
+
         # Execute the call and fetch the response
         response = instance.invoke(self.methodName, service, request, self.skipErrorCodes)
 
@@ -245,7 +267,7 @@ class GlobalServiceDef(ServiceDef):
     def __init__(self,
                  methodName, serviceName=None, requestName=None,
                  apiHeader=True, skipErrorCodes=None,
-                 preProc=None, postProc=None,
+                 preProc=None, postProc=None, weight=0,
                  **kwargs):
         '''
         Initializes the service and variables, setting the the
@@ -272,7 +294,7 @@ class GlobalServiceDef(ServiceDef):
             self, 0,
             methodName, serviceName=serviceName, requestName=requestName,
             apiHeader=apiHeader, skipErrorCodes=skipErrorCodes,
-            preProc=preProc, postProc=postProc,
+            preProc=preProc, postProc=postProc, weight=weight,
             **kwargs)
 
 
@@ -285,7 +307,7 @@ class ExchangeServiceDef(ServiceDef):
     def __init__(self,
                  methodName, serviceName=None, requestName=None,
                  apiHeader=True, skipErrorCodes=None,
-                 preProc=None, postProc=None,
+                 preProc=None, postProc=None, weight=0,
                  **kwargs):
         '''
         Initializes the service and variables, setting the the
@@ -312,7 +334,7 @@ class ExchangeServiceDef(ServiceDef):
             self, 1,
             methodName, serviceName=serviceName, requestName=requestName,
             apiHeader=apiHeader, skipErrorCodes=skipErrorCodes,
-            preProc=preProc, postProc=postProc,
+            preProc=preProc, postProc=postProc, weight=weight,
             **kwargs)
 
 

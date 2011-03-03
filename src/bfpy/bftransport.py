@@ -5,7 +5,8 @@
 # This file is part of BfPy
 #
 # BfPy is a Python library to communicate with the Betfair Betting Exchange
-# Copyright (C) 2010  Daniel Rodriguez (aka Daniel Rodriksson)
+# Copyright (C) 2010 Daniel Rodriguez (aka Daniel Rodriksson)
+# Copyright (C) 2011 Sensible Odds Ltd.
 #
 # You can learn more and contact the author at:
 #
@@ -325,9 +326,10 @@ except ImportError:
         def open(self, request):
             """
             Open a file or url
-            If request.url can't be identified as a url, it will
+            If url (attribute of request) can't be identified as a url, it will
             return the content in a file-like object
-            @param request: A suds Request
+
+            @param request: A suds request
             @type request: suds.transport.Request
             @return: A file-like object
             @rtype: file
@@ -353,17 +355,17 @@ except ImportError:
 
             return fp
 
-        def send(self, request):
-            """
-            Send a soap request
+        def send(self, req):
+            '''
+            Send a soap message
 
-            @param request: A suds Request
-            @type request: suds.transport.Request
+            @param req: A suds request
+            @type req: suds.transport.Request
             @return: suds Reply
             @rtype: suds.transport.Reply
-            """
-            log.debug('sending: %s', request)
-            return self.invoke(request)
+            '''
+            log.debug('sending: %s', req)
+            return self.invoke(req)
 
 
         # for the base class Transport
@@ -379,7 +381,7 @@ except ImportError:
             @param retfile: indicates if a file-like object is to be returned
             @type retfile: bool 
             @return: A file-like object or a suds Reply
-            @rtype: file or suds.transport.Reply
+            @rtype: suds.transport.Reply
             """
             tm = self.options.timeout
 

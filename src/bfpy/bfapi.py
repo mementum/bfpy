@@ -5,7 +5,8 @@
 # This file is part of BfPy
 #
 # BfPy is a Python library to communicate with the Betfair Betting Exchange
-# Copyright (C) 2010  Daniel Rodriguez (aka Daniel Rodriksson)
+# Copyright (C) 2010 Daniel Rodriguez (aka Daniel Rodriksson)
+# Copyright (C) 2011 Sensible Odds Ltd.
 #
 # You can learn more and contact the author at:
 #
@@ -38,6 +39,7 @@ from socket import error as SocketError
 
 import suds.client
 
+import bfcounter
 import bferror
 from bfservice import BfService, GlobalServiceDef, ExchangeServiceDef, GlobalObject, ExchangeObject
 from bfprocessors import *
@@ -54,6 +56,7 @@ ExchangeUK = 1
 ExchangeAus = 2
 
 Exchanges = [ExchangeUK, ExchangeAus]
+EndPoints = [Global, ExchangeUK, ExchangeAus]
 
 
 class BfApi(object):
@@ -72,6 +75,10 @@ class BfApi(object):
     @type preProcess: bool
     @ivar postProcess: whether service requests will undergo post-processing
     @type postProcess: bool
+    @ivar maxRequests: maximum number of requests to issue to Bf in 1 second
+                       (20 is maximum before data charges kick-in)
+                       maxRequests = 0 to unlimit the number of requests
+    @type maxRequests: int
     @ivar transport: a reference to the L{BfTransport} used to communicate (HTTP)
                      with the Betfair servers
     @type transport: L{BfTransport}
@@ -233,7 +240,7 @@ class BfApi(object):
         }
 
 
-    def __init__(self, preProcess=preProcess, postProcess=postProcess, **kwargs):
+    def __init__(self, preProcess=preProcess, postProcess=postProcess, maxRequests=20, **kwargs):
         '''
         Initializes the processing options, transport and service clients
 
@@ -241,9 +248,16 @@ class BfApi(object):
         @type preProcess: bool
         @param postProcess: whether service requests will undergo post-processing
         @type postProcess: bool
+        @param maxRequests: maximum number of requests to issue to Bf in 1 second (20 is maximum before data charges)
+                            maxRequests = 0 to unlimit the number of requests
+        @type maxRequests: int
         '''
         self.preProcess = preProcess
         self.postProcess = postProcess
+        self.maxRequests = maxRequests
+        self.dataCounter = dict()
+        for endPoint in EndPoints:
+            self.dataCounter[endPoint] = bfcounter.DataCounter(maxRequests)
 
         self.transport = bftransport.BfTransport()
         # The proxy may be needed early if the WSDLs are to be downloaded from the net
@@ -346,6 +360,18 @@ class BfApi(object):
         return request
 
 
+    def addDataWeight(self, endPoint, weight):
+        '''
+        Adds the weight to the counter corresponding to the endPoint
+
+        @param endPoint: which endPoint to add weight to
+        @type endPoint: int
+        @param weight: weight of the call to come
+        @type weight: int
+        '''
+        self.dataCounter[endPoint].add(weight, self.maxRequests)
+
+
     def invoke(self, methodName, service, request, skipErrorCodes):
         '''
         Invokes a service with a given request and with a list of errors
@@ -368,6 +394,7 @@ class BfApi(object):
         @raise BfApiError: on specific API errors
         @raise BfServiceError: on service errors (unless specified in skipErrorCodes)
         '''
+
         try:
             response = service(request)
         except suds.WebFault, e:
@@ -467,27 +494,30 @@ class BfApi(object):
                          postProc=[ArrayFix('eventTypeItems', 'EventType')]),
         ExchangeServiceDef('getAllMarkets', preProc=[ArrayUnfix('eventTypeIds', 'int'), ArrayUnfix('countries', 'Country')],
                            postProc=[ProcAllMarkets()]),
-        ExchangeServiceDef('getBet', skipErrorCodes=['NO_RESULTS'], postProc=[ArrayFix('bet.matches', 'Match')]),
+        ExchangeServiceDef('getBet', skipErrorCodes=['NO_RESULTS'], postProc=[ArrayFix('bet.matches', 'Match')], weight=1),
         ExchangeServiceDef('getBetHistory', skipErrorCodes=['NO_RESULTS'],
                            preProc=[ArrayUnfix('marketTypesIncluded', 'MarketTypeEnum'),
                                     ArrayUnfix('eventTypeIds', 'int'),
                                     PreBetHistory()],
+                           weight=-1,
                            marketId=0, detailed=False, marketTypesIncluded=['A', 'L', 'O', 'R'],
                            recordCount=100, sortBetsBy='BET_ID', startRecord=0),
-        ExchangeServiceDef('getBetLite', skipErrorCodes=['NO_RESULTS']),
-        ExchangeServiceDef('getBetMatchesLite', skipErrorCodes=['NO_RESULTS'], postProc=[ArrayFix('matchLites', 'MatchLite')]),
+        ExchangeServiceDef('getBetLite', skipErrorCodes=['NO_RESULTS'], weight=1),
+        ExchangeServiceDef('getBetMatchesLite', skipErrorCodes=['NO_RESULTS'], postProc=[ArrayFix('matchLites', 'MatchLite')], weight=1),
         ExchangeServiceDef('getCompleteMarketPricesCompressed',
                            skipErrorCodes=['EVENT_CLOSED', 'EVENT_SUSPENDED', 'EVENT_INACTIVE'],
                            preProc=[PreCompleteMarketPricesCompressed()],
-                           postProc=[ProcMarketPricesCompressed(True)]),
+                           postProc=[ProcMarketPricesCompressed(True)], weight=1),
         ExchangeServiceDef('getCurrentBets', skipErrorCodes=['NO_RESULTS'], postProc=[ArrayFix('bets', 'Bet'), ProcCurrentBets()],
+                           weight=-1,
                            detailed=False, orderBy='NONE', marketId=0, recordCount=0, startRecord=0, noTotalRecordCount=True),
         ExchangeServiceDef('getCurrentBetsLite', skipErrorCodes=['NO_RESULTS'], postProc=[ArrayFix('betLites', 'BetLite')],
+                           weight=-1,
                            orderBy='NONE', marketId=0, recordCount=1000, startRecord=0, noTotalRecordCount=True),
         ExchangeServiceDef('getDetailAvailableMarketDepth', serviceName='getDetailAvailableMktDepth',
                            requestName='GetDetailedAvailableMktDepthReq',
                            skipErrorCodes=['NO_RESULTS', 'SUSPENDED_MARKET'],
-                           postProc=[ArrayFix('priceItems', 'AvailabilityInfo')],
+                           postProc=[ArrayFix('priceItems', 'AvailabilityInfo')], weight=1,
                            asianLineId=0),
         GlobalServiceDef('getEvents', skipErrorCodes=['NO_RESULTS'],
                          postProc=[ArrayFix('eventItems', 'BFEvent'), ArrayFix('marketItems', 'MarketSummary')]),
@@ -495,31 +525,30 @@ class BfApi(object):
         # Documentation incorrectly states that includeCouponLinks is optional
         ExchangeServiceDef('getMarket', postProc=[ProcMarket()], includeCouponLinks=False),
         ExchangeServiceDef('getMarketInfo'),
-        ExchangeServiceDef('getMarketPrices', postProc=[ProcMarketPrices()]),
-        ExchangeServiceDef('getMarketPricesCompressed', postProc=[ProcMarketPricesCompressed()]),
+        ExchangeServiceDef('getMarketPrices', postProc=[ProcMarketPrices()], weight=1),
+        ExchangeServiceDef('getMarketPricesCompressed', postProc=[ProcMarketPricesCompressed()], weight=1),
         ExchangeServiceDef('getMarketTradedVolume', skipErrorCodes=['NO_RESULTS', 'MARKET_CLOSED'],
-                           postProc=[ArrayFix('priceItems', 'VolumeInfo')],
+                           postProc=[ArrayFix('priceItems', 'VolumeInfo')], weight=1,
                            asianLineId=0),
         ExchangeServiceDef('getMarketTradedVolumeCompressed', skipErrorCodes=['EVENT_SUSPENDED', 'EVENT_CLOSED'],
                            preProc=[PreMarketTradedVolumeCompressed()],
-                           postProc=[ProcMarketTradedVolumeCompressed()]),
+                           postProc=[ProcMarketTradedVolumeCompressed()], weight=1),
         ExchangeServiceDef('getMUBets', preProc=[ArrayUnfix('betIds', 'betId')],
                            postProc=[ArrayFix('bets', 'MUBet')],
-                           matchedSince=datetime(2000, 01, 01, 00, 00, 00),
-                           skipErrorCodes=['NO_RESULTS'],
+                           skipErrorCodes=['NO_RESULTS'], weight=-1,
                            betStatus='MU', excludeLastSecond=False,
-
+                           matchedSince=datetime(2000, 01, 01, 00, 00, 00),
                            orderBy='BET_ID', recordCount=200, sortOrder='ASC', startRecord=0),
         ExchangeServiceDef('getMUBetsLite', preProc=[ArrayUnfix('betIds', 'betId')],
                            postProc=[ArrayFix('betLites', 'MUBetLite')],
-                           skipErrorCodes=['NO_RESULTS'],
+                           skipErrorCodes=['NO_RESULTS'], weight=-1,
                            betStatus='MU', excludeLastSecond=False,
                            matchedSince=datetime(2000, 01, 01, 00, 00, 00),
                            orderBy='BET_ID', recordCount=200, sortOrder='ASC', startRecord=0),
         ExchangeServiceDef('getMarketProfitAndLoss',
                            skipErrorCodes=['MARKET_CLOSED', 'INVALID_MARKET'],
                            preProc=[PreProcMarketProfitAndLoss()],
-                           postProc=[ArrayFix('annotations', 'ProfitAndLoss'), ProcMarketProfitAndLoss()],
+                           postProc=[ArrayFix('annotations', 'ProfitAndLoss'), ProcMarketProfitAndLoss()], weight=1,
                            includeBspBets=False, includeSettledBets=False, netOfCommission=False),
         ExchangeServiceDef('getPrivateMarkets', skipErrorCodes=['NO_RESULTS'],
                            preProc=[PreProcPrivateMarkets()], postProc=[ArrayFix('privateMarkets', 'PrivateMarket')],

@@ -3,7 +3,7 @@
           "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>bfpy.bfprocessors.ArrayFix</title>
+  <title>bfpy.bfcounter.DataCounter</title>
   <link rel="stylesheet" href="epydoc.css" type="text/css" />
   <script type="text/javascript" src="epydoc.js"></script>
 </head>
@@ -43,8 +43,8 @@
     <td width="100%">
       <span class="breadcrumbs">
         <a href="bfpy-module.html">Package&nbsp;bfpy</a> ::
-        <a href="bfpy.bfprocessors-module.html">Module&nbsp;bfprocessors</a> ::
-        Class&nbsp;ArrayFix
+        <a href="bfpy.bfcounter-module.html">Module&nbsp;bfcounter</a> ::
+        Class&nbsp;DataCounter
       </span>
     </td>
     <td>
@@ -54,24 +54,23 @@
     onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
         <tr><td align="right"><span class="options"
             >[<a href="frames.html" target="_top">frames</a
-            >]&nbsp;|&nbsp;<a href="bfpy.bfprocessors.ArrayFix-class.html"
+            >]&nbsp;|&nbsp;<a href="bfpy.bfcounter.DataCounter-class.html"
             target="_top">no&nbsp;frames</a>]</span></td></tr>
       </table>
     </td>
   </tr>
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
-<h1 class="epydoc">Class ArrayFix</h1><p class="nomargin-top"><span class="codelink"><a href="bfpy.bfprocessors-pysrc.html#ArrayFix">source&nbsp;code</a></span></p>
+<h1 class="epydoc">Class DataCounter</h1><p class="nomargin-top"><span class="codelink"><a href="bfpy.bfcounter-pysrc.html#DataCounter">source&nbsp;code</a></span></p>
 <pre class="base-tree">
 object --+
          |
-        <strong class="uidshort">ArrayFix</strong>
+        <strong class="uidshort">DataCounter</strong>
 </pre>
 
 <hr />
-<p>Response processor</p>
-  <p>Remove one (or more) levels of indirection from the arrays defined in 
-  the Betfair WSDLs</p>
+<p>Implements data count and throttling for a configured maximum number 
+  of data requests made in a second</p>
 
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -96,12 +95,12 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfprocessors.ArrayFix-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">attrName</span>,
-        <span class="summary-sig-arg">subAttrName</span>)</span><br />
-      x.__init__(...) initializes x; see x.__class__.__doc__ for signature</td>
+          <td><span class="summary-sig"><a href="bfpy.bfcounter.DataCounter-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">maxRequests</span>=<span class="summary-sig-default">20</span>,
+        <span class="summary-sig-arg">timeGuard</span>=<span class="summary-sig-default">0.05</span>)</span><br />
+      Initializes the request data holder</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfprocessors-pysrc.html#ArrayFix.__init__">source&nbsp;code</a></span>
+            <span class="codelink"><a href="bfpy.bfcounter-pysrc.html#DataCounter.__init__">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -115,11 +114,14 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="__call__"></a><span class="summary-sig-name">__call__</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">response</span>,
-        <span class="summary-sig-arg">**kwargs</span>)</span></td>
+          <td><span class="summary-sig"><a href="bfpy.bfcounter.DataCounter-class.html#add" class="summary-sig-name">add</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">weight</span>,
+        <span class="summary-sig-arg">maxRequests</span>=<span class="summary-sig-default">-1</span>)</span><br />
+      Adds a weight to the list, purging the list of requests, 
+      recalculating the weight and deciding if blocking for an amount of 
+      time is needed</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfprocessors-pysrc.html#ArrayFix.__call__">source&nbsp;code</a></span>
+            <span class="codelink"><a href="bfpy.bfcounter-pysrc.html#DataCounter.add">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -143,6 +145,64 @@ object --+
       <code>__str__</code>,
       <code>__subclasshook__</code>
       </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="lock"></a><span class="summary-name">lock</span><br />
+      thread lock controller to enable counter sharing
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">int</span>
+    </td><td class="summary">
+        <a name="maxRequests"></a><span class="summary-name">maxRequests</span><br />
+      maximum number of concurrent requests
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">list</span>
+    </td><td class="summary">
+        <a name="reqs"></a><span class="summary-name">reqs</span><br />
+      list of last requests made (purged if needed on next weight addition)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">float</span>
+    </td><td class="summary">
+        <a name="timeGuard"></a><span class="summary-name">timeGuard</span><br />
+      extra time to add to blocking time if blocking is needed
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">int</span>
+    </td><td class="summary">
+        <a name="weight"></a><span class="summary-name">weight</span><br />
+      current data charges weight (recalculated on next weight addition)
     </td>
   </tr>
 </table>
@@ -197,22 +257,54 @@ object --+
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
   <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">attrName</span>,
-        <span class="sig-arg">subAttrName</span>)</span>
+        <span class="sig-arg">maxRequests</span>=<span class="sig-default">20</span>,
+        <span class="sig-arg">timeGuard</span>=<span class="sig-default">0.05</span>)</span>
     <br /><em class="fname">(Constructor)</em>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfprocessors-pysrc.html#ArrayFix.__init__">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="bfpy.bfcounter-pysrc.html#DataCounter.__init__">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>x.__init__(...) initializes x; see x.__class__.__doc__ for 
-  signature</p>
+  <p>Initializes the request data holder</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>maxRequests</code></strong> (int) - maximum number of concurrent requests</li>
+        <li><strong class="pname"><code>timeGuard</code></strong> (float) - extra time to add to blocking time if blocking is needed</li>
+    </ul></dd>
     <dt>Overrides:
         object.__init__
-        <dd><em class="note">(inherited documentation)</em></dd>
     </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="add"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">add</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">weight</span>,
+        <span class="sig-arg">maxRequests</span>=<span class="sig-default">-1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bfcounter-pysrc.html#DataCounter.add">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Adds a weight to the list, purging the list of requests, recalculating
+  the weight and deciding if blocking for an amount of time is needed</p>
+  <p>If no weight is given (0) or maxRequests is set to (0) no action is 
+  performed</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>weight</code></strong> (int) - new weight to add to the list</li>
+        <li><strong class="pname"><code>maxRequests</code></strong> (int) - override value for maxrequests. -1 (do not override)</li>
+    </ul></dd>
   </dl>
 </td></tr></table>
 </div>

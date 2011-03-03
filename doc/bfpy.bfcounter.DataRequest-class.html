@@ -3,7 +3,7 @@
           "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>bfpy.timezone.UTC</title>
+  <title>bfpy.bfcounter.DataRequest</title>
   <link rel="stylesheet" href="epydoc.css" type="text/css" />
   <script type="text/javascript" src="epydoc.js"></script>
 </head>
@@ -43,8 +43,8 @@
     <td width="100%">
       <span class="breadcrumbs">
         <a href="bfpy-module.html">Package&nbsp;bfpy</a> ::
-        <a href="bfpy.timezone-module.html">Module&nbsp;timezone</a> ::
-        Class&nbsp;UTC
+        <a href="bfpy.bfcounter-module.html">Module&nbsp;bfcounter</a> ::
+        Class&nbsp;DataRequest
       </span>
     </td>
     <td>
@@ -54,24 +54,22 @@
     onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
         <tr><td align="right"><span class="options"
             >[<a href="frames.html" target="_top">frames</a
-            >]&nbsp;|&nbsp;<a href="bfpy.timezone.UTC-class.html"
+            >]&nbsp;|&nbsp;<a href="bfpy.bfcounter.DataRequest-class.html"
             target="_top">no&nbsp;frames</a>]</span></td></tr>
       </table>
     </td>
   </tr>
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
-<h1 class="epydoc">Class UTC</h1><p class="nomargin-top"><span class="codelink"><a href="bfpy.timezone-pysrc.html#UTC">source&nbsp;code</a></span></p>
+<h1 class="epydoc">Class DataRequest</h1><p class="nomargin-top"><span class="codelink"><a href="bfpy.bfcounter-pysrc.html#DataRequest">source&nbsp;code</a></span></p>
 <pre class="base-tree">
-     object --+    
-              |    
-datetime.tzinfo --+
-                  |
-                 <strong class="uidshort">UTC</strong>
+object --+
+         |
+        <strong class="uidshort">DataRequest</strong>
 </pre>
 
 <hr />
-<p>UTC Timezone class</p>
+<p>Basic request information holder</p>
 
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -96,47 +94,12 @@ datetime.tzinfo --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="bfpy.timezone.UTC-class.html#utcoffset" class="summary-sig-name">utcoffset</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">dt</span>)</span><br />
-      Offset to utc.</td>
+          <td><span class="summary-sig"><a href="bfpy.bfcounter.DataRequest-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">tstamp</span>,
+        <span class="summary-sig-arg">weight</span>)</span><br />
+      Initializes the request data holder</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.timezone-pysrc.html#UTC.utcoffset">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="bfpy.timezone.UTC-class.html#tzname" class="summary-sig-name">tzname</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">dt</span>)</span><br />
-      Return the name of this timezone</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.timezone-pysrc.html#UTC.tzname">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="bfpy.timezone.UTC-class.html#dst" class="summary-sig-name">dst</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">dt</span>)</span><br />
-      Return the current offset for Daylight Savings.</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.timezone-pysrc.html#UTC.dst">source&nbsp;code</a></span>
+            <span class="codelink"><a href="bfpy.bfcounter-pysrc.html#DataRequest.__init__">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -146,17 +109,13 @@ datetime.tzinfo --+
   </tr>
   <tr>
     <td colspan="2" class="summary">
-    <p class="indent-wrapped-lines"><b>Inherited from <code>datetime.tzinfo</code></b>:
-      <code>__getattribute__</code>,
-      <code>__new__</code>,
-      <code>__reduce__</code>,
-      <code>fromutc</code>
-      </p>
     <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
       <code>__delattr__</code>,
       <code>__format__</code>,
+      <code>__getattribute__</code>,
       <code>__hash__</code>,
-      <code>__init__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
       <code>__reduce_ex__</code>,
       <code>__repr__</code>,
       <code>__setattr__</code>,
@@ -167,17 +126,17 @@ datetime.tzinfo --+
     </td>
   </tr>
 </table>
-<!-- ==================== CLASS VARIABLES ==================== -->
-<a name="section-ClassVariables"></a>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
 <table class="summary" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr bgcolor="#70b0f0" class="table-header">
   <td colspan="2" class="table-header">
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
       <tr valign="top">
-        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="left"><span class="table-header">Instance Variables</span></td>
         <td align="right" valign="top"
-         ><span class="options">[<a href="#section-ClassVariables"
+         ><span class="options">[<a href="#section-InstanceVariables"
          class="privatelink" onclick="toggle_private();"
          >hide private</a>]</span></td>
       </tr>
@@ -186,9 +145,18 @@ datetime.tzinfo --+
 </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">float</span>
     </td><td class="summary">
-        <a name="ZERO"></a><span class="summary-name">ZERO</span> = <code title="datetime.timedelta(0)">datetime.timedelta(0)</code>
+        <a name="tstamp"></a><span class="summary-name">tstamp</span><br />
+      time when the request was made (from time.clock())
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">int</span>
+    </td><td class="summary">
+        <a name="weight"></a><span class="summary-name">weight</span><br />
+      contribution to the data charges count
     </td>
   </tr>
 </table>
@@ -235,71 +203,32 @@ datetime.tzinfo --+
   </td>
 </tr>
 </table>
-<a name="utcoffset"></a>
+<a name="__init__"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">utcoffset</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">dt</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">tstamp</span>,
+        <span class="sig-arg">weight</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.timezone-pysrc.html#UTC.utcoffset">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="bfpy.bfcounter-pysrc.html#DataRequest.__init__">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Offset to utc. Always zero for itself</p>
+  <p>Initializes the request data holder</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>tstamp</code></strong> (float) - time when the request was made (from time.clock())</li>
+        <li><strong class="pname"><code>weight</code></strong> (int) - contribution to the data charges count</li>
+    </ul></dd>
     <dt>Overrides:
-        datetime.tzinfo.utcoffset
-    </dt>
-  </dl>
-</td></tr></table>
-</div>
-<a name="tzname"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">tzname</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">dt</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.timezone-pysrc.html#UTC.tzname">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Return the name of this timezone</p>
-  <dl class="fields">
-    <dt>Overrides:
-        datetime.tzinfo.tzname
-    </dt>
-  </dl>
-</td></tr></table>
-</div>
-<a name="dst"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">dst</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">dt</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.timezone-pysrc.html#UTC.dst">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Return the current offset for Daylight Savings. Always 0 in UTC</p>
-  <dl class="fields">
-    <dt>Overrides:
-        datetime.tzinfo.dst
+        object.__init__
     </dt>
   </dl>
 </td></tr></table>
@@ -336,7 +265,7 @@ datetime.tzinfo --+
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Thu Oct 28 16:21:39 2010
+    Generated by Epydoc 3.0.1 on Thu Mar 03 13:03:15 2011
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

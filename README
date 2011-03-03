@@ -1,7 +1,8 @@
 BfPy is a Python library to communicate wit the Betfair Betting Exchange
 using the Betfair API (see <http://bdp.betfair.com>)
 
-Copyright (C) 2010  Daniel Rodriguez (aka Daniel Rodriksson)
+Copyright (C) 2010 Daniel Rodriguez (aka Daniel Rodriksson)
+Copyright (C) 2011 Sensible Odds Ltd.
 
 You can learn more and contact the author at:
 
