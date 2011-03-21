@@ -1,3 +1,6 @@
+1.01
+-- Corrected data counter implementation to support the DirectAPI
+
 1.00
 -- DirectAPI tested under Bfplusplus.
 -- Implemented a correction for ArrayFix to enable fixing if no results are sent by Betfair

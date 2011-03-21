@@ -233,13 +233,18 @@ class ServiceDef(ServiceDescriptor):
         # Calculate the data charges weight
         if self.weight < 0:
             # A marketId parameter is supposed to be in place
-            try:
-                if not request.marketId:
+            marketId = getattr(request, 'marketId')
+            if marketId is not None:
+                # Support for directAPI ApiParams
+                if type(marketId).__name__ == 'instancemethod':
+                    marketId = marketId()
+
+                if not marketId:
                     weight = 5 * -self.weight
                 else:
                     weight = -self.weight
-            except:
-                weight = 5 * -self.weight
+            else:
+                weight = -self.weight
         else:
             weight = self.weight
             

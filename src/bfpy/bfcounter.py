@@ -91,6 +91,7 @@ class DataCounter(object):
         self.maxRequests = maxRequests
         self.reqs = list()
         self.weight = 0
+        self.timeGuard = timeGuard
 
 
     def add(self, weight, maxRequests=-1):
