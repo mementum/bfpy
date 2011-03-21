@@ -226,6 +226,7 @@ class HttxConnection(HttxBase):
             self.createconnection(httxreq.get_full_url())
 
         # Add the appropriate headers for the outgoing request
+        self.addkeepalive(httxreq)
         self.adddecompress(httxreq)
         self.addcookies(httxreq)
         self.addauth(httxreq)
@@ -363,6 +364,17 @@ class HttxConnection(HttxBase):
 
         if headername is not None:
             httxreq.add_unredirected_header(headername, headerval)
+
+
+    def addkeepalive(self, httxreq):
+        '''
+        Adds the Connection Keep-Alive header
+
+        @param httxreq: Request to be executed
+        @type httxreq: L{HttxRequest}
+        '''
+        if self.options.connkeepalive:
+            httxreq.add_header('Connection', 'Keep-Alive')
 
 
     def adduseragent(self, httxreq):

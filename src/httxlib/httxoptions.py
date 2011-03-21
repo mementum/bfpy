@@ -150,6 +150,10 @@ class HttxOptions(HttxObject):
       - keepalive
         Default value: 90 seconds
         Timeout for HTTP keepalive
+
+      - connkeepalive
+        Default value: True
+        Timeout for HTTP Send the 'Connection: Keep-Alive' header
         
       - sendfullurl
         Default value: False
@@ -252,6 +256,7 @@ class HttxOptions(HttxObject):
     defoptions = (
         HttxOption('timeout', 15),
         HttxOption('keepalive', 90),
+        HttxOption('connkeepalive', True),
         HttxOption('sendfullurl', False),
         HttxOption('proxy', None),
         HttxOption('compression', False),

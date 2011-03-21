@@ -34,7 +34,8 @@ from copy import copy
 from operator import attrgetter
 import time
 
-from bfapi import BfApi, eventRootId
+from bfapi import BfApi
+import bfglobals
 from bfservice import ServiceDescriptor
 
 
@@ -74,7 +75,7 @@ class GetEvents(ServiceDescriptor):
         callArgs.update(**kwargs)
         eventParentId = callArgs.get('eventParentId')
 
-        if eventParentId == eventRootId:
+        if eventParentId == bfglobals.eventRootId:
             response = instance.getActiveEventTypes()
             # Alias the .id and .name attributes to those of an event
             for event in response.eventTypeItems:

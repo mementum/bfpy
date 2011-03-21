@@ -37,27 +37,39 @@ from collections import namedtuple
 from datetime import datetime
 from socket import error as SocketError
 
-import suds.client
-
+import bfglobals
 import bfcounter
+from bfdirect import ApiService
 import bferror
 from bfservice import BfService, GlobalServiceDef, ExchangeServiceDef, GlobalObject, ExchangeObject
 from bfprocessors import *
 import bftransport
-import bfwsdl
 
-preProcess = True
-postProcess = True
-eventRootId = -1
-freeApiId = 82
+try:
+    import suds
+    import suds.client
+    from suds import WebFault as sudsWebFault
+except ImportError:
+    sudsWebFault = None
+else:
+    import logging
+    # logging.basicConfig(level=logging.INFO)
+    from util import NullHandler
 
-Global = 0
-ExchangeUK = 1
-ExchangeAus = 2
 
-Exchanges = [ExchangeUK, ExchangeAus]
-EndPoints = [Global, ExchangeUK, ExchangeAus]
+    handler = NullHandler()
 
+    # suds logging
+    log = logging.getLogger('suds')
+    log.setLevel(logging.ERROR)
+    log.addHandler(handler)
+
+    import bfwsdl
+    wsdlDefs = {
+        bfglobals.Global: bfwsdl.BFGlobalService,
+        bfglobals.ExchangeUK: bfwsdl.BFExchangeService,
+        bfglobals.ExchangeAus: bfwsdl.BFExchangeServiceAus
+        }
 
 class BfApi(object):
     '''
@@ -71,6 +83,7 @@ class BfApi(object):
     by changing the module L{preProcess} and L{postProcess} variables or passing them as
     named arguments to the constructor
 
+    @type preProcess: bool
     @ivar preProcess: whether service requests will undergo pre-processing
     @type preProcess: bool
     @ivar postProcess: whether service requests will undergo post-processing
@@ -79,6 +92,10 @@ class BfApi(object):
                        (20 is maximum before data charges kick-in)
                        maxRequests = 0 to unlimit the number of requests
     @type maxRequests: int
+    @ivar directApi: use the DirectAPI calls where possible
+    @type directApi: bool
+    @ivar fullDirect: use only the available DirectAPI calls and do not load suds
+    @type fullDirect: bool
     @ivar transport: a reference to the L{BfTransport} used to communicate (HTTP)
                      with the Betfair servers
     @type transport: L{BfTransport}
@@ -182,7 +199,7 @@ class BfApi(object):
           orderBy='BET_ID', recordCount=200,
           sortOrder='ASC', startRecord=0
 
-        - getMUBetsLite:
+        - getMUBetsLite:directApi
           Default values:
           betStatus='MU', excludeLastSecond=False,
           matchedSince=datetime(2000, 01, 01, 00, 00, 00),
@@ -233,14 +250,12 @@ class BfApi(object):
 
     __metaclass__ = BfService
 
-    wsdlDefs = {
-        Global: bfwsdl.BFGlobalService,
-        ExchangeUK: bfwsdl.BFExchangeService,
-        ExchangeAus: bfwsdl.BFExchangeServiceAus
-        }
-
-
-    def __init__(self, preProcess=preProcess, postProcess=postProcess, maxRequests=20, **kwargs):
+    def __init__(self, preProcess=bfglobals.preProcess,
+                 postProcess=bfglobals.postProcess,
+                 maxRequests=20,
+                 directApi=True,
+                 fullDirect=False,
+                 **kwargs):
         '''
         Initializes the processing options, transport and service clients
 
@@ -251,12 +266,20 @@ class BfApi(object):
         @param maxRequests: maximum number of requests to issue to Bf in 1 second (20 is maximum before data charges)
                             maxRequests = 0 to unlimit the number of requests
         @type maxRequests: int
+        @param directApi: use the DirectAPI calls where possible
+        @type directApi: bool
+        @param fullDirect: use only the available DirectAPI calls and do not load suds
+        @type fullDirect: bool
         '''
         self.preProcess = preProcess
         self.postProcess = postProcess
         self.maxRequests = maxRequests
+        self.directApi = directApi
+        self.fullDirect = fullDirect
+        if self.fullDirect:
+            self.directApi = True
         self.dataCounter = dict()
-        for endPoint in EndPoints:
+        for endPoint in bfglobals.EndPoints:
             self.dataCounter[endPoint] = bfcounter.DataCounter(maxRequests)
 
         self.transport = bftransport.BfTransport()
@@ -264,9 +287,16 @@ class BfApi(object):
         if 'proxydict' in kwargs:
             self.transport.setproxy(kwargs['proxydict'])
 
-        self.clients = dict()
-        for endPoint, wsdlDef in self.wsdlDefs.iteritems():
-            self.clients[endPoint] = suds.client.Client(wsdlDef, transport=self.transport.clone())
+        self.transport.setuseragent(bfglobals.libstring)
+
+        if not self.fullDirect:
+            self.clients = dict()
+            for endPoint, wsdlDef in self.wsdlDefs.iteritems():
+                self.clients[endPoint] = suds.client.Client(wsdlDef, transport=self.transport.clone())
+
+        self.apiServices = dict()
+        for endPoint in bfglobals.EndPoints:
+            self.apiServices[endPoint] = ApiService(endPoint=endPoint, transport=self.transport.clone())
 
 
     def clone(self):
@@ -281,8 +311,9 @@ class BfApi(object):
         '''
         obj = copy(self)
 
-        for endPoint, client in self.clients.iteritems():
-            obj.clients[endPoint] = client.clone()
+        if not self.fullDirect:
+            for endPoint, client in self.clients.iteritems():
+                obj.clients[endPoint] = client.clone()
 
         obj.sessionToken = ''
 
@@ -301,10 +332,17 @@ class BfApi(object):
         @return: a service to be invoked
         @rtype: method generated by suds from the WSDL definition
         '''
+        if self.directApi:
+            try:
+                return self.apiServices[endPoint].getService(serviceName)
+            except AttributeError:
+                pass
+
+        # If not directApi or a Exception was raised, we end up here
         return getattr(self.clients[endPoint].service, serviceName)
 
 
-    def getObject(self, endPoint, objectName):
+    def getObject(self, endPoint, objectName, apiHeader=False):
         '''
         Returns an object from an endPoint
 
@@ -312,30 +350,31 @@ class BfApi(object):
         @type endPoint: int
         @param objectName: name of the object to be retrieved
         @type objectName: str
+        @param apiHeader: whether to append an APIRequestHeader to the object
+        @type apiHeader: bool
 
-        @return: the requested object
-        @rtype: object generated by suds from the WSDL definitions
+        @return: the requested object and whether the object is fetched from the directApi
+        @rtype: tuple (object generated by suds from the WSDL definitions, directApi boolean)
         '''
-        return self.clients[endPoint].factory.create('ns1:%s' % objectName)
+        if self.directApi:
+            try:
+                obj = self.apiServices[endPoint].getObject(objectName)
+            except KeyError:
+                pass
+            else:
+                if apiHeader:
+                    obj.header = self.apiServices[endPoint].getObject('APIRequestHeader')
+                    obj.header.clientStamp = 0
+                    obj.header.sessionToken = self.sessionToken
+                return obj
 
-
-    def getHeader(self, endPoint):
-        '''
-        All methods (but login) add a header to the request. This method
-        retrieves the header object
-
-        @param endPoint: suds client to retrieve the service from
-        @type endPoint: int
-
-        @return: the API header
-        @rtype: object generated by suds from the WSDL definitions
-        '''
-        header = self.getObject(endPoint, 'APIRequestHeader')
-
-	header.clientStamp = 0
-	header.sessionToken = self.sessionToken
-
-        return header
+        # If not directApi or a Exception was raised, we end up here
+        obj = self.clients[endPoint].factory.create('ns1:%s' % objectName)
+        if apiHeader:
+            obj.header = self.clients[endPoint].factory.create('ns1:APIRequestHeader')
+            obj.header.clientStamp = 0
+            obj.header.sessionToken = self.sessionToken
+        return obj
 
 
     def getRequest(self, endPoint, requestName, apiHeader=True): 
@@ -348,16 +387,13 @@ class BfApi(object):
         @type endPoint: int
         @param requestName: name of the object to be retrieved
         @type requestName: str
+        @param apiHeader: whether to append an APIRequestHeader to the object
+        @type apiHeader: bool
 
         @return: the request object
         @rtype: object generated by suds from the WSDL definitions
         '''
-        request = self.getObject(endPoint, requestName)
-
-        if apiHeader:
-            request.header = self.getHeader(endPoint)
-
-        return request
+        return self.getObject(endPoint, requestName, apiHeader)
 
 
     def addDataWeight(self, endPoint, weight):
@@ -397,9 +433,12 @@ class BfApi(object):
 
         try:
             response = service(request)
-        except suds.WebFault, e:
+        except sudsWebFault, e:
             raise bferror.BfHttpError(methodName, e, str(e), e.fault, e.document)
         except (SocketError, bftransport.TransportException), e:
+            # Summarise (all potential) network errors into a generic notification
+            raise bferror.BfNetworkError(methodName, e, str(e), e.args)
+        except bferror.BfHttpError, e:
             # Summarise (all potential) network errors into a generic notification
             raise bferror.BfNetworkError(methodName, e, str(e), e.args)
         except Exception, e:
@@ -478,7 +517,7 @@ class BfApi(object):
         # ######################
         GlobalServiceDef('login', apiHeader=False,
                          preProc=[PreProcLogin()], postProc=[ProcLogin()],
-                         productId=freeApiId, vendorSoftwareId=0, ipAddress='0', locationId=0),
+                         productId=bfglobals.freeApiId, vendorSoftwareId=0, ipAddress='0', locationId=0),
         GlobalServiceDef('logout'),
         GlobalServiceDef('keepAlive'),
 

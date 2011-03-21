@@ -27,11 +27,11 @@
 #
 ################################################################################
 '''
-BfPy suds transport
+BfPy transport
 '''
 
 #
-# Contains classes for a suds http(s) transport implementation
+# Contains classes for http(s) transport implementation
 #
 
 import logging
@@ -43,6 +43,43 @@ handler = NullHandler()
 log = logging.getLogger('bftransport')
 log.addHandler(handler)
 
+# Replace the suds transport base class
+class BaseTransport(object):
+    def __init__(self):
+        pass
+
+# replace the suds TransportError
+from bferror import BfHttpError as sTransportError
+
+# replace the Request and Reply classes of suds if needed
+class sRequest(object):
+    def __init__(self, url, message=None):
+        self.url = url
+        self.headers = dict()
+        self.message = message
+
+    def __str__(self):
+        s = []
+        s.append('URL:%s' % self.url)
+        s.append('HEADERS: %s' % self.headers)
+        s.append('MESSAGE:')
+        s.append(self.message)
+        return '\n'.join(s)
+
+class sReply(object):
+    def __init__(self, code, headers, message):
+        self.code = code
+        self.headers = headers
+        self.message = message
+
+    def __str__(self):
+        s = []
+        s.append('CODE: %s' % self.code)
+        s.append('HEADERS: %s' % self.headers)
+        s.append('MESSAGE:')
+        s.append(self.message)
+        return '\n'.join(s)
+
 try:
 
     from httxlib import HttxManager, HttxRequest, HttxException, SocketException
@@ -52,9 +89,15 @@ try:
     from cStringIO import StringIO
     from urlparse import urlparse
 
-    import suds
+    try:
+        from suds.transport import Transport as BaseTransport
+        from suds.transport import TransportError as sTransportError
+        from suds.transport import Reply as sReply
+            
+    except ImportError:
+        pass
 
-    class BfTransport(suds.transport.Transport):
+    class BfTransport(BaseTransport):
         '''
         HTTP transport using httxlib. Provides http/https transport
         with cookies, authentication (basic and digest), redirection,
@@ -74,7 +117,7 @@ try:
             @param kwargs: keyword arguments
             @type kwargs: dict
             '''
-            suds.transport.Transport.__init__(self)
+            BaseTransport.__init__(self)
             self.httxmanager = httxmanager if httxmanager else HttxManager()
 
 
@@ -114,8 +157,8 @@ try:
             If request.url can't be identified as a url, it will
             return the content in a file-like object
 
-            @param request: A suds Request
-            @type Request: suds.transport.Request
+            @param request: A request
+            @type Request: sRequest or suds Request
             @return: A file-like object
             @rtype: file
             """
@@ -133,7 +176,7 @@ try:
                     try:
                         fp = open(parsed.path)
                     except Exception, e:
-                        raise suds.transport.TransportError(str(e), 503, StringIO(''))
+                        raise sTransportError(str(e), 503, StringIO(''))
                 else:
                     log.debug('opening scheme (%s) over the network', parsed.scheme)
                     fp = self.invoke(request, retfile=True)
@@ -145,10 +188,10 @@ try:
             """
             Send a soap request
 
-            @param request: A suds Request
-            @type Request: suds.transport.Request
-            @return: suds Reply
-            @rtype: suds.transport.Reply
+            @param request: A request
+            @type Request: sRequest or suds.transport.Request
+            @return: the reply
+            @rtype: sReply suds.transport.Reply
             """
             log.debug('sending: %s', request)
             return self.invoke(request)
@@ -178,29 +221,29 @@ try:
                     return None if not retFile else StringIO('')
 
                 if httxresponse.status < 200 and httxresponse.status >= 300:
-                    raise suds.transport.TransportError(httxresponse.reason, httxresponse.status, httxresponse.bodyfile)
+                    raise sTransportError(httxresponse.reason, httxresponse.status, httxresponse.bodyfile)
 
                 if not httxresponse.body.startswith('<?xml'):
-                    raise suds.transport.TransportError('Wrong answer received from server. Please check connection',
-                                         503, httxresponse.bodyfile)
-                    # raise suds.transport.TransportError(httxresponse.reason, httxresponse.status, httxresponse.bodyfile)
+                    raise sTransportError('Wrong answer received from server. Please check connection',
+                                          503, httxresponse.bodyfile)
+                    # raise sTransportError(httxresponse.reason, httxresponse.status, httxresponse.bodyfile)
 
-            except suds.transport.TransportError:
+            except sTransportError:
                 raise
             except HttxException, e:
                 # This error is to mimic the original exception code
                 httxresponse = e.response
-                raise suds.transport.TransportError(httxresponse.reason, httxresponse.status, httxresponse.bodyfile)
+                raise sTransportError(httxresponse.reason, httxresponse.status, httxresponse.bodyfile)
             except Exception, e:
                 # This will be a non-HTTP error (python syntax, socket closed, socket timeout, ssl, ...)
                 # Original transport from suds does not handle "non-http" errors
                 # But they could be handled in something like
                 # to generate a WebFault
                 # 503 is chosen following the HTTP return codes definition
-                # raise suds.transport.TransportError(str(e), 503, StringIO(''))
+                # raise sTransportError(str(e), 503, StringIO(''))
                 raise
 
-            reply = suds.transport.Reply(200, httxresponse.headers, httxresponse.body)
+            reply = sReply(200, httxresponse.headers, httxresponse.body)
             log.debug('received reply:\n%s', reply)
 
             # if needed return what "open" is expecting ... a file-like object

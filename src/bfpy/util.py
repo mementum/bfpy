@@ -223,5 +223,3 @@ class EmptyObject(object):
 
     def __len__(self):
         return len(self.__dict__)
-
-

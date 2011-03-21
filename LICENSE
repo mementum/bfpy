@@ -1,3 +1,10 @@
+The file bfsoap.py contains parts (modified and adapted if needed) from the
+ElementSoap Library. See the file for the original license
+
+--------------------------------------------------------------------
+
+Bfpy is released under the GPLv3. License is below
+
                     GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 

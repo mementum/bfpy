@@ -223,7 +223,7 @@ class ServiceDef(ServiceDescriptor):
         if instance.preProcess:
             for preProc in self.preProc:
                 preProc(request, requestArgs,
-                        instance=instance, service=service, exchangeId=endPoint,
+                        instance=instance, exchangeId=endPoint,
                         methodArgs=kwargs)
 
         # Fill in the defined argument values in the service request
@@ -247,12 +247,13 @@ class ServiceDef(ServiceDescriptor):
         instance.addDataWeight(endPoint, weight)
 
         # Execute the call and fetch the response
-        response = instance.invoke(self.methodName, service, request, self.skipErrorCodes)
+        response = instance.invoke(self.methodName, service,
+                                   request, self.skipErrorCodes)
 
         # Post-Process the response if needed
         if instance.postProcess:
             for postProc in self.postProc:
-                postProc(response, instance=instance, service=service,exchangeId=endPoint,
+                postProc(response, instance=instance, exchangeId=endPoint,
                          request=request)
 
         return response

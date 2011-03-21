@@ -50,6 +50,11 @@ class ArrayUnfix(object):
         self.subAttrName = subAttrName
 
     def __call__(self, request, requestArgs, **kwargs):
+        instance = kwargs.get('instance')
+        if instance.directApi:
+            # Direct API calls put the array at the right level
+            return
+
         attr = getattr(request, self.attrName)
         try:
             value = requestArgs.pop(self.attrName)
@@ -73,6 +78,8 @@ class ArrayFix(object):
     def __call__(self, response, **kwargs):
         parentAttrs = response
 
+        instance = kwargs.get('instance')
+
         targetName = self.attrNames[-1]
         if len(self.attrNames) > 1:
             for attrName in self.attrNames[:-1]:
@@ -84,43 +91,20 @@ class ArrayFix(object):
         for parentAttr in parentAttrs:
             targetAttr = getattr(parentAttr, targetName)
             if targetAttr is not None:
-                subAttr = targetAttr
-                for subAttrName in self.subAttrNames:
-                    subAttr = getattr(subAttr, subAttrName)
+                if not instance.directApi:
+                    # suds returns the array one level lower
+                    subAttr = targetAttr
+                    for subAttrName in self.subAttrNames:
+                        subAttr = getattr(subAttr, subAttrName)
+                else:
+                    # DirectApi returns the array at the right level
+                    subAttr = targetAttr
             else:
+                # if the targetAttr (in both DirectApi and suds) has been
+                # nullified, it has to be replaced with a list
                 subAttr = list()
 
             setattr(parentAttr, targetName, subAttr)
-
-
-class ArrayFix2(object):
-    '''
-    Response processor
-
-    Remove one (or more) levels of indirection from the arrays
-    defined in the Betfair WSDLs
-    '''
-    def __init__(self, attrName, subAttrName):
-        self.attrNames = attrName.split('.')
-        self.subAttrNames = subAttrName.split('.')
-
-    def __call__(self, response, **kwargs):
-        parentAttr = response
-        if len(self.attrNames) > 1:
-            for attrName in self.attrNames[:-1]:
-                parentAttr = getattr(parentAttr, attrName)
-
-        targetName = self.attrNames[-1]
-        targetAttr = getattr(parentAttr, targetName)
-
-        if targetAttr is not None:
-            subAttr = targetAttr
-            for subAttrName in self.subAttrNames:
-                subAttr = getattr(subAttr, subAttrName)
-        else:
-            subAttr = list()
-
-        setattr(parentAttr, targetName, subAttr)
 
 
 class PatchAttr(object):
@@ -318,9 +302,12 @@ class ProcLogin(object):
 
         for loginArg in loginArgs:
             attrValue = getattr(request, loginArg)
+            # Support for directApi non-data descriptors
+            if type(attrValue).__name__ == 'instancemethod':
+                attrValue = attrValue()
             setattr(instance, loginArg, attrValue)
 
-        # Write down thee currency code
+        # Write down the currency code
         instance.currency = response.currency
 
 
@@ -338,18 +325,20 @@ class ProcMarket(object):
         # Embed the exchangeId in the answer, since this is a must for betting
         response.market.exchangeId = exchangeId
 
-        # Adjust (moving arrays one level up) the response
-        # There may be no runners (closed market for example)
-        if response.market.runners:
-            response.market.runners = response.market.runners.Runner
-        else:
-            response.market.runners = list()
+        instance = kwargs.get('instance')
+        if not instance.directApi:
+            # Adjust (moving arrays one level up) the response
+            # There may be no runners (closed market for example)
+            if response.market.runners:
+                response.market.runners = response.market.runners.Runner
+            else:
+                response.market.runners = list()
 
-        # Australian Market does not return eventHierarchy and the field is 'None'
-        if response.market.eventHierarchy:
-            response.market.eventHierarchy = response.market.eventHierarchy.EventId
-        else:
-            response.market.eventHierarchy = list()
+            # Australian Market does not return eventHierarchy and the field is 'None'
+            if response.market.eventHierarchy:
+                response.market.eventHierarchy = response.market.eventHierarchy.EventId
+            else:
+                response.market.eventHierarchy = list()
 
         # Adjust the marketTime to the system local time
         # The original object is naive and suds fails to identify DST settings
