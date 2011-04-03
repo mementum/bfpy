@@ -3,7 +3,7 @@
           "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>bfpy.bfdirect.ApiCall</title>
+  <title>bfpy.bfapicalls.ApiCall</title>
   <link rel="stylesheet" href="epydoc.css" type="text/css" />
   <script type="text/javascript" src="epydoc.js"></script>
 </head>
@@ -43,7 +43,7 @@
     <td width="100%">
       <span class="breadcrumbs">
         <a href="bfpy-module.html">Package&nbsp;bfpy</a> ::
-        <a href="bfpy.bfdirect-module.html">Module&nbsp;bfdirect</a> ::
+        <a href="bfpy.bfapicalls-module.html">Module&nbsp;bfapicalls</a> ::
         Class&nbsp;ApiCall
       </span>
     </td>
@@ -54,14 +54,14 @@
     onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
         <tr><td align="right"><span class="options"
             >[<a href="frames.html" target="_top">frames</a
-            >]&nbsp;|&nbsp;<a href="bfpy.bfdirect.ApiCall-class.html"
+            >]&nbsp;|&nbsp;<a href="bfpy.bfapicalls.ApiCall-class.html"
             target="_top">no&nbsp;frames</a>]</span></td></tr>
       </table>
     </td>
   </tr>
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
-<h1 class="epydoc">Class ApiCall</h1><p class="nomargin-top"><span class="codelink"><a href="bfpy.bfdirect-pysrc.html#ApiCall">source&nbsp;code</a></span></p>
+<h1 class="epydoc">Class ApiCall</h1><p class="nomargin-top"><span class="codelink"><a href="bfpy.bfapicalls-pysrc.html#ApiCall">source&nbsp;code</a></span></p>
 <pre class="base-tree">
 object --+
          |
@@ -71,7 +71,7 @@ object --+
 <dl><dt>Known Subclasses:</dt>
 <dd>
       <ul class="subclass-list">
-<li><a href="bfpy.bfdirect.ApiCallExchange-class.html">ApiCallExchange</a></li><li>, <a href="bfpy.bfdirect.ApiCallGlobal-class.html">ApiCallGlobal</a></li>  </ul>
+<li><a href="bfpy.bfapicalls.ApiCallExchange-class.html">ApiCallExchange</a></li><li>, <a href="bfpy.bfapicalls.ApiCallGlobal-class.html">ApiCallGlobal</a></li>  </ul>
 </dd></dl>
 
 <hr />
@@ -102,13 +102,56 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfdirect.ApiCall-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">exchange</span>,
+          <td><span class="summary-sig"><a href="bfpy.bfapicalls.ApiCall-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">ns1</span>,
+        <span class="summary-sig-arg">ns2</span>,
         <span class="summary-sig-arg">operation</span>)</span><br />
       Initializes most of the pattern and the HTTP request, leaving just 
       the last second specific value substitutions for the soap call</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfdirect-pysrc.html#ApiCall.__init__">source&nbsp;code</a></span>
+            <span class="codelink"><a href="bfpy.bfapicalls-pysrc.html#ApiCall.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">tuple</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.bfapicalls.ApiCall-class.html#decodeComplex" class="summary-sig-name">decodeComplex</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">element</span>,
+        <span class="summary-sig-arg">xstype</span>,
+        <span class="summary-sig-arg">valtype</span>)</span><br />
+      Decodes a SOAP complex type from Betfair referring to the type 
+      namespace (ns2 instance variable)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bfapicalls-pysrc.html#ApiCall.decodeComplex">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">tuple</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.bfapicalls.ApiCall-class.html#decodeSimplex" class="summary-sig-name">decodeSimplex</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">element</span>,
+        <span class="summary-sig-arg">xstype</span>,
+        <span class="summary-sig-arg">valtype</span>)</span><br />
+      Decodes a SOAP simple type from Betfair referring to the type 
+      namespace (ns2 instance variable)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bfapicalls-pysrc.html#ApiCall.decodeSimplex">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -122,13 +165,13 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfdirect.ApiCall-class.html#patternSub" class="summary-sig-name">patternSub</a>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="bfpy.bfapicalls.ApiCall-class.html#patternSub" class="summary-sig-name">patternSub</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">name</span>,
         <span class="summary-sig-arg">value</span>)</span><br />
       Initializes most of the pattern and the HTTP request, leaving just 
       the last second specific value substitutions for the soap call</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfdirect-pysrc.html#ApiCall.patternSub">source&nbsp;code</a></span>
+            <span class="codelink"><a href="bfpy.bfapicalls-pysrc.html#ApiCall.patternSub">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -142,12 +185,12 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfdirect.ApiCall-class.html#__get__" class="summary-sig-name">__get__</a>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="bfpy.bfapicalls.ApiCall-class.html#__get__" class="summary-sig-name">__get__</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">instance</span>,
         <span class="summary-sig-arg">owner</span>)</span><br />
       Non-data descriptor implementation.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfdirect-pysrc.html#ApiCall.__get__">source&nbsp;code</a></span>
+            <span class="codelink"><a href="bfpy.bfapicalls-pysrc.html#ApiCall.__get__">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -161,13 +204,13 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfdirect.ApiCall-class.html#__call__" class="summary-sig-name">__call__</a>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="bfpy.bfapicalls.ApiCall-class.html#__call__" class="summary-sig-name">__call__</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">instance</span>,
         <span class="summary-sig-arg">request</span>)</span><br />
       Invoked as method by <a href="bfpy.bfdirect.ApiService-class.html" 
       class="link">ApiService</a> instances.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfdirect-pysrc.html#ApiCall.__call__">source&nbsp;code</a></span>
+            <span class="codelink"><a href="bfpy.bfapicalls-pysrc.html#ApiCall.__call__">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -215,39 +258,7 @@ object --+
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">string</span>
     </td><td class="summary">
-        <a name="nsGlobal"></a><span class="summary-name">nsGlobal</span> = <code title="'http://www.betfair.com/publicapi/v3/BFGlobalService/'"><code class="variable-quote">'</code><code class="variable-string">http://www.betfair.com/publicapi/v3/BFGlobalService/</code><code class="variable-quote">'</code></code><br />
-      soap namespace for Global Api Services
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">string</span>
-    </td><td class="summary">
-        <a href="bfpy.bfdirect.ApiCall-class.html#nsGlobalTypes" class="summary-name">nsGlobalTypes</a> = <code title="'http://www.betfair.com/publicapi/types/global/v3/'"><code class="variable-quote">'</code><code class="variable-string">http://www.betfair.com/publicapi/types/global</code><code class="variable-ellipsis">...</code></code><br />
-      soap namespace for Global Api Types
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">string</span>
-    </td><td class="summary">
-        <a href="bfpy.bfdirect.ApiCall-class.html#nsExchange" class="summary-name">nsExchange</a> = <code title="'http://www.betfair.com/publicapi/v5/BFExchangeService/'"><code class="variable-quote">'</code><code class="variable-string">http://www.betfair.com/publicapi/v5/BFExchangeSe</code><code class="variable-ellipsis">...</code></code><br />
-      soap namespace for Exchange Api Services
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">string</span>
-    </td><td class="summary">
-        <a href="bfpy.bfdirect.ApiCall-class.html#nsExchangeTypes" class="summary-name">nsExchangeTypes</a> = <code title="'http://www.betfair.com/publicapi/types/exchange/v5/'"><code class="variable-quote">'</code><code class="variable-string">http://www.betfair.com/publicapi/types/exch</code><code class="variable-ellipsis">...</code></code><br />
-      soap namespace for Global Api Types
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">string</span>
-    </td><td class="summary">
-        <a href="bfpy.bfdirect.ApiCall-class.html#soappattern" class="summary-name">soappattern</a> = <code title="'''&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+        <a href="bfpy.bfapicalls.ApiCall-class.html#soappattern" class="summary-name">soappattern</a> = <code title="'''&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;SOAP-ENV:Envelope xmlns:ns0=&quot;http://schemas.xmlsoap.org/soap/envelope\
 /&quot; xmlns:ns1=&quot;$$ns1$$&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-ins\
 tance&quot; xmlns:ns2=&quot;$$ns2$$&quot; xmlns:SOAP-ENV=&quot;http://schemas.xmlsoap.org/\
@@ -280,10 +291,10 @@ soap/envelope/&quot;&gt;
 </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">bftransport.TransportDirect</span>
+      <span class="summary-type">dict</span>
     </td><td class="summary">
-        <a name="httpreq"></a><span class="summary-name">httpreq</span><br />
-      http request holder
+        <a name="headers"></a><span class="summary-name">headers</span><br />
+      customized headers for this specific operation
     </td>
   </tr>
 <tr>
@@ -298,8 +309,25 @@ soap/envelope/&quot;&gt;
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">string</span>
     </td><td class="summary">
-        <a name="ns"></a><span class="summary-name">ns</span><br />
+        <a name="ns1"></a><span class="summary-name">ns1</span><br />
       namespace where this call was defined
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">string</span>
+    </td><td class="summary">
+        <a name="ns2"></a><span class="summary-name">ns2</span><br />
+      namespace where types for this call are defined
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">string</span>
+    </td><td class="summary">
+        <a name="nsxsd"></a><span class="summary-name">nsxsd</span><br />
+      namespace where types for this call are defined formatted for type 
+      parsing
     </td>
   </tr>
 <tr>
@@ -308,15 +336,6 @@ soap/envelope/&quot;&gt;
     </td><td class="summary">
         <a name="pattern"></a><span class="summary-name">pattern</span><br />
       holds the prepared soap message patter
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">string</span>
-    </td><td class="summary">
-        <a name="resulttag"></a><span class="summary-name">resulttag</span><br />
-      convenient string to look for the &quot;Result&quot; object in 
-      responses
     </td>
   </tr>
 </table>
@@ -371,12 +390,13 @@ soap/envelope/&quot;&gt;
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
   <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">exchange</span>,
+        <span class="sig-arg">ns1</span>,
+        <span class="sig-arg">ns2</span>,
         <span class="sig-arg">operation</span>)</span>
     <br /><em class="fname">(Constructor)</em>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfdirect-pysrc.html#ApiCall.__init__">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="bfpy.bfapicalls-pysrc.html#ApiCall.__init__">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
@@ -385,12 +405,77 @@ soap/envelope/&quot;&gt;
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>exchange</code></strong> (boolean) - if the call is defined in the Global or Exchange namespace</li>
+        <li><strong class="pname"><code>ns1</code></strong> (string) - namespace where the call was defined</li>
+        <li><strong class="pname"><code>ns2</code></strong> (string) - namespace where the types used by the call were defined</li>
         <li><strong class="pname"><code>operation</code></strong> (string) - name of the call</li>
     </ul></dd>
     <dt>Overrides:
         object.__init__
     </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="decodeComplex"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">decodeComplex</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">element</span>,
+        <span class="sig-arg">xstype</span>,
+        <span class="sig-arg">valtype</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bfapicalls-pysrc.html#ApiCall.decodeComplex">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Decodes a SOAP complex type from Betfair referring to the type 
+  namespace (ns2 instance variable)</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>element</code></strong> (elementTree.element) - xml element containing the type to be parsed</li>
+        <li><strong class="pname"><code>xstype</code></strong> (string) - namespace to which the type belongs in the xsd schema</li>
+        <li><strong class="pname"><code>valtype</code></strong> (string) - type of the element</li>
+    </ul></dd>
+    <dt>Returns: tuple</dt>
+        <dd>a tuple with False|True indicating if the type could be decoded 
+          and the actual result of the decoding</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="decodeSimplex"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">decodeSimplex</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">element</span>,
+        <span class="sig-arg">xstype</span>,
+        <span class="sig-arg">valtype</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bfapicalls-pysrc.html#ApiCall.decodeSimplex">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Decodes a SOAP simple type from Betfair referring to the type 
+  namespace (ns2 instance variable)</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>element</code></strong> (elementTree.element) - xml element containing the type to be parsed</li>
+        <li><strong class="pname"><code>xstype</code></strong> (string) - namespace to which the type belongs in the xsd schema</li>
+        <li><strong class="pname"><code>valtype</code></strong> (string) - type of the element</li>
+    </ul></dd>
+    <dt>Returns: tuple</dt>
+        <dd>a tuple with False|True indicating if the type could be decoded 
+          and the actual result of the decoding</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -406,7 +491,7 @@ soap/envelope/&quot;&gt;
         <span class="sig-arg">value</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfdirect-pysrc.html#ApiCall.patternSub">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="bfpy.bfapicalls-pysrc.html#ApiCall.patternSub">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
@@ -433,7 +518,7 @@ soap/envelope/&quot;&gt;
         <span class="sig-arg">owner</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfdirect-pysrc.html#ApiCall.__get__">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="bfpy.bfapicalls-pysrc.html#ApiCall.__get__">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
@@ -462,7 +547,7 @@ soap/envelope/&quot;&gt;
     <br /><em class="fname">(Call operator)</em>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfdirect-pysrc.html#ApiCall.__call__">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="bfpy.bfapicalls-pysrc.html#ApiCall.__call__">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
@@ -502,66 +587,6 @@ soap/envelope/&quot;&gt;
   </td>
 </tr>
 </table>
-<a name="nsGlobalTypes"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <h3 class="epydoc">nsGlobalTypes</h3>
-  soap namespace for Global Api Types
-  <dl class="fields">
-    <dt>Type:</dt>
-      <dd>string</dd>
-  </dl>
-  <dl class="fields">
-    <dt>Value:</dt>
-      <dd><table><tr><td><pre class="variable">
-<code class="variable-quote">'</code><code class="variable-string">http://www.betfair.com/publicapi/types/global/v3/</code><code class="variable-quote">'</code>
-</pre></td></tr></table>
-</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="nsExchange"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <h3 class="epydoc">nsExchange</h3>
-  soap namespace for Exchange Api Services
-  <dl class="fields">
-    <dt>Type:</dt>
-      <dd>string</dd>
-  </dl>
-  <dl class="fields">
-    <dt>Value:</dt>
-      <dd><table><tr><td><pre class="variable">
-<code class="variable-quote">'</code><code class="variable-string">http://www.betfair.com/publicapi/v5/BFExchangeService/</code><code class="variable-quote">'</code>
-</pre></td></tr></table>
-</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="nsExchangeTypes"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <h3 class="epydoc">nsExchangeTypes</h3>
-  soap namespace for Global Api Types
-  <dl class="fields">
-    <dt>Type:</dt>
-      <dd>string</dd>
-  </dl>
-  <dl class="fields">
-    <dt>Value:</dt>
-      <dd><table><tr><td><pre class="variable">
-<code class="variable-quote">'</code><code class="variable-string">http://www.betfair.com/publicapi/types/exchange/v5/</code><code class="variable-quote">'</code>
-</pre></td></tr></table>
-</dd>
-  </dl>
-</td></tr></table>
-</div>
 <a name="soappattern"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
@@ -623,7 +648,7 @@ soap/envelope/&quot;&gt;
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Mon Mar 21 11:56:25 2011
+    Generated by Epydoc 3.0.1 on Sun Apr 03 13:17:41 2011
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

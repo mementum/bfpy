@@ -66,7 +66,10 @@ Soap processing
 import base64
 from cStringIO import StringIO
 from datetime import datetime
-from xml.etree.ElementTree import Element, SubElement, QName, iterparse
+try:
+    from xml.etree.cElementTree import Element, SubElement, QName, iterparse
+except ImportError:
+    from xml.etree.ElementTree import Element, SubElement, QName, iterparse
 
 from util import EmptyObject
 
@@ -85,14 +88,14 @@ BF_TYPES_GLOBAL = '{http://www.betfair.com/publicapi/types/global/v3/}'
 BF_TYPES_EXCHANGE = '{http://www.betfair.com/publicapi/types/exchange/v5/}'
 
 #
-def soap_process(httpbody):
+def soap_process(httpbody, complexDecoders, simplexDecoders):
     response = namespace_parse(StringIO(httpbody))
     response = response.find(NS_SOAP_ENV_body)[0]
 
     fix_xsi_types(response)
     # look_for_fault(response)
 
-    return decode(response)
+    return decode(response, complexDecoders, simplexDecoders)
 
 # Extracted from SoapService
 def fix_xsi_types(response):
@@ -151,7 +154,7 @@ XSDTYPES = {
     'dateTime': lambda x: datetime.strptime(x.split('.')[0], '%Y-%m-%dT%H:%M:%S'),
     }
 
-def decode_element(element):
+def decode_element(element, simplexDecoders):
     if element is None:
         return None
 
@@ -168,7 +171,12 @@ def decode_element(element):
     if xstype == NS_XSD:
         return XSDTYPES[valtype](element.text)
     
-    if xstype in (BF_TYPES_GLOBAL, BF_TYPES_EXCHANGE):
+    for simplexDecoder in simplexDecoders:
+        decoded, retval = simplexDecoder(element, xstype, valtype)
+        if decoded:
+            return retval
+        
+    if False and xstype in (BF_TYPES_GLOBAL, BF_TYPES_EXCHANGE):
         if 'Enum' in valtype:
             return element.text
 
@@ -189,14 +197,14 @@ def decode_element(element):
 
 
 # Added this function to abstract the creation of an array
-def decode_array(element):
+def decode_array(element, complexDecoders, simplexDecoders):
     value = []
     for elem in element:
-        value.append(decode(elem))
+        value.append(decode(elem, complexDecoders, simplexDecoders))
     return value
 
 
-def decode(element):
+def decode(element, complexDecoders, simplexDecoders):
     if element.get(NS_XSI_nil) is not None:
         return None
 
@@ -205,13 +213,17 @@ def decode(element):
         xstype, valtype = xsitype.split('}')
         xstype += '}'
 
+        for complexDecoder in complexDecoders:
+            decoded, retval = complexDecoder(element, xstype, valtype)
+            if decoded:
+                return retval
         # is it an array?
-        if xstype in (BF_TYPES_GLOBAL, BF_TYPES_EXCHANGE) and valtype.startswith('ArrayOf'):
-            return decode_array(element)
+        if False and xstype in (BF_TYPES_GLOBAL, BF_TYPES_EXCHANGE) and valtype.startswith('ArrayOf'):
+            return decode_array(element, complexDecoders, simplexDecoders)
 
         # is it a primitive type?
         try:
-            return decode_element(element)
+            return decode_element(element, simplexDecoders)
         except ValueError:
             if xsitype and xsitype.startswith(NS_XSD):
                 raise # unknown primitive type
@@ -220,7 +232,7 @@ def decode(element):
     value = EmptyObject()
     for elem in element:
         # Set the name of the instance attribute without namespace
-        setattr(value, elem.tag.split('}')[-1], decode(elem))
+        setattr(value, elem.tag.split('}')[-1], decode(elem, complexDecoders, simplexDecoders))
     return value
 
 ##

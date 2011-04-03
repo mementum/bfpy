@@ -32,6 +32,8 @@ Definition of services and metaclass to install them in an API provider
 
 import types
 
+import bfglobals
+
 
 class ServiceDescriptor(object):
     '''
@@ -206,7 +208,7 @@ class ServiceDef(ServiceDescriptor):
         '''
         # Calls to Exchanges need the specific exchange endPoint
         # passed to the functions as 1st unnamed arg
-        endPoint = self.endPoint if not self.endPoint else args[0]
+        endPoint = self.endPoint if self.endPoint <= 0 else args[0]
 
         # Get the service from the appropriate endpoint
         service = instance.getService(endPoint, self.serviceName)
@@ -231,22 +233,11 @@ class ServiceDef(ServiceDescriptor):
             setattr(request, name, value)
 
         # Calculate the data charges weight
+        weight = abs(self.weight)
         if self.weight < 0:
-            # A marketId parameter is supposed to be in place
-            marketId = getattr(request, 'marketId')
-            if marketId is not None:
-                # Support for directAPI ApiParams
-                if type(marketId).__name__ == 'instancemethod':
-                    marketId = marketId()
-
-                if not marketId:
-                    weight = 5 * -self.weight
-                else:
-                    weight = -self.weight
-            else:
-                weight = -self.weight
-        else:
-            weight = self.weight
+            if hasattr(request, 'marketId') and not request.marketId:
+                # Some calls using marketId '0' cost 5 times
+                weight *= 5
             
         # Add the weight to the instance - blocking the call if needed
         instance.addDataWeight(endPoint, weight)
@@ -297,7 +288,7 @@ class GlobalServiceDef(ServiceDef):
         @type kwargs: dict
         '''
         ServiceDef.__init__(
-            self, 0,
+            self, bfglobals.Global,
             methodName, serviceName=serviceName, requestName=requestName,
             apiHeader=apiHeader, skipErrorCodes=skipErrorCodes,
             preProc=preProc, postProc=postProc, weight=weight,
@@ -337,7 +328,7 @@ class ExchangeServiceDef(ServiceDef):
         @type kwargs: dict
         '''
         ServiceDef.__init__(
-            self, 1,
+            self, bfglobals.Exchange,
             methodName, serviceName=serviceName, requestName=requestName,
             apiHeader=apiHeader, skipErrorCodes=skipErrorCodes,
             preProc=preProc, postProc=postProc, weight=weight,
@@ -433,22 +424,3 @@ class ExchangeObject(ServiceObject):
         @type kwargs: dict
         '''
         ServiceObject.__init__(self, 1, objectName, **kwargs)
-
-
-class BfService(type):
-    '''
-    Metaclass for L{BfApi} to initialize the non-data descriptor based
-    methods on instantiation
-    '''
-
-    def __new__(mcs, name, bases, dict):
-        '''
-        On L{BfApi} instantiation the service definitions present in the
-        class variable I{serviceDefs} are added to the dictionary of the
-        instance to generate non-data descriptor based methods
-        that allow the invocation of the Betfair API Services
-        '''
-        for serviceDef in dict['serviceDefs']:
-            dict[serviceDef.methodName] = serviceDef
-
-        return type.__new__(mcs, name, bases, dict)

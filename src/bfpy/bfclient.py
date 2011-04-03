@@ -30,8 +30,7 @@
 BfClient object implementation.
 '''
 
-from bfapi import *
-from bfservice import BfService
+from bfapi import BfApi, BfService
 import bfclientext 
 
 

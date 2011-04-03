@@ -82,7 +82,7 @@ class ApiParam(object):
 
         self.patternFill = '<%s>%%s</%s>' % (name, name)
 
-        if nullable:
+        if self.nullable:
             self.patternNull = '<%s' % name
             if xsd:
                 self.patternNull += ' xsi:nil="true"'
@@ -103,36 +103,40 @@ class ApiParam(object):
         self.instanceval[instance] = value
 
 
-    def __get__(self, instance, owner):
+    def __get__(self, instance, owner=None):
         '''
         Non-data descriptor implementation.
 
-        It returns a method type pointing to itself. This forces the invocation of __call__
+        If invoked at class level it returns and unbound method pointing that forces the invocation
+        of __call__. The invocation has to be done with an instance
+
+        If invoked from an instance it returns the value that is currently stored for such instance
 
         @type instance: instance of class
         @param instance: instance that calls the descriptor
         @type owner: class
         @param owner: the class that holds the descriptor
         '''
-        return self.instanceCache.setdefault(instance, types.MethodType(self, instance, owner))
+        if instance is None:
+            return self.instanceCache.setdefault(owner, types.MethodType(self, None, owner))
+        return self.instanceval.get(instance, self.defvalue)
 
 
-    def __call__(self, instance, resolve=False):
+    def __call__(self, instance):
         '''
         Returns the pattern for this param
 
         @type instance: instance
         @param instance: instance that is calling the descriptor
-        @type resolve: bool
-        @param resolve: if resolve is true the substituted pattern is returned, else the value stored
-                        for the instance
+
+        @return: textual representation of the defined ApiParam type
+        @rtype: string
+
         '''
         value = self.instanceval.get(instance, self.defvalue)
 
-        if not resolve:
-            return value
-        
-        if value is None:
+        if value is None and self.nullable:
+            # NOTE: A exception could be raised if not "nullable"
             return self.patternNull
 
         if isinstance(value, (int, long, float, basestring)):
@@ -221,7 +225,7 @@ class ApiDataType(object):
             subpattern += '\n'
 
         for param in self.params:
-            subpattern += getattr(self, param)(resolve=True)
+            subpattern += getattr(self.__class__, param)(self)
             subpattern += '\n'
 
         return self.pattern % subpattern
@@ -233,6 +237,7 @@ class ApiDataType(object):
         '''
         return self()
 
+
     def __unicode__(self):
         '''
         Returns the final computed pattern for the type in unicode
@@ -240,7 +245,7 @@ class ApiDataType(object):
         return unicode(self()).encode('utf-8')
 
 
-''' ApiDataType definitions'''
+'''ApiDataType definitions'''
 
 class APIRequestHeader(ApiDataType):
     apiParams = [

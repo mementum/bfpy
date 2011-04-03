@@ -40,6 +40,8 @@ BfPy global variables and functions module.
 @var freeApiId: default Betfair product Id, the one for the free API
 @type Global: int
 @var Global: endPoint id (internal) for the Global Betfair endpoint service
+@type Exchange: int
+@var Exchange: endPoint id (internal) to point out that a call goes to an Exchange
 @type ExchangeUK: int
 @var ExchangeUK: endPoint id (Betfair) for the UK Exchange Betfair endpoint service
 @type ExchangeAus: int
@@ -50,6 +52,10 @@ BfPy global variables and functions module.
 @var EndPoints: list of available Betfair EndPoints
 @type EndPointUrls: list
 @var EndPointUrls: list of available Betfair EndPoint Urls
+
+@type wsdlDefs: dict
+@var wsdlDefs: mapping of EndPoints to the WSDL contents
+
 @type eventRootId: int
 @var eventRootId: default parentEventId to identify ActiveEventTypes in the joint
                   call that unifies GetActiveEventTypes and GetEvents
@@ -60,15 +66,30 @@ BfPy global variables and functions module.
 @type postProcess: bool
 @var postProcess: default library behaviour: process (easing use) Betfair answers
                   before sending them to Betfair
-'''
 
+@type forceDirect: bool
+@var forceDirect: to force the library always use the DirectAPI method
+                  If suds importing fails, it will be set to True
+
+
+@type sudsWebFault: object
+@var sudsWebFaults: an alias to suds.WebFault or None if no suds is used 
+
+@type sudsClient: module
+@var sudsClient: an alias so suds.client or None if no suds is used
+
+'''
 libname = 'BfPy'
-version = 0.99
+version = 1.02
 libstring = '%s %s' % (libname, str(version))
+
+forceDirect = False
+wsdlDefs = dict()
 
 freeApiId = 82
 
 Global = 0
+Exchange = 1
 ExchangeUK = 1
 ExchangeAus = 2
 
@@ -80,6 +101,41 @@ EndPointUrls = {
     ExchangeUK: 'https://api.betfair.com/exchange/v5/BFExchangeService',
     ExchangeAus: 'https://api-au.betfair.com/exchange/v5/BFExchangeService',
     }
+
+sudsWebFault = None
+sudsClient = None
+
+try:
+    # Try importing suds
+    import suds
+except ImportError:
+    # No suds, so only DirectAPI calls can be used
+    forceDirect = True
+else:
+    # Suds is available. Import the wsdl contents, clients and fault
+    import bfwsdl
+    wsdlDefs = {
+        Global: bfwsdl.BFGlobalService,
+        ExchangeUK: bfwsdl.BFExchangeService,
+        ExchangeAus: bfwsdl.BFExchangeServiceAus
+        }
+
+    import suds.client
+    sudsClient = suds.client
+    from suds import WebFault
+    sudsWebFault = WebFault
+
+    import logging
+    # logging.basicConfig(level=logging.INFO)
+    from util import NullHandler
+
+    handler = NullHandler()
+
+    # suds logging
+    log = logging.getLogger('suds')
+    log.setLevel(logging.ERROR)
+    log.addHandler(handler)
+
 
 eventRootId = -1
 

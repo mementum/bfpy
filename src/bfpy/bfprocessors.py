@@ -203,9 +203,11 @@ class ProcAllMarkets(object):
             marketItem.marketStatus = marketItemFields[3]
             marketItem.marketTime = datetime.fromtimestamp(long(marketItemFields[4]) / 1000)
 
-            localTimezone = LocalTimezone()
-            daylight = localTimezone.dst(marketItem.marketTime)
-            marketItem.marketTime += daylight
+            if False:
+                # From timestamp seems to correct to the local timezone
+                localTimezone = LocalTimezone()
+                daylight = localTimezone.dst(marketItem.marketTime)
+                marketItem.marketTime += daylight
             
             menuPathParts = list()
             menuParts = marketItemFields[5].split('\\')
@@ -302,9 +304,6 @@ class ProcLogin(object):
 
         for loginArg in loginArgs:
             attrValue = getattr(request, loginArg)
-            # Support for directApi non-data descriptors
-            if type(attrValue).__name__ == 'instancemethod':
-                attrValue = attrValue()
             setattr(instance, loginArg, attrValue)
 
         # Write down the currency code
@@ -325,21 +324,6 @@ class ProcMarket(object):
         # Embed the exchangeId in the answer, since this is a must for betting
         response.market.exchangeId = exchangeId
 
-        instance = kwargs.get('instance')
-        if not instance.directApi:
-            # Adjust (moving arrays one level up) the response
-            # There may be no runners (closed market for example)
-            if response.market.runners:
-                response.market.runners = response.market.runners.Runner
-            else:
-                response.market.runners = list()
-
-            # Australian Market does not return eventHierarchy and the field is 'None'
-            if response.market.eventHierarchy:
-                response.market.eventHierarchy = response.market.eventHierarchy.EventId
-            else:
-                response.market.eventHierarchy = list()
-
         # Adjust the marketTime to the system local time
         # The original object is naive and suds fails to identify DST settings
         localTimezone = LocalTimezone()
@@ -348,13 +332,13 @@ class ProcMarket(object):
 
         # Return a non-naive datetime object (in case the calling app wanted to
         # move it to another timezone
-        marketTime = datetime(response.market.marketTime.year,
-                              response.market.marketTime.month,
-                              response.market.marketTime.day,
-                              response.market.marketTime.hour,
-                              response.market.marketTime.minute,
-                              response.market.marketTime.second,
-                              tzinfo=localTimezone)
+        response.market.marketTime = datetime(response.market.marketTime.year,
+                                              response.market.marketTime.month,
+                                              response.market.marketTime.day,
+                                              response.market.marketTime.hour,
+                                              response.market.marketTime.minute,
+                                              response.market.marketTime.second,
+                                              tzinfo=localTimezone)
 
 
 class ProcMarketPricesCompressed(object):

@@ -31,176 +31,16 @@ Definition of direct construction API call and services
 and metaclass to install them in an API provider
 '''
 
-# FIXME: Add timezone to time when sending it as param (matchedSince, fromDate)
+# FIXME: Add local timezone to date params before textTranslation (matchedSince, fromDate)
 
 import types
 
 from bftransport import sRequest
 
+import bfapicalls
 import bfglobals
 import bfsoap
 import bftypes
-
-
-class ApiCall(object):
-    '''
-    Non-data descriptor class to be installed in L{ApiService}
-
-    @type nsGlobal: string
-    @cvar nsGlobal: soap namespace for Global Api Services
-    @type nsGlobalTypes: string
-    @cvar nsGlobalTypes: soap namespace for Global Api Types
-    @type nsExchange: string
-    @cvar nsExchange: soap namespace for Exchange Api Services
-    @type nsExchangeTypes: string
-    @cvar nsExchangeTypes: soap namespace for Global Api Types
-    @type soappattern: string
-    @cvar soappattern: basic string pattern with substitution patterns to form
-                       the final soap message
-
-    @type instanceCache: dict
-    @ivar instanceCache: cache for instances during descriptor operation
-    @type pattern: string
-    @ivar pattern: holds the prepared soap message patter
-    @type ns: string
-    @ivar ns: namespace where this call was defined
-    @type resulttag: string
-    @ivar resulttag: convenient string to look for the "Result" object in responses
-    @type httpreq: bftransport.TransportDirect
-    @ivar httpreq: http request holder
-    '''
-    nsGlobal = 'http://www.betfair.com/publicapi/v3/BFGlobalService/'
-    nsGlobalTypes = 'http://www.betfair.com/publicapi/types/global/v3/'
-
-    nsExchange = 'http://www.betfair.com/publicapi/v5/BFExchangeService/'
-    nsExchangeTypes = 'http://www.betfair.com/publicapi/types/exchange/v5/'
-
-    soappattern = '''<?xml version="1.0" encoding="UTF-8"?>
-<SOAP-ENV:Envelope xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="$$ns1$$" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns2="$$ns2$$" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
-<SOAP-ENV:Header/>
-<ns0:Body>
-<ns1:$$operation$$>
-$$request$$
-</ns1:$$operation$$>
-</ns0:Body>
-</SOAP-ENV:Envelope>'''
-
-    def __init__(self, exchange, operation):
-        '''
-        Initializes most of the pattern and the HTTP request, leaving just the last second
-        specific value substitutions for the soap call
-
-        @type exchange: boolean
-        @param exchange: if the call is defined in the Global or Exchange namespace
-        @type operation: string
-        @param operation: name of the call
-        '''
-        self.instanceCache = dict()
-
-        self.pattern = self.soappattern
-
-        self.ns = self.nsGlobal if not exchange else self.nsExchange
-        self.ns2 = self.nsGlobalTypes if not exchange else self.nsExchangeTypes
-        self.resulttag = '{%s}Result' % self.ns
-        self.pattern = self.patternSub('ns1', self.ns)
-        self.pattern = self.patternSub('ns2', self.ns2)
-
-        self.operation = operation
-        self.pattern = self.patternSub('operation', self.operation)
-
-        self.httpreq = sRequest('', None)
-        self.httpreq.headers['Content-type'] = 'text/xml; charset=utf-8'
-        self.httpreq.headers['User-agent'] = bfglobals.libstring
-        self.httpreq.headers['SoapAction'] = '"%s"' % self.operation
-
-
-    def patternSub(self, name, value):
-        '''
-        Initializes most of the pattern and the HTTP request, leaving just the last second
-        specific value substitutions for the soap call
-
-        @type name: string
-        @param name: pattern name to be substituted in the soap message
-        @type value: string
-        @param value: the string to put into the soap message
-        '''
-        return self.pattern.replace('$$%s$$' % name, value)
-
-
-    def __get__(self, instance, owner):
-        '''
-        Non-data descriptor implementation.
-
-        It returns a method type pointing to itself. This forces the invocation of __call__
-
-        @type instance: instance of class
-        @param instance: instance that calls the descriptor
-        @type owner: class
-        @param owner: the class that holds the descriptor
-        '''
-        return self.instanceCache.setdefault(instance, types.MethodType(self, instance, owner))
-
-
-    def __call__(self, instance, request):
-        '''
-        Invoked as method by L{ApiService} instances. It receives the instance and a request
-
-        It finishes preparation of the soap message with the value of the request object and
-        also the preparation of the http request.
-
-        Invokes the http request, the parsing of the soap and return the "Result" part of the
-        entire response
-
-        @type instance: an object
-        @param instance: object that is invoking the descriptor
-        @type request: L{ApiDataType}
-        @param request: the request to be sent to the servers
-        '''
-        self.httpreq.url = instance.endPointUrl
-
-        # 'Calling' the request delivers the content
-        self.httpreq.message = self.patternSub('request', request())
-
-        # print "sending httpreq %s" % self.httpreq
-        reply = instance.transport.send(self.httpreq)
-        # print "reply is %s" % reply
-
-        response = bfsoap.soap_process(reply.message)
-        # print "xml response: %s" % str(response)
-
-        # return getattr(response, self.resulttag)
-        # return getattr(response, 'Result')
-        return response.Result
-
-
-class ApiCallGlobal(ApiCall):
-    '''
-    Specialized version of L{ApiCall} for Global calls
-    '''
-
-    def __init__(self, operation):
-        '''
-        Initializes the parent class with exchange set to False
-
-        @type operation: string
-        @param operation: name of the call
-        '''
-        ApiCall.__init__(self, exchange=False, operation=operation)
-
-
-class ApiCallExchange(ApiCall):
-    '''
-    Specialized version of L{ApiCall} for Exchange calls
-    '''
-
-    def __init__(self, operation):
-        '''
-        Initializes the parent class with exchange set to True
-
-        @type operation: string
-        @param operation: name of the call
-        '''
-        ApiCall.__init__(self, exchange=True, operation=operation)
 
 
 class ApiServiceMeta(type):
@@ -224,12 +64,30 @@ class ApiServiceMeta(type):
         @param clsdict: the dictionary of cls
         '''
 
-        for apiCall in clsdict['apiCalls']:
+        for apiCall in clsdict['ApiCalls']:
             clsdict[apiCall.operation] = apiCall
 
         clsdict['objects'] = {}
         for apiType in bftypes.ApiDataTypes:
             clsdict['objects'][apiType.__name__] = apiType
+
+        # Support pluggable extern Api Calls & Types
+        try:
+            import bfextern
+        except Exception, e:
+            pass
+        else:
+            try:
+                for apiCall in bfextern.ApiCalls:
+                    clsdict[apiCall.operation] = apiCall
+            except:
+                pass
+
+            try:
+                for apiType in bfextern.ApiDataTypes:
+                    clsdict['objects'][apiType.__name__] = apiType
+            except:
+                pass
             
         return type.__new__(cls, name, bases, clsdict)
 
@@ -239,8 +97,8 @@ class ApiService(object):
     Holds L{ApiCall} descriptors and L{ApiDataType} classes to enable
     direct interaction with a Betfair service
 
-    @type apiCalls: list
-    @cvar apiCalls: list of ApiCalls to install
+    @type ApiCalls: list
+    @cvar ApiCalls: list of ApiCalls to install
 
     @type endPointUrl: string
     @ivar endPointUrl: url to the service
@@ -250,33 +108,32 @@ class ApiService(object):
 
     __metaclass__ = ApiServiceMeta
 
-    apiCalls = [
-        ApiCallGlobal('login'),
-        ApiCallGlobal('keepAlive'),
-        ApiCallGlobal('logout'),
-        ApiCallGlobal('getActiveEventTypes'),
-        ApiCallGlobal('getEvents'),
-        ApiCallExchange('getAllMarkets'),
-        ApiCallExchange('getAccountFunds'),
-        ApiCallGlobal('transferFunds'),
-        ApiCallExchange('getCurrentBets'),
-        ApiCallExchange('getMarket'),
-        ApiCallExchange('getMarketPricesCompressed'),
-        ApiCallExchange('getCompleteMarketPricesCompressed'),
-        ApiCallExchange('getMarketTradedVolumeCompressed'),
-        ApiCallExchange('getMarketProfitAndLoss'),
-        ApiCallExchange('getMUBets'),
-        ApiCallExchange('placeBets'),
-        ApiCallExchange('cancelBets'),
-        ApiCallExchange('updateBets'),
+    ApiCalls = [
+        bfapicalls.ApiCallGlobal('login'),
+        bfapicalls.ApiCallGlobal('keepAlive'),
+        bfapicalls.ApiCallGlobal('logout'),
+        bfapicalls.ApiCallGlobal('getActiveEventTypes'),
+        bfapicalls.ApiCallGlobal('getEvents'),
+        bfapicalls.ApiCallExchange('getAllMarkets'),
+        bfapicalls.ApiCallExchange('getAccountFunds'),
+        bfapicalls.ApiCallGlobal('transferFunds'),
+        bfapicalls.ApiCallExchange('getCurrentBets'),
+        bfapicalls.ApiCallExchange('getMarket'),
+        bfapicalls.ApiCallExchange('getMarketPricesCompressed'),
+        bfapicalls.ApiCallExchange('getCompleteMarketPricesCompressed'),
+        bfapicalls.ApiCallExchange('getMarketTradedVolumeCompressed'),
+        bfapicalls.ApiCallExchange('getMarketProfitAndLoss'),
+        bfapicalls.ApiCallExchange('getMUBets'),
+        bfapicalls.ApiCallExchange('placeBets'),
+        bfapicalls.ApiCallExchange('cancelBets'),
+        bfapicalls.ApiCallExchange('updateBets'),
         ]
 
-    # ApiCallExchange('updateBets'),
 
     def __init__(self, endPoint, transport):
         '''
-        Initializes the parent class with exchange set to True
-
+        Constructor of ApiService
+        
         @type endPoint: int
         @param endPoint: which enpoint will do the call
         @type transport: L{BfTransport}
