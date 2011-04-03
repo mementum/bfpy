@@ -4,7 +4,7 @@
 -- Simplified data charges weight counter calculations and removed any DirectAPI dependency
 -- Only the processors ArrayFix and ArrayUnfix need to take DirectAPI into account in comparison to suds
 -- Generalized the Soap parsing of custom defined types with callbacks
--- Added support to plug in external (user-made) calls (suds and/or DirectAPI) calls by adding a module called bfextern
+-- Added support to plug in external (user-defined) calls (suds and/or DirectAPI) calls by adding a module called bfextern
 
 1.01
 -- Corrected data counter implementation to support the DirectAPI
