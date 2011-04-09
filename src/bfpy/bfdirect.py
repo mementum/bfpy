@@ -127,6 +127,13 @@ class ApiService(object):
         bfapicalls.ApiCallExchange('placeBets'),
         bfapicalls.ApiCallExchange('cancelBets'),
         bfapicalls.ApiCallExchange('updateBets'),
+        bfapicalls.ApiCallVendor('createVendorAccessRequest'),
+        bfapicalls.ApiCallVendor('cancelVendorAccessRequest'),
+        bfapicalls.ApiCallVendor('updateVendorSubscription'),
+        bfapicalls.ApiCallVendor('getVendorUsers'),
+        bfapicalls.ApiCallVendor('getVendorAccessRequests'),
+        bfapicalls.ApiCallVendor('getSubscriptionInfo'),
+        bfapicalls.ApiCallVendor('getVendorInfo'),
         ]
 
 

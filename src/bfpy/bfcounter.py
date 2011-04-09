@@ -30,6 +30,7 @@
 Implementation of a Data Counter/Throttler to implemente Betfair Data Charges
 weight counting
 '''
+from __future__ import with_statement
 
 import threading
 import time

@@ -463,3 +463,87 @@ class UpdateBets(ApiDataType):
         ]
     def __init__(self):
         ApiDataType.__init__(self, name=None)
+
+
+##############################################
+# DirectAPI implementation of Vendor API types
+##############################################
+class CreateVendorAccessRequestReq(ApiDataType):
+    apiParams = [
+        ApiParam('vendorCustomField'),
+        ApiParam('vendorSoftwareId'),
+        ApiParam('expiryDate', nullable=True),
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class CancelVendorAccessRequestReq(ApiDataType):
+    apiParams = [
+        ApiParam('accessRequestToken'),
+        ApiParam('vendorSoftwareId'),
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class VendorSubscriptionReq(ApiDataType):
+    apiParams = [
+        ApiParam('username'),
+        ApiParam('vendorCustomField'),
+        ApiParam('vendorClientId'),
+        ApiParam('vendorSoftwareId'),
+        ApiParam('expiryDate', nullable=True),
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class GetVendorUsersReq(ApiDataType):
+    apiParams = [
+        ApiParam('vendorSoftwareId'),
+        ApiParam('username', nullable=True),
+        ApiParam('usernameSearchModifier', xsd=False),
+        ApiParam('vendorCustomField', nullable=True),
+        ApiParam('customFieldSearchModifier', xsd=False),
+        ApiParam('expiryDateFrom', nullable=True),
+        ApiParam('expiryDateTo', nullable=True),
+        ApiParam('status', xsd=False),
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class GetVendorAccessRequestsReq(ApiDataType):
+    apiParams = [
+        ApiParam('vendorSoftwareId'),
+        ApiParam('status', xsd=False),
+        ApiParam('requestDateFrom', nullable=True),
+        ApiParam('requestDateTo', nullable=True),
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class GetSubscriptionInfoReq(ApiDataType):
+    apiParams = [
+        ApiParam('username'),
+        ApiParam('vendorClientId'),
+        ApiParam('vendorSoftwareId'),
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class GetVendorInfoReq(ApiDataType):
+    apiParams = [
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)

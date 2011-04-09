@@ -98,6 +98,10 @@
       <em class="summary">Specialized version of <a href="bfpy.bfapicalls.ApiCall-class.html"
         class="link">ApiCall</a> for Global calls</em>
     </li>
+    <li> <strong class="uidlink"><a href="bfpy.bfapicalls.ApiCallVendor-class.html">bfpy.bfapicalls.ApiCallVendor</a></strong>:
+      <em class="summary">Specialized version of <a href="bfpy.bfapicalls.ApiCall-class.html"
+        class="link">ApiCall</a> for Vendor calls</em>
+    </li>
     </ul>
     </li>
     <li> <strong class="uidlink"><a href="bfpy.bftypes.ApiDataType-class.html">bfpy.bftypes.ApiDataType</a></strong>:
@@ -110,6 +114,10 @@
     <li> <strong class="uidlink"><a href="bfpy.bftypes.CancelBets-class.html">bfpy.bftypes.CancelBets</a></strong>
     </li>
     <li> <strong class="uidlink"><a href="bfpy.bftypes.CancelBetsReq-class.html">bfpy.bftypes.CancelBetsReq</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.bftypes.CancelVendorAccessRequestReq-class.html">bfpy.bftypes.CancelVendorAccessRequestReq</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.bftypes.CreateVendorAccessRequestReq-class.html">bfpy.bftypes.CreateVendorAccessRequestReq</a></strong>
     </li>
     <li> <strong class="uidlink"><a href="bfpy.bftypes.GetAccountFundsReq-class.html">bfpy.bftypes.GetAccountFundsReq</a></strong>
     </li>
@@ -133,6 +141,14 @@
     </li>
     <li> <strong class="uidlink"><a href="bfpy.bftypes.GetMarketTradedVolumeCompressedReq-class.html">bfpy.bftypes.GetMarketTradedVolumeCompressedReq</a></strong>
     </li>
+    <li> <strong class="uidlink"><a href="bfpy.bftypes.GetSubscriptionInfoReq-class.html">bfpy.bftypes.GetSubscriptionInfoReq</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.bftypes.GetVendorAccessRequestsReq-class.html">bfpy.bftypes.GetVendorAccessRequestsReq</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.bftypes.GetVendorInfoReq-class.html">bfpy.bftypes.GetVendorInfoReq</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.bftypes.GetVendorUsersReq-class.html">bfpy.bftypes.GetVendorUsersReq</a></strong>
+    </li>
     <li> <strong class="uidlink"><a href="bfpy.bftypes.KeepAliveReq-class.html">bfpy.bftypes.KeepAliveReq</a></strong>
     </li>
     <li> <strong class="uidlink"><a href="bfpy.bftypes.LoginReq-class.html">bfpy.bftypes.LoginReq</a></strong>
@@ -148,6 +164,8 @@
     <li> <strong class="uidlink"><a href="bfpy.bftypes.UpdateBets-class.html">bfpy.bftypes.UpdateBets</a></strong>
     </li>
     <li> <strong class="uidlink"><a href="bfpy.bftypes.UpdateBetsReq-class.html">bfpy.bftypes.UpdateBetsReq</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.bftypes.VendorSubscriptionReq-class.html">bfpy.bftypes.VendorSubscriptionReq</a></strong>
     </li>
     </ul>
     </li>
@@ -220,8 +238,8 @@
     </ul>
     </li>
     <li> <strong class="uidlink"><a href="bfpy.bfapi.BfApi-class.html">bfpy.bfapi.BfApi</a></strong>:
-      <em class="summary">The class implements a unified communication interface with the 
-        Betfair API Services EndPoints (Global, ExchangeUK, ExchangeAus)</em>
+      <em class="summary">The class implements a unified communication interface with the Betfair API Services
+EndPoints (Global, ExchangeUK, ExchangeAus)</em>
     <ul>
     <li> <strong class="uidlink"><a href="bfpy.bfclient.BfClient-class.html">bfpy.bfclient.BfClient</a></strong>:
       <em class="summary">The class defines a higher level interface over the <a 
@@ -240,6 +258,10 @@
     <li> <strong class="uidlink"><a href="bfpy.util.EmptyObject-class.html">bfpy.util.EmptyObject</a></strong>:
       <em class="summary">Used to implement objects, like those arising from compressed 
         answers</em>
+    </li>
+    <li> <strong class="uidlink"><a href="bfpy.bfapi.BfApi.MinStake-class.html">bfpy.bfapi.BfApi.MinStake</a></strong>:
+      <em class="summary">Placeholder class for minimum bets if the getAllCurrencies family 
+        cannot be used</em>
     </li>
     <li> <strong class="uidlink"><a href="bfpy.bfprocessors.PatchAttr-class.html">bfpy.bfprocessors.PatchAttr</a></strong>:
       <em class="summary">Response processor</em>
@@ -330,6 +352,9 @@
     <li> <strong class="uidlink"><a href="bfpy.bfservice.GlobalServiceDef-class.html">bfpy.bfservice.GlobalServiceDef</a></strong>:
       <em class="summary">Service Definition for global services.</em>
     </li>
+    <li> <strong class="uidlink"><a href="bfpy.bfservice.VendorServiceDef-class.html">bfpy.bfservice.VendorServiceDef</a></strong>:
+      <em class="summary">Service Definition for vendor services.</em>
+    </li>
     </ul>
     </li>
     <li> <strong class="uidlink"><a href="bfpy.bfservice.ServiceObject-class.html">bfpy.bfservice.ServiceObject</a></strong>:
@@ -344,21 +369,15 @@
       <em class="summary">Subclass of ServiceObject to retrieve objects from the global 
         endPoint (0)</em>
     </li>
+    <li> <strong class="uidlink"><a href="bfpy.bfservice.VendorObject-class.html">bfpy.bfservice.VendorObject</a></strong>:
+      <em class="summary">Subclass of ServiceObject to retrieve objects from the Vendor 
+        endPoint</em>
+    </li>
     </ul>
     </li>
     </ul>
     </li>
     <li> <strong class="uidlink"><a href="bfpy.bftransport.sRequest-class.html">bfpy.bftransport.sRequest</a></strong>
-    </li>
-    <li> <strong class="uidlink">tuple</strong>:
-      <em class="summary">tuple() -&gt; empty tuple tuple(iterable) -&gt; tuple initialized 
-        from iterable's items</em>
-    <ul>
-    <li> <strong class="uidlink"><a href="bfpy.bfapi.BfApi.MinStakes-class.html">bfpy.bfapi.BfApi.MinStakes</a></strong>:
-      <em class="summary">CurrencyMinStakes(minimumStake, minimumRangeStake, 
-        minimumBSPLayLiability)</em>
-    </li>
-    </ul>
     </li>
     <li> <strong class="uidlink">type</strong>:
       <em class="summary">type(object) -&gt; the object's type type(name, bases, dict) -&gt; 
@@ -428,7 +447,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Sun Apr 03 13:17:41 2011
+    Generated by Epydoc 3.0.1 on Sat Apr 09 23:52:47 2011
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

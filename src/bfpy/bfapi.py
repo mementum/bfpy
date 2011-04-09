@@ -33,7 +33,6 @@ It does initialize suds logging to a L{NullHandler} to avoid any logging output
 '''
 
 from copy import copy
-from collections import namedtuple
 from datetime import datetime
 from socket import error as SocketError
 
@@ -41,7 +40,7 @@ import bfglobals
 import bfcounter
 import bfdirect
 import bferror
-from bfservice import GlobalServiceDef, ExchangeServiceDef, GlobalObject, ExchangeObject
+from bfservice import GlobalServiceDef, ExchangeServiceDef, VendorServiceDef, GlobalObject, ExchangeObject
 from bfprocessors import *
 import bftransport
 
@@ -252,6 +251,23 @@ class BfApi(object):
         - viewProfileV2
         - viewReferAndEarn
         - withdrawToPaymentCard
+
+        - createVendorAccessRequest,
+        - cancelVendorAccessRequest,
+        - updateVendorSubscription,
+          requestName='VendorSubscriptionReq' (non standard definition by Betfair)
+          Default parameters:
+            username = '' (internal Betfair use, but cannot be set to null)
+        - getVendorUsers
+          Default parameters:
+            usernameSearchModifier='CONTAINS', customFieldSearchModifier='CONTAINS', status='ACTIVE'
+        - getVendorAccessRequests
+          Default parameters:
+            status = ACTIVE
+        - getSubscriptionInfo
+          Default parameters:
+            username = '' (internal Betfair use, but cannot be set to null)
+        - getVendorInfo
     '''
 
     __metaclass__ = BfService
@@ -464,19 +480,41 @@ class BfApi(object):
         return response
 
 
-    MinStakes = namedtuple('CurrencyMinStakes', ('minimumStake', 'minimumRangeStake', 'minimumBSPLayLiability'))
+    # MinStakes = namedtuple('CurrencyMinStakes', ('minimumStake', 'minimumRangeStake', 'minimumBSPLayLiability'))
     # minimumStake, minimumRangeStake, minimumBSPLayLiability
+    # MinStakes = namedtuple('CurrencyMinStakes', ('minimumStake', 'minimumRangeStake', 'minimumBSPLayLiability'))
+
+    class MinStake(object):
+        '''
+        Placeholder class for minimum bets if the getAllCurrencies family cannot be used
+
+        @ivar minimumStake: Minimum Stake for regular markets
+        @type minimumstake: float
+        @ivar minimumRangeStake: Minimum Stake for Range markets
+        @type minimumRangestake: float
+        @ivar minimumBSPLayLiability: Minimum lay stake for BSP markets
+        @type minimumBSPLayLiability: float
+        '''
+
+        def __init__(self, minimumStake, minimumRangeStake, minimumBSPLayLiability):
+            '''
+            Init the object instance variables with the provided values
+            '''
+            self.minimumStake = minimumStake
+            self.minimumRangeStake = minimumRangeStake
+            self.minimumBSPLayLiability = minimumBSPLayLiability
+
     MinBets = {
-        'AUD': MinStakes(5.0, 3.0, 30.0),
-        'CAD': MinStakes(6.0, 3.0, 30.0),
-        'DKK': MinStakes(30.0, 15.0, 150.0),
-        'EUR': MinStakes(2.0, 2.0, 20.0),
-        'HKD': MinStakes(25.0, 15.0, 125.0),
-        'NOK': MinStakes(30.0, 15.0, 150.0),
-        'SGD': MinStakes(6.0, 1.0, 30.0),
-        'SEK': MinStakes(30.0, 15.0, 150.0),
-        'GBP': MinStakes(2.0, 1.0, 10.0),
-        'USD': MinStakes(4.0, 2.0, 20.0),
+        'AUD': MinStake(5.0, 3.0, 30.0),
+        'CAD': MinStake(6.0, 3.0, 30.0),
+        'DKK': MinStake(30.0, 15.0, 150.0),
+        'EUR': MinStake(2.0, 2.0, 20.0),
+        'HKD': MinStake(25.0, 15.0, 125.0),
+        'NOK': MinStake(30.0, 15.0, 150.0),
+        'SGD': MinStake(6.0, 1.0, 30.0),
+        'SEK': MinStake(30.0, 15.0, 150.0),
+        'GBP': MinStake(2.0, 1.0, 10.0),
+        'USD': MinStake(4.0, 2.0, 20.0),
         }
 
     @staticmethod
@@ -492,7 +530,7 @@ class BfApi(object):
         @type which: str
 
         @returns: the minimum stakes (minimumStake, minimumRangeStake, minimumBSPLayLiability
-        @rtype: namedtuple
+        @rtype: L{MinStake}
         '''
         minBets = BfApi.MinBets[currency]
         if not which:
@@ -639,4 +677,23 @@ class BfApi(object):
         GlobalServiceDef('viewProfileV2'),
         GlobalServiceDef('viewReferAndEarn', skipErrorCodes=['NO_RESULTS']),
         GlobalServiceDef('withdrawToPaymentCard'),
+
+        # ######################
+        # Vendor API Services
+        # ######################
+        VendorServiceDef('createVendorAccessRequest'),
+        VendorServiceDef('cancelVendorAccessRequest'),
+        VendorServiceDef('updateVendorSubscription', requestName='VendorSubscriptionReq',
+                         username=''),
+        # The 3 parameters below are declared as "N" (non-mandatory) in the docs, but the WSDL
+        # requires them and if not provided an INTERNAL ERROR is generated
+        VendorServiceDef('getVendorUsers', postProc=[ArrayFix('vendorUsers', 'vendorUser')],
+                         usernameSearchModifier='CONTAINS', customFieldSearchModifier='CONTAINS', status='ACTIVE'),
+        # status below is declared as "N" (non-mandatory) in the docs, but the WSDL
+        # requires it and if not provided an INTERNAL ERROR is generated
+        VendorServiceDef('getVendorAccessRequests', postProc=[ArrayFix('vendorAccessRequests', 'vendorAccessRequest')],
+                         status='ACTIVE'),
+        VendorServiceDef('getSubscriptionInfo',
+                         username=''),
+        VendorServiceDef('getVendorInfo', postProc=[ArrayFix('vendorInfo', 'vsInfo')]),
         ]

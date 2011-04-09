@@ -86,6 +86,8 @@ $$request$$
         @type operation: string
         @param operation: name of the call
         '''
+        self.__name__ = '_' + operation + '_'
+        
         self.instanceCache = dict()
 
         self.pattern = self.soappattern
@@ -221,6 +223,23 @@ class ApiCallExchange(ApiCall):
     '''
     ns1 = 'http://www.betfair.com/publicapi/v5/BFExchangeService/'
     ns2 = 'http://www.betfair.com/publicapi/types/exchange/v5/'
+
+    def __init__(self, operation):
+        '''
+        Initializes the parent class
+
+        @type operation: string
+        @param operation: name of the call
+        '''
+        ApiCall.__init__(self, self.ns1, self.ns2, operation=operation)
+
+
+class ApiCallVendor(ApiCall):
+    '''
+    Specialized version of L{ApiCall} for Vendor calls
+    '''
+    ns1 = 'http://www.betfair.com/adminapi/v2/VendorService/'
+    ns2 = 'http://www.betfair.com/adminapi/types/v2/'
 
     def __init__(self, operation):
         '''

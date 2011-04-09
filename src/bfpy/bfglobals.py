@@ -80,7 +80,7 @@ BfPy global variables and functions module.
 
 '''
 libname = 'BfPy'
-version = 1.02
+version = 1.10
 libstring = '%s %s' % (libname, str(version))
 
 forceDirect = False
@@ -88,15 +88,17 @@ wsdlDefs = dict()
 
 freeApiId = 82
 
+Vendor = -1
 Global = 0
 Exchange = 1
 ExchangeUK = 1
 ExchangeAus = 2
 
 Exchanges = [ExchangeUK, ExchangeAus]
-EndPoints = [Global, ExchangeUK, ExchangeAus]
+EndPoints = [Vendor, Global, ExchangeUK, ExchangeAus]
 
 EndPointUrls = {
+    Vendor: 'https://api.betfair.com/admin-api/v2/VendorService',
     Global: 'https://api.betfair.com/global/v3/BFGlobalService',
     ExchangeUK: 'https://api.betfair.com/exchange/v5/BFExchangeService',
     ExchangeAus: 'https://api-au.betfair.com/exchange/v5/BFExchangeService',
@@ -115,9 +117,10 @@ else:
     # Suds is available. Import the wsdl contents, clients and fault
     import bfwsdl
     wsdlDefs = {
+        Vendor: bfwsdl.BFVendorService,
         Global: bfwsdl.BFGlobalService,
         ExchangeUK: bfwsdl.BFExchangeService,
-        ExchangeAus: bfwsdl.BFExchangeServiceAus
+        ExchangeAus: bfwsdl.BFExchangeServiceAus,
         }
 
     import suds.client

@@ -57,6 +57,8 @@ class ServiceDescriptor(object):
         @param kwargs: extra variables passed to the method
         @type kwargs: dict
         '''
+        self.__name__ = '_' + methodName + '_'
+        
         self.methodName = methodName
         
         # Cache for descriptor calls
@@ -335,6 +337,50 @@ class ExchangeServiceDef(ServiceDef):
             **kwargs)
 
 
+##############################################
+# Abstract implementation of Vendor API calls
+##############################################
+class VendorServiceDef(ServiceDef):
+    '''
+    Service Definition for vendor services. It is a ServiceDefinition
+    subclass with the endPoint set to the vendor value
+    '''
+
+    def __init__(self,
+                 methodName, serviceName=None, requestName=None,
+                 apiHeader=True, skipErrorCodes=None,
+                 preProc=None, postProc=None, weight=0,
+                 **kwargs):
+        '''
+        Initializes the service and variables, setting the the
+        endPoint to the vendor endPoint (-1)
+        
+        @param methodName: name the method will be invoked by
+        @type methodName: str
+        @param serviceName: name of the service to invoke
+        @type serviceName: str
+        @param requestName: name of the request to pass to the service
+        @type requestName: str
+        @param apiHeader: whether to add an API header to the request
+        @type apiHeader: bool
+        @param skipErrorCodes: errorCodes that will not signal an error
+        @type skipErrorCodes: list
+        @param preProc: callables that will pre process a service request
+        @type preProc: list
+        @param postProc: callables that will post process a service response
+        @type postProc: list
+        @param kwargs: extra arguments (with values) to pass to the method
+        @type kwargs: dict
+        '''
+
+        ServiceDef.__init__(
+            self, bfglobals.Vendor,
+            methodName, serviceName=serviceName, requestName=requestName,
+            apiHeader=apiHeader, skipErrorCodes=skipErrorCodes,
+            preProc=preProc, postProc=postProc, weight=weight,
+            **kwargs)
+
+
 class ServiceObject(ServiceDescriptor):
     '''
     Service descriptor implementation to retrieve named objects defined
@@ -406,7 +452,7 @@ class GlobalObject(ServiceObject):
         @param kwargs: extra arguments (with values) to pass to the method
         @type kwargs: dict
         '''
-        ServiceObject.__init__(self, 0, objectName, **kwargs)
+        ServiceObject.__init__(self, bfglobals.Global, objectName, **kwargs)
 
 
 class ExchangeObject(ServiceObject):
@@ -416,11 +462,28 @@ class ExchangeObject(ServiceObject):
 
     def __init__(self, objectName, **kwargs):
         '''
-        Initialize a ServiceObject with the global endPoint (1)
+        Initialize a ServiceObject with the exchange endPoint (1)
         
         @param objectName: name of the object to be retrieved
         @type objectName: str
         @param kwargs: extra arguments (with values) to pass to the method
         @type kwargs: dict
         '''
-        ServiceObject.__init__(self, 1, objectName, **kwargs)
+        ServiceObject.__init__(self, bfglobals.Exchange, objectName, **kwargs)
+
+
+class VendorObject(ServiceObject):
+    '''
+    Subclass of ServiceObject to retrieve objects from the Vendor endPoint
+    '''
+
+    def __init__(self, objectName, **kwargs):
+        '''
+        Initialize a ServiceObject with the Vendor endPoint (1)
+        
+        @param objectName: name of the object to be retrieved
+        @type objectName: str
+        @param kwargs: extra arguments (with values) to pass to the method
+        @type kwargs: dict
+        '''
+        ServiceObject.__init__(self, bfglobals.Vendor, objectName, **kwargs)

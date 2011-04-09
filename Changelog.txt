@@ -1,3 +1,7 @@
+1.10
+-- Implemented Software Vendor API Services
+-- Small changes to improve Python 2.5 compatibility (HttxLib not yet)
+
 1.02
 -- ApiParam descriptor now works as data attritubute and method, removing the need to recognize it outside of the DirectAPI library part
 -- Post Processing for Market split into parts to remove DirectAPI dependency

@@ -134,9 +134,10 @@ class GetCurrentBets(ServiceDescriptor):
         if currentBetsArgs['betStatus'] != 'MU':
             return BfApi.getCurrentBets(instance, *args, **currentBetsArgs)
 
-        del currentBetsArgs['betStatus']
-        mResponse = BfApi.getCurrentBets(instance, *args, betStatus='M', **currentBetsArgs)
-        uResponse = BfApi.getCurrentBets(instance, *args, betStatus='U', **currentBetsArgs)
+        currentBetsArgs['betStatus'] = 'M'
+        mResponse = BfApi.getCurrentBets(instance, *args, **currentBetsArgs)
+        currentBetsArgs['betStatus'] = 'U'
+        uResponse = BfApi.getCurrentBets(instance, *args, **currentBetsArgs)
 
         mResponse.totalRecordCount += uResponse.totalRecordCount
         mResponse.bets.extend(uResponse.bets)

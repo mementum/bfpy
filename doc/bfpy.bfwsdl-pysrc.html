@@ -8785,7 +8785,829 @@
 <a name="L8722"></a><tt class="py-lineno">8722</tt>  <tt class="py-line"><tt class="py-string">  &lt;/wsdl:service&gt;</tt> </tt>
 <a name="L8723"></a><tt class="py-lineno">8723</tt>  <tt class="py-line"><tt class="py-string">&lt;/wsdl:definitions&gt;</tt> </tt>
 <a name="L8724"></a><tt class="py-lineno">8724</tt>  <tt class="py-line"><tt class="py-string">'''</tt> </tt>
-<a name="L8725"></a><tt class="py-lineno">8725</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<a name="L8725"></a><tt class="py-lineno">8725</tt>  <tt class="py-line"> </tt>
+<a name="L8726"></a><tt class="py-lineno">8726</tt>  <tt class="py-line"><tt id="link-3" class="py-name" targets="Variable bfpy.bfwsdl.BFVendorService=bfpy.bfwsdl-module.html#BFVendorService"><a title="bfpy.bfwsdl.BFVendorService" class="py-name" href="#" onclick="return doclink('link-3', 'BFVendorService', 'link-3');">BFVendorService</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'''</tt> </tt>
+<a name="L8727"></a><tt class="py-lineno">8727</tt>  <tt class="py-line"><tt class="py-string">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</tt> </tt>
+<a name="L8728"></a><tt class="py-lineno">8728</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L8729"></a><tt class="py-lineno">8729</tt>  <tt class="py-line"><tt class="py-string">&lt;!--</tt> </tt>
+<a name="L8730"></a><tt class="py-lineno">8730</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L8731"></a><tt class="py-lineno">8731</tt>  <tt class="py-line"><tt class="py-string">Copyright 2003-2004 The Sporting Exchange Limited. All rights reserved. </tt> </tt>
+<a name="L8732"></a><tt class="py-lineno">8732</tt>  <tt class="py-line"><tt class="py-string">The presentation, distribution or other dissemination of the information contained herein by The Sporting Exchange Limited (Betfair) is not a license, either expressly or impliedly, to any intellectual property owned or controlled by Betfair.</tt> </tt>
+<a name="L8733"></a><tt class="py-lineno">8733</tt>  <tt class="py-line"><tt class="py-string">Save as provided by statute and to the fullest extent permitted by law, the following provisions set out the entire liability of Betfair (including any liability for the acts and omissions of its employees, agents and sub-contractors) to the User in respect of the use of its WSDL file whether in contract, tort, statute, equity or otherwise: </tt> </tt>
+<a name="L8734"></a><tt class="py-lineno">8734</tt>  <tt class="py-line"><tt class="py-string">(a)     The User acknowledges and agrees that (except as expressly provided in this Agreement) the WSDL is provided "AS IS" without warranties of any kind (whether express or implied);</tt> </tt>
+<a name="L8735"></a><tt class="py-lineno">8735</tt>  <tt class="py-line"><tt class="py-string">(b)    All conditions, warranties, terms and undertakings (whether express or implied, statutory or otherwise relating to the delivery, performance, quality, uninterrupted use, fitness for purpose, occurrence or reliability of the WSDL are hereby excluded to the fullest extent permitted by law; and </tt> </tt>
+<a name="L8736"></a><tt class="py-lineno">8736</tt>  <tt class="py-line"><tt class="py-string">(c)     Betfair shall not be liable to the User for loss of profit (whether direct or indirect), loss of contracts or goodwill, lost advertising, loss of data or any type of special, indirect, consequential or economic loss (including loss or damage suffered by the User as a result of an action brought by a third party) even if such loss was reasonably foreseeable or Betfair had been advised of the possibility of the User incurring such loss.</tt> </tt>
+<a name="L8737"></a><tt class="py-lineno">8737</tt>  <tt class="py-line"><tt class="py-string">No exclusion or limitation set out in this Agreement shall apply in the case of fraud or fraudulent concealment, death or personal injury resulting from the negligence of either party or any of its employees, agents or sub-contractors; and/or any breach of the obligations implied by (as appropriate) section 12 of the Sale of Goods Act 1979, section 2 of the Supply of Goods and Services Act 1982 or section 8 of the Supply of Goods (Implied Terms) Act 1973.</tt> </tt>
+<a name="L8738"></a><tt class="py-lineno">8738</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L8739"></a><tt class="py-lineno">8739</tt>  <tt class="py-line"><tt class="py-string">--&gt;</tt> </tt>
+<a name="L8740"></a><tt class="py-lineno">8740</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L8741"></a><tt class="py-lineno">8741</tt>  <tt class="py-line"><tt class="py-string">&lt;wsdl:definitions name="VendorService"</tt> </tt>
+<a name="L8742"></a><tt class="py-lineno">8742</tt>  <tt class="py-line"><tt class="py-string">        xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" </tt> </tt>
+<a name="L8743"></a><tt class="py-lineno">8743</tt>  <tt class="py-line"><tt class="py-string">        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" </tt> </tt>
+<a name="L8744"></a><tt class="py-lineno">8744</tt>  <tt class="py-line"><tt class="py-string">        xmlns:xsd="http://www.w3.org/2001/XMLSchema" </tt> </tt>
+<a name="L8745"></a><tt class="py-lineno">8745</tt>  <tt class="py-line"><tt class="py-string">        xmlns:types="http://www.betfair.com/adminapi/types/v2/"</tt> </tt>
+<a name="L8746"></a><tt class="py-lineno">8746</tt>  <tt class="py-line"><tt class="py-string">        xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" </tt> </tt>
+<a name="L8747"></a><tt class="py-lineno">8747</tt>  <tt class="py-line"><tt class="py-string">        xmlns:tns="http://www.betfair.com/adminapi/v2/VendorService/" </tt> </tt>
+<a name="L8748"></a><tt class="py-lineno">8748</tt>  <tt class="py-line"><tt class="py-string">        xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" </tt> </tt>
+<a name="L8749"></a><tt class="py-lineno">8749</tt>  <tt class="py-line"><tt class="py-string">        xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" </tt> </tt>
+<a name="L8750"></a><tt class="py-lineno">8750</tt>  <tt class="py-line"><tt class="py-string">        targetNamespace="http://www.betfair.com/adminapi/v2/VendorService/" </tt> </tt>
+<a name="L8751"></a><tt class="py-lineno">8751</tt>  <tt class="py-line"><tt class="py-string">        xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"&gt;</tt> </tt>
+<a name="L8752"></a><tt class="py-lineno">8752</tt>  <tt class="py-line"><tt class="py-string">  &lt;wsdl:types&gt;</tt> </tt>
+<a name="L8753"></a><tt class="py-lineno">8753</tt>  <tt class="py-line"><tt class="py-string">    &lt;xsd:schema targetNamespace="http://www.betfair.com/adminapi/types/v2/"&gt;</tt> </tt>
+<a name="L8754"></a><tt class="py-lineno">8754</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/"/&gt;</tt> </tt>
+<a name="L8755"></a><tt class="py-lineno">8755</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L8756"></a><tt class="py-lineno">8756</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L8757"></a><tt class="py-lineno">8757</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:complexType name="SetAccessRequestReq"&gt;</tt> </tt>
+<a name="L8758"></a><tt class="py-lineno">8758</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexContent&gt;</tt> </tt>
+<a name="L8759"></a><tt class="py-lineno">8759</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:extension base="types:APIRequest"&gt;</tt> </tt>
+<a name="L8760"></a><tt class="py-lineno">8760</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L8761"></a><tt class="py-lineno">8761</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:element name="accessRequestToken" nillable="false" type="xsd:string"/&gt;</tt> </tt>
+<a name="L8762"></a><tt class="py-lineno">8762</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L8763"></a><tt class="py-lineno">8763</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:extension&gt;</tt> </tt>
+<a name="L8764"></a><tt class="py-lineno">8764</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexContent&gt;</tt> </tt>
+<a name="L8765"></a><tt class="py-lineno">8765</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L8766"></a><tt class="py-lineno">8766</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:complexType name="SetAccessRequestResp"&gt;</tt> </tt>
+<a name="L8767"></a><tt class="py-lineno">8767</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexContent&gt;</tt> </tt>
+<a name="L8768"></a><tt class="py-lineno">8768</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:extension base="types:APIResponse"&gt;</tt> </tt>
+<a name="L8769"></a><tt class="py-lineno">8769</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L8770"></a><tt class="py-lineno">8770</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:element name="vendorSoftwareId" nillable="false" type="xsd:int"/&gt;</tt> </tt>
+<a name="L8771"></a><tt class="py-lineno">8771</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:element name="vendorClientId" nillable="false" type="xsd:int"/&gt;</tt> </tt>
+<a name="L8772"></a><tt class="py-lineno">8772</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:element name="vendorSoftwareName" nillable="false" type="xsd:string"/&gt;</tt> </tt>
+<a name="L8773"></a><tt class="py-lineno">8773</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:element name="expiryDate" nillable="false" type="xsd:dateTime"/&gt;</tt> </tt>
+<a name="L8774"></a><tt class="py-lineno">8774</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:element name="errorCode" type="types:SetAccessRequestErrorEnum"/&gt;</tt> </tt>
+<a name="L8775"></a><tt class="py-lineno">8775</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:element name="minorErrorCode" nillable="true" type="xsd:string"/&gt;</tt> </tt>
+<a name="L8776"></a><tt class="py-lineno">8776</tt>  <tt class="py-line"><tt class="py-string">            &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L8777"></a><tt class="py-lineno">8777</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:extension&gt;</tt> </tt>
+<a name="L8778"></a><tt class="py-lineno">8778</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexContent&gt;</tt> </tt>
+<a name="L8779"></a><tt class="py-lineno">8779</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L8780"></a><tt class="py-lineno">8780</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:simpleType name="SetAccessRequestErrorEnum"&gt;</tt> </tt>
+<a name="L8781"></a><tt class="py-lineno">8781</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:restriction base="xsd:string"&gt;</tt> </tt>
+<a name="L8782"></a><tt class="py-lineno">8782</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="OK"/&gt;</tt> </tt>
+<a name="L8783"></a><tt class="py-lineno">8783</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="INVALID_ACCESS_REQUEST_TOKEN"/&gt;</tt> </tt>
+<a name="L8784"></a><tt class="py-lineno">8784</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="REQUEST_ALREADY_DONE"/&gt;</tt> </tt>
+<a name="L8785"></a><tt class="py-lineno">8785</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="REQUEST_EXPIRED"/&gt;</tt> </tt>
+<a name="L8786"></a><tt class="py-lineno">8786</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="REQUEST_CANCELLED"/&gt;</tt> </tt>
+<a name="L8787"></a><tt class="py-lineno">8787</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value='VENDOR_SOFTWARE_INVALID'/&gt;</tt> </tt>
+<a name="L8788"></a><tt class="py-lineno">8788</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value='VENDOR_SOFTWARE_INACTIVE'/&gt;</tt> </tt>
+<a name="L8789"></a><tt class="py-lineno">8789</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value='USER_ALREADY_SUBSCRIBED'/&gt;</tt> </tt>
+<a name="L8790"></a><tt class="py-lineno">8790</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="API_ERROR"/&gt;</tt> </tt>
+<a name="L8791"></a><tt class="py-lineno">8791</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:restriction&gt;</tt> </tt>
+<a name="L8792"></a><tt class="py-lineno">8792</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:simpleType&gt;</tt> </tt>
+<a name="L8793"></a><tt class="py-lineno">8793</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L8794"></a><tt class="py-lineno">8794</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L8795"></a><tt class="py-lineno">8795</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:complexType name="CancelVendorAccessRequestReq"&gt;</tt> </tt>
+<a name="L8796"></a><tt class="py-lineno">8796</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexContent&gt;</tt> </tt>
+<a name="L8797"></a><tt class="py-lineno">8797</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:extension base="types:APIRequest"&gt;</tt> </tt>
+<a name="L8798"></a><tt class="py-lineno">8798</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L8799"></a><tt class="py-lineno">8799</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:element name="accessRequestToken" nillable="false" type="xsd:string"/&gt;</tt> </tt>
+<a name="L8800"></a><tt class="py-lineno">8800</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:element name="vendorSoftwareId" nillable="false" type="xsd:int"/&gt;</tt> </tt>
+<a name="L8801"></a><tt class="py-lineno">8801</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L8802"></a><tt class="py-lineno">8802</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:extension&gt;</tt> </tt>
+<a name="L8803"></a><tt class="py-lineno">8803</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexContent&gt;</tt> </tt>
+<a name="L8804"></a><tt class="py-lineno">8804</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L8805"></a><tt class="py-lineno">8805</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:complexType name="CancelVendorAccessRequestResp"&gt;</tt> </tt>
+<a name="L8806"></a><tt class="py-lineno">8806</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexContent&gt;</tt> </tt>
+<a name="L8807"></a><tt class="py-lineno">8807</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:extension base="types:APIResponse"&gt;</tt> </tt>
+<a name="L8808"></a><tt class="py-lineno">8808</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L8809"></a><tt class="py-lineno">8809</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:element name="errorCode" type="types:CancelVendorAccessRequestErrorEnum"/&gt;</tt> </tt>
+<a name="L8810"></a><tt class="py-lineno">8810</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:element name="minorErrorCode" nillable="true" type="xsd:string"/&gt;</tt> </tt>
+<a name="L8811"></a><tt class="py-lineno">8811</tt>  <tt class="py-line"><tt class="py-string">            &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L8812"></a><tt class="py-lineno">8812</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:extension&gt;</tt> </tt>
+<a name="L8813"></a><tt class="py-lineno">8813</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexContent&gt;</tt> </tt>
+<a name="L8814"></a><tt class="py-lineno">8814</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L8815"></a><tt class="py-lineno">8815</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:simpleType name="CancelVendorAccessRequestErrorEnum"&gt;</tt> </tt>
+<a name="L8816"></a><tt class="py-lineno">8816</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:restriction base="xsd:string"&gt;</tt> </tt>
+<a name="L8817"></a><tt class="py-lineno">8817</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="OK"/&gt;</tt> </tt>
+<a name="L8818"></a><tt class="py-lineno">8818</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="INVALID_VENDOR_SOFTWARE_ID"/&gt;</tt> </tt>
+<a name="L8819"></a><tt class="py-lineno">8819</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="INVALID_VENDOR_SESSION" /&gt;</tt> </tt>
+<a name="L8820"></a><tt class="py-lineno">8820</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="OPERATOR_NOT_VENDORSOFTWARE_OWNER" /&gt;</tt> </tt>
+<a name="L8821"></a><tt class="py-lineno">8821</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value='INVALID_ACCESS_REQUEST_TOKEN'/&gt;</tt> </tt>
+<a name="L8822"></a><tt class="py-lineno">8822</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value='INVALID_VENDOR_CLIENT_ACCESS_REQUEST_STATUS'/&gt;</tt> </tt>
+<a name="L8823"></a><tt class="py-lineno">8823</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value='VENDOR_SOFTWARE_INVALID'/&gt;</tt> </tt>
+<a name="L8824"></a><tt class="py-lineno">8824</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value='VENDOR_SOFTWARE_INACTIVE'/&gt;</tt> </tt>
+<a name="L8825"></a><tt class="py-lineno">8825</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="API_ERROR"/&gt;</tt> </tt>
+<a name="L8826"></a><tt class="py-lineno">8826</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:restriction&gt;</tt> </tt>
+<a name="L8827"></a><tt class="py-lineno">8827</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:simpleType&gt;</tt> </tt>
+<a name="L8828"></a><tt class="py-lineno">8828</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L8829"></a><tt class="py-lineno">8829</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:complexType name="GetVendorAccessRequestsReq"&gt;</tt> </tt>
+<a name="L8830"></a><tt class="py-lineno">8830</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexContent&gt;</tt> </tt>
+<a name="L8831"></a><tt class="py-lineno">8831</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:extension base="types:APIRequest"&gt;</tt> </tt>
+<a name="L8832"></a><tt class="py-lineno">8832</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L8833"></a><tt class="py-lineno">8833</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:element name="vendorSoftwareId" nillable="false" type="xsd:int"/&gt;</tt> </tt>
+<a name="L8834"></a><tt class="py-lineno">8834</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:element name="status" type="types:VendorClientAccessRequestStatusEnum"/&gt;</tt> </tt>
+<a name="L8835"></a><tt class="py-lineno">8835</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:element name="requestDateFrom" nillable="true" type="xsd:dateTime"/&gt;</tt> </tt>
+<a name="L8836"></a><tt class="py-lineno">8836</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:element name="requestDateTo" nillable="true" type="xsd:dateTime"/&gt;</tt> </tt>
+<a name="L8837"></a><tt class="py-lineno">8837</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L8838"></a><tt class="py-lineno">8838</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:extension&gt;</tt> </tt>
+<a name="L8839"></a><tt class="py-lineno">8839</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexContent&gt;</tt> </tt>
+<a name="L8840"></a><tt class="py-lineno">8840</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L8841"></a><tt class="py-lineno">8841</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:complexType name="GetVendorAccessRequestsResp"&gt;</tt> </tt>
+<a name="L8842"></a><tt class="py-lineno">8842</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexContent&gt;</tt> </tt>
+<a name="L8843"></a><tt class="py-lineno">8843</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:extension base="types:APIResponse"&gt;</tt> </tt>
+<a name="L8844"></a><tt class="py-lineno">8844</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L8845"></a><tt class="py-lineno">8845</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:element name="vendorAccessRequests" nillable="true" type="types:ArrayOfVendorAccessRequest"/&gt;</tt> </tt>
+<a name="L8846"></a><tt class="py-lineno">8846</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:element name="errorCode" type="types:GetVendorAccessRequestsErrorEnum"/&gt;</tt> </tt>
+<a name="L8847"></a><tt class="py-lineno">8847</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:element name="minorErrorCode" nillable="true" type="xsd:string"/&gt;</tt> </tt>
+<a name="L8848"></a><tt class="py-lineno">8848</tt>  <tt class="py-line"><tt class="py-string">            &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L8849"></a><tt class="py-lineno">8849</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:extension&gt;</tt> </tt>
+<a name="L8850"></a><tt class="py-lineno">8850</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexContent&gt;</tt> </tt>
+<a name="L8851"></a><tt class="py-lineno">8851</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L8852"></a><tt class="py-lineno">8852</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:complexType name="ArrayOfVendorAccessRequest"&gt;</tt> </tt>
+<a name="L8853"></a><tt class="py-lineno">8853</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L8854"></a><tt class="py-lineno">8854</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:element name="vendorAccessRequest" form="qualified" maxOccurs="unbounded"</tt> </tt>
+<a name="L8855"></a><tt class="py-lineno">8855</tt>  <tt class="py-line"><tt class="py-string">            nillable="true" type="types:VendorAccessRequest"/&gt;</tt> </tt>
+<a name="L8856"></a><tt class="py-lineno">8856</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L8857"></a><tt class="py-lineno">8857</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L8858"></a><tt class="py-lineno">8858</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:complexType name="VendorAccessRequest"&gt;</tt> </tt>
+<a name="L8859"></a><tt class="py-lineno">8859</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L8860"></a><tt class="py-lineno">8860</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:element name="vendorSoftwareId" nillable="false" type="xsd:int"/&gt;</tt> </tt>
+<a name="L8861"></a><tt class="py-lineno">8861</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:element name="vendorCustomField" nillable="false" type="xsd:string"/&gt;</tt> </tt>
+<a name="L8862"></a><tt class="py-lineno">8862</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:element name="vendorClientId" nillable="false" type="xsd:int"/&gt;</tt> </tt>
+<a name="L8863"></a><tt class="py-lineno">8863</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:element name="accessRequestToken" nillable="false" type="xsd:string"/&gt;</tt> </tt>
+<a name="L8864"></a><tt class="py-lineno">8864</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:element name="expiryDate" nillable="false" type="xsd:dateTime"/&gt;</tt> </tt>
+<a name="L8865"></a><tt class="py-lineno">8865</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:element name="status" nillable="true" type="types:VendorClientAccessRequestStatusEnum"/&gt;</tt> </tt>
+<a name="L8866"></a><tt class="py-lineno">8866</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L8867"></a><tt class="py-lineno">8867</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L8868"></a><tt class="py-lineno">8868</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:simpleType name="GetVendorAccessRequestsErrorEnum"&gt;</tt> </tt>
+<a name="L8869"></a><tt class="py-lineno">8869</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:restriction base="xsd:string"&gt;</tt> </tt>
+<a name="L8870"></a><tt class="py-lineno">8870</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="OK"/&gt;</tt> </tt>
+<a name="L8871"></a><tt class="py-lineno">8871</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="INVALID_VENDOR_SOFTWARE_ID"/&gt;</tt> </tt>
+<a name="L8872"></a><tt class="py-lineno">8872</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="INVALID_VENDOR_SESSION" /&gt;</tt> </tt>
+<a name="L8873"></a><tt class="py-lineno">8873</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="OPERATOR_NOT_VENDORSOFTWARE_OWNER" /&gt;</tt> </tt>
+<a name="L8874"></a><tt class="py-lineno">8874</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value='VENDOR_SOFTWARE_INACTIVE'/&gt;</tt> </tt>
+<a name="L8875"></a><tt class="py-lineno">8875</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value='INVALID_STATUS'/&gt;</tt> </tt>
+<a name="L8876"></a><tt class="py-lineno">8876</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value='NO_RESULTS'/&gt;</tt> </tt>
+<a name="L8877"></a><tt class="py-lineno">8877</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="API_ERROR"/&gt;</tt> </tt>
+<a name="L8878"></a><tt class="py-lineno">8878</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:restriction&gt;</tt> </tt>
+<a name="L8879"></a><tt class="py-lineno">8879</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:simpleType&gt;</tt> </tt>
+<a name="L8880"></a><tt class="py-lineno">8880</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:simpleType name="VendorClientAccessRequestStatusEnum"&gt;</tt> </tt>
+<a name="L8881"></a><tt class="py-lineno">8881</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:restriction base="xsd:string"&gt;</tt> </tt>
+<a name="L8882"></a><tt class="py-lineno">8882</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="ACTIVE"/&gt;</tt> </tt>
+<a name="L8883"></a><tt class="py-lineno">8883</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="CANCELLED"/&gt;</tt> </tt>
+<a name="L8884"></a><tt class="py-lineno">8884</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="EXPIRED"/&gt;</tt> </tt>
+<a name="L8885"></a><tt class="py-lineno">8885</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="DONE"/&gt;</tt> </tt>
+<a name="L8886"></a><tt class="py-lineno">8886</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:restriction&gt;</tt> </tt>
+<a name="L8887"></a><tt class="py-lineno">8887</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:simpleType&gt;</tt> </tt>
+<a name="L8888"></a><tt class="py-lineno">8888</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L8889"></a><tt class="py-lineno">8889</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:complexType name="CreateVendorAccessRequestReq"&gt;</tt> </tt>
+<a name="L8890"></a><tt class="py-lineno">8890</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexContent&gt;</tt> </tt>
+<a name="L8891"></a><tt class="py-lineno">8891</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:extension base="types:APIRequest"&gt;</tt> </tt>
+<a name="L8892"></a><tt class="py-lineno">8892</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L8893"></a><tt class="py-lineno">8893</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:element name="vendorCustomField" nillable="false" type="xsd:string"/&gt;</tt> </tt>
+<a name="L8894"></a><tt class="py-lineno">8894</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:element name="vendorSoftwareId" nillable="false" type="xsd:int"/&gt;</tt> </tt>
+<a name="L8895"></a><tt class="py-lineno">8895</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:element name="expiryDate" nillable="true" type="xsd:dateTime"/&gt;</tt> </tt>
+<a name="L8896"></a><tt class="py-lineno">8896</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L8897"></a><tt class="py-lineno">8897</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:extension&gt;</tt> </tt>
+<a name="L8898"></a><tt class="py-lineno">8898</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexContent&gt;</tt> </tt>
+<a name="L8899"></a><tt class="py-lineno">8899</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L8900"></a><tt class="py-lineno">8900</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:complexType name="CreateVendorAccessRequestResp"&gt;</tt> </tt>
+<a name="L8901"></a><tt class="py-lineno">8901</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexContent&gt;</tt> </tt>
+<a name="L8902"></a><tt class="py-lineno">8902</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:extension base="types:APIResponse"&gt;</tt> </tt>
+<a name="L8903"></a><tt class="py-lineno">8903</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L8904"></a><tt class="py-lineno">8904</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:element name="errorCode" type="types:CreateVendorAccessRequestErrorEnum"/&gt;</tt> </tt>
+<a name="L8905"></a><tt class="py-lineno">8905</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:element name="minorErrorCode" nillable="true" type="xsd:string"/&gt;</tt> </tt>
+<a name="L8906"></a><tt class="py-lineno">8906</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:element name="accessRequestToken" nillable="true" type="xsd:string"/&gt;</tt> </tt>
+<a name="L8907"></a><tt class="py-lineno">8907</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:element name="validUntil" type="xsd:dateTime"/&gt;</tt> </tt>
+<a name="L8908"></a><tt class="py-lineno">8908</tt>  <tt class="py-line"><tt class="py-string">            &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L8909"></a><tt class="py-lineno">8909</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:extension&gt;</tt> </tt>
+<a name="L8910"></a><tt class="py-lineno">8910</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexContent&gt;</tt> </tt>
+<a name="L8911"></a><tt class="py-lineno">8911</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L8912"></a><tt class="py-lineno">8912</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:simpleType name="CreateVendorAccessRequestErrorEnum"&gt;</tt> </tt>
+<a name="L8913"></a><tt class="py-lineno">8913</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:restriction base="xsd:string"&gt;</tt> </tt>
+<a name="L8914"></a><tt class="py-lineno">8914</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:enumeration value='OK'/&gt;</tt> </tt>
+<a name="L8915"></a><tt class="py-lineno">8915</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:enumeration value='INVALID_VENDOR_SOFTWARE_ID'/&gt;</tt> </tt>
+<a name="L8916"></a><tt class="py-lineno">8916</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:enumeration value='INVALID_VENDOR_SESSION'/&gt;</tt> </tt>
+<a name="L8917"></a><tt class="py-lineno">8917</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:enumeration value='OPERATOR_NOT_VENDORSOFTWARE_OWNER'/&gt;</tt> </tt>
+<a name="L8918"></a><tt class="py-lineno">8918</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:enumeration value='LOGIN_RESTRICTED_LOCATION'/&gt;</tt> </tt>
+<a name="L8919"></a><tt class="py-lineno">8919</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:enumeration value='VENDOR_SOFTWARE_INVALID'/&gt;</tt> </tt>
+<a name="L8920"></a><tt class="py-lineno">8920</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:enumeration value='VENDOR_SOFTWARE_INACTIVE'/&gt;</tt> </tt>
+<a name="L8921"></a><tt class="py-lineno">8921</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:enumeration value='INVALID_VENDOR_CUSTOM_FIELD'/&gt;</tt> </tt>
+<a name="L8922"></a><tt class="py-lineno">8922</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:enumeration value='INVALID_EXPIRY_DATE'/&gt;</tt> </tt>
+<a name="L8923"></a><tt class="py-lineno">8923</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:enumeration value='API_ERROR'/&gt;</tt> </tt>
+<a name="L8924"></a><tt class="py-lineno">8924</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:restriction&gt;</tt> </tt>
+<a name="L8925"></a><tt class="py-lineno">8925</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:simpleType&gt;</tt> </tt>
+<a name="L8926"></a><tt class="py-lineno">8926</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L8927"></a><tt class="py-lineno">8927</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:complexType name="VendorSubscriptionReq"&gt;</tt> </tt>
+<a name="L8928"></a><tt class="py-lineno">8928</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexContent&gt;</tt> </tt>
+<a name="L8929"></a><tt class="py-lineno">8929</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:extension base="types:APIRequest"&gt;</tt> </tt>
+<a name="L8930"></a><tt class="py-lineno">8930</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L8931"></a><tt class="py-lineno">8931</tt>  <tt class="py-line"><tt class="py-string">                        &lt;xsd:element name="username" nillable="false" type="xsd:string"/&gt;</tt> </tt>
+<a name="L8932"></a><tt class="py-lineno">8932</tt>  <tt class="py-line"><tt class="py-string">                        &lt;xsd:element name="vendorCustomField" nillable="false" type="xsd:string"/&gt;</tt> </tt>
+<a name="L8933"></a><tt class="py-lineno">8933</tt>  <tt class="py-line"><tt class="py-string">                        &lt;xsd:element name="vendorClientId" nillable="false" type="xsd:int"/&gt;</tt> </tt>
+<a name="L8934"></a><tt class="py-lineno">8934</tt>  <tt class="py-line"><tt class="py-string">                        &lt;xsd:element name="vendorSoftwareId" nillable="false" type="xsd:int"/&gt;</tt> </tt>
+<a name="L8935"></a><tt class="py-lineno">8935</tt>  <tt class="py-line"><tt class="py-string">                        &lt;xsd:element name="expiryDate" nillable="true" type="xsd:dateTime"/&gt;</tt> </tt>
+<a name="L8936"></a><tt class="py-lineno">8936</tt>  <tt class="py-line"><tt class="py-string">                &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L8937"></a><tt class="py-lineno">8937</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:extension&gt;</tt> </tt>
+<a name="L8938"></a><tt class="py-lineno">8938</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexContent&gt;</tt> </tt>
+<a name="L8939"></a><tt class="py-lineno">8939</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L8940"></a><tt class="py-lineno">8940</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:complexType name="VendorSubscriptionResp"&gt;</tt> </tt>
+<a name="L8941"></a><tt class="py-lineno">8941</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexContent&gt;</tt> </tt>
+<a name="L8942"></a><tt class="py-lineno">8942</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:extension base="types:APIResponse"&gt;</tt> </tt>
+<a name="L8943"></a><tt class="py-lineno">8943</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L8944"></a><tt class="py-lineno">8944</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:element name="errorCode" type="types:VendorSubscriptionErrorEnum"/&gt;</tt> </tt>
+<a name="L8945"></a><tt class="py-lineno">8945</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:element name="minorErrorCode" nillable="true" type="xsd:string"/&gt;</tt> </tt>
+<a name="L8946"></a><tt class="py-lineno">8946</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:element name="validUntil" type="xsd:dateTime"/&gt;</tt> </tt>
+<a name="L8947"></a><tt class="py-lineno">8947</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:element name="vendorClientId" nillable="false" type="xsd:int"/&gt;</tt> </tt>
+<a name="L8948"></a><tt class="py-lineno">8948</tt>  <tt class="py-line"><tt class="py-string">            &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L8949"></a><tt class="py-lineno">8949</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:extension&gt;</tt> </tt>
+<a name="L8950"></a><tt class="py-lineno">8950</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexContent&gt;</tt> </tt>
+<a name="L8951"></a><tt class="py-lineno">8951</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L8952"></a><tt class="py-lineno">8952</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:simpleType name="VendorSubscriptionErrorEnum"&gt;</tt> </tt>
+<a name="L8953"></a><tt class="py-lineno">8953</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:restriction base="xsd:string"&gt;</tt> </tt>
+<a name="L8954"></a><tt class="py-lineno">8954</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="OK"/&gt;</tt> </tt>
+<a name="L8955"></a><tt class="py-lineno">8955</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="INVALID_USERNAME"/&gt;</tt> </tt>
+<a name="L8956"></a><tt class="py-lineno">8956</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="USER_NOT_ACCOUNT_OWNER"/&gt;</tt> </tt>
+<a name="L8957"></a><tt class="py-lineno">8957</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="INVALID_VENDOR_SOFTWARE_ID"/&gt;</tt> </tt>
+<a name="L8958"></a><tt class="py-lineno">8958</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="LOGIN_FAILED_ACCOUNT_LOCKED"/&gt;</tt> </tt>
+<a name="L8959"></a><tt class="py-lineno">8959</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="ACCOUNT_SUSPENDED"/&gt;</tt> </tt>
+<a name="L8960"></a><tt class="py-lineno">8960</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="ACCOUNT_CLOSED"/&gt;</tt> </tt>
+<a name="L8961"></a><tt class="py-lineno">8961</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="INVALID_VENDOR_SESSION" /&gt;</tt> </tt>
+<a name="L8962"></a><tt class="py-lineno">8962</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="OPERATOR_NOT_VENDORSOFTWARE_OWNER" /&gt;</tt> </tt>
+<a name="L8963"></a><tt class="py-lineno">8963</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="LOGIN_RESTRICTED_LOCATION"/&gt;</tt> </tt>
+<a name="L8964"></a><tt class="py-lineno">8964</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="USER_ALREADY_SUBSCRIBED"/&gt;</tt> </tt>
+<a name="L8965"></a><tt class="py-lineno">8965</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="INVALID_VENDOR_CLIENT_ID"/&gt;</tt> </tt>
+<a name="L8966"></a><tt class="py-lineno">8966</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="INVALID_VENDOR_CUSTOM_FIELD"/&gt;</tt> </tt>
+<a name="L8967"></a><tt class="py-lineno">8967</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="INVALID_INPUT_PARAMETERS"/&gt;</tt> </tt>
+<a name="L8968"></a><tt class="py-lineno">8968</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="API_ERROR"/&gt;</tt> </tt>
+<a name="L8969"></a><tt class="py-lineno">8969</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:restriction&gt;</tt> </tt>
+<a name="L8970"></a><tt class="py-lineno">8970</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:simpleType&gt;</tt> </tt>
+<a name="L8971"></a><tt class="py-lineno">8971</tt>  <tt class="py-line"><tt class="py-string">          </tt> </tt>
+<a name="L8972"></a><tt class="py-lineno">8972</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:complexType name="CancelVendorSubscriptionReq"&gt;</tt> </tt>
+<a name="L8973"></a><tt class="py-lineno">8973</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexContent&gt;</tt> </tt>
+<a name="L8974"></a><tt class="py-lineno">8974</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:extension base="types:APIRequest"&gt;</tt> </tt>
+<a name="L8975"></a><tt class="py-lineno">8975</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L8976"></a><tt class="py-lineno">8976</tt>  <tt class="py-line"><tt class="py-string">                      &lt;xsd:element name="username" nillable="false" type="xsd:string"/&gt;</tt> </tt>
+<a name="L8977"></a><tt class="py-lineno">8977</tt>  <tt class="py-line"><tt class="py-string">                  &lt;xsd:element name="vendorSoftwareId" nillable="false" type="xsd:int"/&gt;</tt> </tt>
+<a name="L8978"></a><tt class="py-lineno">8978</tt>  <tt class="py-line"><tt class="py-string">                  &lt;xsd:element name="vendorClientId" nillable="false" type="xsd:int"/&gt;</tt> </tt>
+<a name="L8979"></a><tt class="py-lineno">8979</tt>  <tt class="py-line"><tt class="py-string">                        &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L8980"></a><tt class="py-lineno">8980</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:extension&gt;</tt> </tt>
+<a name="L8981"></a><tt class="py-lineno">8981</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexContent&gt;</tt> </tt>
+<a name="L8982"></a><tt class="py-lineno">8982</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L8983"></a><tt class="py-lineno">8983</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:complexType name="CancelVendorSubscriptionResp"&gt;</tt> </tt>
+<a name="L8984"></a><tt class="py-lineno">8984</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexContent&gt;</tt> </tt>
+<a name="L8985"></a><tt class="py-lineno">8985</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:extension base="types:APIResponse"&gt;</tt> </tt>
+<a name="L8986"></a><tt class="py-lineno">8986</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L8987"></a><tt class="py-lineno">8987</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:element name="errorCode" type="types:VendorSubscriptionErrorEnum"/&gt;</tt> </tt>
+<a name="L8988"></a><tt class="py-lineno">8988</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:element name="minorErrorCode" nillable="true" type="xsd:string"/&gt;</tt> </tt>
+<a name="L8989"></a><tt class="py-lineno">8989</tt>  <tt class="py-line"><tt class="py-string">            &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L8990"></a><tt class="py-lineno">8990</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:extension&gt;</tt> </tt>
+<a name="L8991"></a><tt class="py-lineno">8991</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexContent&gt;</tt> </tt>
+<a name="L8992"></a><tt class="py-lineno">8992</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L8993"></a><tt class="py-lineno">8993</tt>  <tt class="py-line"><tt class="py-string">          </tt> </tt>
+<a name="L8994"></a><tt class="py-lineno">8994</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:complexType name="GetSubscriptionInfoReq"&gt;</tt> </tt>
+<a name="L8995"></a><tt class="py-lineno">8995</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexContent&gt;</tt> </tt>
+<a name="L8996"></a><tt class="py-lineno">8996</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:extension base="types:APIRequest"&gt;</tt> </tt>
+<a name="L8997"></a><tt class="py-lineno">8997</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L8998"></a><tt class="py-lineno">8998</tt>  <tt class="py-line"><tt class="py-string">                      &lt;xsd:element name="username" nillable="false" type="xsd:string"/&gt;</tt> </tt>
+<a name="L8999"></a><tt class="py-lineno">8999</tt>  <tt class="py-line"><tt class="py-string">                      &lt;xsd:element name="vendorClientId" nillable="false" type="xsd:int"/&gt;</tt> </tt>
+<a name="L9000"></a><tt class="py-lineno">9000</tt>  <tt class="py-line"><tt class="py-string">                      &lt;xsd:element name="vendorSoftwareId" nillable="false" type="xsd:int"/&gt;</tt> </tt>
+<a name="L9001"></a><tt class="py-lineno">9001</tt>  <tt class="py-line"><tt class="py-string">                        &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9002"></a><tt class="py-lineno">9002</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:extension&gt;</tt> </tt>
+<a name="L9003"></a><tt class="py-lineno">9003</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexContent&gt;</tt> </tt>
+<a name="L9004"></a><tt class="py-lineno">9004</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9005"></a><tt class="py-lineno">9005</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:complexType name="GetSubscriptionInfoResp"&gt;</tt> </tt>
+<a name="L9006"></a><tt class="py-lineno">9006</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexContent&gt;</tt> </tt>
+<a name="L9007"></a><tt class="py-lineno">9007</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:extension base="types:APIResponse"&gt;</tt> </tt>
+<a name="L9008"></a><tt class="py-lineno">9008</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L9009"></a><tt class="py-lineno">9009</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:element name="vendorSoftware" nillable="true" type="xsd:int"/&gt;</tt> </tt>
+<a name="L9010"></a><tt class="py-lineno">9010</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:element name="expiryDate" nillable="true" type="xsd:dateTime"/&gt;</tt> </tt>
+<a name="L9011"></a><tt class="py-lineno">9011</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:element name="errorCode" type="types:VendorSubscriptionErrorEnum"/&gt;</tt> </tt>
+<a name="L9012"></a><tt class="py-lineno">9012</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:element name="minorErrorCode" nillable="true" type="xsd:string"/&gt;</tt> </tt>
+<a name="L9013"></a><tt class="py-lineno">9013</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:element name="status" nillable="true" type="types:VendorSoftwareClientStatusEnum"/&gt;</tt> </tt>
+<a name="L9014"></a><tt class="py-lineno">9014</tt>  <tt class="py-line"><tt class="py-string">            &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9015"></a><tt class="py-lineno">9015</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:extension&gt;</tt> </tt>
+<a name="L9016"></a><tt class="py-lineno">9016</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexContent&gt;</tt> </tt>
+<a name="L9017"></a><tt class="py-lineno">9017</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9018"></a><tt class="py-lineno">9018</tt>  <tt class="py-line"><tt class="py-string">          </tt> </tt>
+<a name="L9019"></a><tt class="py-lineno">9019</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:complexType name="GetVendorInfoReq"&gt;</tt> </tt>
+<a name="L9020"></a><tt class="py-lineno">9020</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexContent&gt;</tt> </tt>
+<a name="L9021"></a><tt class="py-lineno">9021</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:extension base="types:APIRequest"/&gt;</tt> </tt>
+<a name="L9022"></a><tt class="py-lineno">9022</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexContent&gt;</tt> </tt>
+<a name="L9023"></a><tt class="py-lineno">9023</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9024"></a><tt class="py-lineno">9024</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:complexType name="GetVendorInfoResp"&gt;</tt> </tt>
+<a name="L9025"></a><tt class="py-lineno">9025</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexContent&gt;</tt> </tt>
+<a name="L9026"></a><tt class="py-lineno">9026</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:extension base="types:APIResponse"&gt;</tt> </tt>
+<a name="L9027"></a><tt class="py-lineno">9027</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L9028"></a><tt class="py-lineno">9028</tt>  <tt class="py-line"><tt class="py-string">                                &lt;xsd:element name="vendorInfo" nillable="true" type="types:ArrayOfVendorSoftwareInfos"/&gt;</tt> </tt>
+<a name="L9029"></a><tt class="py-lineno">9029</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:element name="errorCode" type="types:VendorSubscriptionErrorEnum"/&gt;</tt> </tt>
+<a name="L9030"></a><tt class="py-lineno">9030</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:element name="minorErrorCode" nillable="true" type="xsd:string"/&gt;</tt> </tt>
+<a name="L9031"></a><tt class="py-lineno">9031</tt>  <tt class="py-line"><tt class="py-string">            &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9032"></a><tt class="py-lineno">9032</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:extension&gt;</tt> </tt>
+<a name="L9033"></a><tt class="py-lineno">9033</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexContent&gt;</tt> </tt>
+<a name="L9034"></a><tt class="py-lineno">9034</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9035"></a><tt class="py-lineno">9035</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:complexType name="ArrayOfVendorSoftwareInfos"&gt;</tt> </tt>
+<a name="L9036"></a><tt class="py-lineno">9036</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L9037"></a><tt class="py-lineno">9037</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:element name="vsInfo" form="qualified" maxOccurs="unbounded"</tt> </tt>
+<a name="L9038"></a><tt class="py-lineno">9038</tt>  <tt class="py-line"><tt class="py-string">            nillable="true" type="types:VendorSoftwareInfo"/&gt;</tt> </tt>
+<a name="L9039"></a><tt class="py-lineno">9039</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9040"></a><tt class="py-lineno">9040</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9041"></a><tt class="py-lineno">9041</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:complexType name="VendorSoftwareInfo"&gt;</tt> </tt>
+<a name="L9042"></a><tt class="py-lineno">9042</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L9043"></a><tt class="py-lineno">9043</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:element name="vendorSoftwareId" nillable="false" type="xsd:int"/&gt;</tt> </tt>
+<a name="L9044"></a><tt class="py-lineno">9044</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:element name="vendorSoftwareName" nillable="false" type="xsd:string"/&gt;</tt> </tt>
+<a name="L9045"></a><tt class="py-lineno">9045</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:element name="activeClientsNo" type="xsd:long"/&gt;</tt> </tt>
+<a name="L9046"></a><tt class="py-lineno">9046</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9047"></a><tt class="py-lineno">9047</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9048"></a><tt class="py-lineno">9048</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9049"></a><tt class="py-lineno">9049</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:complexType name="GetVendorUsersReq"&gt;</tt> </tt>
+<a name="L9050"></a><tt class="py-lineno">9050</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexContent&gt;</tt> </tt>
+<a name="L9051"></a><tt class="py-lineno">9051</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:extension base="types:APIRequest"&gt;</tt> </tt>
+<a name="L9052"></a><tt class="py-lineno">9052</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L9053"></a><tt class="py-lineno">9053</tt>  <tt class="py-line"><tt class="py-string">                  &lt;xsd:element name="vendorSoftwareId" nillable="false" type="xsd:int"/&gt;</tt> </tt>
+<a name="L9054"></a><tt class="py-lineno">9054</tt>  <tt class="py-line"><tt class="py-string">                  &lt;xsd:element name="username" nillable="true" type="xsd:string"/&gt;</tt> </tt>
+<a name="L9055"></a><tt class="py-lineno">9055</tt>  <tt class="py-line"><tt class="py-string">                  &lt;xsd:element name="usernameSearchModifier" type="types:SearchModifierEnum"/&gt;</tt> </tt>
+<a name="L9056"></a><tt class="py-lineno">9056</tt>  <tt class="py-line"><tt class="py-string">                  &lt;xsd:element name="vendorCustomField" nillable="true" type="xsd:string"/&gt;</tt> </tt>
+<a name="L9057"></a><tt class="py-lineno">9057</tt>  <tt class="py-line"><tt class="py-string">                  &lt;xsd:element name="customFieldSearchModifier" type="types:SearchModifierEnum"/&gt;</tt> </tt>
+<a name="L9058"></a><tt class="py-lineno">9058</tt>  <tt class="py-line"><tt class="py-string">                  &lt;xsd:element name="expiryDateFrom" nillable="true" type="xsd:dateTime"/&gt;</tt> </tt>
+<a name="L9059"></a><tt class="py-lineno">9059</tt>  <tt class="py-line"><tt class="py-string">                  &lt;xsd:element name="expiryDateTo" nillable="true" type="xsd:dateTime"/&gt;</tt> </tt>
+<a name="L9060"></a><tt class="py-lineno">9060</tt>  <tt class="py-line"><tt class="py-string">                  &lt;xsd:element name="status" type="types:VendorSoftwareClientStatusEnum"/&gt;</tt> </tt>
+<a name="L9061"></a><tt class="py-lineno">9061</tt>  <tt class="py-line"><tt class="py-string">                        &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9062"></a><tt class="py-lineno">9062</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:extension&gt;</tt> </tt>
+<a name="L9063"></a><tt class="py-lineno">9063</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexContent&gt;</tt> </tt>
+<a name="L9064"></a><tt class="py-lineno">9064</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9065"></a><tt class="py-lineno">9065</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:simpleType name="SearchModifierEnum"&gt;</tt> </tt>
+<a name="L9066"></a><tt class="py-lineno">9066</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:restriction base="xsd:string"&gt;</tt> </tt>
+<a name="L9067"></a><tt class="py-lineno">9067</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="STARTS_WITH"/&gt;</tt> </tt>
+<a name="L9068"></a><tt class="py-lineno">9068</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="EXACT"/&gt;</tt> </tt>
+<a name="L9069"></a><tt class="py-lineno">9069</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="ENDS_WITH"/&gt;</tt> </tt>
+<a name="L9070"></a><tt class="py-lineno">9070</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="CONTAINS"/&gt;</tt> </tt>
+<a name="L9071"></a><tt class="py-lineno">9071</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:restriction&gt;</tt> </tt>
+<a name="L9072"></a><tt class="py-lineno">9072</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:simpleType&gt;</tt> </tt>
+<a name="L9073"></a><tt class="py-lineno">9073</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:complexType name="GetVendorUsersResp"&gt;</tt> </tt>
+<a name="L9074"></a><tt class="py-lineno">9074</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexContent&gt;</tt> </tt>
+<a name="L9075"></a><tt class="py-lineno">9075</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:extension base="types:APIResponse"&gt;</tt> </tt>
+<a name="L9076"></a><tt class="py-lineno">9076</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L9077"></a><tt class="py-lineno">9077</tt>  <tt class="py-line"><tt class="py-string">                                &lt;xsd:element name="vendorUsers" nillable="true" type="types:ArrayOfVendorUser"/&gt;</tt> </tt>
+<a name="L9078"></a><tt class="py-lineno">9078</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:element name="errorCode" type="types:VendorSubscriptionErrorEnum"/&gt;</tt> </tt>
+<a name="L9079"></a><tt class="py-lineno">9079</tt>  <tt class="py-line"><tt class="py-string">                &lt;xsd:element name="minorErrorCode" nillable="true" type="xsd:string"/&gt;</tt> </tt>
+<a name="L9080"></a><tt class="py-lineno">9080</tt>  <tt class="py-line"><tt class="py-string">            &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9081"></a><tt class="py-lineno">9081</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:extension&gt;</tt> </tt>
+<a name="L9082"></a><tt class="py-lineno">9082</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexContent&gt;</tt> </tt>
+<a name="L9083"></a><tt class="py-lineno">9083</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9084"></a><tt class="py-lineno">9084</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:complexType name="ArrayOfVendorUser"&gt;</tt> </tt>
+<a name="L9085"></a><tt class="py-lineno">9085</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L9086"></a><tt class="py-lineno">9086</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:element name="vendorUser" form="qualified" maxOccurs="unbounded"</tt> </tt>
+<a name="L9087"></a><tt class="py-lineno">9087</tt>  <tt class="py-line"><tt class="py-string">            nillable="true" type="types:VendorUser"/&gt;</tt> </tt>
+<a name="L9088"></a><tt class="py-lineno">9088</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9089"></a><tt class="py-lineno">9089</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9090"></a><tt class="py-lineno">9090</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:complexType name="VendorUser"&gt;</tt> </tt>
+<a name="L9091"></a><tt class="py-lineno">9091</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L9092"></a><tt class="py-lineno">9092</tt>  <tt class="py-line"><tt class="py-string">              &lt;xsd:element name="vendorSoftwareId" nillable="false" type="xsd:int"/&gt;</tt> </tt>
+<a name="L9093"></a><tt class="py-lineno">9093</tt>  <tt class="py-line"><tt class="py-string">              &lt;xsd:element name="username" nillable="false" type="xsd:string"/&gt;</tt> </tt>
+<a name="L9094"></a><tt class="py-lineno">9094</tt>  <tt class="py-line"><tt class="py-string">              &lt;xsd:element name="expiryDate" nillable="true" type="xsd:dateTime"/&gt;</tt> </tt>
+<a name="L9095"></a><tt class="py-lineno">9095</tt>  <tt class="py-line"><tt class="py-string">              &lt;xsd:element name="status" nillable="true" type="types:VendorSoftwareClientStatusEnum"/&gt;</tt> </tt>
+<a name="L9096"></a><tt class="py-lineno">9096</tt>  <tt class="py-line"><tt class="py-string">              &lt;xsd:element name="vendorClientId" nillable="false" type="xsd:int"/&gt;</tt> </tt>
+<a name="L9097"></a><tt class="py-lineno">9097</tt>  <tt class="py-line"><tt class="py-string">              &lt;xsd:element name="vendorCustomField" nillable="false" type="xsd:string"/&gt;</tt> </tt>
+<a name="L9098"></a><tt class="py-lineno">9098</tt>  <tt class="py-line"><tt class="py-string">              &lt;xsd:element name="createDate" nillable="true" type="xsd:dateTime"/&gt;</tt> </tt>
+<a name="L9099"></a><tt class="py-lineno">9099</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9100"></a><tt class="py-lineno">9100</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9101"></a><tt class="py-lineno">9101</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:simpleType name="VendorSoftwareClientStatusEnum"&gt;</tt> </tt>
+<a name="L9102"></a><tt class="py-lineno">9102</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:restriction base="xsd:string"&gt;</tt> </tt>
+<a name="L9103"></a><tt class="py-lineno">9103</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="ACTIVE"/&gt;</tt> </tt>
+<a name="L9104"></a><tt class="py-lineno">9104</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="CANCELLED"/&gt;</tt> </tt>
+<a name="L9105"></a><tt class="py-lineno">9105</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="EXPIRED"/&gt;</tt> </tt>
+<a name="L9106"></a><tt class="py-lineno">9106</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:restriction&gt;</tt> </tt>
+<a name="L9107"></a><tt class="py-lineno">9107</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:simpleType&gt;</tt> </tt>
+<a name="L9108"></a><tt class="py-lineno">9108</tt>  <tt class="py-line"><tt class="py-string">          </tt> </tt>
+<a name="L9109"></a><tt class="py-lineno">9109</tt>  <tt class="py-line"><tt class="py-string">          </tt> </tt>
+<a name="L9110"></a><tt class="py-lineno">9110</tt>  <tt class="py-line"><tt class="py-string">          &lt;!-- base types copied from BFService wsdl--&gt;</tt> </tt>
+<a name="L9111"></a><tt class="py-lineno">9111</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:complexType abstract="true" name="APIRequest"&gt;</tt> </tt>
+<a name="L9112"></a><tt class="py-lineno">9112</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L9113"></a><tt class="py-lineno">9113</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:element name="header" nillable="true" type="types:APIRequestHeader"/&gt;</tt> </tt>
+<a name="L9114"></a><tt class="py-lineno">9114</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9115"></a><tt class="py-lineno">9115</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9116"></a><tt class="py-lineno">9116</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:complexType name="APIRequestHeader"&gt;</tt> </tt>
+<a name="L9117"></a><tt class="py-lineno">9117</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L9118"></a><tt class="py-lineno">9118</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:element name="clientStamp" type="xsd:long"/&gt;</tt> </tt>
+<a name="L9119"></a><tt class="py-lineno">9119</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:element name="sessionToken" nillable="true" type="xsd:string"/&gt;</tt> </tt>
+<a name="L9120"></a><tt class="py-lineno">9120</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9121"></a><tt class="py-lineno">9121</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9122"></a><tt class="py-lineno">9122</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:complexType abstract="true" name="APIResponse"&gt;</tt> </tt>
+<a name="L9123"></a><tt class="py-lineno">9123</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L9124"></a><tt class="py-lineno">9124</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:element name="header" nillable="true" type="types:APIResponseHeader"/&gt;</tt> </tt>
+<a name="L9125"></a><tt class="py-lineno">9125</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9126"></a><tt class="py-lineno">9126</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9127"></a><tt class="py-lineno">9127</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:complexType name="APIResponseHeader"&gt;</tt> </tt>
+<a name="L9128"></a><tt class="py-lineno">9128</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L9129"></a><tt class="py-lineno">9129</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:element name="errorCode" type="types:APIErrorEnum"/&gt;</tt> </tt>
+<a name="L9130"></a><tt class="py-lineno">9130</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:element name="minorErrorCode" nillable="true" type="xsd:string"/&gt;</tt> </tt>
+<a name="L9131"></a><tt class="py-lineno">9131</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:element name="sessionToken" nillable="true" type="xsd:string"/&gt;</tt> </tt>
+<a name="L9132"></a><tt class="py-lineno">9132</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:element name="timestamp" type="xsd:dateTime"/&gt;</tt> </tt>
+<a name="L9133"></a><tt class="py-lineno">9133</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9134"></a><tt class="py-lineno">9134</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9135"></a><tt class="py-lineno">9135</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:simpleType name="APIErrorEnum"&gt;</tt> </tt>
+<a name="L9136"></a><tt class="py-lineno">9136</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:restriction base="xsd:string"&gt;</tt> </tt>
+<a name="L9137"></a><tt class="py-lineno">9137</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="OK"/&gt;</tt> </tt>
+<a name="L9138"></a><tt class="py-lineno">9138</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="INTERNAL_ERROR"/&gt;</tt> </tt>
+<a name="L9139"></a><tt class="py-lineno">9139</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="EXCEEDED_THROTTLE"/&gt;</tt> </tt>
+<a name="L9140"></a><tt class="py-lineno">9140</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="USER_NOT_SUBSCRIBED_TO_PRODUCT"/&gt;</tt> </tt>
+<a name="L9141"></a><tt class="py-lineno">9141</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="SUBSCRIPTION_INACTIVE_OR_SUSPENDED"/&gt;</tt> </tt>
+<a name="L9142"></a><tt class="py-lineno">9142</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="VENDOR_SOFTWARE_INACTIVE"/&gt;</tt> </tt>
+<a name="L9143"></a><tt class="py-lineno">9143</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="VENDOR_SOFTWARE_INVALID"/&gt;</tt> </tt>
+<a name="L9144"></a><tt class="py-lineno">9144</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="SERVICE_NOT_AVAILABLE_IN_PRODUCT"/&gt;</tt> </tt>
+<a name="L9145"></a><tt class="py-lineno">9145</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="NO_SESSION"/&gt;</tt> </tt>
+<a name="L9146"></a><tt class="py-lineno">9146</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="TOO_MANY_REQUESTS"/&gt;</tt> </tt>
+<a name="L9147"></a><tt class="py-lineno">9147</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="PRODUCT_REQUIRES_FUNDED_ACCOUNT"/&gt;</tt> </tt>
+<a name="L9148"></a><tt class="py-lineno">9148</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:enumeration value="SERVICE_NOT_AVAILABLE_FOR_LOGIN_STATUS"/&gt;</tt> </tt>
+<a name="L9149"></a><tt class="py-lineno">9149</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:restriction&gt;</tt> </tt>
+<a name="L9150"></a><tt class="py-lineno">9150</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:simpleType&gt;</tt> </tt>
+<a name="L9151"></a><tt class="py-lineno">9151</tt>  <tt class="py-line"><tt class="py-string">          </tt> </tt>
+<a name="L9152"></a><tt class="py-lineno">9152</tt>  <tt class="py-line"><tt class="py-string">    &lt;/xsd:schema&gt;</tt> </tt>
+<a name="L9153"></a><tt class="py-lineno">9153</tt>  <tt class="py-line"><tt class="py-string">    </tt> </tt>
+<a name="L9154"></a><tt class="py-lineno">9154</tt>  <tt class="py-line"><tt class="py-string">    &lt;xsd:schema elementFormDefault="qualified" targetNamespace="http://www.betfair.com/adminapi/v2/VendorService/"&gt;</tt> </tt>
+<a name="L9155"></a><tt class="py-lineno">9155</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:import namespace="http://www.betfair.com/adminapi/types/v2/"/&gt;</tt> </tt>
+<a name="L9156"></a><tt class="py-lineno">9156</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9157"></a><tt class="py-lineno">9157</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:element name="setAccessRequest"&gt;</tt> </tt>
+<a name="L9158"></a><tt class="py-lineno">9158</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexType&gt;</tt> </tt>
+<a name="L9159"></a><tt class="py-lineno">9159</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L9160"></a><tt class="py-lineno">9160</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:element name="request" type="types:SetAccessRequestReq"/&gt;</tt> </tt>
+<a name="L9161"></a><tt class="py-lineno">9161</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9162"></a><tt class="py-lineno">9162</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9163"></a><tt class="py-lineno">9163</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:element&gt;</tt> </tt>
+<a name="L9164"></a><tt class="py-lineno">9164</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:element name="setAccessRequestResponse"&gt;</tt> </tt>
+<a name="L9165"></a><tt class="py-lineno">9165</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexType&gt;</tt> </tt>
+<a name="L9166"></a><tt class="py-lineno">9166</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L9167"></a><tt class="py-lineno">9167</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:element name="Result" nillable="true" type="types:SetAccessRequestResp"/&gt;</tt> </tt>
+<a name="L9168"></a><tt class="py-lineno">9168</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9169"></a><tt class="py-lineno">9169</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9170"></a><tt class="py-lineno">9170</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:element&gt;</tt> </tt>
+<a name="L9171"></a><tt class="py-lineno">9171</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9172"></a><tt class="py-lineno">9172</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:element name="cancelVendorAccessRequest"&gt;</tt> </tt>
+<a name="L9173"></a><tt class="py-lineno">9173</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexType&gt;</tt> </tt>
+<a name="L9174"></a><tt class="py-lineno">9174</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L9175"></a><tt class="py-lineno">9175</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:element name="request" type="types:CancelVendorAccessRequestReq"/&gt;</tt> </tt>
+<a name="L9176"></a><tt class="py-lineno">9176</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9177"></a><tt class="py-lineno">9177</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9178"></a><tt class="py-lineno">9178</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:element&gt;</tt> </tt>
+<a name="L9179"></a><tt class="py-lineno">9179</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:element name="cancelVendorAccessRequestResponse"&gt;</tt> </tt>
+<a name="L9180"></a><tt class="py-lineno">9180</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexType&gt;</tt> </tt>
+<a name="L9181"></a><tt class="py-lineno">9181</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L9182"></a><tt class="py-lineno">9182</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:element name="Result" nillable="true" type="types:CancelVendorAccessRequestResp"/&gt;</tt> </tt>
+<a name="L9183"></a><tt class="py-lineno">9183</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9184"></a><tt class="py-lineno">9184</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9185"></a><tt class="py-lineno">9185</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:element&gt;</tt> </tt>
+<a name="L9186"></a><tt class="py-lineno">9186</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9187"></a><tt class="py-lineno">9187</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:element name="getVendorAccessRequests"&gt;</tt> </tt>
+<a name="L9188"></a><tt class="py-lineno">9188</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexType&gt;</tt> </tt>
+<a name="L9189"></a><tt class="py-lineno">9189</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L9190"></a><tt class="py-lineno">9190</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:element name="request" type="types:GetVendorAccessRequestsReq"/&gt;</tt> </tt>
+<a name="L9191"></a><tt class="py-lineno">9191</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9192"></a><tt class="py-lineno">9192</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9193"></a><tt class="py-lineno">9193</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:element&gt;</tt> </tt>
+<a name="L9194"></a><tt class="py-lineno">9194</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:element name="getVendorAccessRequestsResponse"&gt;</tt> </tt>
+<a name="L9195"></a><tt class="py-lineno">9195</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexType&gt;</tt> </tt>
+<a name="L9196"></a><tt class="py-lineno">9196</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L9197"></a><tt class="py-lineno">9197</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:element name="Result" nillable="true" type="types:GetVendorAccessRequestsResp"/&gt;</tt> </tt>
+<a name="L9198"></a><tt class="py-lineno">9198</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9199"></a><tt class="py-lineno">9199</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9200"></a><tt class="py-lineno">9200</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:element&gt;</tt> </tt>
+<a name="L9201"></a><tt class="py-lineno">9201</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9202"></a><tt class="py-lineno">9202</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:element name="createVendorAccessRequest"&gt;</tt> </tt>
+<a name="L9203"></a><tt class="py-lineno">9203</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexType&gt;</tt> </tt>
+<a name="L9204"></a><tt class="py-lineno">9204</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L9205"></a><tt class="py-lineno">9205</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:element name="request" type="types:CreateVendorAccessRequestReq"/&gt;</tt> </tt>
+<a name="L9206"></a><tt class="py-lineno">9206</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9207"></a><tt class="py-lineno">9207</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9208"></a><tt class="py-lineno">9208</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:element&gt;</tt> </tt>
+<a name="L9209"></a><tt class="py-lineno">9209</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:element name="createVendorAccessRequestResponse"&gt;</tt> </tt>
+<a name="L9210"></a><tt class="py-lineno">9210</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexType&gt;</tt> </tt>
+<a name="L9211"></a><tt class="py-lineno">9211</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L9212"></a><tt class="py-lineno">9212</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:element name="Result" nillable="true" type="types:CreateVendorAccessRequestResp"/&gt;</tt> </tt>
+<a name="L9213"></a><tt class="py-lineno">9213</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9214"></a><tt class="py-lineno">9214</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9215"></a><tt class="py-lineno">9215</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:element&gt;</tt> </tt>
+<a name="L9216"></a><tt class="py-lineno">9216</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9217"></a><tt class="py-lineno">9217</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:element name="addVendorSubscription"&gt;</tt> </tt>
+<a name="L9218"></a><tt class="py-lineno">9218</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexType&gt;</tt> </tt>
+<a name="L9219"></a><tt class="py-lineno">9219</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L9220"></a><tt class="py-lineno">9220</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:element name="request" type="types:VendorSubscriptionReq"/&gt;</tt> </tt>
+<a name="L9221"></a><tt class="py-lineno">9221</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9222"></a><tt class="py-lineno">9222</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9223"></a><tt class="py-lineno">9223</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:element&gt;</tt> </tt>
+<a name="L9224"></a><tt class="py-lineno">9224</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:element name="addVendorSubscriptionResponse"&gt;</tt> </tt>
+<a name="L9225"></a><tt class="py-lineno">9225</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexType&gt;</tt> </tt>
+<a name="L9226"></a><tt class="py-lineno">9226</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L9227"></a><tt class="py-lineno">9227</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:element name="Result" nillable="true" type="types:VendorSubscriptionResp"/&gt;</tt> </tt>
+<a name="L9228"></a><tt class="py-lineno">9228</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9229"></a><tt class="py-lineno">9229</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9230"></a><tt class="py-lineno">9230</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:element&gt;</tt> </tt>
+<a name="L9231"></a><tt class="py-lineno">9231</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9232"></a><tt class="py-lineno">9232</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:element name="updateVendorSubscription"&gt;</tt> </tt>
+<a name="L9233"></a><tt class="py-lineno">9233</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexType&gt;</tt> </tt>
+<a name="L9234"></a><tt class="py-lineno">9234</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L9235"></a><tt class="py-lineno">9235</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:element name="request" type="types:VendorSubscriptionReq"/&gt;</tt> </tt>
+<a name="L9236"></a><tt class="py-lineno">9236</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9237"></a><tt class="py-lineno">9237</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9238"></a><tt class="py-lineno">9238</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:element&gt;</tt> </tt>
+<a name="L9239"></a><tt class="py-lineno">9239</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:element name="updateVendorSubscriptionResponse"&gt;</tt> </tt>
+<a name="L9240"></a><tt class="py-lineno">9240</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexType&gt;</tt> </tt>
+<a name="L9241"></a><tt class="py-lineno">9241</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L9242"></a><tt class="py-lineno">9242</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:element name="Result" nillable="true" type="types:VendorSubscriptionResp"/&gt;</tt> </tt>
+<a name="L9243"></a><tt class="py-lineno">9243</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9244"></a><tt class="py-lineno">9244</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9245"></a><tt class="py-lineno">9245</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:element&gt;</tt> </tt>
+<a name="L9246"></a><tt class="py-lineno">9246</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9247"></a><tt class="py-lineno">9247</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:element name="cancelVendorSubscription"&gt;</tt> </tt>
+<a name="L9248"></a><tt class="py-lineno">9248</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexType&gt;</tt> </tt>
+<a name="L9249"></a><tt class="py-lineno">9249</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L9250"></a><tt class="py-lineno">9250</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:element name="request" type="types:CancelVendorSubscriptionReq"/&gt;</tt> </tt>
+<a name="L9251"></a><tt class="py-lineno">9251</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9252"></a><tt class="py-lineno">9252</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9253"></a><tt class="py-lineno">9253</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:element&gt;</tt> </tt>
+<a name="L9254"></a><tt class="py-lineno">9254</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:element name="cancelVendorSubscriptionResponse"&gt;</tt> </tt>
+<a name="L9255"></a><tt class="py-lineno">9255</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexType&gt;</tt> </tt>
+<a name="L9256"></a><tt class="py-lineno">9256</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L9257"></a><tt class="py-lineno">9257</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:element name="Result" nillable="true" type="types:CancelVendorSubscriptionResp"/&gt;</tt> </tt>
+<a name="L9258"></a><tt class="py-lineno">9258</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9259"></a><tt class="py-lineno">9259</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9260"></a><tt class="py-lineno">9260</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:element&gt;</tt> </tt>
+<a name="L9261"></a><tt class="py-lineno">9261</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9262"></a><tt class="py-lineno">9262</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:element name="getSubscriptionInfo"&gt;</tt> </tt>
+<a name="L9263"></a><tt class="py-lineno">9263</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexType&gt;</tt> </tt>
+<a name="L9264"></a><tt class="py-lineno">9264</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L9265"></a><tt class="py-lineno">9265</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:element name="request" type="types:GetSubscriptionInfoReq"/&gt;</tt> </tt>
+<a name="L9266"></a><tt class="py-lineno">9266</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9267"></a><tt class="py-lineno">9267</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9268"></a><tt class="py-lineno">9268</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:element&gt;</tt> </tt>
+<a name="L9269"></a><tt class="py-lineno">9269</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:element name="getSubscriptionInfoResponse"&gt;</tt> </tt>
+<a name="L9270"></a><tt class="py-lineno">9270</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexType&gt;</tt> </tt>
+<a name="L9271"></a><tt class="py-lineno">9271</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L9272"></a><tt class="py-lineno">9272</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:element name="Result" nillable="true" type="types:GetSubscriptionInfoResp"/&gt;</tt> </tt>
+<a name="L9273"></a><tt class="py-lineno">9273</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9274"></a><tt class="py-lineno">9274</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9275"></a><tt class="py-lineno">9275</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:element&gt;</tt> </tt>
+<a name="L9276"></a><tt class="py-lineno">9276</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9277"></a><tt class="py-lineno">9277</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:element name="getVendorInfo"&gt;</tt> </tt>
+<a name="L9278"></a><tt class="py-lineno">9278</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexType&gt;</tt> </tt>
+<a name="L9279"></a><tt class="py-lineno">9279</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L9280"></a><tt class="py-lineno">9280</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:element name="request" type="types:GetVendorInfoReq"/&gt;</tt> </tt>
+<a name="L9281"></a><tt class="py-lineno">9281</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9282"></a><tt class="py-lineno">9282</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9283"></a><tt class="py-lineno">9283</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:element&gt;</tt> </tt>
+<a name="L9284"></a><tt class="py-lineno">9284</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:element name="getVendorInfoResponse"&gt;</tt> </tt>
+<a name="L9285"></a><tt class="py-lineno">9285</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexType&gt;</tt> </tt>
+<a name="L9286"></a><tt class="py-lineno">9286</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L9287"></a><tt class="py-lineno">9287</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:element name="Result" nillable="true" type="types:GetVendorInfoResp"/&gt;</tt> </tt>
+<a name="L9288"></a><tt class="py-lineno">9288</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9289"></a><tt class="py-lineno">9289</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9290"></a><tt class="py-lineno">9290</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:element&gt;</tt> </tt>
+<a name="L9291"></a><tt class="py-lineno">9291</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9292"></a><tt class="py-lineno">9292</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:element name="getVendorUsers"&gt;</tt> </tt>
+<a name="L9293"></a><tt class="py-lineno">9293</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexType&gt;</tt> </tt>
+<a name="L9294"></a><tt class="py-lineno">9294</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L9295"></a><tt class="py-lineno">9295</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:element name="request" type="types:GetVendorUsersReq"/&gt;</tt> </tt>
+<a name="L9296"></a><tt class="py-lineno">9296</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9297"></a><tt class="py-lineno">9297</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9298"></a><tt class="py-lineno">9298</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:element&gt;</tt> </tt>
+<a name="L9299"></a><tt class="py-lineno">9299</tt>  <tt class="py-line"><tt class="py-string">      &lt;xsd:element name="getVendorUsersResponse"&gt;</tt> </tt>
+<a name="L9300"></a><tt class="py-lineno">9300</tt>  <tt class="py-line"><tt class="py-string">        &lt;xsd:complexType&gt;</tt> </tt>
+<a name="L9301"></a><tt class="py-lineno">9301</tt>  <tt class="py-line"><tt class="py-string">          &lt;xsd:sequence&gt;</tt> </tt>
+<a name="L9302"></a><tt class="py-lineno">9302</tt>  <tt class="py-line"><tt class="py-string">            &lt;xsd:element name="Result" nillable="true" type="types:GetVendorUsersResp"/&gt;</tt> </tt>
+<a name="L9303"></a><tt class="py-lineno">9303</tt>  <tt class="py-line"><tt class="py-string">          &lt;/xsd:sequence&gt;</tt> </tt>
+<a name="L9304"></a><tt class="py-lineno">9304</tt>  <tt class="py-line"><tt class="py-string">        &lt;/xsd:complexType&gt;</tt> </tt>
+<a name="L9305"></a><tt class="py-lineno">9305</tt>  <tt class="py-line"><tt class="py-string">      &lt;/xsd:element&gt;</tt> </tt>
+<a name="L9306"></a><tt class="py-lineno">9306</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9307"></a><tt class="py-lineno">9307</tt>  <tt class="py-line"><tt class="py-string">    &lt;/xsd:schema&gt;</tt> </tt>
+<a name="L9308"></a><tt class="py-lineno">9308</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9309"></a><tt class="py-lineno">9309</tt>  <tt class="py-line"><tt class="py-string">  &lt;/wsdl:types&gt;</tt> </tt>
+<a name="L9310"></a><tt class="py-lineno">9310</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9311"></a><tt class="py-lineno">9311</tt>  <tt class="py-line"><tt class="py-string">  &lt;wsdl:message name="setAccessRequestIn"&gt;</tt> </tt>
+<a name="L9312"></a><tt class="py-lineno">9312</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:part element="tns:setAccessRequest" name="parameters"/&gt;</tt> </tt>
+<a name="L9313"></a><tt class="py-lineno">9313</tt>  <tt class="py-line"><tt class="py-string">  &lt;/wsdl:message&gt;</tt> </tt>
+<a name="L9314"></a><tt class="py-lineno">9314</tt>  <tt class="py-line"><tt class="py-string">  &lt;wsdl:message name="setAccessRequestOut"&gt;</tt> </tt>
+<a name="L9315"></a><tt class="py-lineno">9315</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:part element="tns:setAccessRequestResponse" name="parameters"/&gt;</tt> </tt>
+<a name="L9316"></a><tt class="py-lineno">9316</tt>  <tt class="py-line"><tt class="py-string">  &lt;/wsdl:message&gt;</tt> </tt>
+<a name="L9317"></a><tt class="py-lineno">9317</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9318"></a><tt class="py-lineno">9318</tt>  <tt class="py-line"><tt class="py-string">  &lt;wsdl:message name="cancelVendorAccessRequestIn"&gt;</tt> </tt>
+<a name="L9319"></a><tt class="py-lineno">9319</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:part element="tns:cancelVendorAccessRequest" name="parameters"/&gt;</tt> </tt>
+<a name="L9320"></a><tt class="py-lineno">9320</tt>  <tt class="py-line"><tt class="py-string">  &lt;/wsdl:message&gt;</tt> </tt>
+<a name="L9321"></a><tt class="py-lineno">9321</tt>  <tt class="py-line"><tt class="py-string">  &lt;wsdl:message name="cancelVendorAccessRequestOut"&gt;</tt> </tt>
+<a name="L9322"></a><tt class="py-lineno">9322</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:part element="tns:cancelVendorAccessRequestResponse" name="parameters"/&gt;</tt> </tt>
+<a name="L9323"></a><tt class="py-lineno">9323</tt>  <tt class="py-line"><tt class="py-string">  &lt;/wsdl:message&gt;</tt> </tt>
+<a name="L9324"></a><tt class="py-lineno">9324</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9325"></a><tt class="py-lineno">9325</tt>  <tt class="py-line"><tt class="py-string">  &lt;wsdl:message name="getVendorAccessRequestsIn"&gt;</tt> </tt>
+<a name="L9326"></a><tt class="py-lineno">9326</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:part element="tns:getVendorAccessRequests" name="parameters"/&gt;</tt> </tt>
+<a name="L9327"></a><tt class="py-lineno">9327</tt>  <tt class="py-line"><tt class="py-string">  &lt;/wsdl:message&gt;</tt> </tt>
+<a name="L9328"></a><tt class="py-lineno">9328</tt>  <tt class="py-line"><tt class="py-string">  &lt;wsdl:message name="getVendorAccessRequestsOut"&gt;</tt> </tt>
+<a name="L9329"></a><tt class="py-lineno">9329</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:part element="tns:getVendorAccessRequestsResponse" name="parameters"/&gt;</tt> </tt>
+<a name="L9330"></a><tt class="py-lineno">9330</tt>  <tt class="py-line"><tt class="py-string">  &lt;/wsdl:message&gt;</tt> </tt>
+<a name="L9331"></a><tt class="py-lineno">9331</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9332"></a><tt class="py-lineno">9332</tt>  <tt class="py-line"><tt class="py-string">  &lt;wsdl:message name="createVendorAccessRequestIn"&gt;</tt> </tt>
+<a name="L9333"></a><tt class="py-lineno">9333</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:part element="tns:createVendorAccessRequest" name="parameters"/&gt;</tt> </tt>
+<a name="L9334"></a><tt class="py-lineno">9334</tt>  <tt class="py-line"><tt class="py-string">  &lt;/wsdl:message&gt;</tt> </tt>
+<a name="L9335"></a><tt class="py-lineno">9335</tt>  <tt class="py-line"><tt class="py-string">  &lt;wsdl:message name="createVendorAccessRequestOut"&gt;</tt> </tt>
+<a name="L9336"></a><tt class="py-lineno">9336</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:part element="tns:createVendorAccessRequestResponse" name="parameters"/&gt;</tt> </tt>
+<a name="L9337"></a><tt class="py-lineno">9337</tt>  <tt class="py-line"><tt class="py-string">  &lt;/wsdl:message&gt;</tt> </tt>
+<a name="L9338"></a><tt class="py-lineno">9338</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9339"></a><tt class="py-lineno">9339</tt>  <tt class="py-line"><tt class="py-string">  &lt;wsdl:message name="addVendorSubscriptionIn"&gt;</tt> </tt>
+<a name="L9340"></a><tt class="py-lineno">9340</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:part element="tns:addVendorSubscription" name="parameters"/&gt;</tt> </tt>
+<a name="L9341"></a><tt class="py-lineno">9341</tt>  <tt class="py-line"><tt class="py-string">  &lt;/wsdl:message&gt;</tt> </tt>
+<a name="L9342"></a><tt class="py-lineno">9342</tt>  <tt class="py-line"><tt class="py-string">  &lt;wsdl:message name="addVendorSubscriptionOut"&gt;</tt> </tt>
+<a name="L9343"></a><tt class="py-lineno">9343</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:part element="tns:addVendorSubscriptionResponse" name="parameters"/&gt;</tt> </tt>
+<a name="L9344"></a><tt class="py-lineno">9344</tt>  <tt class="py-line"><tt class="py-string">  &lt;/wsdl:message&gt;</tt> </tt>
+<a name="L9345"></a><tt class="py-lineno">9345</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9346"></a><tt class="py-lineno">9346</tt>  <tt class="py-line"><tt class="py-string">  &lt;wsdl:message name="updateVendorSubscriptionIn"&gt;</tt> </tt>
+<a name="L9347"></a><tt class="py-lineno">9347</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:part element="tns:updateVendorSubscription" name="parameters"/&gt;</tt> </tt>
+<a name="L9348"></a><tt class="py-lineno">9348</tt>  <tt class="py-line"><tt class="py-string">  &lt;/wsdl:message&gt;</tt> </tt>
+<a name="L9349"></a><tt class="py-lineno">9349</tt>  <tt class="py-line"><tt class="py-string">  &lt;wsdl:message name="updateVendorSubscriptionOut"&gt;</tt> </tt>
+<a name="L9350"></a><tt class="py-lineno">9350</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:part element="tns:updateVendorSubscriptionResponse" name="parameters"/&gt;</tt> </tt>
+<a name="L9351"></a><tt class="py-lineno">9351</tt>  <tt class="py-line"><tt class="py-string">  &lt;/wsdl:message&gt;</tt> </tt>
+<a name="L9352"></a><tt class="py-lineno">9352</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9353"></a><tt class="py-lineno">9353</tt>  <tt class="py-line"><tt class="py-string">  &lt;wsdl:message name="cancelVendorSubscriptionIn"&gt;</tt> </tt>
+<a name="L9354"></a><tt class="py-lineno">9354</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:part element="tns:cancelVendorSubscription" name="parameters"/&gt;</tt> </tt>
+<a name="L9355"></a><tt class="py-lineno">9355</tt>  <tt class="py-line"><tt class="py-string">  &lt;/wsdl:message&gt;</tt> </tt>
+<a name="L9356"></a><tt class="py-lineno">9356</tt>  <tt class="py-line"><tt class="py-string">  &lt;wsdl:message name="cancelVendorSubscriptionOut"&gt;</tt> </tt>
+<a name="L9357"></a><tt class="py-lineno">9357</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:part element="tns:cancelVendorSubscriptionResponse" name="parameters"/&gt;</tt> </tt>
+<a name="L9358"></a><tt class="py-lineno">9358</tt>  <tt class="py-line"><tt class="py-string">  &lt;/wsdl:message&gt;</tt> </tt>
+<a name="L9359"></a><tt class="py-lineno">9359</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9360"></a><tt class="py-lineno">9360</tt>  <tt class="py-line"><tt class="py-string">  &lt;wsdl:message name="getSubscriptionInfoIn"&gt;</tt> </tt>
+<a name="L9361"></a><tt class="py-lineno">9361</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:part element="tns:getSubscriptionInfo" name="parameters"/&gt;</tt> </tt>
+<a name="L9362"></a><tt class="py-lineno">9362</tt>  <tt class="py-line"><tt class="py-string">  &lt;/wsdl:message&gt;</tt> </tt>
+<a name="L9363"></a><tt class="py-lineno">9363</tt>  <tt class="py-line"><tt class="py-string">  &lt;wsdl:message name="getSubscriptionInfoOut"&gt;</tt> </tt>
+<a name="L9364"></a><tt class="py-lineno">9364</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:part element="tns:getSubscriptionInfoResponse" name="parameters"/&gt;</tt> </tt>
+<a name="L9365"></a><tt class="py-lineno">9365</tt>  <tt class="py-line"><tt class="py-string">  &lt;/wsdl:message&gt;</tt> </tt>
+<a name="L9366"></a><tt class="py-lineno">9366</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9367"></a><tt class="py-lineno">9367</tt>  <tt class="py-line"><tt class="py-string">  &lt;wsdl:message name="getVendorInfoIn"&gt;</tt> </tt>
+<a name="L9368"></a><tt class="py-lineno">9368</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:part element="tns:getVendorInfo" name="parameters"/&gt;</tt> </tt>
+<a name="L9369"></a><tt class="py-lineno">9369</tt>  <tt class="py-line"><tt class="py-string">  &lt;/wsdl:message&gt;</tt> </tt>
+<a name="L9370"></a><tt class="py-lineno">9370</tt>  <tt class="py-line"><tt class="py-string">  &lt;wsdl:message name="getVendorInfoOut"&gt;</tt> </tt>
+<a name="L9371"></a><tt class="py-lineno">9371</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:part element="tns:getVendorInfoResponse" name="parameters"/&gt;</tt> </tt>
+<a name="L9372"></a><tt class="py-lineno">9372</tt>  <tt class="py-line"><tt class="py-string">  &lt;/wsdl:message&gt;</tt> </tt>
+<a name="L9373"></a><tt class="py-lineno">9373</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9374"></a><tt class="py-lineno">9374</tt>  <tt class="py-line"><tt class="py-string">  &lt;wsdl:message name="getVendorUsersIn"&gt;</tt> </tt>
+<a name="L9375"></a><tt class="py-lineno">9375</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:part element="tns:getVendorUsers" name="parameters"/&gt;</tt> </tt>
+<a name="L9376"></a><tt class="py-lineno">9376</tt>  <tt class="py-line"><tt class="py-string">  &lt;/wsdl:message&gt;</tt> </tt>
+<a name="L9377"></a><tt class="py-lineno">9377</tt>  <tt class="py-line"><tt class="py-string">  &lt;wsdl:message name="getVendorUsersOut"&gt;</tt> </tt>
+<a name="L9378"></a><tt class="py-lineno">9378</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:part element="tns:getVendorUsersResponse" name="parameters"/&gt;</tt> </tt>
+<a name="L9379"></a><tt class="py-lineno">9379</tt>  <tt class="py-line"><tt class="py-string">  &lt;/wsdl:message&gt;</tt> </tt>
+<a name="L9380"></a><tt class="py-lineno">9380</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9381"></a><tt class="py-lineno">9381</tt>  <tt class="py-line"><tt class="py-string">  &lt;wsdl:portType name="VendorService"&gt;</tt> </tt>
+<a name="L9382"></a><tt class="py-lineno">9382</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9383"></a><tt class="py-lineno">9383</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:operation name="setAccessRequest"&gt;</tt> </tt>
+<a name="L9384"></a><tt class="py-lineno">9384</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:input message="tns:setAccessRequestIn" name="setAccessRequestIn"/&gt;</tt> </tt>
+<a name="L9385"></a><tt class="py-lineno">9385</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:output message="tns:setAccessRequestOut" name="setAccessRequestOut"/&gt;</tt> </tt>
+<a name="L9386"></a><tt class="py-lineno">9386</tt>  <tt class="py-line"><tt class="py-string">    &lt;/wsdl:operation&gt;</tt> </tt>
+<a name="L9387"></a><tt class="py-lineno">9387</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9388"></a><tt class="py-lineno">9388</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:operation name="cancelVendorAccessRequest"&gt;</tt> </tt>
+<a name="L9389"></a><tt class="py-lineno">9389</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:input message="tns:cancelVendorAccessRequestIn" name="cancelVendorAccessRequestIn"/&gt;</tt> </tt>
+<a name="L9390"></a><tt class="py-lineno">9390</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:output message="tns:cancelVendorAccessRequestOut" name="cancelVendorAccessRequestOut"/&gt;</tt> </tt>
+<a name="L9391"></a><tt class="py-lineno">9391</tt>  <tt class="py-line"><tt class="py-string">    &lt;/wsdl:operation&gt;</tt> </tt>
+<a name="L9392"></a><tt class="py-lineno">9392</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9393"></a><tt class="py-lineno">9393</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:operation name="getVendorAccessRequests"&gt;</tt> </tt>
+<a name="L9394"></a><tt class="py-lineno">9394</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:input message="tns:getVendorAccessRequestsIn" name="getVendorAccessRequestsIn"/&gt;</tt> </tt>
+<a name="L9395"></a><tt class="py-lineno">9395</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:output message="tns:getVendorAccessRequestsOut" name="getVendorAccessRequestsOut"/&gt;</tt> </tt>
+<a name="L9396"></a><tt class="py-lineno">9396</tt>  <tt class="py-line"><tt class="py-string">    &lt;/wsdl:operation&gt;</tt> </tt>
+<a name="L9397"></a><tt class="py-lineno">9397</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9398"></a><tt class="py-lineno">9398</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:operation name="createVendorAccessRequest"&gt;</tt> </tt>
+<a name="L9399"></a><tt class="py-lineno">9399</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:input message="tns:createVendorAccessRequestIn" name="createVendorAccessRequestIn"/&gt;</tt> </tt>
+<a name="L9400"></a><tt class="py-lineno">9400</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:output message="tns:createVendorAccessRequestOut" name="createVendorAccessRequestOut"/&gt;</tt> </tt>
+<a name="L9401"></a><tt class="py-lineno">9401</tt>  <tt class="py-line"><tt class="py-string">    &lt;/wsdl:operation&gt;</tt> </tt>
+<a name="L9402"></a><tt class="py-lineno">9402</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9403"></a><tt class="py-lineno">9403</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:operation name="addVendorSubscription"&gt;</tt> </tt>
+<a name="L9404"></a><tt class="py-lineno">9404</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:input message="tns:addVendorSubscriptionIn" name="addVendorSubscriptionIn"/&gt;</tt> </tt>
+<a name="L9405"></a><tt class="py-lineno">9405</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:output message="tns:addVendorSubscriptionOut" name="addVendorSubscriptionOut"/&gt;</tt> </tt>
+<a name="L9406"></a><tt class="py-lineno">9406</tt>  <tt class="py-line"><tt class="py-string">    &lt;/wsdl:operation&gt;</tt> </tt>
+<a name="L9407"></a><tt class="py-lineno">9407</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9408"></a><tt class="py-lineno">9408</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:operation name="updateVendorSubscription"&gt;</tt> </tt>
+<a name="L9409"></a><tt class="py-lineno">9409</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:input message="tns:updateVendorSubscriptionIn" name="updateVendorSubscriptionIn"/&gt;</tt> </tt>
+<a name="L9410"></a><tt class="py-lineno">9410</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:output message="tns:updateVendorSubscriptionOut" name="updateVendorSubscriptionOut"/&gt;</tt> </tt>
+<a name="L9411"></a><tt class="py-lineno">9411</tt>  <tt class="py-line"><tt class="py-string">    &lt;/wsdl:operation&gt;</tt> </tt>
+<a name="L9412"></a><tt class="py-lineno">9412</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9413"></a><tt class="py-lineno">9413</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:operation name="cancelVendorSubscription"&gt;</tt> </tt>
+<a name="L9414"></a><tt class="py-lineno">9414</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:input message="tns:cancelVendorSubscriptionIn" name="cancelVendorSubscriptionIn"/&gt;</tt> </tt>
+<a name="L9415"></a><tt class="py-lineno">9415</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:output message="tns:cancelVendorSubscriptionOut" name="cancelVendorSubscriptionOut"/&gt;</tt> </tt>
+<a name="L9416"></a><tt class="py-lineno">9416</tt>  <tt class="py-line"><tt class="py-string">    &lt;/wsdl:operation&gt;</tt> </tt>
+<a name="L9417"></a><tt class="py-lineno">9417</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9418"></a><tt class="py-lineno">9418</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:operation name="getSubscriptionInfo"&gt;</tt> </tt>
+<a name="L9419"></a><tt class="py-lineno">9419</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:input message="tns:getSubscriptionInfoIn" name="getSubscriptionInfoIn"/&gt;</tt> </tt>
+<a name="L9420"></a><tt class="py-lineno">9420</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:output message="tns:getSubscriptionInfoOut" name="getSubscriptionInfoOut"/&gt;</tt> </tt>
+<a name="L9421"></a><tt class="py-lineno">9421</tt>  <tt class="py-line"><tt class="py-string">    &lt;/wsdl:operation&gt;</tt> </tt>
+<a name="L9422"></a><tt class="py-lineno">9422</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9423"></a><tt class="py-lineno">9423</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:operation name="getVendorInfo"&gt;</tt> </tt>
+<a name="L9424"></a><tt class="py-lineno">9424</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:input message="tns:getVendorInfoIn" name="getVendorInfoIn"/&gt;</tt> </tt>
+<a name="L9425"></a><tt class="py-lineno">9425</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:output message="tns:getVendorInfoOut" name="getVendorInfoOut"/&gt;</tt> </tt>
+<a name="L9426"></a><tt class="py-lineno">9426</tt>  <tt class="py-line"><tt class="py-string">    &lt;/wsdl:operation&gt;</tt> </tt>
+<a name="L9427"></a><tt class="py-lineno">9427</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9428"></a><tt class="py-lineno">9428</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:operation name="getVendorUsers"&gt;</tt> </tt>
+<a name="L9429"></a><tt class="py-lineno">9429</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:input message="tns:getVendorUsersIn" name="getVendorUsersIn"/&gt;</tt> </tt>
+<a name="L9430"></a><tt class="py-lineno">9430</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:output message="tns:getVendorUsersOut" name="getVendorUsersOut"/&gt;</tt> </tt>
+<a name="L9431"></a><tt class="py-lineno">9431</tt>  <tt class="py-line"><tt class="py-string">    &lt;/wsdl:operation&gt;</tt> </tt>
+<a name="L9432"></a><tt class="py-lineno">9432</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9433"></a><tt class="py-lineno">9433</tt>  <tt class="py-line"><tt class="py-string">  &lt;/wsdl:portType&gt;</tt> </tt>
+<a name="L9434"></a><tt class="py-lineno">9434</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9435"></a><tt class="py-lineno">9435</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9436"></a><tt class="py-lineno">9436</tt>  <tt class="py-line"><tt class="py-string">  &lt;wsdl:binding name="VendorService" type="tns:VendorService"&gt;</tt> </tt>
+<a name="L9437"></a><tt class="py-lineno">9437</tt>  <tt class="py-line"><tt class="py-string">    &lt;soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/&gt;</tt> </tt>
+<a name="L9438"></a><tt class="py-lineno">9438</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9439"></a><tt class="py-lineno">9439</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:operation name="setAccessRequest"&gt;</tt> </tt>
+<a name="L9440"></a><tt class="py-lineno">9440</tt>  <tt class="py-line"><tt class="py-string">      &lt;soap:operation soapAction="setAccessRequest" style="document"/&gt;</tt> </tt>
+<a name="L9441"></a><tt class="py-lineno">9441</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:input name="setAccessRequestIn"&gt;</tt> </tt>
+<a name="L9442"></a><tt class="py-lineno">9442</tt>  <tt class="py-line"><tt class="py-string">        &lt;soap:body use="literal"/&gt;</tt> </tt>
+<a name="L9443"></a><tt class="py-lineno">9443</tt>  <tt class="py-line"><tt class="py-string">      &lt;/wsdl:input&gt;</tt> </tt>
+<a name="L9444"></a><tt class="py-lineno">9444</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:output name="setAccessRequestOut"&gt;</tt> </tt>
+<a name="L9445"></a><tt class="py-lineno">9445</tt>  <tt class="py-line"><tt class="py-string">        &lt;soap:body use="literal"/&gt;</tt> </tt>
+<a name="L9446"></a><tt class="py-lineno">9446</tt>  <tt class="py-line"><tt class="py-string">      &lt;/wsdl:output&gt;</tt> </tt>
+<a name="L9447"></a><tt class="py-lineno">9447</tt>  <tt class="py-line"><tt class="py-string">    &lt;/wsdl:operation&gt;</tt> </tt>
+<a name="L9448"></a><tt class="py-lineno">9448</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9449"></a><tt class="py-lineno">9449</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:operation name="cancelVendorAccessRequest"&gt;</tt> </tt>
+<a name="L9450"></a><tt class="py-lineno">9450</tt>  <tt class="py-line"><tt class="py-string">      &lt;soap:operation soapAction="cancelVendorAccessRequest" style="document"/&gt;</tt> </tt>
+<a name="L9451"></a><tt class="py-lineno">9451</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:input name="cancelVendorAccessRequestIn"&gt;</tt> </tt>
+<a name="L9452"></a><tt class="py-lineno">9452</tt>  <tt class="py-line"><tt class="py-string">        &lt;soap:body use="literal"/&gt;</tt> </tt>
+<a name="L9453"></a><tt class="py-lineno">9453</tt>  <tt class="py-line"><tt class="py-string">      &lt;/wsdl:input&gt;</tt> </tt>
+<a name="L9454"></a><tt class="py-lineno">9454</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:output name="cancelVendorAccessRequestOut"&gt;</tt> </tt>
+<a name="L9455"></a><tt class="py-lineno">9455</tt>  <tt class="py-line"><tt class="py-string">        &lt;soap:body use="literal"/&gt;</tt> </tt>
+<a name="L9456"></a><tt class="py-lineno">9456</tt>  <tt class="py-line"><tt class="py-string">      &lt;/wsdl:output&gt;</tt> </tt>
+<a name="L9457"></a><tt class="py-lineno">9457</tt>  <tt class="py-line"><tt class="py-string">    &lt;/wsdl:operation&gt;</tt> </tt>
+<a name="L9458"></a><tt class="py-lineno">9458</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9459"></a><tt class="py-lineno">9459</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:operation name="getVendorAccessRequests"&gt;</tt> </tt>
+<a name="L9460"></a><tt class="py-lineno">9460</tt>  <tt class="py-line"><tt class="py-string">      &lt;soap:operation soapAction="getVendorAccessRequests" style="document"/&gt;</tt> </tt>
+<a name="L9461"></a><tt class="py-lineno">9461</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:input name="getVendorAccessRequestsIn"&gt;</tt> </tt>
+<a name="L9462"></a><tt class="py-lineno">9462</tt>  <tt class="py-line"><tt class="py-string">        &lt;soap:body use="literal"/&gt;</tt> </tt>
+<a name="L9463"></a><tt class="py-lineno">9463</tt>  <tt class="py-line"><tt class="py-string">      &lt;/wsdl:input&gt;</tt> </tt>
+<a name="L9464"></a><tt class="py-lineno">9464</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:output name="getVendorAccessRequestsOut"&gt;</tt> </tt>
+<a name="L9465"></a><tt class="py-lineno">9465</tt>  <tt class="py-line"><tt class="py-string">        &lt;soap:body use="literal"/&gt;</tt> </tt>
+<a name="L9466"></a><tt class="py-lineno">9466</tt>  <tt class="py-line"><tt class="py-string">      &lt;/wsdl:output&gt;</tt> </tt>
+<a name="L9467"></a><tt class="py-lineno">9467</tt>  <tt class="py-line"><tt class="py-string">    &lt;/wsdl:operation&gt;</tt> </tt>
+<a name="L9468"></a><tt class="py-lineno">9468</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9469"></a><tt class="py-lineno">9469</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:operation name="createVendorAccessRequest"&gt;</tt> </tt>
+<a name="L9470"></a><tt class="py-lineno">9470</tt>  <tt class="py-line"><tt class="py-string">      &lt;soap:operation soapAction="createVendorAccessRequest" style="document"/&gt;</tt> </tt>
+<a name="L9471"></a><tt class="py-lineno">9471</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:input name="createVendorAccessRequestIn"&gt;</tt> </tt>
+<a name="L9472"></a><tt class="py-lineno">9472</tt>  <tt class="py-line"><tt class="py-string">        &lt;soap:body use="literal"/&gt;</tt> </tt>
+<a name="L9473"></a><tt class="py-lineno">9473</tt>  <tt class="py-line"><tt class="py-string">      &lt;/wsdl:input&gt;</tt> </tt>
+<a name="L9474"></a><tt class="py-lineno">9474</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:output name="createVendorAccessRequestOut"&gt;</tt> </tt>
+<a name="L9475"></a><tt class="py-lineno">9475</tt>  <tt class="py-line"><tt class="py-string">        &lt;soap:body use="literal"/&gt;</tt> </tt>
+<a name="L9476"></a><tt class="py-lineno">9476</tt>  <tt class="py-line"><tt class="py-string">      &lt;/wsdl:output&gt;</tt> </tt>
+<a name="L9477"></a><tt class="py-lineno">9477</tt>  <tt class="py-line"><tt class="py-string">    &lt;/wsdl:operation&gt;</tt> </tt>
+<a name="L9478"></a><tt class="py-lineno">9478</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9479"></a><tt class="py-lineno">9479</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:operation name="addVendorSubscription"&gt;</tt> </tt>
+<a name="L9480"></a><tt class="py-lineno">9480</tt>  <tt class="py-line"><tt class="py-string">      &lt;soap:operation soapAction="addVendorSubscription" style="document"/&gt;</tt> </tt>
+<a name="L9481"></a><tt class="py-lineno">9481</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:input name="addVendorSubscriptionIn"&gt;</tt> </tt>
+<a name="L9482"></a><tt class="py-lineno">9482</tt>  <tt class="py-line"><tt class="py-string">        &lt;soap:body use="literal"/&gt;</tt> </tt>
+<a name="L9483"></a><tt class="py-lineno">9483</tt>  <tt class="py-line"><tt class="py-string">      &lt;/wsdl:input&gt;</tt> </tt>
+<a name="L9484"></a><tt class="py-lineno">9484</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:output name="addVendorSubscriptionOut"&gt;</tt> </tt>
+<a name="L9485"></a><tt class="py-lineno">9485</tt>  <tt class="py-line"><tt class="py-string">        &lt;soap:body use="literal"/&gt;</tt> </tt>
+<a name="L9486"></a><tt class="py-lineno">9486</tt>  <tt class="py-line"><tt class="py-string">      &lt;/wsdl:output&gt;</tt> </tt>
+<a name="L9487"></a><tt class="py-lineno">9487</tt>  <tt class="py-line"><tt class="py-string">    &lt;/wsdl:operation&gt;</tt> </tt>
+<a name="L9488"></a><tt class="py-lineno">9488</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9489"></a><tt class="py-lineno">9489</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:operation name="updateVendorSubscription"&gt;</tt> </tt>
+<a name="L9490"></a><tt class="py-lineno">9490</tt>  <tt class="py-line"><tt class="py-string">      &lt;soap:operation soapAction="updateVendorSubscription" style="document"/&gt;</tt> </tt>
+<a name="L9491"></a><tt class="py-lineno">9491</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:input name="updateVendorSubscriptionIn"&gt;</tt> </tt>
+<a name="L9492"></a><tt class="py-lineno">9492</tt>  <tt class="py-line"><tt class="py-string">        &lt;soap:body use="literal"/&gt;</tt> </tt>
+<a name="L9493"></a><tt class="py-lineno">9493</tt>  <tt class="py-line"><tt class="py-string">      &lt;/wsdl:input&gt;</tt> </tt>
+<a name="L9494"></a><tt class="py-lineno">9494</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:output name="updateVendorSubscriptionOut"&gt;</tt> </tt>
+<a name="L9495"></a><tt class="py-lineno">9495</tt>  <tt class="py-line"><tt class="py-string">        &lt;soap:body use="literal"/&gt;</tt> </tt>
+<a name="L9496"></a><tt class="py-lineno">9496</tt>  <tt class="py-line"><tt class="py-string">      &lt;/wsdl:output&gt;</tt> </tt>
+<a name="L9497"></a><tt class="py-lineno">9497</tt>  <tt class="py-line"><tt class="py-string">    &lt;/wsdl:operation&gt;</tt> </tt>
+<a name="L9498"></a><tt class="py-lineno">9498</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9499"></a><tt class="py-lineno">9499</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:operation name="cancelVendorSubscription"&gt;</tt> </tt>
+<a name="L9500"></a><tt class="py-lineno">9500</tt>  <tt class="py-line"><tt class="py-string">      &lt;soap:operation soapAction="cancelVendorSubscription" style="document"/&gt;</tt> </tt>
+<a name="L9501"></a><tt class="py-lineno">9501</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:input name="cancelVendorSubscriptionIn"&gt;</tt> </tt>
+<a name="L9502"></a><tt class="py-lineno">9502</tt>  <tt class="py-line"><tt class="py-string">        &lt;soap:body use="literal"/&gt;</tt> </tt>
+<a name="L9503"></a><tt class="py-lineno">9503</tt>  <tt class="py-line"><tt class="py-string">      &lt;/wsdl:input&gt;</tt> </tt>
+<a name="L9504"></a><tt class="py-lineno">9504</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:output name="cancelVendorSubscriptionOut"&gt;</tt> </tt>
+<a name="L9505"></a><tt class="py-lineno">9505</tt>  <tt class="py-line"><tt class="py-string">        &lt;soap:body use="literal"/&gt;</tt> </tt>
+<a name="L9506"></a><tt class="py-lineno">9506</tt>  <tt class="py-line"><tt class="py-string">      &lt;/wsdl:output&gt;</tt> </tt>
+<a name="L9507"></a><tt class="py-lineno">9507</tt>  <tt class="py-line"><tt class="py-string">    &lt;/wsdl:operation&gt;</tt> </tt>
+<a name="L9508"></a><tt class="py-lineno">9508</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9509"></a><tt class="py-lineno">9509</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:operation name="getSubscriptionInfo"&gt;</tt> </tt>
+<a name="L9510"></a><tt class="py-lineno">9510</tt>  <tt class="py-line"><tt class="py-string">      &lt;soap:operation soapAction="getSubscriptionInfo" style="document"/&gt;</tt> </tt>
+<a name="L9511"></a><tt class="py-lineno">9511</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:input name="getSubscriptionInfoIn"&gt;</tt> </tt>
+<a name="L9512"></a><tt class="py-lineno">9512</tt>  <tt class="py-line"><tt class="py-string">        &lt;soap:body use="literal"/&gt;</tt> </tt>
+<a name="L9513"></a><tt class="py-lineno">9513</tt>  <tt class="py-line"><tt class="py-string">      &lt;/wsdl:input&gt;</tt> </tt>
+<a name="L9514"></a><tt class="py-lineno">9514</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:output name="getSubscriptionInfoOut"&gt;</tt> </tt>
+<a name="L9515"></a><tt class="py-lineno">9515</tt>  <tt class="py-line"><tt class="py-string">        &lt;soap:body use="literal"/&gt;</tt> </tt>
+<a name="L9516"></a><tt class="py-lineno">9516</tt>  <tt class="py-line"><tt class="py-string">      &lt;/wsdl:output&gt;</tt> </tt>
+<a name="L9517"></a><tt class="py-lineno">9517</tt>  <tt class="py-line"><tt class="py-string">    &lt;/wsdl:operation&gt;</tt> </tt>
+<a name="L9518"></a><tt class="py-lineno">9518</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9519"></a><tt class="py-lineno">9519</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:operation name="getVendorInfo"&gt;</tt> </tt>
+<a name="L9520"></a><tt class="py-lineno">9520</tt>  <tt class="py-line"><tt class="py-string">      &lt;soap:operation soapAction="getVendorInfo" style="document"/&gt;</tt> </tt>
+<a name="L9521"></a><tt class="py-lineno">9521</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:input name="getVendorInfoIn"&gt;</tt> </tt>
+<a name="L9522"></a><tt class="py-lineno">9522</tt>  <tt class="py-line"><tt class="py-string">        &lt;soap:body use="literal"/&gt;</tt> </tt>
+<a name="L9523"></a><tt class="py-lineno">9523</tt>  <tt class="py-line"><tt class="py-string">      &lt;/wsdl:input&gt;</tt> </tt>
+<a name="L9524"></a><tt class="py-lineno">9524</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:output name="getVendorInfoOut"&gt;</tt> </tt>
+<a name="L9525"></a><tt class="py-lineno">9525</tt>  <tt class="py-line"><tt class="py-string">        &lt;soap:body use="literal"/&gt;</tt> </tt>
+<a name="L9526"></a><tt class="py-lineno">9526</tt>  <tt class="py-line"><tt class="py-string">      &lt;/wsdl:output&gt;</tt> </tt>
+<a name="L9527"></a><tt class="py-lineno">9527</tt>  <tt class="py-line"><tt class="py-string">    &lt;/wsdl:operation&gt;</tt> </tt>
+<a name="L9528"></a><tt class="py-lineno">9528</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9529"></a><tt class="py-lineno">9529</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:operation name="getVendorUsers"&gt;</tt> </tt>
+<a name="L9530"></a><tt class="py-lineno">9530</tt>  <tt class="py-line"><tt class="py-string">      &lt;soap:operation soapAction="getVendorUsers" style="document"/&gt;</tt> </tt>
+<a name="L9531"></a><tt class="py-lineno">9531</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:input name="getVendorUsersIn"&gt;</tt> </tt>
+<a name="L9532"></a><tt class="py-lineno">9532</tt>  <tt class="py-line"><tt class="py-string">        &lt;soap:body use="literal"/&gt;</tt> </tt>
+<a name="L9533"></a><tt class="py-lineno">9533</tt>  <tt class="py-line"><tt class="py-string">      &lt;/wsdl:input&gt;</tt> </tt>
+<a name="L9534"></a><tt class="py-lineno">9534</tt>  <tt class="py-line"><tt class="py-string">      &lt;wsdl:output name="getVendorUsersOut"&gt;</tt> </tt>
+<a name="L9535"></a><tt class="py-lineno">9535</tt>  <tt class="py-line"><tt class="py-string">        &lt;soap:body use="literal"/&gt;</tt> </tt>
+<a name="L9536"></a><tt class="py-lineno">9536</tt>  <tt class="py-line"><tt class="py-string">      &lt;/wsdl:output&gt;</tt> </tt>
+<a name="L9537"></a><tt class="py-lineno">9537</tt>  <tt class="py-line"><tt class="py-string">    &lt;/wsdl:operation&gt;</tt> </tt>
+<a name="L9538"></a><tt class="py-lineno">9538</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L9539"></a><tt class="py-lineno">9539</tt>  <tt class="py-line"><tt class="py-string">  &lt;/wsdl:binding&gt;</tt> </tt>
+<a name="L9540"></a><tt class="py-lineno">9540</tt>  <tt class="py-line"><tt class="py-string">  &lt;wsdl:service name="VendorService"&gt;</tt> </tt>
+<a name="L9541"></a><tt class="py-lineno">9541</tt>  <tt class="py-line"><tt class="py-string">    &lt;wsdl:port binding="tns:VendorService" name="VendorService"&gt;</tt> </tt>
+<a name="L9542"></a><tt class="py-lineno">9542</tt>  <tt class="py-line"><tt class="py-string">      &lt;soap:address location="https://api.betfair.com/admin-api/v2/VendorService"/&gt;</tt> </tt>
+<a name="L9543"></a><tt class="py-lineno">9543</tt>  <tt class="py-line"><tt class="py-string">    &lt;/wsdl:port&gt;</tt> </tt>
+<a name="L9544"></a><tt class="py-lineno">9544</tt>  <tt class="py-line"><tt class="py-string">  &lt;/wsdl:service&gt;</tt> </tt>
+<a name="L9545"></a><tt class="py-lineno">9545</tt>  <tt class="py-line"><tt class="py-string">&lt;/wsdl:definitions&gt;</tt> </tt>
+<a name="L9546"></a><tt class="py-lineno">9546</tt>  <tt class="py-line"><tt class="py-string">'''</tt> </tt>
+<a name="L9547"></a><tt class="py-lineno">9547</tt>  <tt class="py-line"> </tt><script type="text/javascript">
 <!--
 expandto(location.href);
 // -->
@@ -8823,7 +9645,7 @@ expandto(location.href);
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Sun Apr 03 13:17:43 2011
+    Generated by Epydoc 3.0.1 on Sat Apr 09 23:52:50 2011
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
