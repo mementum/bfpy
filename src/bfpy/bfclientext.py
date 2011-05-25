@@ -193,7 +193,7 @@ class PlaceBets(ServiceDescriptor):
         '''
         placeBetsArgs = self.kwargs.copy()
         placeBetsArgs.update(**kwargs)
-        nonIPRePlace = placeBetsArgs.pop('nonIPRePlace')
+        nonIPRePlace = placeBetsArgs.pop('_nonIPRePlace')
 
         response = BfApi.placeBets(instance, *args, **placeBetsArgs)
 

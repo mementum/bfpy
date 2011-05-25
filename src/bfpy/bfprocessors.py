@@ -33,8 +33,10 @@ Implementation of BfApi request and response processors
 from datetime import datetime, timedelta
 
 import bferror
+import bfglobals
+import bfvirtual
 from timezone import LocalTimezone
-from util import EmptyObject
+from bfutil import EmptyObject
 
 
 class ArrayUnfix(object):
@@ -284,10 +286,10 @@ class PreProcLogin(object):
         loginArgs = ['username', 'password', 'productId', 'vendorSoftwareId']
 
         for loginArg in loginArgs:
-            if hasattr(instance, loginArg):
-                if loginArg not in methodArgs:
-                    loginArgValue = getattr(instance, loginArg)
-                    requestArgs[loginArg] = loginArgValue
+            if loginArg not in methodArgs:
+                loginArgVal = getattr(instance, loginArg, None)
+                if loginArgVal is not None:
+                    requestArgs[loginArg] = loginArgVal
 
 
 class ProcLogin(object):
@@ -308,6 +310,31 @@ class ProcLogin(object):
 
         # Write down the currency code
         instance.currency = response.currency
+        instance.rateGBP = 0
+
+        requestArgs = kwargs.get('requestArgs')
+        if instance.productId != bfglobals.freeApiId and \
+               requestArgs.get('_getCurrencies', False):
+
+            instance.getAllCurrenciesV2()
+
+
+class ProcGetAllCurrenciesV2(object):
+    '''
+    Response processor
+
+    Writes down all currency related things and keeps a copy of the
+    rateGBP for virtual price calculations
+    '''
+    def __call__(self, response, **kwargs):
+        instance = kwargs.get('instance')
+
+        for currencyItem in response.currencyItems:
+            instance.MinBets[currencyItem.currencyCode] = currencyItem
+
+            # Write down the rateGBP to use it in virtualPrices
+            if instance.currency == currencyItem.currencyCode:
+                instance.rateGBP = currencyItem.rateGBP
 
 
 class ProcMarket(object):
@@ -324,14 +351,13 @@ class ProcMarket(object):
         # Embed the exchangeId in the answer, since this is a must for betting
         response.market.exchangeId = exchangeId
 
-        # Adjust the marketTime to the system local time
-        # The original object is naive and suds fails to identify DST settings
+        # Adjust the marketTime to the system local time - Bf times are in GMT (UTC)
         localTimezone = LocalTimezone()
-        daylight = localTimezone.dst(response.market.marketTime)
-        response.market.marketTime += daylight
+        utcoffset = localTimezone.utcoffset(response.market.marketTime)
+        response.market.marketTime += utcoffset
 
-        # Return a non-naive datetime object (in case the calling app wanted to
-        # move it to another timezone
+        # Make a non-naive datetime object (in case the calling app wanted to
+        # move it to another timezone)
         response.market.marketTime = datetime(response.market.marketTime.year,
                                               response.market.marketTime.month,
                                               response.market.marketTime.day,
@@ -364,6 +390,19 @@ class ProcMarketPricesCompressed(object):
             for runner in response.marketPrices.runnerPrices:
                 runner.bestPricesToBack = runner.bestPricesToBack.Price
                 runner.bestPricesToLay = runner.bestPricesToLay.Price
+
+        # Virtual prices
+        if not self.completeCompressed:
+            instance = kwargs.get('instance')
+            if instance.productId != bfglobals.freeApiId and \
+                   instance.MinBets[instance.currency].rateGBP is not None:
+                # In the freeApi there is no rateGBP and the virtualPrices can't
+                # be calculated as in the web site, so we can't come down here
+                requestArgs = kwargs.get('requestArgs')
+                if requestArgs.get('_virtualPrices', False):
+                    bfvirtual.VirtualPrices(response.marketPrices,
+                                            instance.MinBets['GBP'].minimumStake,
+                                            instance.MinBets[instance.currency].rateGBP)
 
 
     def ParseMarketPricesCompressed(self, compressedPrices, completeCompressed=False):
@@ -507,6 +546,7 @@ class ProcMarketPricesCompressed(object):
 
         # Assign the header fields
         runner.selectionId = int(partsHeader[0])
+        # AsianLineId is not sent in the compressed format
         runner.asianLineId = 0
         runner.sortOrder = int(partsHeader[1])
         runner.totalAmountMatched = float(partsHeader[2])
@@ -528,7 +568,6 @@ class ProcMarketPricesCompressed(object):
         runner.actualBSP = self.ToFloatIfNotNull(partsHeader[9])
 
         if completeCompressed == True:
-
             numFieldsPerPrice = 5
             runner.Prices = list()
 
@@ -539,7 +578,6 @@ class ProcMarketPricesCompressed(object):
             numPrices = len(partsPrices) / numFieldsPerPrice
 
             for i in xrange(numPrices):
-
                 index = i * numFieldsPerPrice
 
                 # numFieldsPerPrice has to be added to the index to include the last element.
@@ -548,14 +586,12 @@ class ProcMarketPricesCompressed(object):
                 runner.Prices.append(price)
             runner.prices = runner.Prices
         else:
-
             numFieldsPerPrice = 4
             
             partsPrices = partsRunner[1].split('~')
             numPrices = len(partsPrices) / numFieldsPerPrice
             # Back Prices
             for i in xrange(numPrices):
-
                 index = i * numFieldsPerPrice
 
                 # numFieldsPerPrice has to be added to the index to include the last element.
@@ -567,7 +603,6 @@ class ProcMarketPricesCompressed(object):
             numPrices = len(partsPrices) / numFieldsPerPrice
             # Lay Prices
             for i in xrange(numPrices):
-
                 index = i * numFieldsPerPrice
 
                 # numFieldsPerPrice has to be added to the index to include the last element
@@ -686,27 +721,20 @@ class ProcMarketPrices(object):
     '''
     Response processor
 
-    Removes several possible array indirections from a GetMarketPricesResp
     '''
     def __call__(self, response, **kwargs):
 
-        mktPrices = response.marketPrices
-
-        if mktPrices.runnerPrices is not None:
-            mktPrices.runnerPrices = mktPrices.runnerPrices.RunnerPrices
-        else:
-            mktPrices.runnerPrices = list()
-
-        for runnerPrice in mktPrices.runnerPrices:
-            if runnerPrice.bestPricesToBack is not None:
-                runnerPrice.bestPricesToBack = runnerPrice.bestPricesToBack.Price
-            else:
-                runnerPrice.bestPricesToBack = list()
-
-            if runnerPrice.bestPricesToLay is not None:
-                runnerPrice.bestPricesToLay = runnerPrice.bestPricesToLay.Price
-            else:
-                runnerPrice.bestPricesToLay = list()
+        # Virtual prices
+        instance = kwargs.get('instance')
+        if instance.productId != bfglobals.freeApiId and \
+               instance.MinBets[instance.currency].rateGBP is not None:
+            # In the freeApi there is no rateGBP and the virtualPrices can't
+            # be calculated exactly as in the web site, so we can't come down here
+            requestArgs = kwargs.get('requestArgs')
+            if requestArgs.get('_virtualPrices', False):
+                bfvirtual.VirtualPrices(response.marketPrices,
+                                        instance.MinBets['GBP'].minimumStake,
+                                        instance.MinBets[instance.currency].rateGBP)
 
 
 class PreCompleteMarketPricesCompressed(object):
@@ -735,7 +763,7 @@ class ProcMarketTradedVolumeCompressed(object):
     '''
     Response processor
 
-    Decompresses de Market Traded Volume response
+    Decompresses the Market Traded Volume response
     '''
     def __call__(self, response, **kwargs):
         tradedVolume = list()

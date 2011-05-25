@@ -34,6 +34,19 @@ from __future__ import with_statement
 
 import threading
 import time
+import sys
+
+'''
+time.clock seems to work find under Windows, keeping wallclock time
+but seems to really only report CPU time under Linux/Unix and therefore
+is not counting time spent in calls like time.sleep if they have not
+been implemented with a CPU approach
+'''
+if sys.platform == 'win32':
+    tclock = time.clock
+else:
+    tclock = time.time
+
 
 class DataRequest(object):
     '''
@@ -79,7 +92,7 @@ class DataCounter(object):
 
     __slots__ = ['__weakref__', 'lock', 'maxRequests', 'timeGuard', 'reqs', 'weight']
 
-    def __init__(self, maxRequests=20, timeGuard=0.05):
+    def __init__(self, maxRequests=20, timeGuard=0.00):
         '''
         Initializes the request data holder
 
@@ -114,7 +127,7 @@ class DataCounter(object):
             return
 
         with self.lock:
-            tnow = time.clock()
+            tnow = tclock()
 
             # purge the request list of requests older than 1 second
             while self.reqs:
@@ -130,8 +143,7 @@ class DataCounter(object):
 
             if self.weight > maxRequests:
                 # All remaining requests happened within one second
-                # see how much has to be waited until we may issue another
-                # request
+                # see how much has to be waited until we may issue another request
                 excess = self.weight - maxRequests
 
                 for req in self.reqs:

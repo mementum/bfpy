@@ -33,6 +33,9 @@ Classes for definition and management of API types
 import datetime
 import types
 
+from timezone import LocalTimezone
+
+
 class ApiParam(object):
     '''
     Non-data descriptor class to be installed in a L{ApiDataType}
@@ -78,6 +81,7 @@ class ApiParam(object):
         self.name = name
         self.nullable = nullable
         self.defvalue = value
+        self.xsd = xsd
         self.listtype = listtype
 
         self.patternFill = '<%s>%%s</%s>' % (name, name)
@@ -148,7 +152,9 @@ class ApiParam(object):
             for val in value:
                 pattern += self.patternList % str(val)
         elif isinstance(value, datetime.datetime):
-            pattern = value.isoformat()
+            localTimezone = LocalTimezone()
+            tmpvalue = value - localTimezone.utcoffset(value)
+            pattern = tmpvalue.isoformat()
         else:
             pattern = str(value)
 
@@ -174,11 +180,11 @@ class ApiDataTypeMeta(type):
         @type clsdict: dict
         @param clsdict: the dictionary of cls
         '''
-        clsdict['params'] = list()
-        if 'apiParams' in clsdict:
-            for apiParam in clsdict['apiParams']:
+        clsdict['_params'] = list()
+        if '_apiParams' in clsdict:
+            for apiParam in clsdict['_apiParams']:
                 clsdict[apiParam.name] = apiParam
-                clsdict['params'].append(apiParam.name)
+                clsdict['_params'].append(apiParam.name)
 
         newcls = type.__new__(cls, name, bases, clsdict)
         ApiDataTypes.append(newcls)
@@ -198,7 +204,9 @@ class ApiDataType(object):
     '''
     __metaclass__ = ApiDataTypeMeta
 
-    def __init__(self, name='ns1:request'):
+    apitype = None
+
+    def __init__(self, ns='ns1', name='request'):
         '''
         Initializes the pattern using the given name
 
@@ -208,6 +216,10 @@ class ApiDataType(object):
                      (except for the substitution)
         '''
         self.header = None
+
+        if ns and name:
+            name = '%s:%s' % (ns, name)
+
         if name is not None:
             self.pattern = '<%s>\n%%s</%s>' % (name, name)
         else:
@@ -224,7 +236,7 @@ class ApiDataType(object):
             subpattern += self.header()
             subpattern += '\n'
 
-        for param in self.params:
+        for param in self._params:
             subpattern += getattr(self.__class__, param)(self)
             subpattern += '\n'
 
@@ -245,29 +257,38 @@ class ApiDataType(object):
         return unicode(self()).encode('utf-8')
 
 
+    def __copy__(self):
+        clone = self.__class__()
+        for param in self._params:
+            setattr(clone, param, getattr(self, param))
+        return clone
+        
+
 '''ApiDataType definitions'''
 
 class APIRequestHeader(ApiDataType):
-    apiParams = [
+    _apiParams = [
         ApiParam('clientStamp'), ApiParam('sessionToken'),
         ]
 
     def __init__(self):
-        ApiDataType.__init__(self, name='header')
+        ApiDataType.__init__(self, ns=None, name='header')
 
+
+##############################
+# General API - Complete
+##############################
 
 class LoginReq(ApiDataType):
-    apiParams = [
-        ApiParam('ipAddress'), ApiParam('locationId'),
-        ApiParam('password'), ApiParam('productId'),
-        ApiParam('username'), ApiParam('vendorSoftwareId'),
+    _apiParams = [
+        ApiParam('ipAddress'),
+        ApiParam('locationId'),
+        ApiParam('password'),
+        ApiParam('productId'),
+        ApiParam('username'),
+        ApiParam('vendorSoftwareId'),
         ]
 
-    def __init__(self):
-        ApiDataType.__init__(self)
-
-
-class KeepAliveReq(ApiDataType):
     def __init__(self):
         ApiDataType.__init__(self)
 
@@ -277,17 +298,41 @@ class LogoutReq(ApiDataType):
         ApiDataType.__init__(self)
 
 
-class GetEventTypesReq(ApiDataType):
-    apiParams = [
-        ApiParam('locale', nullable=True),
+class KeepAliveReq(ApiDataType):
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+##############################
+# Read-Only API - Complete
+##############################
+class ConvertCurrencyReq(ApiDataType):
+    _apiParams = [
+        ApiParam('amount'),
+        ApiParam('fromCurrency', nullable=True),
+        ApiParam('toCurrency', nullable=True),
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class GetCurrenciesReq(ApiDataType):
+    _apiParams = [
         ]
     def __init__(self):
         ApiDataType.__init__(self)
 
 
-class GetEventsReq(ApiDataType):
-    apiParams = [
-        ApiParam('eventParentId'),
+class GetCurrenciesV2Req(ApiDataType):
+    _apiParams = [
+        ]
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class GetEventTypesReq(ApiDataType):
+    _apiParams = [
         ApiParam('locale', nullable=True),
         ]
     def __init__(self):
@@ -295,7 +340,7 @@ class GetEventsReq(ApiDataType):
 
 
 class GetAllMarketsReq(ApiDataType):
-    apiParams = [
+    _apiParams = [
         ApiParam('locale', nullable=True),
         ApiParam('eventTypeIds', nullable=True, xsd=False, listtype='int'),
         ApiParam('countries', nullable=True, xsd=False, listtype='Country'),
@@ -307,23 +352,65 @@ class GetAllMarketsReq(ApiDataType):
         ApiDataType.__init__(self)
 
 
-class GetAccountFundsReq(ApiDataType):
+class GetBetReq(ApiDataType):
+    _apiParams = [
+        ApiParam('betId'),
+        ApiParam('locale', nullable=True),
+        ]
+
     def __init__(self):
         ApiDataType.__init__(self)
 
 
-class TransferFundsReq(ApiDataType):
-    apiParams = [
-        ApiParam('sourceWalletId'),
-        ApiParam('targetWalletId'),
-        ApiParam('amount'),
+class GetBetHistoryReq(ApiDataType):
+    _apiParams = [
+        ApiParam('betTypesIncluded', xsd=False),
+        ApiParam('detailed'),
+        ApiParam('eventTypeIds', nullable=True, xsd=False, listtype='int'),
+        ApiParam('marketId'),
+        ApiParam('locale', nullable=True),
+        ApiParam('timezone', nullable=True),
+        ApiParam('marketTypesIncluded', nullable=True, xsd=False, listtype='MarketTypeEnum'),
+        ApiParam('placedDateFrom'),
+        ApiParam('placedDateTo'),
+        ApiParam('recordCount'),
+        ApiParam('sortBetsBy', xsd=False),
+        ApiParam('startRecord'),
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class GetBetLiteReq(ApiDataType):
+    _apiParams = [
+        ApiParam('betId'),
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class GetBetMatchesLiteReq(ApiDataType):
+    _apiParams = [
+        ApiParam('betId'),
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class GetCompleteMarketPricesCompressedReq(ApiDataType):
+    _apiParams = [
+        ApiParam('currencyCode', nullable=True),
+        ApiParam('marketId'),
         ]
     def __init__(self):
         ApiDataType.__init__(self)
 
 
 class GetCurrentBetsReq(ApiDataType):
-    apiParams = [
+    _apiParams = [
         ApiParam('betStatus', xsd=False),
         ApiParam('detailed'),
         ApiParam('locale', nullable=True),
@@ -338,81 +425,194 @@ class GetCurrentBetsReq(ApiDataType):
         ApiDataType.__init__(self)
 
 
-class GetMarketReq(ApiDataType):
-    apiParams = [
+class GetCurrentBetsLiteReq(ApiDataType):
+    _apiParams = [
+        ApiParam('betStatus', xsd=False),
+        ApiParam('marketId'),
+        ApiParam('orderBy', xsd=False),
+        ApiParam('recordCount'),
+        ApiParam('startRecord'),
+        ApiParam('noTotalRecordCount'),
+        ]
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class GetDetailedAvailableMktDepthReq(ApiDataType):
+    _apiParams = [
+        ApiParam('asianLineId'),
+        ApiParam('currencyCode', nullable=True),
         ApiParam('locale', nullable=True),
         ApiParam('marketId'),
-        ApiParam('includeCouponLinks', nullable=True),
+        ApiParam('selectionId'),
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class GetEventsReq(ApiDataType):
+    _apiParams = [
+        ApiParam('eventParentId'),
+        ApiParam('locale', nullable=True),
+        ]
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class GetInPlayMarketsReq(ApiDataType):
+    _apiParams = [
+        ApiParam('locale', nullable=True),
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class GetMarketReq(ApiDataType):
+    _apiParams = [
+        ApiParam('locale', nullable=True),
+        ApiParam('marketId'),
+        ApiParam('includeCouponLinks'),
+        ]
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class GetMarketInfoReq(ApiDataType):
+    _apiParams = [
+        ApiParam('marketId'),
+        ]
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class GetMarketPricesReq(ApiDataType):
+    _apiParams = [
+        ApiParam('currencyCode', nullable=True),
+        ApiParam('marketId'),
         ]
     def __init__(self):
         ApiDataType.__init__(self)
 
 
 class GetMarketPricesCompressedReq(ApiDataType):
-    apiParams = [
+    _apiParams = [
         ApiParam('currencyCode', nullable=True),
         ApiParam('marketId'),
-        ]
-    def __init__(self):
-        ApiDataType.__init__(self)
-
-
-class GetCompleteMarketPricesCompressedReq(ApiDataType):
-    apiParams = [
-        ApiParam('currencyCode', nullable=True),
-        ApiParam('marketId'),
-        ]
-    def __init__(self):
-        ApiDataType.__init__(self)
-
-
-class GetMarketTradedVolumeCompressedReq(ApiDataType):
-    apiParams = [
-        ApiParam('currencyCode', nullable=True),
-        ApiParam('marketId'),
-        ]
-    def __init__(self):
-        ApiDataType.__init__(self)
-
-
-class GetMarketProfitAndLossReq(ApiDataType):
-    apiParams = [
-        ApiParam('locale', nullable=True),
-        ApiParam('includeSettledBets', nullable=True),
-        ApiParam('includeBspBets'),
-        ApiParam('marketID'),
-        ApiParam('netOfComission', nullable=True),
         ]
     def __init__(self):
         ApiDataType.__init__(self)
 
 
 class GetMUBetsReq(ApiDataType):
-    apiParams = [
+    _apiParams = [
         ApiParam('betStatus', xsd=False),
-        ApiParam('marketId', nullable=True),
+        ApiParam('marketId'),
         ApiParam('betIds', nullable=True, xsd=False, listtype='betId'),
         ApiParam('orderBy', xsd=False),
         ApiParam('sortOrder', xsd=False),
         ApiParam('recordCount'),
         ApiParam('startRecord'),
         ApiParam('matchedSince', nullable=True),
-        ApiParam('excludeLastSecond', nullable=True),
+        ApiParam('excludeLastSecond'),
         ]
     def __init__(self):
         ApiDataType.__init__(self)
 
 
+class GetMUBetsLiteReq(ApiDataType):
+    _apiParams = [
+        ApiParam('betStatus', xsd=False),
+        ApiParam('marketId'),
+        ApiParam('betIds', nullable=True, xsd=False, listtype='betId'),
+        ApiParam('orderBy', xsd=False),
+        ApiParam('sortOrder', xsd=False),
+        ApiParam('recordCount'),
+        ApiParam('startRecord'),
+        ApiParam('matchedSince', nullable=True),
+        ApiParam('excludeLastSecond'),
+        ]
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class GetMarketProfitAndLossReq(ApiDataType):
+    _apiParams = [
+        ApiParam('locale', nullable=True),
+        ApiParam('includeSettledBets'),
+        ApiParam('includeBspBets'),
+        ApiParam('marketID'),
+        ApiParam('netOfComission'),
+        ]
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class GetMarketTradedVolumeReq(ApiDataType):
+    _apiParams = [
+        ApiParam('asianLineId'),
+        ApiParam('currencyCode', nullable=True),
+        ApiParam('marketId'),
+        ApiParam('selectionId'),
+        ]
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class GetMarketTradedVolumeCompressedReq(ApiDataType):
+    _apiParams = [
+        ApiParam('currencyCode', nullable=True),
+        ApiParam('marketId'),
+        ]
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class GetPrivateMarketsReq(ApiDataType):
+    _apiParams = [
+        ApiParam('locale', nullable=True),
+        ApiParam('eventTypeId'),
+        ApiParam('marketType', xsd=False),
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class GetSilksReq(ApiDataType):
+    _apiParams = [
+        ApiParam('locale', nullable=True),
+        ApiParam('markets', nullable=True, xsd=False, listtype='int'),
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class GetSilksV2Req(ApiDataType):
+    _apiParams = [
+        ApiParam('locale', nullable=True),
+        ApiParam('markets', nullable=True, xsd=False, listtype='int'),
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+##############################
+# Bet Placement API - Complete
+##############################
 class PlaceBetsReq(ApiDataType):
-    apiParams = [
-        ApiParam('bets', listtype='PlaceBets'),
+    _apiParams = [
+        ApiParam('bets', xsd=False, nullable=True, listtype='PlaceBets'),
         ]
     def __init__(self):
         ApiDataType.__init__(self)
 
 
 class PlaceBets(ApiDataType):
-    apiParams = [
+    _apiParams = [
         ApiParam('asianLineId'),
         ApiParam('betType', xsd=False),
         ApiParam('betCategoryType', xsd=False),
@@ -420,7 +620,7 @@ class PlaceBets(ApiDataType):
         ApiParam('marketId'),
         ApiParam('price'),
         ApiParam('selectionId'),
-        ApiParam('size'),
+        ApiParam('size', nullable=True),
         ApiParam('bspLiability', nullable=True),
         ]
     def __init__(self):
@@ -428,35 +628,44 @@ class PlaceBets(ApiDataType):
 
 
 class CancelBetsReq(ApiDataType):
-    apiParams = [
-        ApiParam('bets', listtype='CancelBets'),
+    _apiParams = [
+        ApiParam('bets', xsd=False, nullable=True, listtype='CancelBets'),
         ]
     def __init__(self):
         ApiDataType.__init__(self)
 
 
 class CancelBets(ApiDataType):
-    apiParams = [
+    _apiParams = [
         ApiParam('betId'),
         ]
     def __init__(self):
         ApiDataType.__init__(self, name=None)
 
 
+class CancelBetsByMarketReq(ApiDataType):
+    _apiParams = [
+        ApiParam('markets', nullable=True, xsd=False, listtype='int'),
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
 class UpdateBetsReq(ApiDataType):
-    apiParams = [
-        ApiParam('bets', listtype='UpdateBets'),
+    _apiParams = [
+        ApiParam('bets', xsd=False, nullable=True, listtype='UpdateBets'),
         ]
     def __init__(self):
         ApiDataType.__init__(self)
 
 
 class UpdateBets(ApiDataType):
-    apiParams = [
+    _apiParams = [
         ApiParam('betId'),
-        ApiParam('newPrice'),
+        ApiParam('newPrice', nullable=True),
         ApiParam('newSize'),
-        ApiParam('oldPrice'),
+        ApiParam('oldPrice', nullable=True),
         ApiParam('oldSize'),
         ApiParam('newBetPersistenceType', xsd=False),
         ApiParam('oldBetPersistenceType', xsd=False),
@@ -465,11 +674,264 @@ class UpdateBets(ApiDataType):
         ApiDataType.__init__(self, name=None)
 
 
+##############################
+# Account Management API - Complete
+##############################
+class AddPaymentCardReq(ApiDataType):
+    _apiParams = [
+        ApiParam('cardNumber'),
+        ApiParam('cardType', xsd=False),
+        ApiParam('startDate', nullable=True),
+        ApiParam('expiryDate'),
+        ApiParam('issueNumber', nullable=True),
+        ApiParam('billingName'),
+        ApiParam('nickName'),
+        ApiParam('password'),
+        ApiParam('address1'),
+        ApiParam('address2', nullable=True),
+        ApiParam('address3', nullable=True),
+        ApiParam('address4', nullable=True),
+        ApiParam('town', nullable=True),
+        ApiParam('county', nullable=True),
+        ApiParam('zipCode', nullable=True),
+        ApiParam('country', nullable=True),
+        ApiParam('cardStatus', xsd=False),
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class DeletePaymentCardReq(ApiDataType):
+    _apiParams = [
+        ApiParam('nickName'),
+        ApiParam('password'),
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class DepositFromPaymentCardReq(ApiDataType):
+    _apiParams = [
+        ApiParam('amount'),
+        ApiParam('cardIdentifier', nullable=True),
+        ApiParam('cv2', nullable=True),
+        ApiParam('password', nullable=True),
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class ForgotPasswordReq(ApiDataType):
+    _apiParams = [
+        ApiParam('username'),
+        ApiParam('emailAddress'),
+        ApiParam('countryOfResidence'),
+        ApiParam('forgottenPasswordAnswer1', nullable=True),
+        ApiParam('forgottenPasswordAnswer2', nullable=True),
+        ApiParam('newPassword', nullable=True),
+        ApiParam('newPasswordRepeat', nullable=True),
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class GetAccountFundsReq(ApiDataType):
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class GetAccountStatementReq(ApiDataType):
+    _apiParams = [
+        ApiParam('endDate'),
+        ApiParam('itemsIncluded', xsd=False),
+        ApiParam('ignoreAutoTransfers'),
+        ApiParam('recordCount'),
+        ApiParam('startDate'),
+        ApiParam('startRecord'),
+        ApiParam('locale', nullable=True),
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self, name='req')
+
+
+class GetPaymentCardReq(ApiDataType):
+    _apiParams = [
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class GetSubscriptionInfoReq(ApiDataType):
+    _apiParams = [
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class ModifyPasswordReq(ApiDataType):
+    _apiParams = [
+        ApiParam('password'),
+        ApiParam('newPassword'),
+        ApiParam('newPasswordRepeat'),
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class ModifyProfileReq(ApiDataType):
+    _apiParams = [
+        ApiParam('password'),
+        ApiParam('address1', nullable=True),
+        ApiParam('address2', nullable=True),
+        ApiParam('address3', nullable=True),
+        ApiParam('townCity', nullable=True),
+        ApiParam('countyState', nullable=True),
+        ApiParam('postCode', nullable=True),
+        ApiParam('countryOfResidence', nullable=True),
+        ApiParam('homeTelephone', nullable=True),
+        ApiParam('workTelephone', nullable=True),
+        ApiParam('mobileTelephone', nullable=True),
+        ApiParam('emailAddress', nullable=True),
+        ApiParam('timeZone', nullable=True),
+        ApiParam('depositLimit', nullable=True),
+        ApiParam('depositLimitFrequency', xsd=False, nullable=True),
+        ApiParam('lossLimit', nullable=True),
+        ApiParam('lossLimitFrequency', xsd=False, nullable=True),
+        ApiParam('nationalIdentifier', nullable=True),
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class RetrieveLIMBMessageReq(ApiDataType):
+    _apiParams = [
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class SelfExcludeReq(ApiDataType):
+    _apiParams = [
+        ApiParam('selfExclude'),
+        ApiParam('password', nullable=True),
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class SetChatNameReq(ApiDataType):
+    _apiParams = [
+        ApiParam('password'),
+        ApiParam('chatName'),
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class SubmitLIMBMessageReq(ApiDataType):
+    _apiParams = [
+        ApiParam('password'),
+        ApiParam('submitPersonalMessage', xsd=False),
+        ApiParam('submitTCPrivacyPolicyChangeMessage', xsd=False),
+        ApiParam('submitPasswordChangeMessage', xsd=False),
+        ApiParam('submitBirthDateCheckMessage', xsd=False),
+        ApiParam('submitAddressCheckMessage', xsd=False),
+        ApiParam('submitContactDetailsCheckMessage', xsd=False),
+        ApiParam('submitChatNameChangeMessage', xsd=False),
+        ApiParam('submitCardBillingAddressCheckItems', nullable=True, xsd=False),
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class TransferFundsReq(ApiDataType):
+    _apiParams = [
+        ApiParam('sourceWalletId'),
+        ApiParam('targetWalletId'),
+        ApiParam('amount'),
+        ]
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class UpdatePaymentCardReq(ApiDataType):
+    _apiParams = [
+        ApiParam('nickName'),
+        ApiParam('password'),
+        ApiParam('expiryDate', nullable=True),
+        ApiParam('startDate', nullable=True),
+        ApiParam('issueNumber', nullable=True),
+        ApiParam('address1', nullable=True),
+        ApiParam('address2', nullable=True),
+        ApiParam('address3', nullable=True),
+        ApiParam('address4', nullable=True),
+        ApiParam('town', nullable=True),
+        ApiParam('county', nullable=True),
+        ApiParam('zipCode', nullable=True),
+        ApiParam('country', nullable=True),
+        ApiParam('cardStatus', xsd=False),
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class ViewProfileReq(ApiDataType):
+    _apiParams = [
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class ViewProfileV2Req(ApiDataType):
+    _apiParams = [
+        # According to the docs, the following param exists
+        # But not in the WSDL
+        ApiParam('requestVersion', xsd=False, nullable=True),
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class ViewReferAndEarnReq(ApiDataType):
+    _apiParams = [
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
+class WithdrawToPaymentCardReq(ApiDataType):
+    _apiParams = [
+        ApiParam('amount'),
+        ApiParam('cardIdentifier', nullable=True),
+        ApiParam('password', nullable=True),
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
 ##############################################
-# DirectAPI implementation of Vendor API types
+# Account Management API - Complete
 ##############################################
 class CreateVendorAccessRequestReq(ApiDataType):
-    apiParams = [
+    _apiParams = [
         ApiParam('vendorCustomField'),
         ApiParam('vendorSoftwareId'),
         ApiParam('expiryDate', nullable=True),
@@ -479,18 +941,8 @@ class CreateVendorAccessRequestReq(ApiDataType):
         ApiDataType.__init__(self)
 
 
-class CancelVendorAccessRequestReq(ApiDataType):
-    apiParams = [
-        ApiParam('accessRequestToken'),
-        ApiParam('vendorSoftwareId'),
-        ]
-
-    def __init__(self):
-        ApiDataType.__init__(self)
-
-
 class VendorSubscriptionReq(ApiDataType):
-    apiParams = [
+    _apiParams = [
         ApiParam('username'),
         ApiParam('vendorCustomField'),
         ApiParam('vendorClientId'),
@@ -502,8 +954,18 @@ class VendorSubscriptionReq(ApiDataType):
         ApiDataType.__init__(self)
 
 
+class CancelVendorAccessRequestReq(ApiDataType):
+    _apiParams = [
+        ApiParam('accessRequestToken'),
+        ApiParam('vendorSoftwareId'),
+        ]
+
+    def __init__(self):
+        ApiDataType.__init__(self)
+
+
 class GetVendorUsersReq(ApiDataType):
-    apiParams = [
+    _apiParams = [
         ApiParam('vendorSoftwareId'),
         ApiParam('username', nullable=True),
         ApiParam('usernameSearchModifier', xsd=False),
@@ -519,7 +981,7 @@ class GetVendorUsersReq(ApiDataType):
 
 
 class GetVendorAccessRequestsReq(ApiDataType):
-    apiParams = [
+    _apiParams = [
         ApiParam('vendorSoftwareId'),
         ApiParam('status', xsd=False),
         ApiParam('requestDateFrom', nullable=True),
@@ -531,18 +993,20 @@ class GetVendorAccessRequestsReq(ApiDataType):
 
 
 class GetSubscriptionInfoReq(ApiDataType):
-    apiParams = [
+    _apiParams = [
         ApiParam('username'),
         ApiParam('vendorClientId'),
         ApiParam('vendorSoftwareId'),
         ]
+
+    apitype='vendor'
 
     def __init__(self):
         ApiDataType.__init__(self)
 
 
 class GetVendorInfoReq(ApiDataType):
-    apiParams = [
+    _apiParams = [
         ]
 
     def __init__(self):

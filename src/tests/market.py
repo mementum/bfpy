@@ -5,7 +5,8 @@
 # This file is part of BfPy
 #
 # BfPy is a Python library to communicate with the Betfair Betting Exchange
-# Copyright (C) 2010  Daniel Rodriguez (aka Daniel Rodriksson)
+# Copyright (C) 2010 Daniel Rodriguez (aka Daniel Rodriksson)
+# Copyright (C) 2011 Sensible Odds Ltd.
 #
 # You can learn more and contact the author at:
 #
@@ -40,7 +41,7 @@ import bfpy
 import bfpy.bfclient as bfclient
 
 print 'Creating a Betfair Client'
-bf = bfclient.BfClient()
+bf = bfclient.BfClient(fullDirect=True)
 print 'Created a Betfair Client'
 
 loginInfo = sys.modules['__main__'].loginInfo
@@ -48,15 +49,15 @@ loginInfo = sys.modules['__main__'].loginInfo
 response = bf.login(**loginInfo)
 print response
 
-response = bf.getMarket(bfpy.ExchangeUK, marketId=101426972)
+response = bf.getMarket(bfpy.ExchangeUK, marketId=102817643)
 print response
 
-response = bf.getMarketInfo(bfpy.ExchangeUK, marketId=101426972)
+response = bf.getMarketInfo(bfpy.ExchangeUK, marketId=102817643)
 print response
 
-response = bf.getSilks(bfpy.ExchangeUK, markets=[102021854, 102021856])
-print response
+#response = bf.getSilks(bfpy.ExchangeUK, markets=[102021854, 102021856])
+#print response
 
-response = bf.getSilksV2(bfpy.ExchangeUK, markets=[102021854, 102021856])
-print response
+#response = bf.getSilksV2(bfpy.ExchangeUK, markets=[102021854, 102021856])
+#print response
 

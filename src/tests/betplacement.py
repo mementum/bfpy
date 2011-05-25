@@ -5,7 +5,8 @@
 # This file is part of BfPy
 #
 # BfPy is a Python library to communicate with the Betfair Betting Exchange
-# Copyright (C) 2010  Daniel Rodriguez (aka Daniel Rodriksson)
+# Copyright (C) 2010 Daniel Rodriguez (aka Daniel Rodriksson)
+# Copyright (C) 2011 Sensible Odds Ltd.
 #
 # You can learn more and contact the author at:
 #
@@ -40,7 +41,7 @@ import bfpy
 import bfpy.bfclient as bfclient
 
 print 'Creating a Betfair Client'
-bf = bfclient.BfClient()
+bf = bfclient.BfClient(fullDirect=True)
 print 'Created a Betfair Client'
 
 loginInfo = sys.modules['__main__'].loginInfo
@@ -54,8 +55,9 @@ print response
 placeBet = bf.createPlaceBets()
 
 placeBet.asianLineId = 0
-# Man City
-placeBet.selectionId = 47999
+# Man City = 47999
+# Chelsea = 55190
+placeBet.selectionId = 55190
 
 placeBet.price = 500.0
 placeBet.size = 2.0
@@ -66,16 +68,14 @@ placeBet.betCategoryType = 'E'
 
 placeBet.betPersistenceType = 'NONE'
 
-# English Premier League Winner 2010/2011
-placeBet.marketId = 101426972
+# English Premier League Winner 2011/2012
+placeBet.marketId = 102817643
 
 response = bf.placeBets(bfpy.ExchangeUK, bets=[placeBet])
 print response
-
+sys.exit(0)
 
 print 'sleeping 5 seconds'
-time.sleep(5)
-
 bet = response.betResults[0]
 
 updateBet = bf.createUpdateBets()

@@ -107,8 +107,11 @@ named arguments to the constructor
                the service communication
 @type clients: dict
 
-@ivar serviceDefs: service definitions with non-data descriptors
-@type clients: list
+@ivar _serviceDefs: service definitions with non-data descriptors
+@type _serviceDefs: list
+
+@ivar _sharedData: shared variables (amongst clones) definition
+@type _serviceDefs: list
 
 The description below states if a service diverts from the standard
 behaviour and what default values have may be assigned to some variables
@@ -1275,6 +1278,23 @@ The following services are defined:
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#getSubscriptionInfo" class="summary-sig-name">getSubscriptionInfo</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      Service Definition for global services.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bfservice-pysrc.html">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.bfapi.BfApi-class.html#getSubscriptionInfoVendor" class="summary-sig-name">getSubscriptionInfoVendor</a>(<span class="summary-sig-arg">...</span>)</span><br />
       Service Definition for vendor services.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="bfpy.bfservice-pysrc.html">source&nbsp;code</a></span>
@@ -1749,11 +1769,11 @@ GD': MinStake(6.0, 1.0, 30.0), 'SEK': MinStake(30.0, 15.0, 150.0), 'GB\
 P': MinStake(2.0, 1.0, 10.0), 'USD': MinStake(4.0, 2.0, 20.0),}">{'AUD': MinStake(5.0, 3.0, 30.0), 'CAD': MinStake(6.<code class="variable-ellipsis">...</code></code>
     </td>
   </tr>
-<tr>
+<tr class="private">
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="bfpy.bfapi.BfApi-class.html#serviceDefs" class="summary-name">serviceDefs</a> = <code title="[GlobalObject('BFEvent', eventId=-1, eventName= ''), ExchangeObject('M\
+        <a href="bfpy.bfapi.BfApi-class.html#_serviceDefs" class="summary-name" onclick="show_private();">_serviceDefs</a> = <code title="[GlobalObject('BFEvent', eventId=-1, eventName= ''), ExchangeObject('M\
 arket'), ExchangeObject('Runner'), ExchangeObject('MarketPrices'), Exc\
 hangeObject('RunnerPrices'), ExchangeObject('Price'), ExchangeObject('\
 PlaceBets', betCategoryType= 'E', bspLiability= 0.0), ExchangeObject('\
@@ -1761,7 +1781,58 @@ CancelBets'), ExchangeObject('UpdateBets'), GlobalServiceDef('login', \
 apiHeader= False, preProc= [PreProcLogin()], postProc= [ProcLogin()], \
 productId= bfglobals.freeApiId, vendorSoftwareId= 0, ipAddress= '0', l\
 ocationId= 0), GlobalServiceDef('logout'), GlobalServiceDef('keepAlive\
-...">[GlobalObject('BFEvent', eventId=-1, eventName= <code class="variable-ellipsis">...</code></code>
+...">[GlobalObject('BFEvent', eventId=-1, eventName=<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="bfpy.bfapi.BfApi-class.html#_sharedArgs" class="summary-name" onclick="show_private();">_sharedArgs</a> = <code title="[SharedData('username'), SharedData('password'), SharedData('productId\
+'), SharedData('vendorSoftwareId'), SharedData('currency'), SharedData\
+('rateGBP')]">[SharedData('username'), SharedData('password'),<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="currency"></a><span class="summary-name">currency</span> = <code title="&lt;bfpy.bfutil.SharedData object at 0x0120F570&gt;">&lt;bfpy.bfutil.SharedData object at 0x0120F570&gt;</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="password"></a><span class="summary-name">password</span> = <code title="&lt;bfpy.bfutil.SharedData object at 0x0120F1F0&gt;">&lt;bfpy.bfutil.SharedData object at 0x0120F1F0&gt;</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="productId"></a><span class="summary-name">productId</span> = <code title="&lt;bfpy.bfutil.SharedData object at 0x0120F230&gt;">&lt;bfpy.bfutil.SharedData object at 0x0120F230&gt;</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="rateGBP"></a><span class="summary-name">rateGBP</span> = <code title="&lt;bfpy.bfutil.SharedData object at 0x0120F5F0&gt;">&lt;bfpy.bfutil.SharedData object at 0x0120F5F0&gt;</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="username"></a><span class="summary-name">username</span> = <code title="&lt;bfpy.bfutil.SharedData object at 0x011F9FD0&gt;">&lt;bfpy.bfutil.SharedData object at 0x011F9FD0&gt;</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="vendorSoftwareId"></a><span class="summary-name">vendorSoftwareId</span> = <code title="&lt;bfpy.bfutil.SharedData object at 0x0120F4F0&gt;">&lt;bfpy.bfutil.SharedData object at 0x0120F4F0&gt;</code>
     </td>
   </tr>
 </table>
@@ -2815,6 +2886,26 @@ ocationId= 0), GlobalServiceDef('logout'), GlobalServiceDef('keepAlive\
     </td>
   </tr></table>
   
+  <p>Service Definition for global services. It is a ServiceDefinition 
+  subclass with the endPoint set to the global value</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="getSubscriptionInfoVendor"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getSubscriptionInfoVendor</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bfservice-pysrc.html">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
   <p>Service Definition for vendor services. It is a ServiceDefinition 
   subclass with the endPoint set to the vendor value</p>
   <dl class="fields">
@@ -3324,12 +3415,12 @@ P': MinStake(2.0, 1.0, 10.0), 'USD': MinStake(4.0, 2.0, 20.0),}
   </dl>
 </td></tr></table>
 </div>
-<a name="serviceDefs"></a>
-<div>
+<a name="_serviceDefs"></a>
+<div class="private">
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
-  <h3 class="epydoc">serviceDefs</h3>
+  <h3 class="epydoc">_serviceDefs</h3>
   
   <dl class="fields">
   </dl>
@@ -3345,6 +3436,26 @@ apiHeader= False, preProc= [PreProcLogin()], postProc= [ProcLogin()], <span clas
 productId= bfglobals.freeApiId, vendorSoftwareId= 0, ipAddress= '0', l<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
 ocationId= 0), GlobalServiceDef('logout'), GlobalServiceDef('keepAlive<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
 <code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_sharedArgs"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">_sharedArgs</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+[SharedData('username'), SharedData('password'), SharedData('productId<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+'), SharedData('vendorSoftwareId'), SharedData('currency'), SharedData<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+('rateGBP')]
 </pre></td></tr></table>
 </dd>
   </dl>
@@ -3382,7 +3493,7 @@ ocationId= 0), GlobalServiceDef('logout'), GlobalServiceDef('keepAlive<span clas
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Sat Apr 09 23:52:48 2011
+    Generated by Epydoc 3.0.1 on Wed May 25 18:32:44 2011
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

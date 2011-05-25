@@ -31,6 +31,8 @@ BfPy utility classes
 '''
 
 import logging
+import threading
+import types
 
 class NullHandler(logging.Handler):
     '''
@@ -223,3 +225,90 @@ class EmptyObject(object):
 
     def __len__(self):
         return len(self.__dict__)
+
+
+class SharedData(object):
+    '''
+    Non-data descriptor class to be installed in class during class
+    instantiation to enable sharing of values on a clone basis if
+    wished.
+
+    It implements a pointer-like dictionary to store which instance
+    really holds the value for a given instance (an instance can point
+    to itself)
+
+    @type lock: threading.lock
+    @ivar lock: synchronize get/set from/to dictionaries
+    @type instanceval: dict 
+    @ivar instanceval: values stored for instances
+    @type instancepointers: dict 
+    @ivar instancepointers: pointers for instances to find the final value
+    '''
+
+    def __init__(self, name):
+        '''
+        Initializes the descriptor
+        '''
+        self.name = name
+        self.instanceval = dict()
+        self.instancepointers = dict()
+
+        self.lock = threading.RLock()
+
+
+    def __set__(self, instance, value):
+        '''
+        Stores a value for an instance using the master pointer for that instance
+
+        @type instance: instance
+        @param instance: instance that is calling the descriptor
+        @type value: any
+        @param value: value to be stored for the instance (or pointer the instace is associated with)
+        '''
+        # Point to itself unless there is a value in the dict and get the pointer
+        with self.lock:
+            instpointer = self.instancepointers.setdefault(instance, instance)
+            self.instanceval[instpointer] = value
+
+
+    def __get__(self, instance, owner=None):
+        '''
+        Non-data descriptor implementation.
+
+        If invoked at class level it returns and unbound method pointing that forces the invocation
+        of __call__. The invocation has to be done with an instance
+
+        If invoked from an instance it returns the value that is currently stored for such instance
+        (directly or through the master pointer)
+
+        @type instance: instance of class
+        @param instance: instance that calls the descriptor
+        @type owner: class
+        @param owner: the class that holds the descriptor
+        '''
+        if instance is None:
+            return types.MethodType(self, None, owner)
+
+        with self.lock:
+            # Point to itself unless there is a value in the dict and get the pointer
+            instpointer = self.instancepointers.setdefault(instance, instance)
+            # Return None to indicate that it wasn't set so far
+            return self.instanceval.get(instpointer, None)
+
+
+    def __call__(self, instance, slave=None):
+        '''
+        Associates an instance and a slave to share the same value.
+        If no slave is passed, the instance associates to itself.
+
+        @type instance: instance
+        @param instance: instance that is calling the descriptor
+        @type slave: instance
+        @param slave: slave pointer that will be associated to slave
+        '''
+        with self.lock:
+            if slave is None:
+                self.instancepointers[instance] = instance
+            else:
+                self.instancepointers[slave] = self.instancepointers.setdefault(instance, instance)
+

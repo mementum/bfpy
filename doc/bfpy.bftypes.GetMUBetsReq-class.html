@@ -134,6 +134,7 @@
     <td colspan="2" class="summary">
     <p class="indent-wrapped-lines"><b>Inherited from <code><a href="bfpy.bftypes.ApiDataType-class.html">ApiDataType</a></code></b>:
       <code><a href="bfpy.bftypes.ApiDataType-class.html#__call__">__call__</a></code>,
+      <code><a href="bfpy.bftypes.ApiDataType-class.html#__copy__">__copy__</a></code>,
       <code><a href="bfpy.bftypes.ApiDataType-class.html#__str__">__str__</a></code>,
       <code><a href="bfpy.bftypes.ApiDataType-class.html#__unicode__">__unicode__</a></code>
       </p>
@@ -170,64 +171,22 @@
     </table>
   </td>
 </tr>
-<tr>
+<tr class="private">
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="bfpy.bftypes.GetMUBetsReq-class.html#apiParams" class="summary-name">apiParams</a> = <code title="[ApiParam('betStatus', xsd= False), ApiParam('marketId', nullable= Tru\
-e), ApiParam('betIds', nullable= True, xsd= False, listtype= 'betId'),\
- ApiParam('orderBy', xsd= False), ApiParam('sortOrder', xsd= False), A\
-piParam('recordCount'), ApiParam('startRecord'), ApiParam('matchedSinc\
-e', nullable= True), ApiParam('excludeLastSecond', nullable= True),]">[ApiParam('betStatus', xsd= False), ApiParam('mark<code class="variable-ellipsis">...</code></code>
+        <a href="bfpy.bftypes.GetMUBetsReq-class.html#_apiParams" class="summary-name" onclick="show_private();">_apiParams</a> = <code title="[ApiParam('betStatus', xsd= False), ApiParam('marketId'), ApiParam('be\
+tIds', nullable= True, xsd= False, listtype= 'betId'), ApiParam('order\
+By', xsd= False), ApiParam('sortOrder', xsd= False), ApiParam('recordC\
+ount'), ApiParam('startRecord'), ApiParam('matchedSince', nullable= Tr\
+ue), ApiParam('excludeLastSecond'),]">[ApiParam('betStatus', xsd= False), ApiParam('mar<code class="variable-ellipsis">...</code></code>
     </td>
   </tr>
-<tr>
+<tr class="private">
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="betIds"></a><span class="summary-name">betIds</span> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x01010A70&gt;">&lt;bfpy.bftypes.ApiParam object at 0x01010A70&gt;</code>
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a name="betStatus"></a><span class="summary-name">betStatus</span> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x01010A30&gt;">&lt;bfpy.bftypes.ApiParam object at 0x01010A30&gt;</code>
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a name="excludeLastSecond"></a><span class="summary-name">excludeLastSecond</span> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x01010B30&gt;">&lt;bfpy.bftypes.ApiParam object at 0x01010B30&gt;</code>
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a name="marketId"></a><span class="summary-name">marketId</span> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x01010A50&gt;">&lt;bfpy.bftypes.ApiParam object at 0x01010A50&gt;</code>
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a name="matchedSince"></a><span class="summary-name">matchedSince</span> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x01010B10&gt;">&lt;bfpy.bftypes.ApiParam object at 0x01010B10&gt;</code>
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a name="orderBy"></a><span class="summary-name">orderBy</span> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x01010A90&gt;">&lt;bfpy.bftypes.ApiParam object at 0x01010A90&gt;</code>
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a href="bfpy.bftypes.GetMUBetsReq-class.html#params" class="summary-name">params</a> = <code title="['betStatus',
+        <a href="bfpy.bftypes.GetMUBetsReq-class.html#_params" class="summary-name" onclick="show_private();">_params</a> = <code title="['betStatus',
  'marketId',
  'betIds',
  'orderBy',
@@ -235,33 +194,76 @@ e', nullable= True), ApiParam('excludeLastSecond', nullable= True),]">[ApiParam(
  'recordCount',
  'startRecord',
  'matchedSince',
-..."><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">betStatus</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">marketId</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">betIds</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">orderBy</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">sortO</code><code class="variable-ellipsis">...</code></code>
+..."><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">betStatus</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">marketId</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">betIds</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">orderBy</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">sort</code><code class="variable-ellipsis">...</code></code>
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="recordCount"></a><span class="summary-name">recordCount</span> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x01010AD0&gt;">&lt;bfpy.bftypes.ApiParam object at 0x01010AD0&gt;</code>
+        <a name="betIds"></a><span class="summary-name">betIds</span> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x011DAE90&gt;">&lt;bfpy.bftypes.ApiParam object at 0x011DAE90&gt;</code>
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="sortOrder"></a><span class="summary-name">sortOrder</span> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x01010AB0&gt;">&lt;bfpy.bftypes.ApiParam object at 0x01010AB0&gt;</code>
+        <a name="betStatus"></a><span class="summary-name">betStatus</span> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x011DAE50&gt;">&lt;bfpy.bftypes.ApiParam object at 0x011DAE50&gt;</code>
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="startRecord"></a><span class="summary-name">startRecord</span> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x01010AF0&gt;">&lt;bfpy.bftypes.ApiParam object at 0x01010AF0&gt;</code>
+        <a name="excludeLastSecond"></a><span class="summary-name">excludeLastSecond</span> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x011DAF50&gt;">&lt;bfpy.bftypes.ApiParam object at 0x011DAF50&gt;</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="marketId"></a><span class="summary-name">marketId</span> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x011DAE70&gt;">&lt;bfpy.bftypes.ApiParam object at 0x011DAE70&gt;</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="matchedSince"></a><span class="summary-name">matchedSince</span> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x011DAF30&gt;">&lt;bfpy.bftypes.ApiParam object at 0x011DAF30&gt;</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="orderBy"></a><span class="summary-name">orderBy</span> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x011DAEB0&gt;">&lt;bfpy.bftypes.ApiParam object at 0x011DAEB0&gt;</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="recordCount"></a><span class="summary-name">recordCount</span> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x011DAEF0&gt;">&lt;bfpy.bftypes.ApiParam object at 0x011DAEF0&gt;</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="sortOrder"></a><span class="summary-name">sortOrder</span> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x011DAED0&gt;">&lt;bfpy.bftypes.ApiParam object at 0x011DAED0&gt;</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="startRecord"></a><span class="summary-name">startRecord</span> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x011DAF10&gt;">&lt;bfpy.bftypes.ApiParam object at 0x011DAF10&gt;</code>
     </td>
   </tr>
   <tr>
     <td colspan="2" class="summary">
     <p class="indent-wrapped-lines"><b>Inherited from <code><a href="bfpy.bftypes.ApiDataType-class.html">ApiDataType</a></code></b>:
+      <code><a href="bfpy.bftypes.ApiDataType-class.html#apitype">apitype</a></code>,
       <code><a href="bfpy.bftypes.ApiDataType-class.html#header">header</a></code>,
       <code><a href="bfpy.bftypes.ApiDataType-class.html#pattern">pattern</a></code>
       </p>
@@ -359,34 +361,34 @@ e', nullable= True), ApiParam('excludeLastSecond', nullable= True),]">[ApiParam(
   </td>
 </tr>
 </table>
-<a name="apiParams"></a>
-<div>
+<a name="_apiParams"></a>
+<div class="private">
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
-  <h3 class="epydoc">apiParams</h3>
+  <h3 class="epydoc">_apiParams</h3>
   
   <dl class="fields">
   </dl>
   <dl class="fields">
     <dt>Value:</dt>
       <dd><table><tr><td><pre class="variable">
-[ApiParam('betStatus', xsd= False), ApiParam('marketId', nullable= Tru<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
-e), ApiParam('betIds', nullable= True, xsd= False, listtype= 'betId'),<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
- ApiParam('orderBy', xsd= False), ApiParam('sortOrder', xsd= False), A<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
-piParam('recordCount'), ApiParam('startRecord'), ApiParam('matchedSinc<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
-e', nullable= True), ApiParam('excludeLastSecond', nullable= True),]
+[ApiParam('betStatus', xsd= False), ApiParam('marketId'), ApiParam('be<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+tIds', nullable= True, xsd= False, listtype= 'betId'), ApiParam('order<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+By', xsd= False), ApiParam('sortOrder', xsd= False), ApiParam('recordC<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+ount'), ApiParam('startRecord'), ApiParam('matchedSince', nullable= Tr<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+ue), ApiParam('excludeLastSecond'),]
 </pre></td></tr></table>
 </dd>
   </dl>
 </td></tr></table>
 </div>
-<a name="params"></a>
-<div>
+<a name="_params"></a>
+<div class="private">
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
-  <h3 class="epydoc">params</h3>
+  <h3 class="epydoc">_params</h3>
   
   <dl class="fields">
   </dl>
@@ -439,7 +441,7 @@ e', nullable= True), ApiParam('excludeLastSecond', nullable= True),]
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Sat Apr 09 23:52:48 2011
+    Generated by Epydoc 3.0.1 on Wed May 25 18:32:45 2011
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

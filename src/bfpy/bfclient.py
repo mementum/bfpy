@@ -82,7 +82,7 @@ class BfClient(BfApi):
 
     # Methods that override base class non-data descriptors, are implemented
     # as non-data descriptors also (simple override doesn't work)
-    serviceDefs = [
+    _serviceDefs = [
         bfclientext.GetEvents(eventParentId=-1),
         bfclientext.GetCurrentBets(betStatus='MU'),
         bfclientext.PlaceBets(nonIPRePlace=False),

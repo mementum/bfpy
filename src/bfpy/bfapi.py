@@ -28,8 +28,6 @@
 ################################################################################
 '''
 BfApi object implementation.
-
-It does initialize suds logging to a L{NullHandler} to avoid any logging output
 '''
 
 from copy import copy
@@ -43,6 +41,7 @@ import bferror
 from bfservice import GlobalServiceDef, ExchangeServiceDef, VendorServiceDef, GlobalObject, ExchangeObject
 from bfprocessors import *
 import bftransport
+from bfutil import SharedData
 
 
 class BfService(type):
@@ -54,12 +53,17 @@ class BfService(type):
     def __new__(mcs, name, bases, clsdict):
         '''
         On L{BfApi} instantiation the service definitions present in
-        the class variable I{serviceDefs} are added to the dictionary of the
+        the class variable I{_serviceDefs} are added to the dictionary of the
         instance to generate non-data descriptor based methods
         that allow the invocation of the Betfair API Services
         '''
-        for serviceDef in clsdict['serviceDefs']:
-            clsdict[serviceDef.methodName] = serviceDef
+        if '_serviceDefs' in clsdict:
+            for serviceDef in clsdict['_serviceDefs']:
+                clsdict[serviceDef.methodName] = serviceDef
+
+        if '_sharedArgs' in clsdict:
+            for sharedArg in clsdict['_sharedArgs']:
+                clsdict[sharedArg.name] = sharedArg
 
         # support for pluggable external ApiServices
         try:
@@ -108,8 +112,11 @@ class BfApi(object):
                    the service communication
     @type clients: dict
 
-    @ivar serviceDefs: service definitions with non-data descriptors
-    @type clients: list
+    @ivar _serviceDefs: service definitions with non-data descriptors
+    @type _serviceDefs: list
+
+    @ivar _sharedData: shared variables (amongst clones) definition
+    @type _serviceDefs: list
 
     The description below states if a service diverts from the standard
     behaviour and what default values have may be assigned to some variables
@@ -272,6 +279,12 @@ class BfApi(object):
 
     __metaclass__ = BfService
 
+    _sharedArgs = [
+        SharedData('username'), SharedData('password'),
+        SharedData('productId'), SharedData('vendorSoftwareId'),
+        SharedData('currency'), SharedData('rateGBP')
+        ]
+
     def __init__(self, preProcess=bfglobals.preProcess,
                  postProcess=bfglobals.postProcess,
                  maxRequests=20,
@@ -334,7 +347,14 @@ class BfApi(object):
             for endPoint, client in self.clients.iteritems():
                 obj.clients[endPoint] = client.clone()
 
+        for endPoint, service in self.apiServices.iteritems():
+            obj.apiServices[endPoint] = service.clone()
+
         obj.sessionToken = ''
+
+        # Force clone to use this object values as a reference
+        for sharedArg in self._sharedArgs:
+            getattr(self.__class__, sharedArg.name)(self, obj)
 
         return obj
 
@@ -500,6 +520,7 @@ class BfApi(object):
             '''
             Init the object instance variables with the provided values
             '''
+            self.rateGBP = None # Unknown unless full API is used
             self.minimumStake = minimumStake
             self.minimumRangeStake = minimumRangeStake
             self.minimumBSPLayLiability = minimumBSPLayLiability
@@ -539,7 +560,7 @@ class BfApi(object):
         return getattr(minBets, which)
 
 
-    serviceDefs = [
+    _serviceDefs = [
         # ######################
         # API Object Retrieval
         # ######################
@@ -569,7 +590,8 @@ class BfApi(object):
         GlobalServiceDef('getActiveEventTypes', requestName='GetEventTypesReq', skipErrorCodes=['NO_RESULTS'],
                          postProc=[ArrayFix('eventTypeItems', 'EventType')]),
         GlobalServiceDef('getAllCurrencies', requestName='GetCurrenciesReq', postProc=[ArrayFix('currencyItems', 'Currency')]),
-        GlobalServiceDef('getAllCurrenciesV2', requestName='GetCurrenciesV2Req', postProc=[ArrayFix('currencyItems', 'CurrencyV2')]),
+        GlobalServiceDef('getAllCurrenciesV2', requestName='GetCurrenciesV2Req',
+                         postProc=[ArrayFix('currencyItems', 'CurrencyV2'), ProcGetAllCurrenciesV2()]),
         GlobalServiceDef('getAllEventTypes', requestName='GetEventTypesReq', skipErrorCodes=['NO_RESULTS'],
                          postProc=[ArrayFix('eventTypeItems', 'EventType')]),
         ExchangeServiceDef('getAllMarkets', preProc=[ArrayUnfix('eventTypeIds', 'int'), ArrayUnfix('countries', 'Country')],
@@ -603,9 +625,16 @@ class BfApi(object):
                          postProc=[ArrayFix('eventItems', 'BFEvent'), ArrayFix('marketItems', 'MarketSummary')]),
         ExchangeServiceDef('getInPlayMarkets', postProc=[ProcAllMarkets()]),
         # Documentation incorrectly states that includeCouponLinks is optional
-        ExchangeServiceDef('getMarket', postProc=[ArrayFix('market.runners', 'Runner'), ArrayFix('market.eventHierarchy', 'eventId'), ProcMarket()], includeCouponLinks=False),
+        ExchangeServiceDef('getMarket',
+                           postProc=[ArrayFix('market.runners', 'Runner'), ArrayFix('market.eventHierarchy', 'eventId'), ProcMarket()],
+                           includeCouponLinks=False),
         ExchangeServiceDef('getMarketInfo'),
-        ExchangeServiceDef('getMarketPrices', postProc=[ProcMarketPrices()], weight=1),
+        ExchangeServiceDef('getMarketPrices',
+                           postProc=[ArrayFix('marketPrices.runnerPrices', 'RunnerPrices'),
+                                     ArrayFix('marketPrices.runnerPrices.bestPricesToBack', 'Price'),
+                                     ArrayFix('marketPrices.runnerPrices.bestPricesToLay', 'Price'),
+                                     ProcMarketPrices()],
+                           weight=1),
         ExchangeServiceDef('getMarketPricesCompressed', postProc=[ProcMarketPricesCompressed()], weight=1),
         ExchangeServiceDef('getMarketTradedVolume', skipErrorCodes=['NO_RESULTS', 'MARKET_CLOSED'],
                            postProc=[ArrayFix('priceItems', 'VolumeInfo')], weight=1,
@@ -693,7 +722,7 @@ class BfApi(object):
         # requires it and if not provided an INTERNAL ERROR is generated
         VendorServiceDef('getVendorAccessRequests', postProc=[ArrayFix('vendorAccessRequests', 'vendorAccessRequest')],
                          status='ACTIVE'),
-        VendorServiceDef('getSubscriptionInfo',
+        VendorServiceDef('getSubscriptionInfoVendor', requestName='GetSubscriptionInfoReqVendor',
                          username=''),
         VendorServiceDef('getVendorInfo', postProc=[ArrayFix('vendorInfo', 'vsInfo')]),
         ]

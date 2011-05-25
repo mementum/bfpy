@@ -134,6 +134,7 @@
     <td colspan="2" class="summary">
     <p class="indent-wrapped-lines"><b>Inherited from <code><a href="bfpy.bftypes.ApiDataType-class.html">ApiDataType</a></code></b>:
       <code><a href="bfpy.bftypes.ApiDataType-class.html#__call__">__call__</a></code>,
+      <code><a href="bfpy.bftypes.ApiDataType-class.html#__copy__">__copy__</a></code>,
       <code><a href="bfpy.bftypes.ApiDataType-class.html#__str__">__str__</a></code>,
       <code><a href="bfpy.bftypes.ApiDataType-class.html#__unicode__">__unicode__</a></code>
       </p>
@@ -170,80 +171,82 @@
     </table>
   </td>
 </tr>
-<tr>
+<tr class="private">
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="bfpy.bftypes.UpdateBets-class.html#apiParams" class="summary-name">apiParams</a> = <code title="[ApiParam('betId'), ApiParam('newPrice'), ApiParam('newSize'), ApiPara\
-m('oldPrice'), ApiParam('oldSize'), ApiParam('newBetPersistenceType', \
-xsd= False), ApiParam('oldBetPersistenceType', xsd= False),]">[ApiParam('betId'), ApiParam('newPrice'), ApiParam<code class="variable-ellipsis">...</code></code>
+        <a href="bfpy.bftypes.UpdateBets-class.html#_apiParams" class="summary-name" onclick="show_private();">_apiParams</a> = <code title="[ApiParam('betId'), ApiParam('newPrice', nullable= True), ApiParam('ne\
+wSize'), ApiParam('oldPrice', nullable= True), ApiParam('oldSize'), Ap\
+iParam('newBetPersistenceType', xsd= False), ApiParam('oldBetPersisten\
+ceType', xsd= False),]">[ApiParam('betId'), ApiParam('newPrice', nullable<code class="variable-ellipsis">...</code></code>
     </td>
   </tr>
-<tr>
+<tr class="private">
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="betId"></a><span class="summary-name">betId</span> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x01010DB0&gt;">&lt;bfpy.bftypes.ApiParam object at 0x01010DB0&gt;</code>
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a href="bfpy.bftypes.UpdateBets-class.html#newBetPersistenceType" class="summary-name">newBetPersistenceType</a> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x01010E50&gt;">&lt;bfpy.bftypes.ApiParam object at 0x010<code class="variable-ellipsis">...</code></code>
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a name="newPrice"></a><span class="summary-name">newPrice</span> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x01010DD0&gt;">&lt;bfpy.bftypes.ApiParam object at 0x01010DD0&gt;</code>
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a name="newSize"></a><span class="summary-name">newSize</span> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x01010DF0&gt;">&lt;bfpy.bftypes.ApiParam object at 0x01010DF0&gt;</code>
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a href="bfpy.bftypes.UpdateBets-class.html#oldBetPersistenceType" class="summary-name">oldBetPersistenceType</a> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x01010E70&gt;">&lt;bfpy.bftypes.ApiParam object at 0x010<code class="variable-ellipsis">...</code></code>
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a name="oldPrice"></a><span class="summary-name">oldPrice</span> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x01010E10&gt;">&lt;bfpy.bftypes.ApiParam object at 0x01010E10&gt;</code>
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a name="oldSize"></a><span class="summary-name">oldSize</span> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x01010E30&gt;">&lt;bfpy.bftypes.ApiParam object at 0x01010E30&gt;</code>
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a href="bfpy.bftypes.UpdateBets-class.html#params" class="summary-name">params</a> = <code title="['betId',
+        <a href="bfpy.bftypes.UpdateBets-class.html#_params" class="summary-name" onclick="show_private();">_params</a> = <code title="['betId',
  'newPrice',
  'newSize',
  'oldPrice',
  'oldSize',
  'newBetPersistenceType',
- 'oldBetPersistenceType']"><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">betId</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">newPrice</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">newSize</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">oldPrice</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">oldSize</code><code class="variable-ellipsis">...</code></code>
+ 'oldBetPersistenceType']"><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">betId</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">newPrice</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">newSize</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">oldPrice</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">oldSiz</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="betId"></a><span class="summary-name">betId</span> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x011EA6D0&gt;">&lt;bfpy.bftypes.ApiParam object at 0x011EA6D0&gt;</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="bfpy.bftypes.UpdateBets-class.html#newBetPersistenceType" class="summary-name">newBetPersistenceType</a> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x011EA770&gt;">&lt;bfpy.bftypes.ApiParam object at 0x011<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="newPrice"></a><span class="summary-name">newPrice</span> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x011EA6F0&gt;">&lt;bfpy.bftypes.ApiParam object at 0x011EA6F0&gt;</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="newSize"></a><span class="summary-name">newSize</span> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x011EA710&gt;">&lt;bfpy.bftypes.ApiParam object at 0x011EA710&gt;</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="bfpy.bftypes.UpdateBets-class.html#oldBetPersistenceType" class="summary-name">oldBetPersistenceType</a> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x011EA790&gt;">&lt;bfpy.bftypes.ApiParam object at 0x011<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="oldPrice"></a><span class="summary-name">oldPrice</span> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x011EA730&gt;">&lt;bfpy.bftypes.ApiParam object at 0x011EA730&gt;</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="oldSize"></a><span class="summary-name">oldSize</span> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x011EA750&gt;">&lt;bfpy.bftypes.ApiParam object at 0x011EA750&gt;</code>
     </td>
   </tr>
   <tr>
     <td colspan="2" class="summary">
     <p class="indent-wrapped-lines"><b>Inherited from <code><a href="bfpy.bftypes.ApiDataType-class.html">ApiDataType</a></code></b>:
+      <code><a href="bfpy.bftypes.ApiDataType-class.html#apitype">apitype</a></code>,
       <code><a href="bfpy.bftypes.ApiDataType-class.html#header">header</a></code>,
       <code><a href="bfpy.bftypes.ApiDataType-class.html#pattern">pattern</a></code>
       </p>
@@ -341,21 +344,46 @@ xsd= False), ApiParam('oldBetPersistenceType', xsd= False),]">[ApiParam('betId')
   </td>
 </tr>
 </table>
-<a name="apiParams"></a>
-<div>
+<a name="_apiParams"></a>
+<div class="private">
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
-  <h3 class="epydoc">apiParams</h3>
+  <h3 class="epydoc">_apiParams</h3>
   
   <dl class="fields">
   </dl>
   <dl class="fields">
     <dt>Value:</dt>
       <dd><table><tr><td><pre class="variable">
-[ApiParam('betId'), ApiParam('newPrice'), ApiParam('newSize'), ApiPara<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
-m('oldPrice'), ApiParam('oldSize'), ApiParam('newBetPersistenceType', <span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
-xsd= False), ApiParam('oldBetPersistenceType', xsd= False),]
+[ApiParam('betId'), ApiParam('newPrice', nullable= True), ApiParam('ne<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+wSize'), ApiParam('oldPrice', nullable= True), ApiParam('oldSize'), Ap<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+iParam('newBetPersistenceType', xsd= False), ApiParam('oldBetPersisten<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+ceType', xsd= False),]
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_params"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">_params</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">betId</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">newPrice</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">newSize</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">oldPrice</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">oldSize</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">newBetPersistenceType</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">oldBetPersistenceType</code><code class="variable-quote">'</code><code class="variable-group">]</code>
 </pre></td></tr></table>
 </dd>
   </dl>
@@ -373,7 +401,7 @@ xsd= False), ApiParam('oldBetPersistenceType', xsd= False),]
   <dl class="fields">
     <dt>Value:</dt>
       <dd><table><tr><td><pre class="variable">
-&lt;bfpy.bftypes.ApiParam object at 0x01010E50&gt;
+&lt;bfpy.bftypes.ApiParam object at 0x011EA770&gt;
 </pre></td></tr></table>
 </dd>
   </dl>
@@ -391,31 +419,7 @@ xsd= False), ApiParam('oldBetPersistenceType', xsd= False),]
   <dl class="fields">
     <dt>Value:</dt>
       <dd><table><tr><td><pre class="variable">
-&lt;bfpy.bftypes.ApiParam object at 0x01010E70&gt;
-</pre></td></tr></table>
-</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="params"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <h3 class="epydoc">params</h3>
-  
-  <dl class="fields">
-  </dl>
-  <dl class="fields">
-    <dt>Value:</dt>
-      <dd><table><tr><td><pre class="variable">
-<code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">betId</code><code class="variable-quote">'</code><code class="variable-op">,</code>
- <code class="variable-quote">'</code><code class="variable-string">newPrice</code><code class="variable-quote">'</code><code class="variable-op">,</code>
- <code class="variable-quote">'</code><code class="variable-string">newSize</code><code class="variable-quote">'</code><code class="variable-op">,</code>
- <code class="variable-quote">'</code><code class="variable-string">oldPrice</code><code class="variable-quote">'</code><code class="variable-op">,</code>
- <code class="variable-quote">'</code><code class="variable-string">oldSize</code><code class="variable-quote">'</code><code class="variable-op">,</code>
- <code class="variable-quote">'</code><code class="variable-string">newBetPersistenceType</code><code class="variable-quote">'</code><code class="variable-op">,</code>
- <code class="variable-quote">'</code><code class="variable-string">oldBetPersistenceType</code><code class="variable-quote">'</code><code class="variable-group">]</code>
+&lt;bfpy.bftypes.ApiParam object at 0x011EA790&gt;
 </pre></td></tr></table>
 </dd>
   </dl>
@@ -453,7 +457,7 @@ xsd= False), ApiParam('oldBetPersistenceType', xsd= False),]
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Sat Apr 09 23:52:48 2011
+    Generated by Epydoc 3.0.1 on Wed May 25 18:32:45 2011
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

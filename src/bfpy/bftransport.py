@@ -35,7 +35,7 @@ BfPy transport
 #
 
 import logging
-from util import NullHandler
+from bfutil import NullHandler
 
 handler = NullHandler()
 

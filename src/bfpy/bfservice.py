@@ -29,11 +29,12 @@
 '''
 Definition of services and metaclass to install them in an API provider
 '''
+from __future__ import with_statement
 
 import types
 
+import bferror
 import bfglobals
-
 
 class ServiceDescriptor(object):
     '''
@@ -210,7 +211,10 @@ class ServiceDef(ServiceDescriptor):
         '''
         # Calls to Exchanges need the specific exchange endPoint
         # passed to the functions as 1st unnamed arg
-        endPoint = self.endPoint if self.endPoint <= 0 else args[0]
+        try:
+            endPoint = self.endPoint if self.endPoint <= 0 else args[0]
+        except Exception, e:
+            raise bferror.BfError('Forgot to pass ExchangeId!', e, str(e), e.args)
 
         # Get the service from the appropriate endpoint
         service = instance.getService(endPoint, self.serviceName)
@@ -232,7 +236,8 @@ class ServiceDef(ServiceDescriptor):
 
         # Fill in the defined argument values in the service request
         for name, value in requestArgs.iteritems():
-            setattr(request, name, value)
+            if not name.startswith('_'):
+                setattr(request, name, value)
 
         # Calculate the data charges weight
         weight = abs(self.weight)
@@ -241,7 +246,7 @@ class ServiceDef(ServiceDescriptor):
                 # Some calls using marketId '0' cost 5 times
                 weight *= 5
             
-        # Add the weight to the instance - blocking the call if needed
+        # Add the weight to the instance - the call will block if needed
         instance.addDataWeight(endPoint, weight)
 
         # Execute the call and fetch the response
@@ -252,7 +257,7 @@ class ServiceDef(ServiceDescriptor):
         if instance.postProcess:
             for postProc in self.postProc:
                 postProc(response, instance=instance, exchangeId=endPoint,
-                         request=request)
+                         request=request, requestArgs=requestArgs)
 
         return response
 

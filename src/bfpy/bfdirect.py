@@ -31,8 +31,7 @@ Definition of direct construction API call and services
 and metaclass to install them in an API provider
 '''
 
-# FIXME: Add local timezone to date params before textTranslation (matchedSince, fromDate)
-
+import copy
 import types
 
 from bftransport import sRequest
@@ -63,13 +62,20 @@ class ApiServiceMeta(type):
         @type clsdict: dict
         @param clsdict: the dictionary of cls
         '''
-
-        for apiCall in clsdict['ApiCalls']:
-            clsdict[apiCall.operation] = apiCall
+        for apiCall in clsdict['_ApiCalls']:
+            if apiCall.operation not in clsdict:
+                clsdict[apiCall.operation] = apiCall
+            else:
+                apitype = apiCall.apitype[0].upper() + apiCall.apitype[1:]
+                clsdict[apiCall.operation + apitype] = apiCall
 
         clsdict['objects'] = {}
         for apiType in bftypes.ApiDataTypes:
-            clsdict['objects'][apiType.__name__] = apiType
+            if apiType.apitype:
+                suffix = apiType.apitype[0].upper() + apiType.apitype[1:]
+            else:
+                suffix = ''
+            clsdict['objects'][apiType.__name__ + suffix] = apiType
 
         # Support pluggable extern Api Calls & Types
         try:
@@ -97,8 +103,8 @@ class ApiService(object):
     Holds L{ApiCall} descriptors and L{ApiDataType} classes to enable
     direct interaction with a Betfair service
 
-    @type ApiCalls: list
-    @cvar ApiCalls: list of ApiCalls to install
+    @type _ApiCalls: list
+    @cvar _ApiCalls: list of ApiCalls to install
 
     @type endPointUrl: string
     @ivar endPointUrl: url to the service
@@ -108,25 +114,71 @@ class ApiService(object):
 
     __metaclass__ = ApiServiceMeta
 
-    ApiCalls = [
+    _ApiCalls = [
+        # General API - Complete
         bfapicalls.ApiCallGlobal('login'),
-        bfapicalls.ApiCallGlobal('keepAlive'),
         bfapicalls.ApiCallGlobal('logout'),
+        bfapicalls.ApiCallGlobal('keepAlive'),
+
+        # Read-Only API - Complete
+        bfapicalls.ApiCallGlobal('convertCurrency'),
         bfapicalls.ApiCallGlobal('getActiveEventTypes'),
-        bfapicalls.ApiCallGlobal('getEvents'),
+        bfapicalls.ApiCallGlobal('getAllCurrencies'),
+        bfapicalls.ApiCallGlobal('getAllCurrenciesV2'),
+        bfapicalls.ApiCallGlobal('getAllEventTypes'),
         bfapicalls.ApiCallExchange('getAllMarkets'),
-        bfapicalls.ApiCallExchange('getAccountFunds'),
-        bfapicalls.ApiCallGlobal('transferFunds'),
-        bfapicalls.ApiCallExchange('getCurrentBets'),
-        bfapicalls.ApiCallExchange('getMarket'),
-        bfapicalls.ApiCallExchange('getMarketPricesCompressed'),
+        bfapicalls.ApiCallExchange('getBet'),
+        bfapicalls.ApiCallExchange('getBetHistory'),
+        bfapicalls.ApiCallExchange('getBetLite'),
+        bfapicalls.ApiCallExchange('getBetMatchesLite'),
         bfapicalls.ApiCallExchange('getCompleteMarketPricesCompressed'),
-        bfapicalls.ApiCallExchange('getMarketTradedVolumeCompressed'),
-        bfapicalls.ApiCallExchange('getMarketProfitAndLoss'),
+        bfapicalls.ApiCallExchange('getCurrentBets'),
+        bfapicalls.ApiCallExchange('getCurrentBetsLite'),
+        bfapicalls.ApiCallExchange('getDetailAvailableMktDepth'),
+        bfapicalls.ApiCallGlobal('getEvents'),
+        bfapicalls.ApiCallExchange('getInPlayMarkets'),
+        bfapicalls.ApiCallExchange('getMarket'),
+        bfapicalls.ApiCallExchange('getMarketInfo'),
+        bfapicalls.ApiCallExchange('getMarketPrices'),
+        bfapicalls.ApiCallExchange('getMarketPricesCompressed'),
         bfapicalls.ApiCallExchange('getMUBets'),
+        bfapicalls.ApiCallExchange('getMUBetsLite'),
+        bfapicalls.ApiCallExchange('getMarketProfitAndLoss'),
+        bfapicalls.ApiCallExchange('getMarketTradedVolume'),
+        bfapicalls.ApiCallExchange('getMarketTradedVolumeCompressed'),
+        bfapicalls.ApiCallExchange('getPrivateMarkets'),
+        bfapicalls.ApiCallExchange('getSilks'),
+        bfapicalls.ApiCallExchange('getSilksV2'),
+
+        # Bet Placement API - Complete
         bfapicalls.ApiCallExchange('placeBets'),
         bfapicalls.ApiCallExchange('cancelBets'),
+        bfapicalls.ApiCallExchange('cancelBetsByMarket'),
         bfapicalls.ApiCallExchange('updateBets'),
+
+        # Account Management API - Complete
+        bfapicalls.ApiCallGlobal('AddPaymentCard'),
+        bfapicalls.ApiCallGlobal('DeletePaymentCard'),
+        bfapicalls.ApiCallGlobal('DepositFromPaymentCard'),
+        bfapicalls.ApiCallGlobal('forgotPassword'),
+        bfapicalls.ApiCallExchange('getAccountFunds'),
+        bfapicalls.ApiCallExchange('getAccountStatement'),
+        bfapicalls.ApiCallGlobal('getPaymentCard'),
+        bfapicalls.ApiCallGlobal('getSubscriptionInfo'),
+        bfapicalls.ApiCallGlobal('modifyPassword'),
+        bfapicalls.ApiCallGlobal('modifyProfile'),
+        bfapicalls.ApiCallGlobal('transferFunds'),
+        bfapicalls.ApiCallGlobal('retrieveLIMBMessage'),
+        bfapicalls.ApiCallGlobal('selfExclude'),
+        bfapicalls.ApiCallGlobal('setChatName'),
+        bfapicalls.ApiCallGlobal('submitLIMBMessage'),
+        bfapicalls.ApiCallGlobal('updatePaymentCard'),
+        bfapicalls.ApiCallGlobal('viewProfile'),
+        bfapicalls.ApiCallGlobal('viewProfileV2'),
+        bfapicalls.ApiCallGlobal('viewReferAndEarn'),
+        bfapicalls.ApiCallGlobal('withdrawToPaymentCard'),
+
+        # Vendor API - Complete
         bfapicalls.ApiCallVendor('createVendorAccessRequest'),
         bfapicalls.ApiCallVendor('cancelVendorAccessRequest'),
         bfapicalls.ApiCallVendor('updateVendorSubscription'),
@@ -150,12 +202,27 @@ class ApiService(object):
         self.transport = transport
 
 
+    def clone(self):
+        '''
+        Returns an L{ApiService} cloned
+
+        @rtype: L{ApiService}
+        @returns: a clone of itself
+        '''
+        obj = copy.copy(self)
+        obj.transport = self.transport.clone()
+        return obj
+
+
     def getObject(self, name):
         '''
         Returns an L{ApiDataType} by name
 
         @type name: string
         @param name: the object to be returned
+
+        @rtype: ApiDataType
+        @returns: the sought object
         '''
         return self.objects[name]()
 
@@ -166,5 +233,8 @@ class ApiService(object):
 
         @type name: string
         @param name: the api call to be returned
+
+        @rtype: ApiCall
+        @returns: the sought service name
         '''
         return getattr(self, name)

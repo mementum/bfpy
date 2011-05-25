@@ -5,7 +5,8 @@
 # This file is part of BfPy
 #
 # BfPy is a Python library to communicate with the Betfair Betting Exchange
-# Copyright (C) 2010  Daniel Rodriguez (aka Daniel Rodriksson)
+# Copyright (C) 2010 Daniel Rodriguez (aka Daniel Rodriksson)
+# Copyright (C) 2011 Sensible Odds Ltd.
 #
 # You can learn more and contact the author at:
 #
@@ -29,6 +30,7 @@
 Test the services used by bfplusplus for the directApi
 '''
 
+import time
 import sys
 
 import bfpy
@@ -43,14 +45,8 @@ loginInfo = sys.modules['__main__'].loginInfo
 response = bf.login(**loginInfo)
 print response
 
-response = bf.keepAlive()
-print response
+if True:
 
-if False:
-
-    response = bf.keepAlive()
-    print response
-    
     response = bf.keepAlive()
     print response
 
@@ -91,11 +87,11 @@ if False:
     response = bf.getCurrentBets(bfpy.ExchangeUK, betStatus='M')
     print response
 
-    response = bf.getMarket(bfpy.ExchangeUK, marketId=101426972)
+    longTermId = 102817643 # Barclays Premiership 2011/2012
+    longTermRunnerId = 55190 # Chelsea
+    response = bf.getMarket(bfpy.ExchangeUK, marketId=longTermId)
     print response
 
-    longTermId=101426972
-    # Chelsea = 55190
     response = bf.getMarketPricesCompressed(bfpy.ExchangeUK, marketId=longTermId)
     print response
 
@@ -108,38 +104,40 @@ if False:
     response = bf.getMarketProfitAndLoss(bfpy.ExchangeUK, marketId=longTermId)
     print response
 
-    longTermId=101426972
-    response = bf.getMUBets(bfpy.ExchangeUK, marketId=0, betStatus='MU', betIds=[11607664129])
-    print response
-
-
     placeBet = bf.createPlaceBets()
     placeBet.asianLineId = 0
     placeBet.betType = 'B'
-    placeBet.betPersistenceType = 'IP'
-    placeBet.marketId = 102401756
-    placeBet.price = 20.0
-    placeBet.selectionId = 2426
-    placeBet.size = 4.0
+    placeBet.betCategoryType = 'E'
+    placeBet.betPersistenceType = 'NONE'
+    placeBet.marketId = longTermId
+    placeBet.price = 500.0
+    placeBet.selectionId = longTermRunnerId
+    placeBet.size = 2.0
 
-    bf.placeBets(bfpy.ExchangeUK, bets=[placeBet])
+    response = bf.placeBets(bfpy.ExchangeUK, bets=[placeBet])
     print response
 
-    cancelBet = bf.createCancelBets()
-    cancelBet.betId = 14068925024
-    bf.cancelBets(bfpy.ExchangeUK, bets=[cancelBet])
-    print response
-
-
+    time.sleep(5.0)
     updateBet = bf.createUpdateBets()
-    updateBet.betId = 14069265023
-    updateBet.newPrice = 30.0
-    updateBet.newSize = 4.0
-    updateBet.oldPrice = 20.0
-    updateBet.oldSize = 4.0
-    updateBet.newBetPersistenceType = 'IP'
-    updateBet.oldBetPersistenceType = 'IP'
-    bf.updateBets(bfpy.ExchangeUK, bets=[updateBet])
+    updateBet.betId = response.betResults[0].betId
+    updateBet.newPrice = 1000.0
+    updateBet.newSize = 2.0
+    updateBet.oldPrice = 500.0
+    updateBet.oldSize = 2.0
+    updateBet.newBetPersistenceType = 'NONE'
+    updateBet.oldBetPersistenceType = 'NONE'
+    response = bf.updateBets(bfpy.ExchangeUK, bets=[updateBet])
+    print response
+
+    newBetId = response.betResults[0].newBetId
+
+    response = bf.getMUBets(bfpy.ExchangeUK, marketId=longTermId, betStatus='MU')
+    print response
+
+    time.sleep(5.0)
+    cancelBet = bf.createCancelBets()
+    cancelBet.betId = newBetId
+    response = bf.cancelBets(bfpy.ExchangeUK, bets=[cancelBet])
     print response
 
 sys.exit(0)

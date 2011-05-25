@@ -71,7 +71,6 @@ BfPy global variables and functions module.
 @var forceDirect: to force the library always use the DirectAPI method
                   If suds importing fails, it will be set to True
 
-
 @type sudsWebFault: object
 @var sudsWebFaults: an alias to suds.WebFault or None if no suds is used 
 
@@ -80,7 +79,7 @@ BfPy global variables and functions module.
 
 '''
 libname = 'BfPy'
-version = 1.10
+version = 1.11
 libstring = '%s %s' % (libname, str(version))
 
 forceDirect = False
@@ -130,7 +129,7 @@ else:
 
     import logging
     # logging.basicConfig(level=logging.INFO)
-    from util import NullHandler
+    from bfutil import NullHandler
 
     handler = NullHandler()
 
@@ -144,103 +143,3 @@ eventRootId = -1
 
 preProcess = True
 postProcess = True
-
-
-def GetPriceTicksUp(price, ticks):
-    '''
-    Returns the next price tick upwards for a given price
-
-    @type  price: floast
-    @param price: base price for next tick
-    @type  ticks: int
-    @param ticks: number of ticks to increase price
-
-    @rtype: float
-    @return: the passed prices increased x ticks
-    '''
-    priceTicksUp = {
-        2.0: 0.01, 3.0: 0.02, 4.0: 0.05, 6.0: 0.1,
-        10.0: 0.2, 20.0: 0.5, 30.0: 1.0, 50.0: 2.0,
-        100.0: 5.0, 1000.0: 10.0
-        }
-    limits = priceTicksUp.keys()
-    limits.sort()
-    for limit in limits:
-        inc = priceTicksUp[limit]
-        if price < limit:
-            while ticks:
-                ticks -= 1
-                price += inc
-                if price == limit:
-                    break;
-            if not ticks:
-                return price
-    return price
-
-
-def GetPriceTicksDown(price, ticks):
-    '''
-    Returns the next price tick downwards for a given price
-
-    @type  price: floast
-    @param price: base price for next tick
-    @type  ticks: int
-    @param ticks: number of ticks to decrease price
-
-    @rtype: float
-    @return: the passed prices decreased x ticks
-    '''
-    priceTicksDown = {
-        100.0: 10.0, 50.0: 5.0, 30.0: 2.0,
-        20.0: 1.0, 10.0: 0.5, 6.0: 0.2,
-        4.0: 0.1, 3.0: 0.05, 2.0: 0.02,
-        1.01: 0.01
-        }
-
-    # Price is assumed to be well formed
-    limits = priceTicksDown.keys()
-    limits.sort(reverse=True)
-    for limit in limits:
-        inc = priceTicksDown[limit]
-        if price > limit:
-            while ticks:
-                ticks -= 1
-                price -= inc
-                if price == limit:
-                    break
-            if not ticks:
-                return price
-    return price
-
-
-def GetPriceTicks(price, ticks, betType):
-    '''
-    Returns the next price tick upwards/downwards for a given price
-    and bet type
-
-    Back bets increase price upwards
-    Lay bets increase price downwards
-
-    @type  price: floast
-    @param price: base price for next tick
-    @type  ticks: int
-    @param ticks: number of ticks to move the price
-    @type  betType: B|L
-    @param betType: bet type (determines the direction)
-
-    @rtype: float
-    @return: the passed prices decreased x ticks
-    '''
-    if not ticks:
-        return price
-
-    if betType == 'B':
-        if ticks > 0:
-            return GetPriceTicksUp(price, ticks)
-        else:
-            return GetPriceTicksDown(price, abs(ticks))
-    else:
-        if ticks < 0:
-            return GetPriceTicksUp(price, ticks)
-        else:
-            return GetPriceTicksDown(price, abs(ticks))

@@ -5,7 +5,8 @@
 # This file is part of BfPy
 #
 # BfPy is a Python library to communicate with the Betfair Betting Exchange
-# Copyright (C) 2010  Daniel Rodriguez (aka Daniel Rodriksson)
+# Copyright (C) 2010 Daniel Rodriguez (aka Daniel Rodriksson)
+# Copyright (C) 2011 Sensible Odds Ltd.
 #
 # You can learn more and contact the author at:
 #
@@ -43,7 +44,7 @@ import bfpy
 import bfpy.bfclient as bfclient
 
 print 'Creating a Betfair Client'
-bf = bfclient.BfClient()
+bf = bfclient.BfClient(fullDirect=True)
 print 'Created a Betfair Client'
 
 loginInfo = sys.modules['__main__'].loginInfo
@@ -52,7 +53,7 @@ response = bf.login(**loginInfo)
 print response
 
 # English Premier League Winner 2010/11
-longTermId=101426972
+longTermId=102817643
 # Chelsea = 55190
 
 response = bf.getMarketPrices(bfpy.ExchangeUK, marketId=longTermId)

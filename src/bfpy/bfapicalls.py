@@ -31,8 +31,6 @@ Definition of direct construction API call and services
 and metaclass to install them in an API provider
 '''
 
-# FIXME: Add timezone to time when sending it as param (matchedSince, fromDate)
-
 import types
 
 from bftransport import sRequest
@@ -65,16 +63,16 @@ class ApiCall(object):
     '''
 
     soappattern = '''<?xml version="1.0" encoding="UTF-8"?>
-<SOAP-ENV:Envelope xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="$$ns1$$" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns2="$$ns2$$" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
-<SOAP-ENV:Header/>
+<ns0:Envelope xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="$$ns1$$" xmlns:ns2="$$ns2$$" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/">
+<ns0:Header/>
 <ns0:Body>
 <ns1:$$operation$$>
 $$request$$
 </ns1:$$operation$$>
 </ns0:Body>
-</SOAP-ENV:Envelope>'''
+</ns0:Envelope>'''
 
-    def __init__(self, ns1, ns2, operation):
+    def __init__(self, apitype, ns1, ns2, operation):
         '''
         Initializes most of the pattern and the HTTP request, leaving just the last second
         specific value substitutions for the soap call
@@ -86,6 +84,7 @@ $$request$$
         @type operation: string
         @param operation: name of the call
         '''
+        self.apitype = apitype
         self.__name__ = '_' + operation + '_'
         
         self.instanceCache = dict()
@@ -214,7 +213,7 @@ class ApiCallGlobal(ApiCall):
         @type operation: string
         @param operation: name of the call
         '''
-        ApiCall.__init__(self, self.ns1, self.ns2, operation=operation)
+        ApiCall.__init__(self, 'global', self.ns1, self.ns2, operation=operation)
 
 
 class ApiCallExchange(ApiCall):
@@ -231,7 +230,7 @@ class ApiCallExchange(ApiCall):
         @type operation: string
         @param operation: name of the call
         '''
-        ApiCall.__init__(self, self.ns1, self.ns2, operation=operation)
+        ApiCall.__init__(self, 'exchange', self.ns1, self.ns2, operation=operation)
 
 
 class ApiCallVendor(ApiCall):
@@ -248,4 +247,4 @@ class ApiCallVendor(ApiCall):
         @type operation: string
         @param operation: name of the call
         '''
-        ApiCall.__init__(self, self.ns1, self.ns2, operation=operation)
+        ApiCall.__init__(self, 'vendor', self.ns1, self.ns2, operation=operation)

@@ -5,7 +5,8 @@
 # This file is part of BfPy
 #
 # BfPy is a Python library to communicate with the Betfair Betting Exchange
-# Copyright (C) 2010  Daniel Rodriguez (aka Daniel Rodriksson)
+# Copyright (C) 2010 Daniel Rodriguez (aka Daniel Rodriksson)
+# Copyright (C) 2011 Sensible Odds Ltd.
 #
 # You can learn more and contact the author at:
 #
@@ -29,12 +30,9 @@ import sys
 
 import bfpy
 import bfpy.bfclient as bfclient
-print "forceDirect = %s" % str(bfpy.forceDirect)
 
 print 'Creating a Betfair Client'
 bf = bfclient.BfClient(fullDirect=True)
-print "fullDirect = %s" % str(bf.fullDirect)
-print "directApi = %s" % str(bf.directApi)
 print 'Created a Betfair Client'
 
 loginInfo = sys.modules['__main__'].loginInfo
@@ -43,8 +41,9 @@ response = bf.login(**loginInfo)
 print response
 
 myVendorId=PUT_YOUR_VENDOR_ID_HERE
+theClientId=PUT_YOUR_CLIENT_ID_HERE
 
-if False:
+if True:
     response = bf.createVendorAccessRequest(vendorCustomField='test1', vendorSoftwareId=myVendorId)
     print response
 
@@ -54,14 +53,14 @@ if False:
     response = bf.getVendorAccessRequests(vendorSoftwareId=myVendorId)
     print response
 
-    response = bf.getSubscriptionInfo(vendorSoftwareId=myVendorId, vendorClientId=PUT_CLIENT_ID_HERE)
+    response = bf.getSubscriptionInfo(vendorSoftwareId=myVendorId, vendorClientId=theClientId)
     print response
 
     import datetime
-    response = bf.updateVendorSubscription(vendorSoftwareId=myVendorId, vendorClientId=PUT_CLIENT_ID_HERE, expiryDate=datetime.datetime.now())
+    response = bf.updateVendorSubscription(vendorSoftwareId=myVendorId, vendorClientId=theClientId, expiryDate=datetime.datetime.now())
     print response
 
-    response = bf.getSubscriptionInfo(vendorSoftwareId=myVendorId, vendorClientId=PUT_CLIENT_ID_HERE)
+    response = bf.getSubscriptionInfo(vendorSoftwareId=myVendorId, vendorClientId=theClientId)
     print response
 
     response = bf.getVendorInfo()

@@ -5,7 +5,8 @@
 # This file is part of BfPy
 #
 # BfPy is a Python library to communicate with the Betfair Betting Exchange
-# Copyright (C) 2010  Daniel Rodriguez (aka Daniel Rodriksson)
+# Copyright (C) 2010 Daniel Rodriguez (aka Daniel Rodriksson)
+# Copyright (C) 2011 Sensible Odds Ltd.
 #
 # You can learn more and contact the author at:
 #
@@ -36,7 +37,7 @@ import bfpy
 import bfpy.bfclient as bfclient
 
 print 'Creating a Betfair Client'
-bf = bfclient.BfClient()
+bf = bfclient.BfClient(fullDirect=True)
 print 'Created a Betfair Client'
 
 loginInfo = sys.modules['__main__'].loginInfo
@@ -46,14 +47,16 @@ print response
 
 response = bf.getAccountStatement(bfpy.ExchangeUK)
 print response
-sys.exit(0)
 
 # Possibly a full set of fields is needed and not just one field
 # response = bf.modifyProfile(password='yourPass', homeTelephone='aTelephone')
 # print response
 
-# reponse = bf.modifyPassword(password='yourPass', newPassword='newPass', newPasswordRepeat='newPass')
-# print response
+response = bf.modifyPassword(password=loginInfo['password'], newPassword='newPass123456', newPasswordRepeat='newPass123456')
+print response
+
+response = bf.modifyPassword(password='newPass123456', newPassword=loginInfo['password'], newPasswordRepeat=loginInfo['password'])
+print response
 
 response = bf.getSubscriptionInfo()
 print response

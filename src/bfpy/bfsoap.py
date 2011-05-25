@@ -71,7 +71,7 @@ try:
 except ImportError:
     from xml.etree.ElementTree import Element, SubElement, QName, iterparse
 
-from util import EmptyObject
+from bfutil import EmptyObject
 
 # SOAP 1.1 namespaces
 NS_SOAP_ENV = "{http://schemas.xmlsoap.org/soap/envelope/}"
