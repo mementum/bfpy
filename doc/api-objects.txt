@@ -14,6 +14,7 @@ bfpy.preProcess	bfpy-module.html#preProcess
 bfpy.freeApiId	bfpy-module.html#freeApiId
 bfpy.wsdlDefs	bfpy-module.html#wsdlDefs
 bfpy.libname	bfpy-module.html#libname
+bfpy.separateCounters	bfpy-module.html#separateCounters
 bfpy.catchAllExceptions	bfpy-module.html#catchAllExceptions
 bfpy.EndPointUrls	bfpy-module.html#EndPointUrls
 bfpy.PriceIncs	bfpy-module.html#PriceIncs
@@ -41,6 +42,7 @@ bfpy.bfglobals.Global	bfpy.bfglobals-module.html#Global
 bfpy.bfglobals.Vendor	bfpy.bfglobals-module.html#Vendor
 bfpy.bfglobals.version	bfpy.bfglobals-module.html#version
 bfpy.bfglobals.Exchange	bfpy.bfglobals-module.html#Exchange
+bfpy.bfglobals.separateCounters	bfpy.bfglobals-module.html#separateCounters
 bfpy.bfglobals.ExchangeUK	bfpy.bfglobals-module.html#ExchangeUK
 bfpy.bfglobals.catchAllExceptions	bfpy.bfglobals-module.html#catchAllExceptions
 bfpy.bfglobals.ExchangeAus	bfpy.bfglobals-module.html#ExchangeAus
@@ -729,10 +731,16 @@ bfpy.bftransport.BfTransportHtmlError.__init__	bfpy.bftransport.BfTransportHtmlE
 bfpy.bftransport.BfTransportHttpError	bfpy.bftransport.BfTransportHttpError-class.html
 bfpy.bftransport.BfTransportHttpError.__init__	bfpy.bftransport.BfTransportHttpError-class.html#__init__
 bfpy.bftransport.BfTransportReply	bfpy.bftransport.BfTransportReply-class.html
+bfpy.bftransport.BfTransportReply.code	bfpy.bftransport.BfTransportReply-class.html#code
 bfpy.bftransport.BfTransportReply.__str__	bfpy.bftransport.BfTransportReply-class.html#__str__
+bfpy.bftransport.BfTransportReply.headers	bfpy.bftransport.BfTransportReply-class.html#headers
+bfpy.bftransport.BfTransportReply.message	bfpy.bftransport.BfTransportReply-class.html#message
 bfpy.bftransport.BfTransportReply.__init__	bfpy.bftransport.BfTransportReply-class.html#__init__
 bfpy.bftransport.BfTransportRequest	bfpy.bftransport.BfTransportRequest-class.html
+bfpy.bftransport.BfTransportRequest.url	bfpy.bftransport.BfTransportRequest-class.html#url
 bfpy.bftransport.BfTransportRequest.__str__	bfpy.bftransport.BfTransportRequest-class.html#__str__
+bfpy.bftransport.BfTransportRequest.headers	bfpy.bftransport.BfTransportRequest-class.html#headers
+bfpy.bftransport.BfTransportRequest.message	bfpy.bftransport.BfTransportRequest-class.html#message
 bfpy.bftransport.BfTransportRequest.__init__	bfpy.bftransport.BfTransportRequest-class.html#__init__
 bfpy.bftransport.BfTransportSocketError	bfpy.bftransport.BfTransportSocketError-class.html
 bfpy.bftransport.BfTransportSocketError.__init__	bfpy.bftransport.BfTransportSocketError-class.html#__init__

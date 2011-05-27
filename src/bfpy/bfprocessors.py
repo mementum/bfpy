@@ -43,8 +43,7 @@ class ArrayFix(object):
     '''
     Response processor
 
-    Remove one (or more) levels of indirection from the arrays
-    defined in the Betfair WSDLs
+    Replaces nullified arrays with an empty list
     '''
     def __init__(self, attrNames):
         if not isinstance(attrNames, list):

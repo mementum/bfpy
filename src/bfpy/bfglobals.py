@@ -66,6 +66,13 @@ BfPy global variables and functions module.
 @type postProcess: bool
 @var postProcess: default library behaviour: process (easing use) Betfair answers
                   before sending them to Betfair
+@type catchAllExceptions: bool
+@var catchAllException: catch and return as BfPythonError any possible error generated
+                        along the library once a service has been called
+
+@type separateCounters: bool
+@var separateCounters: use separate counters (per exchange/endpoint) to throttle requests
+                      of calls that fall under the DataRequest (default: False)
 '''
 
 libname = 'BfPy'
@@ -108,3 +115,5 @@ preProcess = True
 postProcess = True
 
 catchAllExceptions = True
+
+separateCounters = False

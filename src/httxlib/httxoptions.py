@@ -6,7 +6,9 @@
 #
 # HttxLib is an HTTP(s) Python library suited multithreaded/multidomain
 # applications
-# Copyright (C) 2010  Daniel Rodriguez (aka Daniel Rodriksson)
+#
+# Copyright (C) 2010-2011  Daniel Rodriguez (aka Daniel Rodriksson)
+# Copyright (C) 2011  Sensible Odds Ltd
 #
 # You can learn more and contact the author at:
 #

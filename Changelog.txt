@@ -1,14 +1,16 @@
 1.11
--- Complete API Support via DirectAPI (Resolves Issue #8)
--- Informative error message if ExchangeId is not passed to an Exchange call (Resolves Issue #9)
--- Split Bf WSDL definitions into files for easier management (Resolves Issue #10)
--- Corrected adjustment of marketTime to the local time zone (Resolves Issue #3)
--- ApiDataTypes now support __copy__, which is used in the extended version of PlaceBets (Resolves Issue #4)
--- Clones share data with original object regardless of cloning moment (Resolves Issue #5)
--- Virtual Prices are supported (Resolves Issue #6)
--- DirectAPI datetime objects sent in UTC format always. They were before directly translated to the given time regardless of the timezone (Resolves Issue #7)
--- DataCounter uses now time.clock for Windows and time.time for other platforms to ensure throttling problems under Unix/Linux systems (Resolves Issue #11)
+-- Complete API Support via DirectAPI (Resolves issue #8)
+-- Informative error message if ExchangeId is not passed to an Exchange call (Resolves issue #9)
+-- Split Bf WSDL definitions into files for easier management (Resolves issue #10)
+-- Corrected adjustment of marketTime to the local time zone (Resolves issue #3)
+-- ApiDataTypes now support __copy__, which is used in the extended version of PlaceBets (Resolves issue #4)
+-- Clones share data with original object regardless of cloning moment (Resolves issue #5)
+-- Virtual Prices are supported (Resolves issue #6)
+-- DirectAPI datetime objects sent in UTC format always. They were before directly translated to the given time regardless of the timezone (Resolves issue #7)
+-- DataCounter uses now time.clock for Windows and time.time for other platforms to ensure throttling problems under Unix/Linux systems (Resolves issue #11)
 -- Vendor API call getSubscriptionInfo available as getSuscriptionInfoVendor to avoid conflict with the call of the same name (Resolves Issuue #12)
+-- All returned datetimes are now adjusted to the localtime (Resolves issue #13)
+-- Updated to HttxLib 0.96
 
 1.10
 -- Implemented Software Vendor API Services

@@ -94,7 +94,7 @@ class BfTransportError(BfError):
 
 class BfNetworkError(BfTransportError):
     '''
-    Derived from BfError, to hold error (potential) network errors
+    Derived from BfError, to hold network errors
     '''
 
     def __init__(self, *args):
@@ -118,7 +118,9 @@ class BfHttpError(BfTransportError):
 
 class BfHtmlError(BfTransportError):
     '''
-    Derived from BfError, to hold error errors at Http level
+    Derived from BfError, to hold error errors at Html level
+    (You find yourself behind the proxy of a hotel and the proxy returns
+    200 OK but of course not the expected XML response)
     '''
 
     def __init__(self, *args):

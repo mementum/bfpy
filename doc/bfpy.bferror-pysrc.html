@@ -481,7 +481,7 @@ bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclin
 <a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"> </tt>
 <a name="BfNetworkError"></a><div id="BfNetworkError-def"><a name="L95"></a><tt class="py-lineno"> 95</tt> <a class="py-toggle" href="#" id="BfNetworkError-toggle" onclick="return toggle('BfNetworkError');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="bfpy.bferror.BfNetworkError-class.html">BfNetworkError</a><tt class="py-op">(</tt><tt class="py-base-class">BfTransportError</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
 </div><div id="BfNetworkError-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="BfNetworkError-expanded"><a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
-<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt class="py-docstring">    Derived from BfError, to hold error (potential) network errors</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt class="py-docstring">    Derived from BfError, to hold network errors</tt> </tt>
 <a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
 <a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"> </tt>
 <a name="BfNetworkError.__init__"></a><div id="BfNetworkError.__init__-def"><a name="L100"></a><tt class="py-lineno">100</tt> <a class="py-toggle" href="#" id="BfNetworkError.__init__-toggle" onclick="return toggle('BfNetworkError.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="bfpy.bferror.BfNetworkError-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
@@ -723,14 +723,16 @@ bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclin
 <a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"> </tt>
 <a name="BfHtmlError"></a><div id="BfHtmlError-def"><a name="L119"></a><tt class="py-lineno">119</tt> <a class="py-toggle" href="#" id="BfHtmlError-toggle" onclick="return toggle('BfHtmlError');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="bfpy.bferror.BfHtmlError-class.html">BfHtmlError</a><tt class="py-op">(</tt><tt class="py-base-class">BfTransportError</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
 </div><div id="BfHtmlError-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="BfHtmlError-expanded"><a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
-<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"><tt class="py-docstring">    Derived from BfError, to hold error errors at Http level</tt> </tt>
-<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
-<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"> </tt>
-<a name="BfHtmlError.__init__"></a><div id="BfHtmlError.__init__-def"><a name="L124"></a><tt class="py-lineno">124</tt> <a class="py-toggle" href="#" id="BfHtmlError.__init__-toggle" onclick="return toggle('BfHtmlError.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="bfpy.bferror.BfHtmlError-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="BfHtmlError.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BfHtmlError.__init__-expanded"><a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
-<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line"><tt class="py-docstring">        Constructor. Saves the args by calling the base class constructor</tt> </tt>
-<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
-<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">        <tt id="link-9" class="py-name"><a title="bfpy.bferror.BfTransportError
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"><tt class="py-docstring">    Derived from BfError, to hold error errors at Html level</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"><tt class="py-docstring">    (You find yourself behind the proxy of a hotel and the proxy returns</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"><tt class="py-docstring">    200 OK but of course not the expected XML response)</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"> </tt>
+<a name="BfHtmlError.__init__"></a><div id="BfHtmlError.__init__-def"><a name="L126"></a><tt class="py-lineno">126</tt> <a class="py-toggle" href="#" id="BfHtmlError.__init__-toggle" onclick="return toggle('BfHtmlError.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="bfpy.bferror.BfHtmlError-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BfHtmlError.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BfHtmlError.__init__-expanded"><a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"><tt class="py-docstring">        Constructor. Saves the args by calling the base class constructor</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">        <tt id="link-9" class="py-name"><a title="bfpy.bferror.BfTransportError
 bfpy.bftransport.BfTransportError" class="py-name" href="#" onclick="return doclink('link-9', 'BfTransportError', 'link-5');">BfTransportError</a></tt><tt class="py-op">.</tt><tt id="link-10" class="py-name"><a title="bfpy.bfapi.BfApi.MinStake.__init__
 bfpy.bfapi.BfApi.__init__
 bfpy.bfapicalls.ApiCall.__init__
@@ -840,18 +842,18 @@ bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-10', '__init__', 'link-0');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">)</tt> </tt>
-</div></div><a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"> </tt>
-<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"> </tt>
-<a name="BfBetfairError"></a><div id="BfBetfairError-def"><a name="L131"></a><tt class="py-lineno">131</tt> <a class="py-toggle" href="#" id="BfBetfairError-toggle" onclick="return toggle('BfBetfairError');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="bfpy.bferror.BfBetfairError-class.html">BfBetfairError</a><tt class="py-op">(</tt><tt class="py-base-class">BfError</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="BfBetfairError-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="BfBetfairError-expanded"><a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
-<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"><tt class="py-docstring">    Derived from BfError. Catch all for Betfair API specific errors</tt> </tt>
-<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
-<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line"> </tt>
-<a name="BfBetfairError.__init__"></a><div id="BfBetfairError.__init__-def"><a name="L136"></a><tt class="py-lineno">136</tt> <a class="py-toggle" href="#" id="BfBetfairError.__init__-toggle" onclick="return toggle('BfBetfairError.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="bfpy.bferror.BfBetfairError-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="BfBetfairError.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BfBetfairError.__init__-expanded"><a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
-<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line"><tt class="py-docstring">        Constructor. Saves the args by calling the base class constructor</tt> </tt>
-<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
-<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">        <tt id="link-11" class="py-name"><a title="bfpy.bferror.BfError" class="py-name" href="#" onclick="return doclink('link-11', 'BfError', 'link-1');">BfError</a></tt><tt class="py-op">.</tt><tt id="link-12" class="py-name"><a title="bfpy.bfapi.BfApi.MinStake.__init__
+</div></div><a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line"> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line"> </tt>
+<a name="BfBetfairError"></a><div id="BfBetfairError-def"><a name="L133"></a><tt class="py-lineno">133</tt> <a class="py-toggle" href="#" id="BfBetfairError-toggle" onclick="return toggle('BfBetfairError');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="bfpy.bferror.BfBetfairError-class.html">BfBetfairError</a><tt class="py-op">(</tt><tt class="py-base-class">BfError</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BfBetfairError-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="BfBetfairError-expanded"><a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line"><tt class="py-docstring">    Derived from BfError. Catch all for Betfair API specific errors</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line"> </tt>
+<a name="BfBetfairError.__init__"></a><div id="BfBetfairError.__init__-def"><a name="L138"></a><tt class="py-lineno">138</tt> <a class="py-toggle" href="#" id="BfBetfairError.__init__-toggle" onclick="return toggle('BfBetfairError.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="bfpy.bferror.BfBetfairError-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BfBetfairError.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BfBetfairError.__init__-expanded"><a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line"><tt class="py-docstring">        Constructor. Saves the args by calling the base class constructor</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">        <tt id="link-11" class="py-name"><a title="bfpy.bferror.BfError" class="py-name" href="#" onclick="return doclink('link-11', 'BfError', 'link-1');">BfError</a></tt><tt class="py-op">.</tt><tt id="link-12" class="py-name"><a title="bfpy.bfapi.BfApi.MinStake.__init__
 bfpy.bfapi.BfApi.__init__
 bfpy.bfapicalls.ApiCall.__init__
 bfpy.bfapicalls.ApiCallExchange.__init__
@@ -960,18 +962,18 @@ bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-12', '__init__', 'link-0');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">)</tt> </tt>
-</div></div><a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line"> </tt>
-<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"> </tt>
-<a name="BfApiError"></a><div id="BfApiError-def"><a name="L143"></a><tt class="py-lineno">143</tt> <a class="py-toggle" href="#" id="BfApiError-toggle" onclick="return toggle('BfApiError');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="bfpy.bferror.BfApiError-class.html">BfApiError</a><tt class="py-op">(</tt><tt class="py-base-class">BfBetfairError</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="BfApiError-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="BfApiError-expanded"><a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
-<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line"><tt class="py-docstring">    Derived from the Betfair Catch-all exceptions for API errors</tt> </tt>
-<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
-<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"> </tt>
-<a name="BfApiError.__init__"></a><div id="BfApiError.__init__-def"><a name="L148"></a><tt class="py-lineno">148</tt> <a class="py-toggle" href="#" id="BfApiError.__init__-toggle" onclick="return toggle('BfApiError.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="bfpy.bferror.BfApiError-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="BfApiError.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BfApiError.__init__-expanded"><a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
-<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line"><tt class="py-docstring">        Constructor. Saves the args by calling the base class constructor</tt> </tt>
-<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
-<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">        <tt id="link-13" class="py-name" targets="Class bfpy.bferror.BfBetfairError=bfpy.bferror.BfBetfairError-class.html"><a title="bfpy.bferror.BfBetfairError" class="py-name" href="#" onclick="return doclink('link-13', 'BfBetfairError', 'link-13');">BfBetfairError</a></tt><tt class="py-op">.</tt><tt id="link-14" class="py-name"><a title="bfpy.bfapi.BfApi.MinStake.__init__
+</div></div><a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line"> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line"> </tt>
+<a name="BfApiError"></a><div id="BfApiError-def"><a name="L145"></a><tt class="py-lineno">145</tt> <a class="py-toggle" href="#" id="BfApiError-toggle" onclick="return toggle('BfApiError');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="bfpy.bferror.BfApiError-class.html">BfApiError</a><tt class="py-op">(</tt><tt class="py-base-class">BfBetfairError</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BfApiError-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="BfApiError-expanded"><a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"><tt class="py-docstring">    Derived from the Betfair Catch-all exceptions for API errors</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line"> </tt>
+<a name="BfApiError.__init__"></a><div id="BfApiError.__init__-def"><a name="L150"></a><tt class="py-lineno">150</tt> <a class="py-toggle" href="#" id="BfApiError.__init__-toggle" onclick="return toggle('BfApiError.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="bfpy.bferror.BfApiError-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BfApiError.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BfApiError.__init__-expanded"><a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line"><tt class="py-docstring">        Constructor. Saves the args by calling the base class constructor</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">        <tt id="link-13" class="py-name" targets="Class bfpy.bferror.BfBetfairError=bfpy.bferror.BfBetfairError-class.html"><a title="bfpy.bferror.BfBetfairError" class="py-name" href="#" onclick="return doclink('link-13', 'BfBetfairError', 'link-13');">BfBetfairError</a></tt><tt class="py-op">.</tt><tt id="link-14" class="py-name"><a title="bfpy.bfapi.BfApi.MinStake.__init__
 bfpy.bfapi.BfApi.__init__
 bfpy.bfapicalls.ApiCall.__init__
 bfpy.bfapicalls.ApiCallExchange.__init__
@@ -1080,18 +1082,18 @@ bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-14', '__init__', 'link-0');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">)</tt> </tt>
-</div></div><a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line"> </tt>
-<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"> </tt>
-<a name="BfServiceError"></a><div id="BfServiceError-def"><a name="L155"></a><tt class="py-lineno">155</tt> <a class="py-toggle" href="#" id="BfServiceError-toggle" onclick="return toggle('BfServiceError');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="bfpy.bferror.BfServiceError-class.html">BfServiceError</a><tt class="py-op">(</tt><tt class="py-base-class">BfBetfairError</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="BfServiceError-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="BfServiceError-expanded"><a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
-<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line"><tt class="py-docstring">    Derived from the Betfair Catch-all exceptions for Service errors</tt> </tt>
-<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
-<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"> </tt>
-<a name="BfServiceError.__init__"></a><div id="BfServiceError.__init__-def"><a name="L160"></a><tt class="py-lineno">160</tt> <a class="py-toggle" href="#" id="BfServiceError.__init__-toggle" onclick="return toggle('BfServiceError.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="bfpy.bferror.BfServiceError-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="BfServiceError.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BfServiceError.__init__-expanded"><a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
-<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line"><tt class="py-docstring">        Constructor. Saves the args by calling the base class constructor</tt> </tt>
-<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
-<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">        <tt id="link-15" class="py-name"><a title="bfpy.bferror.BfBetfairError" class="py-name" href="#" onclick="return doclink('link-15', 'BfBetfairError', 'link-13');">BfBetfairError</a></tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="bfpy.bfapi.BfApi.MinStake.__init__
+</div></div><a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line"> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line"> </tt>
+<a name="BfServiceError"></a><div id="BfServiceError-def"><a name="L157"></a><tt class="py-lineno">157</tt> <a class="py-toggle" href="#" id="BfServiceError-toggle" onclick="return toggle('BfServiceError');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="bfpy.bferror.BfServiceError-class.html">BfServiceError</a><tt class="py-op">(</tt><tt class="py-base-class">BfBetfairError</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BfServiceError-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="BfServiceError-expanded"><a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"><tt class="py-docstring">    Derived from the Betfair Catch-all exceptions for Service errors</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line"> </tt>
+<a name="BfServiceError.__init__"></a><div id="BfServiceError.__init__-def"><a name="L162"></a><tt class="py-lineno">162</tt> <a class="py-toggle" href="#" id="BfServiceError.__init__-toggle" onclick="return toggle('BfServiceError.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="bfpy.bferror.BfServiceError-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BfServiceError.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BfServiceError.__init__-expanded"><a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line"><tt class="py-docstring">        Constructor. Saves the args by calling the base class constructor</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">        <tt id="link-15" class="py-name"><a title="bfpy.bferror.BfBetfairError" class="py-name" href="#" onclick="return doclink('link-15', 'BfBetfairError', 'link-13');">BfBetfairError</a></tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="bfpy.bfapi.BfApi.MinStake.__init__
 bfpy.bfapi.BfApi.__init__
 bfpy.bfapicalls.ApiCall.__init__
 bfpy.bfapicalls.ApiCallExchange.__init__
@@ -1200,19 +1202,19 @@ bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-16', '__init__', 'link-0');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">)</tt> </tt>
-</div></div><a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line"> </tt>
-<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line"> </tt>
-<a name="BfApplicationError"></a><div id="BfApplicationError-def"><a name="L167"></a><tt class="py-lineno">167</tt> <a class="py-toggle" href="#" id="BfApplicationError-toggle" onclick="return toggle('BfApplicationError');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="bfpy.bferror.BfApplicationError-class.html">BfApplicationError</a><tt class="py-op">(</tt><tt class="py-base-class">BfBetfairError</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="BfApplicationError-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="BfApplicationError-expanded"><a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
-<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line"><tt class="py-docstring">    Derived from the Betfair Catch-all exceptions for application specific</tt> </tt>
-<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line"><tt class="py-docstring">    errors. Not used in the library</tt> </tt>
-<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
-<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line"> </tt>
-<a name="BfApplicationError.__init__"></a><div id="BfApplicationError.__init__-def"><a name="L173"></a><tt class="py-lineno">173</tt> <a class="py-toggle" href="#" id="BfApplicationError.__init__-toggle" onclick="return toggle('BfApplicationError.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="bfpy.bferror.BfApplicationError-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="BfApplicationError.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BfApplicationError.__init__-expanded"><a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
-<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line"><tt class="py-docstring">        Constructor. Saves the args by calling the base class constructor</tt> </tt>
-<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
-<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">        <tt id="link-17" class="py-name"><a title="bfpy.bferror.BfBetfairError" class="py-name" href="#" onclick="return doclink('link-17', 'BfBetfairError', 'link-13');">BfBetfairError</a></tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="bfpy.bfapi.BfApi.MinStake.__init__
+</div></div><a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line"> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line"> </tt>
+<a name="BfApplicationError"></a><div id="BfApplicationError-def"><a name="L169"></a><tt class="py-lineno">169</tt> <a class="py-toggle" href="#" id="BfApplicationError-toggle" onclick="return toggle('BfApplicationError');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="bfpy.bferror.BfApplicationError-class.html">BfApplicationError</a><tt class="py-op">(</tt><tt class="py-base-class">BfBetfairError</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BfApplicationError-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="BfApplicationError-expanded"><a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line"><tt class="py-docstring">    Derived from the Betfair Catch-all exceptions for application specific</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line"><tt class="py-docstring">    errors. Not used in the library</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line"> </tt>
+<a name="BfApplicationError.__init__"></a><div id="BfApplicationError.__init__-def"><a name="L175"></a><tt class="py-lineno">175</tt> <a class="py-toggle" href="#" id="BfApplicationError.__init__-toggle" onclick="return toggle('BfApplicationError.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="bfpy.bferror.BfApplicationError-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BfApplicationError.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BfApplicationError.__init__-expanded"><a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line"><tt class="py-docstring">        Constructor. Saves the args by calling the base class constructor</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line">        <tt id="link-17" class="py-name"><a title="bfpy.bferror.BfBetfairError" class="py-name" href="#" onclick="return doclink('link-17', 'BfBetfairError', 'link-13');">BfBetfairError</a></tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="bfpy.bfapi.BfApi.MinStake.__init__
 bfpy.bfapi.BfApi.__init__
 bfpy.bfapicalls.ApiCall.__init__
 bfpy.bfapicalls.ApiCallExchange.__init__
@@ -1321,7 +1323,7 @@ bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-18', '__init__', 'link-0');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">)</tt> </tt>
-</div></div><a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+</div></div><a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line"> </tt><script type="text/javascript">
 <!--
 expandto(location.href);
 // -->
@@ -1359,7 +1361,7 @@ expandto(location.href);
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Thu May 26 17:50:08 2011
+    Generated by Epydoc 3.0.1 on Fri May 27 01:55:17 2011
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

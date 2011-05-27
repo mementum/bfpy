@@ -92,7 +92,7 @@ class DataCounter(object):
 
     __slots__ = ['__weakref__', 'lock', 'maxRequests', 'timeGuard', 'reqs', 'weight']
 
-    def __init__(self, maxRequests=20, timeGuard=0.00):
+    def __init__(self, maxRequests=20, timeGuard=0.01):
         '''
         Initializes the request data holder
 

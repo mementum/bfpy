@@ -201,8 +201,10 @@ $$request$$
         httpreq = bftransport.BfTransportRequest(instance.endPointUrl, self.patternSub('request', request()))
         httpreq.headers.update(self.headers)
         reply = instance.transport.send(httpreq)
+
         response = bfsoap.soap_process(reply.message, [self.decodeComplex], [self.decodeSimplex])
         response = getattr(response, self.result)
+
         if self.arrays:
             self.arrays(response)
 

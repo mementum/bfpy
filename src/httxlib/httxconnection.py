@@ -6,7 +6,9 @@
 #
 # HttxLib is an HTTP(s) Python library suited multithreaded/multidomain
 # applications
-# Copyright (C) 2010  Daniel Rodriguez (aka Daniel Rodriksson)
+#
+# Copyright (C) 2010-2011  Daniel Rodriguez (aka Daniel Rodriksson)
+# Copyright (C) 2011  Sensible Odds Ltd
 #
 # You can learn more and contact the author at:
 #
@@ -200,7 +202,7 @@ class HttxConnection(HttxBase):
         try:
             self.conn.connect()
         except SocketError, e:
-            raise SocketException(e)
+            raise SocketException(*e.args)
 
         # Set TCP_NODELAY
         try:
@@ -234,6 +236,7 @@ class HttxConnection(HttxBase):
         self.addcookies(httxreq)
         self.addauth(httxreq)
         self.adduseragent(httxreq)
+        self.addcontent(httxreq)
 
         # Decide if which is the url to send to the server
         if self.parsed.netloc != httxreq.netloc or self.options.sendfullurl:
@@ -247,7 +250,7 @@ class HttxConnection(HttxBase):
         try:
             self.conn.request(httxreq.get_method(), url, httxreq.body, httxreq.allheaders)
         except SocketError, e:
-            raise SocketException(e)
+            raise SocketException(*e.args)
 
         # If no exception, we may save the request to be used by getresponse
         self.lastreq = httxreq
@@ -297,7 +300,7 @@ class HttxConnection(HttxBase):
         try:
             response = self.conn.getresponse()
         except SocketError, e:
-            raise SocketException(e)
+            raise SocketException(*e.args)
 
         if self.options.sendfullurl:
             # FIXME: Some HTTP/1.1 servers may close the connection upon receiving
@@ -391,6 +394,17 @@ class HttxConnection(HttxBase):
             httxreq.add_header('User-Agent', self.options.useragent)
 
 
+    def addcontent(self, httxreq):
+        '''
+        Add headers to httxreq if data is transmitted, borrowed from urllib2.
+
+        @param httxreq: Request to be executed
+        @type httxreq: L{HttxRequest}
+        '''
+        if httxreq.body and httxreq.ispost() and not httxreq.has_header('Content-Type'):
+            httxreq.add_unredirected_header('Content-Type', 'application/x-www-form-urlencoded')
+
+
     def extractcookies(self, response):
         '''
         Perform cookie extraction from a response into a urllib2 cookiejar
@@ -448,6 +462,13 @@ class HttxConnection(HttxBase):
             raise RedirectError(response, 'Redirect error: missing location header')
 
         parsed = urlsplit(locationurl)
+
+        # Fix relative redirect urls
+        if not parsed.scheme or not parsed.netloc:
+            parsed = list(parsed)
+            parsed[:2] = self.lastreq.scheme, self.lastreq.netloc
+            parsed = SplitResult(*parsed)
+            locationurl = urlunsplit(parsed)
 
         if not self.options.externalredirect and self.lastreq.netloc != parsed.netloc:
             # if the redirect netloc is not the one requested and external is not allowed - bail out

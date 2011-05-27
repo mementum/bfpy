@@ -72,9 +72,9 @@ class BfClient(BfApi):
           given that the results from getEvents do not say if a market will turn
           in-play or not
 
-          This is a hack and will be removed
+          This is a hack and may be removed
 
-          Default values: nonIPRePlace=False
+          Default values: _nonIPRePlace=False
 
     '''
 

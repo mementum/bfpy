@@ -266,9 +266,11 @@ class BfApi(object):
         ]
 
 
-    def __init__(self, preProcess=bfglobals.preProcess,
+    def __init__(self,
+                 preProcess=bfglobals.preProcess,
                  postProcess=bfglobals.postProcess,
                  maxRequests=20,
+                 separateCounters=None,
                  **kwargs):
         '''
         Initializes the processing options, transport and service apis
@@ -285,8 +287,13 @@ class BfApi(object):
         self.postProcess = postProcess
         self.maxRequests = maxRequests
         self.dataCounter = dict()
-        for endPoint in bfglobals.EndPoints:
-            self.dataCounter[endPoint] = bfcounter.DataCounter(maxRequests)
+
+        self.separateCounters = separateCounters if separateCounters is not None else bfglobals.separateCounters
+        if self.separateCounters:
+            for endPoint in bfglobals.EndPoints:
+                self.dataCounter[endPoint] = bfcounter.DataCounter(maxRequests)
+        else:
+            self.dataCounter[0] = bfcounter.DataCounter(maxRequests)
 
         self.transport = bftransport.BfTransport()
         if 'proxydict' in kwargs:
@@ -388,7 +395,10 @@ class BfApi(object):
         @param weight: weight of the call to come
         @type weight: int
         '''
-        self.dataCounter[endPoint].add(weight, self.maxRequests)
+        if self.separateCounters:
+            self.dataCounter[endPoint].add(weight, self.maxRequests)
+        else:
+            self.dataCounter[0].add(weight, self.maxRequests)
 
 
     def invoke(self, methodName, service, request, skipErrorCodes):
@@ -417,7 +427,8 @@ class BfApi(object):
         try:
             response = service(request)
         except bftransport.BfTransportSocketError, e:
-            raise bferror.BfNetworkError(methodName, e.args[0], str(e.args[0]), e.args[0].args)
+            # raise bferror.BfNetworkError(methodName, e.args[0], str(e.args[0]), e.args[0].args)
+            raise bferror.BfNetworkError(methodName, e, str(e), e.args)
         except bftransport.BfTransportHttpError, e:
             raise bferror.BfHttpError(methodName, e, str(e), e.args)
         except bftransport.BfTransportHtmlError, e:
@@ -515,8 +526,7 @@ class BfApi(object):
         # ######################
         # General API Services
         # ######################
-        GlobalServiceDef('login', apiHeader=False,
-                         preProc=[PreProcLogin()], postProc=[ProcLogin()],
+        GlobalServiceDef('login', apiHeader=False, preProc=[PreProcLogin()], postProc=[ProcLogin()],
                          productId=bfglobals.freeApiId, vendorSoftwareId=0, ipAddress='0', locationId=0),
         GlobalServiceDef('logout'),
         GlobalServiceDef('keepAlive'),
@@ -588,8 +598,7 @@ class BfApi(object):
         GlobalServiceDef('depositFromPaymentCard'),
         GlobalServiceDef('forgotPassword'),
         ExchangeServiceDef('getAccountFunds'),
-        ExchangeServiceDef('getAccountStatement', skipErrorCodes=['NO_RESULTS'],
-                           preProc=[PreAccountStatement()],
+        ExchangeServiceDef('getAccountStatement', skipErrorCodes=['NO_RESULTS'], preProc=[PreAccountStatement()],
                            itemsIncluded='EXCHANGE', startRecord=0, recordCount=1, ignoreAutoTransfers=True),
         GlobalServiceDef('getPaymentCard'),
         GlobalServiceDef('getSubscriptionInfo'),

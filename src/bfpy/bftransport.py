@@ -61,27 +61,74 @@ class BfTransportHtmlError(BfTransportError):
 
 
 class BfTransportRequest(object):
+    '''
+    Transport neutral class to define a request
+
+    @type url: string
+    @ivar url: url to go to
+    @type headers: dict
+    @ivar headers: specific headers for the call
+    @type message: string
+    @ivar message: content of the soap message
+    '''
+
     def __init__(self, url, message=None):
+        '''
+        Inits the transport request
+
+        @type url: string
+        @param url: url to go to
+        @type message: string
+        @param message: content of the soap message
+        '''
         self.url = url
         self.headers = dict()
         self.message = message
 
     def __str__(self):
+        '''
+        Generates a printable output of a request
+        '''
         s = []
         s.append('URL:%s' % self.url)
         s.append('HEADERS: %s' % self.headers)
         s.append('MESSAGE:')
-        s.append(self.message)
+        if self.message is not None:
+            s.append(self.message)
         return '\n'.join(s)
 
 
 class BfTransportReply(object):
+    '''
+    Transport neutral class to define a Replay
+
+    @type code: int
+    @ivar code: status code from the answer
+    @type headers: dict
+    @ivar headers: specific headers for the call
+    @type message: string
+    @ivar message: content of the soap message
+    '''
+
     def __init__(self, code, headers, message):
+        '''
+        Inits the transport request
+
+        @type code: int
+        @param code: status code from the answer
+        @type headers: dict
+        @param headers: specific headers for the call
+        @type message: string
+        @param message: content of the soap message
+        '''
         self.code = code
         self.headers = headers
         self.message = message
 
     def __str__(self):
+        '''
+        Generates a printable output of a reply
+        '''
         s = []
         s.append('CODE: %s' % self.code)
         s.append('HEADERS: %s' % self.headers)
