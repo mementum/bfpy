@@ -3,7 +3,7 @@
           "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>bfpy.bftransport.sRequest</title>
+  <title>bfpy.bftransport.BfTransportHtmlError</title>
   <link rel="stylesheet" href="epydoc.css" type="text/css" />
   <script type="text/javascript" src="epydoc.js"></script>
 </head>
@@ -44,7 +44,7 @@
       <span class="breadcrumbs">
         <a href="bfpy-module.html">Package&nbsp;bfpy</a> ::
         <a href="bfpy.bftransport-module.html">Module&nbsp;bftransport</a> ::
-        Class&nbsp;sRequest
+        Class&nbsp;BfTransportHtmlError
       </span>
     </td>
     <td>
@@ -54,18 +54,24 @@
     onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
         <tr><td align="right"><span class="options"
             >[<a href="frames.html" target="_top">frames</a
-            >]&nbsp;|&nbsp;<a href="bfpy.bftransport.sRequest-class.html"
+            >]&nbsp;|&nbsp;<a href="bfpy.bftransport.BfTransportHtmlError-class.html"
             target="_top">no&nbsp;frames</a>]</span></td></tr>
       </table>
     </td>
   </tr>
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
-<h1 class="epydoc">Class sRequest</h1><p class="nomargin-top"><span class="codelink"><a href="bfpy.bftransport-pysrc.html#sRequest">source&nbsp;code</a></span></p>
+<h1 class="epydoc">Class BfTransportHtmlError</h1><p class="nomargin-top"><span class="codelink"><a href="bfpy.bftransport-pysrc.html#BfTransportHtmlError">source&nbsp;code</a></span></p>
 <pre class="base-tree">
-object --+
-         |
-        <strong class="uidshort">sRequest</strong>
+              object --+            
+                       |            
+exceptions.BaseException --+        
+                           |        
+        exceptions.Exception --+    
+                               |    
+                <a href="bfpy.bftransport.BfTransportError-class.html">BfTransportError</a> --+
+                                   |
+                                  <strong class="uidshort">BfTransportHtmlError</strong>
 </pre>
 
 <hr />
@@ -92,29 +98,11 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="bfpy.bftransport.sRequest-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">url</span>,
-        <span class="summary-sig-arg">message</span>=<span class="summary-sig-default">None</span>)</span><br />
+          <td><span class="summary-sig"><a href="bfpy.bftransport.BfTransportHtmlError-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>)</span><br />
       x.__init__(...) initializes x; see x.__class__.__doc__ for signature</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bftransport-pysrc.html#sRequest.__init__">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="bfpy.bftransport.sRequest-class.html#__str__" class="summary-sig-name">__str__</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      str(x)</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bftransport-pysrc.html#sRequest.__str__">source&nbsp;code</a></span>
+            <span class="codelink"><a href="bfpy.bftransport-pysrc.html#BfTransportHtmlError.__init__">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -124,16 +112,25 @@ object --+
   </tr>
   <tr>
     <td colspan="2" class="summary">
-    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+    <p class="indent-wrapped-lines"><b>Inherited from <code>exceptions.Exception</code></b>:
+      <code>__new__</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>exceptions.BaseException</code></b>:
       <code>__delattr__</code>,
-      <code>__format__</code>,
       <code>__getattribute__</code>,
-      <code>__hash__</code>,
-      <code>__new__</code>,
+      <code>__getitem__</code>,
+      <code>__getslice__</code>,
       <code>__reduce__</code>,
-      <code>__reduce_ex__</code>,
       <code>__repr__</code>,
       <code>__setattr__</code>,
+      <code>__setstate__</code>,
+      <code>__str__</code>,
+      <code>__unicode__</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__format__</code>,
+      <code>__hash__</code>,
+      <code>__reduce_ex__</code>,
       <code>__sizeof__</code>,
       <code>__subclasshook__</code>
       </p>
@@ -159,6 +156,10 @@ object --+
 </tr>
   <tr>
     <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>exceptions.BaseException</code></b>:
+      <code>args</code>,
+      <code>message</code>
+      </p>
     <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
       <code>__class__</code>
       </p>
@@ -191,12 +192,11 @@ object --+
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
   <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">url</span>,
-        <span class="sig-arg">message</span>=<span class="sig-default">None</span>)</span>
+        <span class="sig-arg">*args</span>)</span>
     <br /><em class="fname">(Constructor)</em>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bftransport-pysrc.html#sRequest.__init__">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="bfpy.bftransport-pysrc.html#BfTransportHtmlError.__init__">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
@@ -205,30 +205,6 @@ object --+
   <dl class="fields">
     <dt>Overrides:
         object.__init__
-        <dd><em class="note">(inherited documentation)</em></dd>
-    </dt>
-  </dl>
-</td></tr></table>
-</div>
-<a name="__str__"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">__str__</span>(<span class="sig-arg">self</span>)</span>
-    <br /><em class="fname">(Informal representation operator)</em>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bftransport-pysrc.html#sRequest.__str__">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>str(x)</p>
-  <dl class="fields">
-    <dt>Overrides:
-        object.__str__
         <dd><em class="note">(inherited documentation)</em></dd>
     </dt>
   </dl>
@@ -266,7 +242,7 @@ object --+
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Wed May 25 18:32:45 2011
+    Generated by Epydoc 3.0.1 on Thu May 26 17:50:07 2011
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

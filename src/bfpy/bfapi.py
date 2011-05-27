@@ -244,16 +244,16 @@ class BfApi(object):
         - updateVendorSubscription,
           requestName='VendorSubscriptionReq' (non standard definition by Betfair)
           Default parameters:
-            username = '' (internal Betfair use, but cannot be set to null)
+          username = '' (internal Betfair use, but cannot be set to null)
         - getVendorUsers
           Default parameters:
-            usernameSearchModifier='CONTAINS', customFieldSearchModifier='CONTAINS', status='ACTIVE'
+          usernameSearchModifier='CONTAINS', customFieldSearchModifier='CONTAINS', status='ACTIVE'
         - getVendorAccessRequests
           Default parameters:
-            status = ACTIVE
+          status = ACTIVE
         - getSubscriptionInfo
           Default parameters:
-            username = '' (internal Betfair use, but cannot be set to null)
+          username = '' (internal Betfair use, but cannot be set to null)
         - getVendorInfo
     '''
 

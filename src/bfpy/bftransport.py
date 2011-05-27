@@ -148,7 +148,7 @@ class BfTransport(object):
         Send a soap request
 
         @param request: A request
-        @type Request: Request
+        @type request: Request
         @return: the reply
         @rtype: BfTransportReply
         """

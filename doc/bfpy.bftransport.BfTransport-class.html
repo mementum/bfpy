@@ -63,9 +63,9 @@
 <!-- ==================== CLASS DESCRIPTION ==================== -->
 <h1 class="epydoc">Class BfTransport</h1><p class="nomargin-top"><span class="codelink"><a href="bfpy.bftransport-pysrc.html#BfTransport">source&nbsp;code</a></span></p>
 <pre class="base-tree">
-suds.transport.Transport --+
-                           |
-                          <strong class="uidshort">BfTransport</strong>
+object --+
+         |
+        <strong class="uidshort">BfTransport</strong>
 </pre>
 
 <hr />
@@ -165,26 +165,7 @@ suds.transport.Transport --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">file</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="bfpy.bftransport.BfTransport-class.html#open" class="summary-sig-name">open</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">request</span>)</span><br />
-      Open a file or url If request.url can't be identified as a url, it 
-      will return the content in a file-like object</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bftransport-pysrc.html#BfTransport.open">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">sReply suds.transport.Reply</span>
+      <span class="summary-type">BfTransportReply</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -193,113 +174,6 @@ suds.transport.Transport --+
       Send a soap request</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="bfpy.bftransport-pysrc.html#BfTransport.send">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">file or suds.transport.Reply</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="bfpy.bftransport.BfTransport-class.html#invoke" class="summary-sig-name">invoke</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">request</span>,
-        <span class="summary-sig-arg">retfile</span>=<span class="summary-sig-default">False</span>)</span><br />
-      Open a connection.</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bftransport-pysrc.html#BfTransport.invoke">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">u2request: urllib2.Requet.</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="bfpy.bftransport.BfTransport-class.html#addcookies" class="summary-sig-name">addcookies</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">u2request</span>)</span><br />
-      Add cookies in the cookiejar to the request.</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bftransport-pysrc.html#BfTransport.addcookies">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">u2request: urllib2.Requet.</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="bfpy.bftransport.BfTransport-class.html#getcookies" class="summary-sig-name">getcookies</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">u2response</span>,
-        <span class="summary-sig-arg">u2request</span>)</span><br />
-      Add cookies in the request to the cookiejar.</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bftransport-pysrc.html#BfTransport.getcookies">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type"><i>OpenerDirector</i></span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="bfpy.bftransport.BfTransport-class.html#u2opener" class="summary-sig-name">u2opener</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Create a urllib opener.</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bftransport-pysrc.html#BfTransport.u2opener">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">[Handler,...]</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="bfpy.bftransport.BfTransport-class.html#u2handlers" class="summary-sig-name">u2handlers</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Get a collection of urllib handlers.</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bftransport-pysrc.html#BfTransport.u2handlers">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">float</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="bfpy.bftransport.BfTransport-class.html#u2ver" class="summary-sig-name">u2ver</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Get the major/minor version of the urllib2 lib.</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bftransport-pysrc.html#BfTransport.u2ver">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -342,40 +216,47 @@ suds.transport.Transport --+
       
     </td>
   </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">suds.transport.Request</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="bfpy.bftransport.BfTransport-class.html#prerequest" class="summary-sig-name">prerequest</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">request</span>)</span><br />
-      Do preprocessing of the request before sending it</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bftransport-pysrc.html#BfTransport.prerequest">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
     </td>
   </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">suds.transport.Replay</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="bfpy.bftransport.BfTransport-class.html#postreply" class="summary-sig-name">postreply</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">reply</span>)</span><br />
-      Do postprocessing of the received reply before returning it</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bftransport-pysrc.html#BfTransport.postreply">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
     </td>
   </tr>
 </table>
@@ -424,7 +305,7 @@ suds.transport.Transport --+
         <li><strong class="pname"><code>kwargs</code></strong> (dict) - keyword arguments</li>
     </ul></dd>
     <dt>Overrides:
-        suds.transport.Transport.__init__
+        object.__init__
     </dt>
   </dl>
 </td></tr></table>
@@ -501,41 +382,6 @@ suds.transport.Transport --+
   </dl>
 </td></tr></table>
 </div>
-<a name="open"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">open</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">request</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bftransport-pysrc.html#BfTransport.open">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Open a file or url If request.url can't be identified as a url, it 
-  will return the content in a file-like object</p>
-  <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>request</code></strong> - A request</li>
-        <li><strong class="pname"><code>Request</code></strong> (sRequest or suds Request)</li>
-    </ul></dd>
-    <dt>Returns: file</dt>
-        <dd>A file-like object</dd>
-    <dt>Raises:</dt>
-    <dd><ul class="nomargin-top">
-        <li><code><strong class='fraise'>TransportError</strong></code> - On all transport errors.</li>
-    </ul></dd>
-    <dt>Overrides:
-        suds.transport.Transport.open
-    </dt>
-  </dl>
-</td></tr></table>
-</div>
 <a name="send"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
@@ -555,161 +401,10 @@ suds.transport.Transport --+
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>request</code></strong> - A request</li>
-        <li><strong class="pname"><code>Request</code></strong> (sRequest or suds.transport.Request)</li>
+        <li><strong class="pname"><code>request</code></strong> (Request) - A request</li>
     </ul></dd>
-    <dt>Returns: sReply suds.transport.Reply</dt>
+    <dt>Returns: BfTransportReply</dt>
         <dd>the reply</dd>
-    <dt>Raises:</dt>
-    <dd><ul class="nomargin-top">
-        <li><code><strong class='fraise'>TransportError</strong></code> - On all transport errors.</li>
-    </ul></dd>
-    <dt>Overrides:
-        suds.transport.Transport.send
-    </dt>
-  </dl>
-</td></tr></table>
-</div>
-<a name="invoke"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">invoke</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">request</span>,
-        <span class="sig-arg">retfile</span>=<span class="sig-default">False</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bftransport-pysrc.html#BfTransport.invoke">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Open a connection.</p>
-  <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>request</code></strong> - A suds Request</li>
-        <li><strong class="pname"><code>retfile</code></strong> - indicates if a file-like object is to be returned</li>
-        <li><strong class="pname"><code>Request</code></strong> (suds.transport.Request)</li>
-    </ul></dd>
-    <dt>Returns: file or suds.transport.Reply</dt>
-        <dd>A file-like object or a suds Reply</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="addcookies"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">addcookies</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">u2request</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bftransport-pysrc.html#BfTransport.addcookies">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Add cookies in the cookiejar to the request.</p>
-  <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>u2request</code></strong> - A urllib2 request.</li>
-    </ul></dd>
-    <dt>Returns: u2request: urllib2.Requet.</dt>
-  </dl>
-</td></tr></table>
-</div>
-<a name="getcookies"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">getcookies</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">u2response</span>,
-        <span class="sig-arg">u2request</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bftransport-pysrc.html#BfTransport.getcookies">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Add cookies in the request to the cookiejar.</p>
-  <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>u2request</code></strong> - A urllib2 request.</li>
-    </ul></dd>
-    <dt>Returns: u2request: urllib2.Requet.</dt>
-  </dl>
-</td></tr></table>
-</div>
-<a name="u2opener"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">u2opener</span>(<span class="sig-arg">self</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bftransport-pysrc.html#BfTransport.u2opener">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Create a urllib opener.</p>
-  <dl class="fields">
-    <dt>Returns: <i>OpenerDirector</i></dt>
-        <dd>An opener.</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="u2handlers"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">u2handlers</span>(<span class="sig-arg">self</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bftransport-pysrc.html#BfTransport.u2handlers">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Get a collection of urllib handlers.</p>
-  <dl class="fields">
-    <dt>Returns: [Handler,...]</dt>
-        <dd>A list of handlers to be installed in the opener.</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="u2ver"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">u2ver</span>(<span class="sig-arg">self</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bftransport-pysrc.html#BfTransport.u2ver">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Get the major/minor version of the urllib2 lib.</p>
-  <dl class="fields">
-    <dt>Returns: float</dt>
-        <dd>The urllib2 version.</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -739,58 +434,6 @@ suds.transport.Transport --+
     </ul></dd>
     <dt>Returns: HttxTransport</dt>
         <dd>a cloned object</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="prerequest"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">prerequest</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">request</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bftransport-pysrc.html#BfTransport.prerequest">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Do preprocessing of the request before sending it</p>
-  <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>request</code></strong> (suds.transport.Request) - the request to preprocess</li>
-    </ul></dd>
-    <dt>Returns: suds.transport.Request</dt>
-        <dd>the request (although the reference is being modified)</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="postreply"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">postreply</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">reply</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bftransport-pysrc.html#BfTransport.postreply">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Do postprocessing of the received reply before returning it</p>
-  <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>reply</code></strong> (suds.transport.Reply) - the reply to process</li>
-    </ul></dd>
-    <dt>Returns: suds.transport.Replay</dt>
-        <dd>the reply (although the reference is being modified)</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -826,7 +469,7 @@ suds.transport.Transport --+
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Wed May 25 18:32:45 2011
+    Generated by Epydoc 3.0.1 on Thu May 26 17:50:07 2011
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

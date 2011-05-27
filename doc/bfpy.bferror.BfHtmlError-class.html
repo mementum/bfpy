@@ -3,7 +3,7 @@
           "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>bfpy.bfprocessors.PatchAttrExId</title>
+  <title>bfpy.bferror.BfHtmlError</title>
   <link rel="stylesheet" href="epydoc.css" type="text/css" />
   <script type="text/javascript" src="epydoc.js"></script>
 </head>
@@ -43,8 +43,8 @@
     <td width="100%">
       <span class="breadcrumbs">
         <a href="bfpy-module.html">Package&nbsp;bfpy</a> ::
-        <a href="bfpy.bfprocessors-module.html">Module&nbsp;bfprocessors</a> ::
-        Class&nbsp;PatchAttrExId
+        <a href="bfpy.bferror-module.html">Module&nbsp;bferror</a> ::
+        Class&nbsp;BfHtmlError
       </span>
     </td>
     <td>
@@ -54,26 +54,30 @@
     onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
         <tr><td align="right"><span class="options"
             >[<a href="frames.html" target="_top">frames</a
-            >]&nbsp;|&nbsp;<a href="bfpy.bfprocessors.PatchAttrExId-class.html"
+            >]&nbsp;|&nbsp;<a href="bfpy.bferror.BfHtmlError-class.html"
             target="_top">no&nbsp;frames</a>]</span></td></tr>
       </table>
     </td>
   </tr>
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
-<h1 class="epydoc">Class PatchAttrExId</h1><p class="nomargin-top"><span class="codelink"><a href="bfpy.bfprocessors-pysrc.html#PatchAttrExId">source&nbsp;code</a></span></p>
+<h1 class="epydoc">Class BfHtmlError</h1><p class="nomargin-top"><span class="codelink"><a href="bfpy.bferror-pysrc.html#BfHtmlError">source&nbsp;code</a></span></p>
 <pre class="base-tree">
-object --+    
-         |    
- <a href="bfpy.bfprocessors.PatchAttr-class.html">PatchAttr</a> --+
-             |
-            <strong class="uidshort">PatchAttrExId</strong>
+              object --+                
+                       |                
+exceptions.BaseException --+            
+                           |            
+        exceptions.Exception --+        
+                               |        
+                         <a href="bfpy.bferror.BfError-class.html">BfError</a> --+    
+                                   |    
+                    <a href="bfpy.bferror.BfTransportError-class.html">BfTransportError</a> --+
+                                       |
+                                      <strong class="uidshort">BfHtmlError</strong>
 </pre>
 
 <hr />
-<p>Response processor</p>
-  <p>Specialization of PatchAttr that handles &quot;exchangeId&quot; 
-  patching specifically</p>
+<p>Derived from BfError, to hold error errors at Http level</p>
 
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -98,11 +102,11 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfprocessors.PatchAttrExId-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">attrName</span>)</span><br />
-      x.__init__(...) initializes x; see x.__class__.__doc__ for signature</td>
+          <td><span class="summary-sig"><a href="bfpy.bferror.BfHtmlError-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>)</span><br />
+      Constructor.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfprocessors-pysrc.html#PatchAttrExId.__init__">source&nbsp;code</a></span>
+            <span class="codelink"><a href="bfpy.bferror-pysrc.html#BfHtmlError.__init__">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -112,22 +116,57 @@ object --+
   </tr>
   <tr>
     <td colspan="2" class="summary">
-    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="bfpy.bfprocessors.PatchAttr-class.html">PatchAttr</a></code></b>:
-      <code><a href="bfpy.bfprocessors.PatchAttr-class.html#__call__">__call__</a></code>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>exceptions.Exception</code></b>:
+      <code>__new__</code>
       </p>
-    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+    <p class="indent-wrapped-lines"><b>Inherited from <code>exceptions.BaseException</code></b>:
       <code>__delattr__</code>,
-      <code>__format__</code>,
       <code>__getattribute__</code>,
-      <code>__hash__</code>,
-      <code>__new__</code>,
+      <code>__getitem__</code>,
+      <code>__getslice__</code>,
       <code>__reduce__</code>,
-      <code>__reduce_ex__</code>,
       <code>__repr__</code>,
       <code>__setattr__</code>,
-      <code>__sizeof__</code>,
+      <code>__setstate__</code>,
       <code>__str__</code>,
+      <code>__unicode__</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__format__</code>,
+      <code>__hash__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__sizeof__</code>,
       <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="bfpy.bferror.BfError-class.html">BfError</a></code></b>:
+      <code><a href="bfpy.bferror.BfError-class.html#errorCode">errorCode</a></code>,
+      <code><a href="bfpy.bferror.BfError-class.html#name">name</a></code>,
+      <code><a href="bfpy.bferror.BfError-class.html#object">object</a></code>,
+      <code><a href="bfpy.bferror.BfError-class.html#requestName">requestName</a></code>,
+      <code><a href="bfpy.bferror.BfError-class.html#response">response</a></code>,
+      <code><a href="bfpy.bferror.BfError-class.html#text">text</a></code>
       </p>
     </td>
   </tr>
@@ -151,6 +190,10 @@ object --+
 </tr>
   <tr>
     <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>exceptions.BaseException</code></b>:
+      <code>args</code>,
+      <code>message</code>
+      </p>
     <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
       <code>__class__</code>
       </p>
@@ -183,20 +226,22 @@ object --+
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
   <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">attrName</span>)</span>
+        <span class="sig-arg">*args</span>)</span>
     <br /><em class="fname">(Constructor)</em>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfprocessors-pysrc.html#PatchAttrExId.__init__">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="bfpy.bferror-pysrc.html#BfHtmlError.__init__">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>x.__init__(...) initializes x; see x.__class__.__doc__ for 
-  signature</p>
+  <p>Constructor. Saves the args by calling the base class constructor</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>args</code></strong> - standard Python args</li>
+    </ul></dd>
     <dt>Overrides:
         object.__init__
-        <dd><em class="note">(inherited documentation)</em></dd>
     </dt>
   </dl>
 </td></tr></table>
@@ -233,7 +278,7 @@ object --+
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Wed May 25 18:32:44 2011
+    Generated by Epydoc 3.0.1 on Thu May 26 17:50:07 2011
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
