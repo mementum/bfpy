@@ -30,24 +30,8 @@
 BfPy utility classes
 '''
 
-import logging
 import threading
 import types
-
-class NullHandler(logging.Handler):
-    '''
-    Definition of a Null logging class to avoid any output
-    from suds
-    '''
-    def emit(self, record):
-        '''
-        Simply discard the incoming param and does nothing
-
-        @param record: logging record
-        @type record: str
-        '''
-        pass
-
 
 # Code from suds: no changes
 def tostr(obj, encoding=None):

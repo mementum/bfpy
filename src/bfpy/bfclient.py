@@ -85,7 +85,7 @@ class BfClient(BfApi):
     _serviceDefs = [
         bfclientext.GetEvents(eventParentId=-1),
         bfclientext.GetCurrentBets(betStatus='MU'),
-        bfclientext.PlaceBets(nonIPRePlace=False),
+        bfclientext.PlaceBets(_nonIPRePlace=False),
         ]
 
     def __init__(self, **kwargs):

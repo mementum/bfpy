@@ -71,6 +71,7 @@ try:
 except ImportError:
     from xml.etree.ElementTree import Element, SubElement, QName, iterparse
 
+from bftimezone import LocalTimezone
 from bfutil import EmptyObject
 
 # SOAP 1.1 namespaces
@@ -84,10 +85,7 @@ NS_XSD = "{http://www.w3.org/2001/XMLSchema}"
 
 SOAP_ENCODING = "http://schemas.xmlsoap.org/soap/encoding/"
 
-BF_TYPES_GLOBAL = '{http://www.betfair.com/publicapi/types/global/v3/}'
-BF_TYPES_EXCHANGE = '{http://www.betfair.com/publicapi/types/exchange/v5/}'
 
-#
 def soap_process(httpbody, complexDecoders, simplexDecoders):
     response = namespace_parse(StringIO(httpbody))
     response = response.find(NS_SOAP_ENV_body)[0]
@@ -143,6 +141,21 @@ def look_for_fault(response):
 # @return A Python object, or None if the element argument was None.
 # @throws ValueError If the element has an unknown type.
 
+
+def convertTime(dtString):
+    dt = datetime.strptime(dtString.split('.')[0], '%Y-%m-%dT%H:%M:%S')
+    localTimezone = LocalTimezone()
+    try:
+        utcoffset = localTimezone.utcoffset(dt)
+    except:
+        # Fails with the dates from getSubscriptionInfo
+        utcoffset = localTimezone.utcoffset(datetime.now())
+
+    dt += utcoffset
+    dt.replace(tzinfo=localTimezone)
+    return dt
+
+
 XSDTYPES = {
     'string': lambda x: x or '',
     'int': lambda x: int(x),
@@ -151,7 +164,8 @@ XSDTYPES = {
     'double': lambda x: float(x),
     'float': lambda x: float(x),
     'boolean': lambda x: x == 'true',
-    'dateTime': lambda x: datetime.strptime(x.split('.')[0], '%Y-%m-%dT%H:%M:%S'),
+    # 'dateTime': lambda x: datetime.strptime(x.split('.')[0], '%Y-%m-%dT%H:%M:%S'),
+    'dateTime': convertTime,
     }
 
 def decode_element(element, simplexDecoders):
@@ -176,10 +190,6 @@ def decode_element(element, simplexDecoders):
         if decoded:
             return retval
         
-    if False and xstype in (BF_TYPES_GLOBAL, BF_TYPES_EXCHANGE):
-        if 'Enum' in valtype:
-            return element.text
-
     raise ValueError("type %s not supported" % type)
 
 ##
@@ -217,9 +227,6 @@ def decode(element, complexDecoders, simplexDecoders):
             decoded, retval = complexDecoder(element, xstype, valtype)
             if decoded:
                 return retval
-        # is it an array?
-        if False and xstype in (BF_TYPES_GLOBAL, BF_TYPES_EXCHANGE) and valtype.startswith('ArrayOf'):
-            return decode_array(element, complexDecoders, simplexDecoders)
 
         # is it a primitive type?
         try:

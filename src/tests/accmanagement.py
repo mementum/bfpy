@@ -37,7 +37,7 @@ import bfpy
 import bfpy.bfclient as bfclient
 
 print 'Creating a Betfair Client'
-bf = bfclient.BfClient(fullDirect=True)
+bf = bfclient.BfClient()
 print 'Created a Betfair Client'
 
 loginInfo = sys.modules['__main__'].loginInfo

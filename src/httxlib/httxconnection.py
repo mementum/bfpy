@@ -197,7 +197,10 @@ class HttxConnection(HttxBase):
                 self.conn.ca_certs = self.options.cacert.find_ca_cert(self.url)
 
         # Force HTTPConnection to connect to have the sock object available
-        self.conn.connect()
+        try:
+            self.conn.connect()
+        except SocketError, e:
+            raise SocketException(e)
 
         # Set TCP_NODELAY
         try:
@@ -244,7 +247,7 @@ class HttxConnection(HttxBase):
         try:
             self.conn.request(httxreq.get_method(), url, httxreq.body, httxreq.allheaders)
         except SocketError, e:
-            raise SocketException(*e.args)
+            raise SocketException(e)
 
         # If no exception, we may save the request to be used by getresponse
         self.lastreq = httxreq
@@ -294,7 +297,7 @@ class HttxConnection(HttxBase):
         try:
             response = self.conn.getresponse()
         except SocketError, e:
-            raise SocketException(*e.args)
+            raise SocketException(e)
 
         if self.options.sendfullurl:
             # FIXME: Some HTTP/1.1 servers may close the connection upon receiving

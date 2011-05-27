@@ -66,24 +66,11 @@ BfPy global variables and functions module.
 @type postProcess: bool
 @var postProcess: default library behaviour: process (easing use) Betfair answers
                   before sending them to Betfair
-
-@type forceDirect: bool
-@var forceDirect: to force the library always use the DirectAPI method
-                  If suds importing fails, it will be set to True
-
-@type sudsWebFault: object
-@var sudsWebFaults: an alias to suds.WebFault or None if no suds is used 
-
-@type sudsClient: module
-@var sudsClient: an alias so suds.client or None if no suds is used
-
 '''
+
 libname = 'BfPy'
 version = 1.11
 libstring = '%s %s' % (libname, str(version))
-
-forceDirect = False
-wsdlDefs = dict()
 
 freeApiId = 82
 
@@ -103,43 +90,21 @@ EndPointUrls = {
     ExchangeAus: 'https://api-au.betfair.com/exchange/v5/BFExchangeService',
     }
 
-sudsWebFault = None
-sudsClient = None
-
 try:
-    # Try importing suds
-    import suds
-except ImportError:
-    # No suds, so only DirectAPI calls can be used
-    forceDirect = True
-else:
-    # Suds is available. Import the wsdl contents, clients and fault
     import bfwsdl
+except ImportError:
+    wsdlDefs = dict()
+else:
     wsdlDefs = {
         Vendor: bfwsdl.BFVendorService,
         Global: bfwsdl.BFGlobalService,
         ExchangeUK: bfwsdl.BFExchangeService,
         ExchangeAus: bfwsdl.BFExchangeServiceAus,
         }
-
-    import suds.client
-    sudsClient = suds.client
-    from suds import WebFault
-    sudsWebFault = WebFault
-
-    import logging
-    # logging.basicConfig(level=logging.INFO)
-    from bfutil import NullHandler
-
-    handler = NullHandler()
-
-    # suds logging
-    log = logging.getLogger('suds')
-    log.setLevel(logging.ERROR)
-    log.addHandler(handler)
-
-
+    
 eventRootId = -1
 
 preProcess = True
 postProcess = True
+
+catchAllExceptions = True

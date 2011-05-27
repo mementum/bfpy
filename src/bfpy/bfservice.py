@@ -214,7 +214,7 @@ class ServiceDef(ServiceDescriptor):
         try:
             endPoint = self.endPoint if self.endPoint <= 0 else args[0]
         except Exception, e:
-            raise bferror.BfError('Forgot to pass ExchangeId!', e, str(e), e.args)
+            raise bferror.BfPythonError('Forgot to pass ExchangeId!', e, str(e), e.args)
 
         # Get the service from the appropriate endpoint
         service = instance.getService(endPoint, self.serviceName)

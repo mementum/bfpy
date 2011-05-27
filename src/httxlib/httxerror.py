@@ -57,6 +57,8 @@ class SocketException(HTTPException):
         Exception.__init__(self, *args)
 
 
+HttxSocketException = SocketException
+
 class HttxException(HTTPException):
     '''
     A class representing a HTTP related exceptions raised by HttxLib

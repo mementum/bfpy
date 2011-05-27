@@ -33,10 +33,10 @@ and metaclass to install them in an API provider
 
 import types
 
-from bftransport import sRequest
-
 import bfglobals
+import bfprocessors
 import bfsoap
+import bftransport
 import bftypes
 
 
@@ -63,16 +63,16 @@ class ApiCall(object):
     '''
 
     soappattern = '''<?xml version="1.0" encoding="UTF-8"?>
-<ns0:Envelope xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="$$ns1$$" xmlns:ns2="$$ns2$$" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/">
-<ns0:Header/>
-<ns0:Body>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns1="$$ns1$$" xmlns:ns2="$$ns2$$">
+<soap:Header/>
+<soap:Body>
 <ns1:$$operation$$>
 $$request$$
 </ns1:$$operation$$>
-</ns0:Body>
-</ns0:Envelope>'''
+</soap:Body>
+</soap:Envelope>'''
 
-    def __init__(self, apitype, ns1, ns2, operation):
+    def __init__(self, apitype, ns1, ns2, operation, result='Result', **kwargs):
         '''
         Initializes most of the pattern and the HTTP request, leaving just the last second
         specific value substitutions for the soap call
@@ -100,10 +100,17 @@ $$request$$
         self.operation = operation
         self.pattern = self.patternSub('operation', self.operation)
 
+        self.result = result
+
         self.headers = dict()
         self.headers['Content-type'] = 'text/xml; charset=utf-8'
         self.headers['User-agent'] = bfglobals.libstring
         self.headers['SoapAction'] = '"%s"' % self.operation
+
+        if 'arrays' in kwargs:
+            self.arrays = bfprocessors.ArrayFix(kwargs['arrays'])
+        else:
+            self.arrays = None
 
 
     def decodeComplex(self, element, xstype, valtype):
@@ -191,12 +198,15 @@ $$request$$
         @param request: the request to be sent to the servers
         '''
         # 'Calling' the request delivers the content
-        httpreq = sRequest(instance.endPointUrl, self.patternSub('request', request()))
+        httpreq = bftransport.BfTransportRequest(instance.endPointUrl, self.patternSub('request', request()))
         httpreq.headers.update(self.headers)
         reply = instance.transport.send(httpreq)
         response = bfsoap.soap_process(reply.message, [self.decodeComplex], [self.decodeSimplex])
+        response = getattr(response, self.result)
+        if self.arrays:
+            self.arrays(response)
 
-        return response.Result
+        return response
 
 
 class ApiCallGlobal(ApiCall):
@@ -206,14 +216,14 @@ class ApiCallGlobal(ApiCall):
     ns1 = 'http://www.betfair.com/publicapi/v3/BFGlobalService/'
     ns2 = 'http://www.betfair.com/publicapi/types/global/v3/'
 
-    def __init__(self, operation):
+    def __init__(self, operation, result='Result', **kwargs):
         '''
         Initializes the parent class
 
         @type operation: string
         @param operation: name of the call
         '''
-        ApiCall.__init__(self, 'global', self.ns1, self.ns2, operation=operation)
+        ApiCall.__init__(self, 'global', self.ns1, self.ns2, operation=operation, result=result, **kwargs)
 
 
 class ApiCallExchange(ApiCall):
@@ -223,14 +233,14 @@ class ApiCallExchange(ApiCall):
     ns1 = 'http://www.betfair.com/publicapi/v5/BFExchangeService/'
     ns2 = 'http://www.betfair.com/publicapi/types/exchange/v5/'
 
-    def __init__(self, operation):
+    def __init__(self, operation, result='Result', **kwargs):
         '''
         Initializes the parent class
 
         @type operation: string
         @param operation: name of the call
         '''
-        ApiCall.__init__(self, 'exchange', self.ns1, self.ns2, operation=operation)
+        ApiCall.__init__(self, 'exchange', self.ns1, self.ns2, operation=operation, result=result, **kwargs)
 
 
 class ApiCallVendor(ApiCall):
@@ -240,11 +250,11 @@ class ApiCallVendor(ApiCall):
     ns1 = 'http://www.betfair.com/adminapi/v2/VendorService/'
     ns2 = 'http://www.betfair.com/adminapi/types/v2/'
 
-    def __init__(self, operation):
+    def __init__(self, operation, result='Result', **kwargs):
         '''
         Initializes the parent class
 
         @type operation: string
         @param operation: name of the call
         '''
-        ApiCall.__init__(self, 'vendor', self.ns1, self.ns2, operation=operation)
+        ApiCall.__init__(self, 'vendor', self.ns1, self.ns2, operation=operation, result=result, **kwargs)

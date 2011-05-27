@@ -69,7 +69,7 @@ class GetEvents(ServiceDescriptor):
         @type instance: object (a L{BfApi} subclass)
 
         @returns: Betfair API answer
-        @rtype: suds object
+        @rtype: parsed answer
         '''
         callArgs = self.kwargs.copy()
         callArgs.update(**kwargs)
@@ -126,7 +126,7 @@ class GetCurrentBets(ServiceDescriptor):
         @type kwargs: dict
 
         @returns: Betfair API answer
-        @rtype: suds object
+        @rtype: parsed answer
         '''
         currentBetsArgs = self.kwargs.copy()
         currentBetsArgs.update(**kwargs)
@@ -189,7 +189,7 @@ class PlaceBets(ServiceDescriptor):
         @type args: tuple
 
         @returns: Betfair API answer
-        @rtype: suds object
+        @rtype: parsed answer
         '''
         placeBetsArgs = self.kwargs.copy()
         placeBetsArgs.update(**kwargs)

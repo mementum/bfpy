@@ -40,7 +40,7 @@ import bfpy
 import bfpy.bfclient as bfclient
 
 print 'Creating a Betfair Client'
-bf = bfclient.BfClient(fullDirect=True)
+bf = bfclient.BfClient()
 print 'Created a Betfair Client'
 
 loginInfo = sys.modules['__main__'].loginInfo
@@ -51,8 +51,8 @@ print response
 response = bf.getInPlayMarkets(bfpy.ExchangeUK)
 print response
 
-response = bf.getPrivateMarkets(bfpy.ExchangeUK, eventTypeId=1)
+response = bf.getAllMarkets(bfpy.ExchangeUK)
 print response
 
-response = bf.getAllMarkets(bfpy.ExchangeUK)
+response = bf.getPrivateMarkets(bfpy.ExchangeUK, eventTypeId=1)
 print response

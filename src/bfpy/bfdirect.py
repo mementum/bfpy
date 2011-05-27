@@ -34,13 +34,9 @@ and metaclass to install them in an API provider
 import copy
 import types
 
-from bftransport import sRequest
-
 import bfapicalls
 import bfglobals
-import bfsoap
 import bftypes
-
 
 class ApiServiceMeta(type):
     '''
@@ -69,7 +65,7 @@ class ApiServiceMeta(type):
                 apitype = apiCall.apitype[0].upper() + apiCall.apitype[1:]
                 clsdict[apiCall.operation + apitype] = apiCall
 
-        clsdict['objects'] = {}
+        clsdict['objects'] = dict()
         for apiType in bftypes.ApiDataTypes:
             if apiType.apitype:
                 suffix = apiType.apitype[0].upper() + apiType.apitype[1:]
@@ -77,24 +73,6 @@ class ApiServiceMeta(type):
                 suffix = ''
             clsdict['objects'][apiType.__name__ + suffix] = apiType
 
-        # Support pluggable extern Api Calls & Types
-        try:
-            import bfextern
-        except Exception, e:
-            pass
-        else:
-            try:
-                for apiCall in bfextern.ApiCalls:
-                    clsdict[apiCall.operation] = apiCall
-            except:
-                pass
-
-            try:
-                for apiType in bfextern.ApiDataTypes:
-                    clsdict['objects'][apiType.__name__] = apiType
-            except:
-                pass
-            
         return type.__new__(cls, name, bases, clsdict)
 
 
@@ -122,39 +100,41 @@ class ApiService(object):
 
         # Read-Only API - Complete
         bfapicalls.ApiCallGlobal('convertCurrency'),
-        bfapicalls.ApiCallGlobal('getActiveEventTypes'),
-        bfapicalls.ApiCallGlobal('getAllCurrencies'),
-        bfapicalls.ApiCallGlobal('getAllCurrenciesV2'),
-        bfapicalls.ApiCallGlobal('getAllEventTypes'),
+        bfapicalls.ApiCallGlobal('getActiveEventTypes', arrays='eventTypeItems'),
+        bfapicalls.ApiCallGlobal('getAllCurrencies', arrays='currencyItems'),
+        bfapicalls.ApiCallGlobal('getAllCurrenciesV2', arrays='currencyItems'),
+        bfapicalls.ApiCallGlobal('getAllEventTypes', arrays='eventTypeItems'),
         bfapicalls.ApiCallExchange('getAllMarkets'),
-        bfapicalls.ApiCallExchange('getBet'),
+        bfapicalls.ApiCallExchange('getBet', arrays='bet.matches'),
         bfapicalls.ApiCallExchange('getBetHistory'),
         bfapicalls.ApiCallExchange('getBetLite'),
-        bfapicalls.ApiCallExchange('getBetMatchesLite'),
+        bfapicalls.ApiCallExchange('getBetMatchesLite', arrays='matchLites'),
         bfapicalls.ApiCallExchange('getCompleteMarketPricesCompressed'),
-        bfapicalls.ApiCallExchange('getCurrentBets'),
-        bfapicalls.ApiCallExchange('getCurrentBetsLite'),
-        bfapicalls.ApiCallExchange('getDetailAvailableMktDepth'),
-        bfapicalls.ApiCallGlobal('getEvents'),
+        bfapicalls.ApiCallExchange('getCurrentBets', arrays='bets'),
+        bfapicalls.ApiCallExchange('getCurrentBetsLite', arrays='betLites'),
+        bfapicalls.ApiCallExchange('getDetailAvailableMktDepth', arrays='priceItems'),
+        bfapicalls.ApiCallGlobal('getEvents', arrays=['eventItems', 'marketItems']),
         bfapicalls.ApiCallExchange('getInPlayMarkets'),
-        bfapicalls.ApiCallExchange('getMarket'),
+        bfapicalls.ApiCallExchange('getMarket', arrays=['market.runners', 'market.eventHierarchy']),
         bfapicalls.ApiCallExchange('getMarketInfo'),
-        bfapicalls.ApiCallExchange('getMarketPrices'),
+        bfapicalls.ApiCallExchange('getMarketPrices', arrays=['marketPrices.runnerPrices',
+                                                              'marketPrices.runnerPrices.bestPricesToBack',
+                                                              'marketPrices.runnerPrices.bestPricesToLay']),
         bfapicalls.ApiCallExchange('getMarketPricesCompressed'),
-        bfapicalls.ApiCallExchange('getMUBets'),
-        bfapicalls.ApiCallExchange('getMUBetsLite'),
-        bfapicalls.ApiCallExchange('getMarketProfitAndLoss'),
-        bfapicalls.ApiCallExchange('getMarketTradedVolume'),
+        bfapicalls.ApiCallExchange('getMarketProfitAndLoss', arrays='annotations'),
+        bfapicalls.ApiCallExchange('getMarketTradedVolume', arrays='priceItems'),
         bfapicalls.ApiCallExchange('getMarketTradedVolumeCompressed'),
-        bfapicalls.ApiCallExchange('getPrivateMarkets'),
-        bfapicalls.ApiCallExchange('getSilks'),
-        bfapicalls.ApiCallExchange('getSilksV2'),
+        bfapicalls.ApiCallExchange('getMUBets', arrays='bets'),
+        bfapicalls.ApiCallExchange('getMUBetsLite', arrays='betLites'),
+        bfapicalls.ApiCallExchange('getPrivateMarkets', arrays='privateMarkets'),
+        bfapicalls.ApiCallExchange('getSilks', arrays=['marketDisplayDetails', 'marketDisplayDetails.racingSilks']),
+        bfapicalls.ApiCallExchange('getSilksV2', arrays=['marketDisplayDetails', 'marketDisplayDetails.racingSilks']),
 
         # Bet Placement API - Complete
-        bfapicalls.ApiCallExchange('placeBets'),
-        bfapicalls.ApiCallExchange('cancelBets'),
-        bfapicalls.ApiCallExchange('cancelBetsByMarket'),
-        bfapicalls.ApiCallExchange('updateBets'),
+        bfapicalls.ApiCallExchange('cancelBets', arrays='betResults'),
+        bfapicalls.ApiCallExchange('cancelBetsByMarket', arrays='results'),
+        bfapicalls.ApiCallExchange('placeBets', arrays='betResults'),
+        bfapicalls.ApiCallExchange('updateBets', arrays='betResults'),
 
         # Account Management API - Complete
         bfapicalls.ApiCallGlobal('AddPaymentCard'),
@@ -162,13 +142,13 @@ class ApiService(object):
         bfapicalls.ApiCallGlobal('DepositFromPaymentCard'),
         bfapicalls.ApiCallGlobal('forgotPassword'),
         bfapicalls.ApiCallExchange('getAccountFunds'),
-        bfapicalls.ApiCallExchange('getAccountStatement'),
-        bfapicalls.ApiCallGlobal('getPaymentCard'),
-        bfapicalls.ApiCallGlobal('getSubscriptionInfo'),
+        bfapicalls.ApiCallExchange('getAccountStatement', arrays='items'),
+        bfapicalls.ApiCallGlobal('getPaymentCard', arrays='paymentCardItems'),
+        bfapicalls.ApiCallGlobal('getSubscriptionInfo', arrays=['subscriptions', 'subscriptions.services']),
         bfapicalls.ApiCallGlobal('modifyPassword'),
         bfapicalls.ApiCallGlobal('modifyProfile'),
         bfapicalls.ApiCallGlobal('transferFunds'),
-        bfapicalls.ApiCallGlobal('retrieveLIMBMessage'),
+        bfapicalls.ApiCallGlobal('retrieveLIMBMessage', arrays='retrieveCardBillingAddressCheckItems'),
         bfapicalls.ApiCallGlobal('selfExclude'),
         bfapicalls.ApiCallGlobal('setChatName'),
         bfapicalls.ApiCallGlobal('submitLIMBMessage'),
@@ -182,10 +162,10 @@ class ApiService(object):
         bfapicalls.ApiCallVendor('createVendorAccessRequest'),
         bfapicalls.ApiCallVendor('cancelVendorAccessRequest'),
         bfapicalls.ApiCallVendor('updateVendorSubscription'),
-        bfapicalls.ApiCallVendor('getVendorUsers'),
-        bfapicalls.ApiCallVendor('getVendorAccessRequests'),
+        bfapicalls.ApiCallVendor('getVendorUsers', arrays='vendorUsers'),
+        bfapicalls.ApiCallVendor('getVendorAccessRequests', arrays='vendorAccessRequests'),
         bfapicalls.ApiCallVendor('getSubscriptionInfo'),
-        bfapicalls.ApiCallVendor('getVendorInfo'),
+        bfapicalls.ApiCallVendor('getVendorInfo', arrays='vendorInfo'),
         ]
 
 

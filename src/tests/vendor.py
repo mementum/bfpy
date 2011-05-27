@@ -32,7 +32,7 @@ import bfpy
 import bfpy.bfclient as bfclient
 
 print 'Creating a Betfair Client'
-bf = bfclient.BfClient(fullDirect=True)
+bf = bfclient.BfClient()
 print 'Created a Betfair Client'
 
 loginInfo = sys.modules['__main__'].loginInfo
@@ -40,8 +40,9 @@ loginInfo = sys.modules['__main__'].loginInfo
 response = bf.login(**loginInfo)
 print response
 
-myVendorId=PUT_YOUR_VENDOR_ID_HERE
-theClientId=PUT_YOUR_CLIENT_ID_HERE
+#myVendorId=PUT_YOUR_VENDOR_ID_HERE
+#theClientId=PUT_YOUR_CLIENT_ID_HERE
+#theClientField=PUT_YOUR_CLIENT_ID_HERE
 
 if True:
     response = bf.createVendorAccessRequest(vendorCustomField='test1', vendorSoftwareId=myVendorId)
@@ -53,14 +54,25 @@ if True:
     response = bf.getVendorAccessRequests(vendorSoftwareId=myVendorId)
     print response
 
-    response = bf.getSubscriptionInfo(vendorSoftwareId=myVendorId, vendorClientId=theClientId)
+    response = bf.getSubscriptionInfoVendor(vendorSoftwareId=myVendorId, vendorClientId=theClientId)
     print response
 
     import datetime
-    response = bf.updateVendorSubscription(vendorSoftwareId=myVendorId, vendorClientId=theClientId, expiryDate=datetime.datetime.now())
+    response = bf.updateVendorSubscription(vendorSoftwareId=myVendorId,
+                                           vendorClientId=theClientId,
+                                           vendorCustomField=theClientField,
+                                           expiryDate=datetime.datetime.now())
     print response
 
-    response = bf.getSubscriptionInfo(vendorSoftwareId=myVendorId, vendorClientId=theClientId)
+    # Return the clientId back to life
+    date2100 = datetime.datetime(year=2100, month=12, day=31)
+    response = bf.updateVendorSubscription(vendorSoftwareId=myVendorId,
+                                           vendorClientId=theClientId,
+                                           vendorCustomField=theClientField,
+                                           expiryDate=date2100)
+    print response
+
+    response = bf.getSubscriptionInfoVendor(vendorSoftwareId=myVendorId, vendorClientId=theClientId)
     print response
 
     response = bf.getVendorInfo()
@@ -68,4 +80,3 @@ if True:
 
     response = bf.getVendorUsers(vendorSoftwareId=myVendorId, status='ACTIVE')
     print response
-    pass

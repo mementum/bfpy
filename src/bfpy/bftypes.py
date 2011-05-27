@@ -33,7 +33,7 @@ Classes for definition and management of API types
 import datetime
 import types
 
-from timezone import LocalTimezone
+from bftimezone import LocalTimezone
 
 
 class ApiParam(object):

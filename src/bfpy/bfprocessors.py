@@ -34,36 +34,9 @@ from datetime import datetime, timedelta
 
 import bferror
 import bfglobals
-import bfvirtual
-from timezone import LocalTimezone
+import bftimezone
 from bfutil import EmptyObject
-
-
-class ArrayUnfix(object):
-    '''
-    Request processor
-
-    Places an array a level lower than specified by the call
-    to add the array indirections present in the Betfair
-    WSDL definitions
-    '''
-    def __init__(self, attrName, subAttrName):
-        self.attrName = attrName
-        self.subAttrName = subAttrName
-
-    def __call__(self, request, requestArgs, **kwargs):
-        instance = kwargs.get('instance')
-        if instance.directApi:
-            # Direct API calls put the array at the right level
-            return
-
-        attr = getattr(request, self.attrName)
-        try:
-            value = requestArgs.pop(self.attrName)
-            setattr(attr, self.subAttrName, value)
-        except KeyError:
-            # Do nothing if the param has not been specified
-            pass
+import bfvirtual
 
 
 class ArrayFix(object):
@@ -73,75 +46,34 @@ class ArrayFix(object):
     Remove one (or more) levels of indirection from the arrays
     defined in the Betfair WSDLs
     '''
-    def __init__(self, attrName, subAttrName):
-        self.attrNames = attrName.split('.')
-        self.subAttrNames = subAttrName.split('.')
+    def __init__(self, attrNames):
+        if not isinstance(attrNames, list):
+            attrNames = [attrNames]
+
+        self.fixAttrs = list()
+        for attrName in attrNames:
+            self.fixAttrs.append(attrName.split('.'))
+
 
     def __call__(self, response, **kwargs):
-        parentAttrs = response
+        for fixAttr in self.fixAttrs:
+            parentAttrs = response
+            targetName = fixAttr[-1]
+            if len(fixAttr) > 1:
+                for attrName in fixAttr[:-1]:
+                    parentAttrs = getattr(parentAttrs, attrName)
 
-        instance = kwargs.get('instance')
+            if not isinstance(parentAttrs, list):
+                parentAttrs = [parentAttrs]
 
-        targetName = self.attrNames[-1]
-        if len(self.attrNames) > 1:
-            for attrName in self.attrNames[:-1]:
-                parentAttrs = getattr(parentAttrs, attrName)
-
-        if not isinstance(parentAttrs, list):
-            parentAttrs = [parentAttrs]
-
-        for parentAttr in parentAttrs:
-            targetAttr = getattr(parentAttr, targetName)
-            if targetAttr is not None:
-                if not instance.directApi:
-                    # suds returns the array one level lower
+            for parentAttr in parentAttrs:
+                targetAttr = getattr(parentAttr, targetName)
+                if targetAttr is not None:
                     subAttr = targetAttr
-                    for subAttrName in self.subAttrNames:
-                        subAttr = getattr(subAttr, subAttrName)
                 else:
-                    # DirectApi returns the array at the right level
-                    subAttr = targetAttr
-            else:
-                # if the targetAttr (in both DirectApi and suds) has been
-                # nullified, it has to be replaced with a list
-                subAttr = list()
+                    subAttr = list()
 
-            setattr(parentAttr, targetName, subAttr)
-
-
-class PatchAttr(object):
-    '''
-    Response processor
-
-    An attribute can be added to an attribute of the response
-    one or several levels below the root, to have sensible
-    information added to a response
-    '''
-    def __init__(self, attrName, subAttrName):
-        self.attrNames = attrName.split('.')
-        self.subAttrName = subAttrName
-
-
-    def __call__(self, response, **kwargs):
-        subAttr = kwargs.get(self.subAttrName)
-        
-        attr = response
-        for attrName in self.attrNames:
-            attr = getattr(attr, attrName)
-
-        setattr(attr, subAttrName, subAttr)
-
-
-class PatchAttrExId(PatchAttr):
-    '''
-    Response processor
-
-    Specialization of PatchAttr that handles "exchangeId"
-    patching specifically
-    '''
-    def __init__(self, attrName):
-        PatchAttr.__init__(self, attrName, 'exchangeId')
-
+                setattr(parentAttr, targetName, subAttr)
 
 
 class ProcAllMarkets(object):
@@ -152,14 +84,15 @@ class ProcAllMarkets(object):
     getAllMarketData
     '''
     def __call__(self, response, **kwargs):
+        # Return quickly if nothing in place
+        if not response.marketData:
+            response.marketData = list()
+            return
+
         # Creat a placeholder for the marketItems to be parsed
         marketItems = list()
 
         # Parse the marketItems data string - separate major fields
-        if not response.marketData:
-            response.marketData = list()
-            return
-        
         marketDataParts = response.marketData.split(':')
 
         # First element is always empty ... pop it out because Betfair places a delimiter at the beginning
@@ -205,11 +138,9 @@ class ProcAllMarkets(object):
             marketItem.marketStatus = marketItemFields[3]
             marketItem.marketTime = datetime.fromtimestamp(long(marketItemFields[4]) / 1000)
 
-            if False:
-                # From timestamp seems to correct to the local timezone
-                localTimezone = LocalTimezone()
-                daylight = localTimezone.dst(marketItem.marketTime)
-                marketItem.marketTime += daylight
+            # Add the local timezone
+            localTimezone = bftimezone.LocalTimezone()
+            marketItem.marketTime.replace(tzinfo=localTimezone)
             
             menuPathParts = list()
             menuParts = marketItemFields[5].split('\\')
@@ -351,21 +282,20 @@ class ProcMarket(object):
         # Embed the exchangeId in the answer, since this is a must for betting
         response.market.exchangeId = exchangeId
 
-        # Adjust the marketTime to the system local time - Bf times are in GMT (UTC)
-        localTimezone = LocalTimezone()
-        utcoffset = localTimezone.utcoffset(response.market.marketTime)
-        response.market.marketTime += utcoffset
+        if False:
+            localTimezone = LocalTimezone()
+            utcoffset = localTimezone.utcoffset(response.market.marketTime)
+            response.market.marketTime += utcoffset
 
-        # Make a non-naive datetime object (in case the calling app wanted to
-        # move it to another timezone)
-        response.market.marketTime = datetime(response.market.marketTime.year,
-                                              response.market.marketTime.month,
-                                              response.market.marketTime.day,
-                                              response.market.marketTime.hour,
-                                              response.market.marketTime.minute,
-                                              response.market.marketTime.second,
-                                              tzinfo=localTimezone)
-
+            # Make a non-naive datetime object (in case the calling app wanted to
+            # move it to another timezone)
+            response.market.marketTime = datetime(response.market.marketTime.year,
+                                                  response.market.marketTime.month,
+                                                  response.market.marketTime.day,
+                                                  response.market.marketTime.hour,
+                                                  response.market.marketTime.minute,
+                                                  response.market.marketTime.second,
+                                                  tzinfo=localTimezone)
 
 class ProcMarketPricesCompressed(object):
     '''
@@ -416,7 +346,7 @@ class ProcMarketPricesCompressed(object):
         @type completeCompressed: bool
 
         @returns: a MarketPrices or CompleteMarketPrices formed object from the compressed string
-        @rtype: suds MarketPrices/CompleteMarketPrices object
+        @rtype: MarketPrices/CompleteMarketPrices object
         '''
         # Split the string in main MarketPrices object + Runner Objects
         if compressedPrices is None:
@@ -467,7 +397,7 @@ class ProcMarketPricesCompressed(object):
         @type completeCompressed: bool
 
         @returns: the prices header
-        @rtype: suds MarketPrices header object
+        @rtype: MarketPrices header object
         '''
         # Generate the object to store the information
         # marketPrices = self.GetObjectExchange('MarketPrices')
@@ -525,7 +455,7 @@ class ProcMarketPricesCompressed(object):
         @type completeCompressed: bool
 
         @returns: the prices for a runner
-        @rtype: suds RunnerPrices objects
+        @rtype: RunnerPrices objects
         '''
         # Generate a RunnerPrices object
         # runner = self.GetObjectExchange('RunnerPrices')
@@ -634,7 +564,7 @@ class ProcMarketPricesCompressed(object):
         @type compressedPriceParts: str
 
         @returns: the individual prices
-        @rtype: suds Price objects
+        @rtype: Price objects
         '''
         # Generate a RunnerPrices object
         # price = self.GetObjectExchange('Price')
@@ -661,7 +591,7 @@ class ProcMarketPricesCompressed(object):
         @type compressedPriceParts: str
 
         @returns: the individual prices
-        @rtype: suds Price objects
+        @rtype: Price objects
         '''
         # Generate a RunnerPrices object
         # price = self.GetObjectExchange('AvailabilityInfo')
@@ -821,26 +751,6 @@ class PreProcPrivateMarkets(object):
             requestArgs['eventTypeId'] = eventTypeId
         except KeyError:
             pass
-
-
-class ProcSilks(object):
-    '''
-    Response processor
-
-    Removes several possible array indirections from a GetSilksResp/GetSilksRespV2
-    '''
-    def __call__(self, response, **kwargs):
-
-        if response.marketDisplayDetails is not None:
-            response.marketDisplayDetails = response.marketDisplayDetails.MarketDisplayDetail
-        else:
-            response.marketDisplayDetails = list()
-
-        for marketDisplayDetails in response.marketDisplayDetails:
-            if marketDisplayDetails.racingSilks is not None:
-                marketDisplayDetails.racingSilks = marketDisplayDetails.racingSilks.RacingSilk
-            else:
-                marketDisplayDetails.racingSilks = list()
 
 
 class PreBetHistory(object):
