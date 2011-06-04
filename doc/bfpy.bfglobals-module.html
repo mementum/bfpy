@@ -92,7 +92,7 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">float</span>
     </td><td class="summary">
-        <a name="version"></a><span class="summary-name">version</span> = <code title="1.11">1.11</code><br />
+        <a name="version"></a><span class="summary-name">version</span> = <code title="1.12">1.12</code><br />
       the version number of the library
     </td>
   </tr>
@@ -100,7 +100,7 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">string</span>
     </td><td class="summary">
-        <a name="libstring"></a><span class="summary-name">libstring</span> = <code title="'BfPy 1.11'"><code class="variable-quote">'</code><code class="variable-string">BfPy 1.11</code><code class="variable-quote">'</code></code><br />
+        <a name="libstring"></a><span class="summary-name">libstring</span> = <code title="'BfPy 1.12'"><code class="variable-quote">'</code><code class="variable-string">BfPy 1.12</code><code class="variable-quote">'</code></code><br />
       the combined library name and version number
     </td>
   </tr>
@@ -239,6 +239,60 @@ The presentation, distribution or other dissemination of the informati\
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">bool</span>
+    </td><td class="summary">
+        <a href="bfpy.bfglobals-module.html#timeUtc" class="summary-name">timeUtc</a> = <code title="False">False</code><br />
+      if True all DateTime objects received from Bf will be returned to the
+      calling application as UTC and the library will assume that DateTime 
+      objects passed by the application are in UTC
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">bool</span>
+    </td><td class="summary">
+        <a href="bfpy.bfglobals-module.html#timeUtcIn" class="summary-name">timeUtcIn</a> = <code title="False">False</code><br />
+      if True all DateTime objects received from Bf will be returned to the
+      calling application as UTC.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">bool</span>
+    </td><td class="summary">
+        <a href="bfpy.bfglobals-module.html#timeUtcOut" class="summary-name">timeUtcOut</a> = <code title="False">False</code><br />
+      if True all DateTime objects passed by the application are in UTCr
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="timeConvertTimestamps"></a><span class="summary-name">timeConvertTimestamps</span> = <code title="True">True</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">bool</span>
+    </td><td class="summary">
+        <a href="bfpy.bfglobals-module.html#timeReturnAware" class="summary-name">timeReturnAware</a> = <code title="False">False</code><br />
+      If True the DateTime objects returned to the application will have be
+      be aware (have a timezone) representing the local timezone
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">bool</span>
+    </td><td class="summary">
+        <a href="bfpy.bfglobals-module.html#timeHonourAware" class="summary-name">timeHonourAware</a> = <code title="False">False</code><br />
+      If True the DateTime objects passed by the application are expected 
+      to be aware (have a timezone) representing the local timezone and 
+      such local timezone will be used for the conversion to UTC before the
+      value is sent to Betfair
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
         <a name="__package__"></a><span class="summary-name">__package__</span> = <code title="'bfpy'"><code class="variable-quote">'</code><code class="variable-string">bfpy</code><code class="variable-quote">'</code></code>
@@ -251,6 +305,15 @@ The presentation, distribution or other dissemination of the informati\
         <a name="catchAllException"></a><span class="summary-name">catchAllException</span><br />
       catch and return as BfPythonError any possible error generated along 
       the library once a service has been called
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">bool</span>
+    </td><td class="summary">
+        <a href="bfpy.bfglobals-module.html#timeConvertTimestaps" class="summary-name">timeConvertTimestaps</a><br />
+      Some of Bf DateTime values are returned as timestamps (in 
+      millisecons) since the start of epoch (1st of January 1970).
     </td>
   </tr>
 </table>
@@ -323,6 +386,134 @@ The presentation, distribution or other dissemination of the informati\
   </dl>
 </td></tr></table>
 </div>
+<a name="timeUtc"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">timeUtc</h3>
+  if True all DateTime objects received from Bf will be returned to the 
+  calling application as UTC and the library will assume that DateTime 
+  objects passed by the application are in UTC
+  <p>Default value: False</p>
+  <dl class="fields">
+    <dt>Type:</dt>
+      <dd>bool</dd>
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+False
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="timeUtcIn"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">timeUtcIn</h3>
+  if True all DateTime objects received from Bf will be returned to the 
+  calling application as UTC.
+  <p>Default value: False</p>
+  <dl class="fields">
+    <dt>Type:</dt>
+      <dd>bool</dd>
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+False
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="timeUtcOut"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">timeUtcOut</h3>
+  if True all DateTime objects passed by the application are in UTCr
+  <p>Default value: False</p>
+  <dl class="fields">
+    <dt>Type:</dt>
+      <dd>bool</dd>
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+False
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="timeReturnAware"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">timeReturnAware</h3>
+  If True the DateTime objects returned to the application will have be be 
+  aware (have a timezone) representing the local timezone
+  <p>Default value: False</p>
+  <dl class="fields">
+    <dt>Type:</dt>
+      <dd>bool</dd>
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+False
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="timeHonourAware"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">timeHonourAware</h3>
+  If True the DateTime objects passed by the application are expected to be
+  aware (have a timezone) representing the local timezone and such local 
+  timezone will be used for the conversion to UTC before the value is sent 
+  to Betfair
+  <p>Default value: False</p>
+  <dl class="fields">
+    <dt>Type:</dt>
+      <dd>bool</dd>
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+False
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="timeConvertTimestaps"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">timeConvertTimestaps</h3>
+  Some of Bf DateTime values are returned as timestamps (in millisecons) 
+  since the start of epoch (1st of January 1970). If true, these values 
+  will be converted to DateTime objects
+  <p>Default value: True</p>
+  <dl class="fields">
+    <dt>Type:</dt>
+      <dd>bool</dd>
+  </dl>
+</td></tr></table>
+</div>
 <br />
 <!-- ==================== NAVIGATION BAR ==================== -->
 <table class="navbar" border="0" width="100%" cellpadding="0"
@@ -355,7 +546,7 @@ The presentation, distribution or other dissemination of the informati\
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Fri May 27 01:55:14 2011
+    Generated by Epydoc 3.0.1 on Sat Jun 04 02:13:34 2011
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

@@ -129,97 +129,153 @@
 <a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt class="py-docstring">@type postProcess: bool</tt> </tt>
 <a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt class="py-docstring">@var postProcess: default library behaviour: process (easing use) Betfair answers</tt> </tt>
 <a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"><tt class="py-docstring">                  before sending them to Betfair</tt> </tt>
-<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-docstring">@type catchAllExceptions: bool</tt> </tt>
-<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-docstring">@var catchAllException: catch and return as BfPythonError any possible error generated</tt> </tt>
-<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt class="py-docstring">                        along the library once a service has been called</tt> </tt>
-<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt class="py-docstring">@type separateCounters: bool</tt> </tt>
-<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt class="py-docstring">@var separateCounters: use separate counters (per exchange/endpoint) to throttle requests</tt> </tt>
-<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt class="py-docstring">                      of calls that fall under the DataRequest (default: False)</tt> </tt>
-<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
-<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"> </tt>
-<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt id="link-0" class="py-name" targets="Variable bfpy.bfglobals.libname=bfpy.bfglobals-module.html#libname,Variable bfpy.libname=bfpy-module.html#libname"><a title="bfpy.bfglobals.libname
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-docstring">@type catchAllExceptions: bool</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt class="py-docstring">@var catchAllException: catch and return as BfPythonError any possible error generated</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-docstring">                        along the library once a service has been called</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt class="py-docstring">@type separateCounters: bool</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt class="py-docstring">@var separateCounters: use separate counters (per exchange/endpoint) to throttle requests</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"><tt class="py-docstring">                      of calls that fall under the DataRequest (default: False)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt class="py-docstring">@type timeUtc: bool</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt class="py-docstring">@var timeUtc: if True all DateTime objects received from Bf will be returned to the calling</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt class="py-docstring">              application as UTC and the library will assume that DateTime objects passed by</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-docstring">              the application are in UTC</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring">              Default value: False</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"><tt class="py-docstring">@type timeUtcIn: bool</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"><tt class="py-docstring">@var timeUtcIn: if True all DateTime objects received from Bf will be returned to the calling</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"><tt class="py-docstring">              application as UTC.</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"><tt class="py-docstring">              Default value: False</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"><tt class="py-docstring">@type timeUtcOut: bool</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"><tt class="py-docstring">@var timeUtcOut: if True all DateTime objects passed by the application are in UTCr</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"><tt class="py-docstring">                 Default value: False</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"><tt class="py-docstring">@type timeConvertTimestaps: bool</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt class="py-docstring">@var timeConvertTimestaps: Some of Bf DateTime values are returned as timestamps (in millisecons) since</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"><tt class="py-docstring">                           the start of epoch (1st of January 1970). If true, these values will be</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"><tt class="py-docstring">                           converted to DateTime objects</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"><tt class="py-docstring">                           Default value: True</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"><tt class="py-docstring">@type timeReturnAware: bool</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"><tt class="py-docstring">@var timeReturnAware: If True the DateTime objects returned to the application will have be</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"><tt class="py-docstring">                      be aware (have a timezone) representing the local timezone</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"><tt class="py-docstring">                      Default value: False</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"><tt class="py-docstring">@type timeHonourAware: bool</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"><tt class="py-docstring">@var timeHonourAware: If True the DateTime objects passed by the application are expected to</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"><tt class="py-docstring">                      be aware (have a timezone) representing the local timezone and such</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"><tt class="py-docstring">                      local timezone will be used for the conversion to UTC before the value</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt class="py-docstring">                      is sent to Betfair</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"><tt class="py-docstring">                      Default value: False</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"><tt class="py-docstring">'''</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"><tt id="link-0" class="py-name" targets="Variable bfpy.bfglobals.libname=bfpy.bfglobals-module.html#libname,Variable bfpy.libname=bfpy-module.html#libname"><a title="bfpy.bfglobals.libname
 bfpy.libname" class="py-name" href="#" onclick="return doclink('link-0', 'libname', 'link-0');">libname</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'BfPy'</tt> </tt>
-<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt id="link-1" class="py-name" targets="Variable bfpy.bfglobals.version=bfpy.bfglobals-module.html#version,Variable bfpy.version=bfpy-module.html#version"><a title="bfpy.bfglobals.version
-bfpy.version" class="py-name" href="#" onclick="return doclink('link-1', 'version', 'link-1');">version</a></tt> <tt class="py-op">=</tt> <tt class="py-number">1.11</tt> </tt>
-<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt id="link-2" class="py-name" targets="Variable bfpy.bfglobals.libstring=bfpy.bfglobals-module.html#libstring,Variable bfpy.libstring=bfpy-module.html#libstring"><a title="bfpy.bfglobals.libstring
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"><tt id="link-1" class="py-name" targets="Variable bfpy.bfglobals.version=bfpy.bfglobals-module.html#version,Variable bfpy.version=bfpy-module.html#version"><a title="bfpy.bfglobals.version
+bfpy.version" class="py-name" href="#" onclick="return doclink('link-1', 'version', 'link-1');">version</a></tt> <tt class="py-op">=</tt> <tt class="py-number">1.12</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"><tt id="link-2" class="py-name" targets="Variable bfpy.bfglobals.libstring=bfpy.bfglobals-module.html#libstring,Variable bfpy.libstring=bfpy-module.html#libstring"><a title="bfpy.bfglobals.libstring
 bfpy.libstring" class="py-name" href="#" onclick="return doclink('link-2', 'libstring', 'link-2');">libstring</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'%s %s'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt id="link-3" class="py-name"><a title="bfpy.bfglobals.libname
 bfpy.libname" class="py-name" href="#" onclick="return doclink('link-3', 'libname', 'link-0');">libname</a></tt><tt class="py-op">,</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt id="link-4" class="py-name"><a title="bfpy.bfglobals.version
 bfpy.version" class="py-name" href="#" onclick="return doclink('link-4', 'version', 'link-1');">version</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
-<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"> </tt>
-<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt id="link-5" class="py-name" targets="Variable bfpy.bfglobals.freeApiId=bfpy.bfglobals-module.html#freeApiId,Variable bfpy.freeApiId=bfpy-module.html#freeApiId"><a title="bfpy.bfglobals.freeApiId
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"><tt id="link-5" class="py-name" targets="Variable bfpy.bfglobals.freeApiId=bfpy.bfglobals-module.html#freeApiId,Variable bfpy.freeApiId=bfpy-module.html#freeApiId"><a title="bfpy.bfglobals.freeApiId
 bfpy.freeApiId" class="py-name" href="#" onclick="return doclink('link-5', 'freeApiId', 'link-5');">freeApiId</a></tt> <tt class="py-op">=</tt> <tt class="py-number">82</tt> </tt>
-<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"> </tt>
-<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt id="link-6" class="py-name" targets="Variable bfpy.Vendor=bfpy-module.html#Vendor,Variable bfpy.bfglobals.Vendor=bfpy.bfglobals-module.html#Vendor"><a title="bfpy.Vendor
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line"> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"><tt id="link-6" class="py-name" targets="Variable bfpy.Vendor=bfpy-module.html#Vendor,Variable bfpy.bfglobals.Vendor=bfpy.bfglobals-module.html#Vendor"><a title="bfpy.Vendor
 bfpy.bfglobals.Vendor" class="py-name" href="#" onclick="return doclink('link-6', 'Vendor', 'link-6');">Vendor</a></tt> <tt class="py-op">=</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt> </tt>
-<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"><tt id="link-7" class="py-name" targets="Variable bfpy.Global=bfpy-module.html#Global,Variable bfpy.bfglobals.Global=bfpy.bfglobals-module.html#Global"><a title="bfpy.Global
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line"><tt id="link-7" class="py-name" targets="Variable bfpy.Global=bfpy-module.html#Global,Variable bfpy.bfglobals.Global=bfpy.bfglobals-module.html#Global"><a title="bfpy.Global
 bfpy.bfglobals.Global" class="py-name" href="#" onclick="return doclink('link-7', 'Global', 'link-7');">Global</a></tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
-<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"><tt id="link-8" class="py-name" targets="Variable bfpy.Exchange=bfpy-module.html#Exchange,Variable bfpy.bfglobals.Exchange=bfpy.bfglobals-module.html#Exchange"><a title="bfpy.Exchange
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"><tt id="link-8" class="py-name" targets="Variable bfpy.Exchange=bfpy-module.html#Exchange,Variable bfpy.bfglobals.Exchange=bfpy.bfglobals-module.html#Exchange"><a title="bfpy.Exchange
 bfpy.bfglobals.Exchange" class="py-name" href="#" onclick="return doclink('link-8', 'Exchange', 'link-8');">Exchange</a></tt> <tt class="py-op">=</tt> <tt class="py-number">1</tt> </tt>
-<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"><tt id="link-9" class="py-name" targets="Variable bfpy.ExchangeUK=bfpy-module.html#ExchangeUK,Variable bfpy.bfglobals.ExchangeUK=bfpy.bfglobals-module.html#ExchangeUK"><a title="bfpy.ExchangeUK
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"><tt id="link-9" class="py-name" targets="Variable bfpy.ExchangeUK=bfpy-module.html#ExchangeUK,Variable bfpy.bfglobals.ExchangeUK=bfpy.bfglobals-module.html#ExchangeUK"><a title="bfpy.ExchangeUK
 bfpy.bfglobals.ExchangeUK" class="py-name" href="#" onclick="return doclink('link-9', 'ExchangeUK', 'link-9');">ExchangeUK</a></tt> <tt class="py-op">=</tt> <tt class="py-number">1</tt> </tt>
-<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"><tt id="link-10" class="py-name" targets="Variable bfpy.ExchangeAus=bfpy-module.html#ExchangeAus,Variable bfpy.bfglobals.ExchangeAus=bfpy.bfglobals-module.html#ExchangeAus"><a title="bfpy.ExchangeAus
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"><tt id="link-10" class="py-name" targets="Variable bfpy.ExchangeAus=bfpy-module.html#ExchangeAus,Variable bfpy.bfglobals.ExchangeAus=bfpy.bfglobals-module.html#ExchangeAus"><a title="bfpy.ExchangeAus
 bfpy.bfglobals.ExchangeAus" class="py-name" href="#" onclick="return doclink('link-10', 'ExchangeAus', 'link-10');">ExchangeAus</a></tt> <tt class="py-op">=</tt> <tt class="py-number">2</tt> </tt>
-<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"> </tt>
-<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"><tt id="link-11" class="py-name" targets="Variable bfpy.Exchanges=bfpy-module.html#Exchanges,Variable bfpy.bfglobals.Exchanges=bfpy.bfglobals-module.html#Exchanges"><a title="bfpy.Exchanges
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line"><tt id="link-11" class="py-name" targets="Variable bfpy.Exchanges=bfpy-module.html#Exchanges,Variable bfpy.bfglobals.Exchanges=bfpy.bfglobals-module.html#Exchanges"><a title="bfpy.Exchanges
 bfpy.bfglobals.Exchanges" class="py-name" href="#" onclick="return doclink('link-11', 'Exchanges', 'link-11');">Exchanges</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-12" class="py-name"><a title="bfpy.ExchangeUK
 bfpy.bfglobals.ExchangeUK" class="py-name" href="#" onclick="return doclink('link-12', 'ExchangeUK', 'link-9');">ExchangeUK</a></tt><tt class="py-op">,</tt> <tt id="link-13" class="py-name"><a title="bfpy.ExchangeAus
 bfpy.bfglobals.ExchangeAus" class="py-name" href="#" onclick="return doclink('link-13', 'ExchangeAus', 'link-10');">ExchangeAus</a></tt><tt class="py-op">]</tt> </tt>
-<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"><tt id="link-14" class="py-name" targets="Variable bfpy.EndPoints=bfpy-module.html#EndPoints,Variable bfpy.bfglobals.EndPoints=bfpy.bfglobals-module.html#EndPoints"><a title="bfpy.EndPoints
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line"><tt id="link-14" class="py-name" targets="Variable bfpy.EndPoints=bfpy-module.html#EndPoints,Variable bfpy.bfglobals.EndPoints=bfpy.bfglobals-module.html#EndPoints"><a title="bfpy.EndPoints
 bfpy.bfglobals.EndPoints" class="py-name" href="#" onclick="return doclink('link-14', 'EndPoints', 'link-14');">EndPoints</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-15" class="py-name"><a title="bfpy.Vendor
 bfpy.bfglobals.Vendor" class="py-name" href="#" onclick="return doclink('link-15', 'Vendor', 'link-6');">Vendor</a></tt><tt class="py-op">,</tt> <tt id="link-16" class="py-name"><a title="bfpy.Global
 bfpy.bfglobals.Global" class="py-name" href="#" onclick="return doclink('link-16', 'Global', 'link-7');">Global</a></tt><tt class="py-op">,</tt> <tt id="link-17" class="py-name"><a title="bfpy.ExchangeUK
 bfpy.bfglobals.ExchangeUK" class="py-name" href="#" onclick="return doclink('link-17', 'ExchangeUK', 'link-9');">ExchangeUK</a></tt><tt class="py-op">,</tt> <tt id="link-18" class="py-name"><a title="bfpy.ExchangeAus
 bfpy.bfglobals.ExchangeAus" class="py-name" href="#" onclick="return doclink('link-18', 'ExchangeAus', 'link-10');">ExchangeAus</a></tt><tt class="py-op">]</tt> </tt>
-<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"> </tt>
-<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"><tt id="link-19" class="py-name" targets="Variable bfpy.EndPointUrls=bfpy-module.html#EndPointUrls,Variable bfpy.bfglobals.EndPointUrls=bfpy.bfglobals-module.html#EndPointUrls"><a title="bfpy.EndPointUrls
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line"><tt id="link-19" class="py-name" targets="Variable bfpy.EndPointUrls=bfpy-module.html#EndPointUrls,Variable bfpy.bfglobals.EndPointUrls=bfpy.bfglobals-module.html#EndPointUrls"><a title="bfpy.EndPointUrls
 bfpy.bfglobals.EndPointUrls" class="py-name" href="#" onclick="return doclink('link-19', 'EndPointUrls', 'link-19');">EndPointUrls</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt> </tt>
-<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">    <tt id="link-20" class="py-name"><a title="bfpy.Vendor
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">    <tt id="link-20" class="py-name"><a title="bfpy.Vendor
 bfpy.bfglobals.Vendor" class="py-name" href="#" onclick="return doclink('link-20', 'Vendor', 'link-6');">Vendor</a></tt><tt class="py-op">:</tt> <tt class="py-string">'https://api.betfair.com/admin-api/v2/VendorService'</tt><tt class="py-op">,</tt> </tt>
-<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">    <tt id="link-21" class="py-name"><a title="bfpy.Global
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">    <tt id="link-21" class="py-name"><a title="bfpy.Global
 bfpy.bfglobals.Global" class="py-name" href="#" onclick="return doclink('link-21', 'Global', 'link-7');">Global</a></tt><tt class="py-op">:</tt> <tt class="py-string">'https://api.betfair.com/global/v3/BFGlobalService'</tt><tt class="py-op">,</tt> </tt>
-<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">    <tt id="link-22" class="py-name"><a title="bfpy.ExchangeUK
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">    <tt id="link-22" class="py-name"><a title="bfpy.ExchangeUK
 bfpy.bfglobals.ExchangeUK" class="py-name" href="#" onclick="return doclink('link-22', 'ExchangeUK', 'link-9');">ExchangeUK</a></tt><tt class="py-op">:</tt> <tt class="py-string">'https://api.betfair.com/exchange/v5/BFExchangeService'</tt><tt class="py-op">,</tt> </tt>
-<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">    <tt id="link-23" class="py-name"><a title="bfpy.ExchangeAus
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">    <tt id="link-23" class="py-name"><a title="bfpy.ExchangeAus
 bfpy.bfglobals.ExchangeAus" class="py-name" href="#" onclick="return doclink('link-23', 'ExchangeAus', 'link-10');">ExchangeAus</a></tt><tt class="py-op">:</tt> <tt class="py-string">'https://api-au.betfair.com/exchange/v5/BFExchangeService'</tt><tt class="py-op">,</tt> </tt>
-<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">    <tt class="py-op">}</tt> </tt>
-<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"> </tt>
-<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"><tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
-<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt id="link-24" class="py-name" targets="Package bfpy.bfwsdl=bfpy.bfwsdl-module.html"><a title="bfpy.bfwsdl" class="py-name" href="#" onclick="return doclink('link-24', 'bfwsdl', 'link-24');">bfwsdl</a></tt> </tt>
-<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"><tt class="py-keyword">except</tt> <tt class="py-name">ImportError</tt><tt class="py-op">:</tt> </tt>
-<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">    <tt id="link-25" class="py-name" targets="Variable bfpy.bfglobals.wsdlDefs=bfpy.bfglobals-module.html#wsdlDefs,Variable bfpy.wsdlDefs=bfpy-module.html#wsdlDefs"><a title="bfpy.bfglobals.wsdlDefs
-bfpy.wsdlDefs" class="py-name" href="#" onclick="return doclink('link-25', 'wsdlDefs', 'link-25');">wsdlDefs</a></tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
-<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"><tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
-<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">    <tt id="link-26" class="py-name"><a title="bfpy.bfglobals.wsdlDefs
-bfpy.wsdlDefs" class="py-name" href="#" onclick="return doclink('link-26', 'wsdlDefs', 'link-25');">wsdlDefs</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt> </tt>
-<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">        <tt id="link-27" class="py-name"><a title="bfpy.Vendor
-bfpy.bfglobals.Vendor" class="py-name" href="#" onclick="return doclink('link-27', 'Vendor', 'link-6');">Vendor</a></tt><tt class="py-op">:</tt> <tt id="link-28" class="py-name"><a title="bfpy.bfwsdl" class="py-name" href="#" onclick="return doclink('link-28', 'bfwsdl', 'link-24');">bfwsdl</a></tt><tt class="py-op">.</tt><tt id="link-29" class="py-name" targets="Variable bfpy.bfwsdl.BFVendorService=bfpy.bfwsdl-module.html#BFVendorService,Variable bfpy.bfwsdl.bfvendor.BFVendorService=bfpy.bfwsdl.bfvendor-module.html#BFVendorService"><a title="bfpy.bfwsdl.BFVendorService
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">    <tt class="py-op">}</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line"> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line"><tt id="link-24" class="py-name" targets="Variable bfpy.bfglobals.wsdlDefs=bfpy.bfglobals-module.html#wsdlDefs,Variable bfpy.wsdlDefs=bfpy-module.html#wsdlDefs"><a title="bfpy.bfglobals.wsdlDefs
+bfpy.wsdlDefs" class="py-name" href="#" onclick="return doclink('link-24', 'wsdlDefs', 'link-24');">wsdlDefs</a></tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line"><tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt id="link-25" class="py-name" targets="Package bfpy.bfwsdl=bfpy.bfwsdl-module.html"><a title="bfpy.bfwsdl" class="py-name" href="#" onclick="return doclink('link-25', 'bfwsdl', 'link-25');">bfwsdl</a></tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line"><tt class="py-keyword">except</tt> <tt class="py-name">ImportError</tt><tt class="py-op">:</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">    <tt class="py-keyword">pass</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"><tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">    <tt id="link-26" class="py-name"><a title="bfpy.bfglobals.wsdlDefs
+bfpy.wsdlDefs" class="py-name" href="#" onclick="return doclink('link-26', 'wsdlDefs', 'link-24');">wsdlDefs</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">        <tt id="link-27" class="py-name"><a title="bfpy.Vendor
+bfpy.bfglobals.Vendor" class="py-name" href="#" onclick="return doclink('link-27', 'Vendor', 'link-6');">Vendor</a></tt><tt class="py-op">:</tt> <tt id="link-28" class="py-name"><a title="bfpy.bfwsdl" class="py-name" href="#" onclick="return doclink('link-28', 'bfwsdl', 'link-25');">bfwsdl</a></tt><tt class="py-op">.</tt><tt id="link-29" class="py-name" targets="Variable bfpy.bfwsdl.BFVendorService=bfpy.bfwsdl-module.html#BFVendorService,Variable bfpy.bfwsdl.bfvendor.BFVendorService=bfpy.bfwsdl.bfvendor-module.html#BFVendorService"><a title="bfpy.bfwsdl.BFVendorService
 bfpy.bfwsdl.bfvendor.BFVendorService" class="py-name" href="#" onclick="return doclink('link-29', 'BFVendorService', 'link-29');">BFVendorService</a></tt><tt class="py-op">,</tt> </tt>
-<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">        <tt id="link-30" class="py-name"><a title="bfpy.Global
-bfpy.bfglobals.Global" class="py-name" href="#" onclick="return doclink('link-30', 'Global', 'link-7');">Global</a></tt><tt class="py-op">:</tt> <tt id="link-31" class="py-name"><a title="bfpy.bfwsdl" class="py-name" href="#" onclick="return doclink('link-31', 'bfwsdl', 'link-24');">bfwsdl</a></tt><tt class="py-op">.</tt><tt id="link-32" class="py-name" targets="Variable bfpy.bfwsdl.BFGlobalService=bfpy.bfwsdl-module.html#BFGlobalService,Variable bfpy.bfwsdl.bfglobal.BFGlobalService=bfpy.bfwsdl.bfglobal-module.html#BFGlobalService"><a title="bfpy.bfwsdl.BFGlobalService
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">        <tt id="link-30" class="py-name"><a title="bfpy.Global
+bfpy.bfglobals.Global" class="py-name" href="#" onclick="return doclink('link-30', 'Global', 'link-7');">Global</a></tt><tt class="py-op">:</tt> <tt id="link-31" class="py-name"><a title="bfpy.bfwsdl" class="py-name" href="#" onclick="return doclink('link-31', 'bfwsdl', 'link-25');">bfwsdl</a></tt><tt class="py-op">.</tt><tt id="link-32" class="py-name" targets="Variable bfpy.bfwsdl.BFGlobalService=bfpy.bfwsdl-module.html#BFGlobalService,Variable bfpy.bfwsdl.bfglobal.BFGlobalService=bfpy.bfwsdl.bfglobal-module.html#BFGlobalService"><a title="bfpy.bfwsdl.BFGlobalService
 bfpy.bfwsdl.bfglobal.BFGlobalService" class="py-name" href="#" onclick="return doclink('link-32', 'BFGlobalService', 'link-32');">BFGlobalService</a></tt><tt class="py-op">,</tt> </tt>
-<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">        <tt id="link-33" class="py-name"><a title="bfpy.ExchangeUK
-bfpy.bfglobals.ExchangeUK" class="py-name" href="#" onclick="return doclink('link-33', 'ExchangeUK', 'link-9');">ExchangeUK</a></tt><tt class="py-op">:</tt> <tt id="link-34" class="py-name"><a title="bfpy.bfwsdl" class="py-name" href="#" onclick="return doclink('link-34', 'bfwsdl', 'link-24');">bfwsdl</a></tt><tt class="py-op">.</tt><tt id="link-35" class="py-name" targets="Variable bfpy.bfwsdl.BFExchangeService=bfpy.bfwsdl-module.html#BFExchangeService,Variable bfpy.bfwsdl.bfexchange.BFExchangeService=bfpy.bfwsdl.bfexchange-module.html#BFExchangeService"><a title="bfpy.bfwsdl.BFExchangeService
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">        <tt id="link-33" class="py-name"><a title="bfpy.ExchangeUK
+bfpy.bfglobals.ExchangeUK" class="py-name" href="#" onclick="return doclink('link-33', 'ExchangeUK', 'link-9');">ExchangeUK</a></tt><tt class="py-op">:</tt> <tt id="link-34" class="py-name"><a title="bfpy.bfwsdl" class="py-name" href="#" onclick="return doclink('link-34', 'bfwsdl', 'link-25');">bfwsdl</a></tt><tt class="py-op">.</tt><tt id="link-35" class="py-name" targets="Variable bfpy.bfwsdl.BFExchangeService=bfpy.bfwsdl-module.html#BFExchangeService,Variable bfpy.bfwsdl.bfexchange.BFExchangeService=bfpy.bfwsdl.bfexchange-module.html#BFExchangeService"><a title="bfpy.bfwsdl.BFExchangeService
 bfpy.bfwsdl.bfexchange.BFExchangeService" class="py-name" href="#" onclick="return doclink('link-35', 'BFExchangeService', 'link-35');">BFExchangeService</a></tt><tt class="py-op">,</tt> </tt>
-<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">        <tt id="link-36" class="py-name"><a title="bfpy.ExchangeAus
-bfpy.bfglobals.ExchangeAus" class="py-name" href="#" onclick="return doclink('link-36', 'ExchangeAus', 'link-10');">ExchangeAus</a></tt><tt class="py-op">:</tt> <tt id="link-37" class="py-name"><a title="bfpy.bfwsdl" class="py-name" href="#" onclick="return doclink('link-37', 'bfwsdl', 'link-24');">bfwsdl</a></tt><tt class="py-op">.</tt><tt id="link-38" class="py-name" targets="Variable bfpy.bfwsdl.BFExchangeServiceAus=bfpy.bfwsdl-module.html#BFExchangeServiceAus,Variable bfpy.bfwsdl.bfexchangeaus.BFExchangeServiceAus=bfpy.bfwsdl.bfexchangeaus-module.html#BFExchangeServiceAus"><a title="bfpy.bfwsdl.BFExchangeServiceAus
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">        <tt id="link-36" class="py-name"><a title="bfpy.ExchangeAus
+bfpy.bfglobals.ExchangeAus" class="py-name" href="#" onclick="return doclink('link-36', 'ExchangeAus', 'link-10');">ExchangeAus</a></tt><tt class="py-op">:</tt> <tt id="link-37" class="py-name"><a title="bfpy.bfwsdl" class="py-name" href="#" onclick="return doclink('link-37', 'bfwsdl', 'link-25');">bfwsdl</a></tt><tt class="py-op">.</tt><tt id="link-38" class="py-name" targets="Variable bfpy.bfwsdl.BFExchangeServiceAus=bfpy.bfwsdl-module.html#BFExchangeServiceAus,Variable bfpy.bfwsdl.bfexchangeaus.BFExchangeServiceAus=bfpy.bfwsdl.bfexchangeaus-module.html#BFExchangeServiceAus"><a title="bfpy.bfwsdl.BFExchangeServiceAus
 bfpy.bfwsdl.bfexchangeaus.BFExchangeServiceAus" class="py-name" href="#" onclick="return doclink('link-38', 'BFExchangeServiceAus', 'link-38');">BFExchangeServiceAus</a></tt><tt class="py-op">,</tt> </tt>
-<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">        <tt class="py-op">}</tt> </tt>
-<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">     </tt>
-<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"><tt id="link-39" class="py-name" targets="Variable bfpy.bfglobals.eventRootId=bfpy.bfglobals-module.html#eventRootId,Variable bfpy.eventRootId=bfpy-module.html#eventRootId"><a title="bfpy.bfglobals.eventRootId
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">        <tt class="py-op">}</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">     </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line"><tt id="link-39" class="py-name" targets="Variable bfpy.bfglobals.eventRootId=bfpy.bfglobals-module.html#eventRootId,Variable bfpy.eventRootId=bfpy-module.html#eventRootId"><a title="bfpy.bfglobals.eventRootId
 bfpy.eventRootId" class="py-name" href="#" onclick="return doclink('link-39', 'eventRootId', 'link-39');">eventRootId</a></tt> <tt class="py-op">=</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt> </tt>
-<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"> </tt>
-<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt id="link-40" class="py-name" targets="Variable bfpy.bfglobals.preProcess=bfpy.bfglobals-module.html#preProcess,Variable bfpy.preProcess=bfpy-module.html#preProcess"><a title="bfpy.bfglobals.preProcess
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line"> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line"><tt id="link-40" class="py-name" targets="Variable bfpy.bfglobals.preProcess=bfpy.bfglobals-module.html#preProcess,Variable bfpy.preProcess=bfpy-module.html#preProcess"><a title="bfpy.bfglobals.preProcess
 bfpy.preProcess" class="py-name" href="#" onclick="return doclink('link-40', 'preProcess', 'link-40');">preProcess</a></tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
-<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"><tt id="link-41" class="py-name" targets="Variable bfpy.bfglobals.postProcess=bfpy.bfglobals-module.html#postProcess,Variable bfpy.postProcess=bfpy-module.html#postProcess"><a title="bfpy.bfglobals.postProcess
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"><tt id="link-41" class="py-name" targets="Variable bfpy.bfglobals.postProcess=bfpy.bfglobals-module.html#postProcess,Variable bfpy.postProcess=bfpy-module.html#postProcess"><a title="bfpy.bfglobals.postProcess
 bfpy.postProcess" class="py-name" href="#" onclick="return doclink('link-41', 'postProcess', 'link-41');">postProcess</a></tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
-<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"> </tt>
-<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"><tt id="link-42" class="py-name" targets="Variable bfpy.bfglobals.catchAllExceptions=bfpy.bfglobals-module.html#catchAllExceptions,Variable bfpy.catchAllExceptions=bfpy-module.html#catchAllExceptions"><a title="bfpy.bfglobals.catchAllExceptions
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line"><tt id="link-42" class="py-name" targets="Variable bfpy.bfglobals.catchAllExceptions=bfpy.bfglobals-module.html#catchAllExceptions,Variable bfpy.catchAllExceptions=bfpy-module.html#catchAllExceptions"><a title="bfpy.bfglobals.catchAllExceptions
 bfpy.catchAllExceptions" class="py-name" href="#" onclick="return doclink('link-42', 'catchAllExceptions', 'link-42');">catchAllExceptions</a></tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
-<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"> </tt>
-<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"><tt id="link-43" class="py-name" targets="Variable bfpy.bfglobals.separateCounters=bfpy.bfglobals-module.html#separateCounters,Variable bfpy.separateCounters=bfpy-module.html#separateCounters"><a title="bfpy.bfglobals.separateCounters
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line"> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line"><tt id="link-43" class="py-name" targets="Variable bfpy.bfglobals.separateCounters=bfpy.bfglobals-module.html#separateCounters,Variable bfpy.separateCounters=bfpy-module.html#separateCounters"><a title="bfpy.bfglobals.separateCounters
 bfpy.separateCounters" class="py-name" href="#" onclick="return doclink('link-43', 'separateCounters', 'link-43');">separateCounters</a></tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
-<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line"> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line"><tt id="link-44" class="py-name" targets="Variable bfpy.bfglobals.timeUtc=bfpy.bfglobals-module.html#timeUtc,Variable bfpy.timeUtc=bfpy-module.html#timeUtc"><a title="bfpy.bfglobals.timeUtc
+bfpy.timeUtc" class="py-name" href="#" onclick="return doclink('link-44', 'timeUtc', 'link-44');">timeUtc</a></tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line"><tt id="link-45" class="py-name" targets="Variable bfpy.bfglobals.timeUtcIn=bfpy.bfglobals-module.html#timeUtcIn,Variable bfpy.timeUtcIn=bfpy-module.html#timeUtcIn"><a title="bfpy.bfglobals.timeUtcIn
+bfpy.timeUtcIn" class="py-name" href="#" onclick="return doclink('link-45', 'timeUtcIn', 'link-45');">timeUtcIn</a></tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line"><tt id="link-46" class="py-name" targets="Variable bfpy.bfglobals.timeUtcOut=bfpy.bfglobals-module.html#timeUtcOut,Variable bfpy.timeUtcOut=bfpy-module.html#timeUtcOut"><a title="bfpy.bfglobals.timeUtcOut
+bfpy.timeUtcOut" class="py-name" href="#" onclick="return doclink('link-46', 'timeUtcOut', 'link-46');">timeUtcOut</a></tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line"><tt id="link-47" class="py-name" targets="Variable bfpy.bfglobals.timeConvertTimestamps=bfpy.bfglobals-module.html#timeConvertTimestamps,Variable bfpy.timeConvertTimestamps=bfpy-module.html#timeConvertTimestamps"><a title="bfpy.bfglobals.timeConvertTimestamps
+bfpy.timeConvertTimestamps" class="py-name" href="#" onclick="return doclink('link-47', 'timeConvertTimestamps', 'link-47');">timeConvertTimestamps</a></tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line"><tt id="link-48" class="py-name" targets="Variable bfpy.bfglobals.timeReturnAware=bfpy.bfglobals-module.html#timeReturnAware,Variable bfpy.timeReturnAware=bfpy-module.html#timeReturnAware"><a title="bfpy.bfglobals.timeReturnAware
+bfpy.timeReturnAware" class="py-name" href="#" onclick="return doclink('link-48', 'timeReturnAware', 'link-48');">timeReturnAware</a></tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line"><tt id="link-49" class="py-name" targets="Variable bfpy.bfglobals.timeHonourAware=bfpy.bfglobals-module.html#timeHonourAware,Variable bfpy.timeHonourAware=bfpy-module.html#timeHonourAware"><a title="bfpy.bfglobals.timeHonourAware
+bfpy.timeHonourAware" class="py-name" href="#" onclick="return doclink('link-49', 'timeHonourAware', 'link-49');">timeHonourAware</a></tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line"> </tt><script type="text/javascript">
 <!--
 expandto(location.href);
 // -->
@@ -257,7 +313,7 @@ expandto(location.href);
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Fri May 27 01:55:16 2011
+    Generated by Epydoc 3.0.1 on Sat Jun 04 02:13:36 2011
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

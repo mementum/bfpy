@@ -3,7 +3,7 @@
           "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>bfpy.bftypes.TransferFundsReq</title>
+  <title>bfpy.bfutil.FactoryClass</title>
   <link rel="stylesheet" href="epydoc.css" type="text/css" />
   <script type="text/javascript" src="epydoc.js"></script>
 </head>
@@ -43,8 +43,8 @@
     <td width="100%">
       <span class="breadcrumbs">
         <a href="bfpy-module.html">Package&nbsp;bfpy</a> ::
-        <a href="bfpy.bftypes-module.html">Module&nbsp;bftypes</a> ::
-        Class&nbsp;TransferFundsReq
+        <a href="bfpy.bfutil-module.html">Module&nbsp;bfutil</a> ::
+        Class&nbsp;FactoryClass
       </span>
     </td>
     <td>
@@ -54,48 +54,25 @@
     onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
         <tr><td align="right"><span class="options"
             >[<a href="frames.html" target="_top">frames</a
-            >]&nbsp;|&nbsp;<a href="bfpy.bftypes.TransferFundsReq-class.html"
+            >]&nbsp;|&nbsp;<a href="bfpy.bfutil.FactoryClass-class.html"
             target="_top">no&nbsp;frames</a>]</span></td></tr>
       </table>
     </td>
   </tr>
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
-<h1 class="epydoc">Class TransferFundsReq</h1><p class="nomargin-top"><span class="codelink"><a href="bfpy.bftypes-pysrc.html#TransferFundsReq">source&nbsp;code</a></span></p>
+<h1 class="epydoc">Class FactoryClass</h1><p class="nomargin-top"><span class="codelink"><a href="bfpy.bfutil-pysrc.html#FactoryClass">source&nbsp;code</a></span></p>
 <pre class="base-tree">
- object --+    
-          |    
-<a href="bfpy.bftypes.ApiDataType-class.html">ApiDataType</a> --+
-              |
-             <strong class="uidshort">TransferFundsReq</strong>
+object --+
+         |
+        <strong class="uidshort">FactoryClass</strong>
 </pre>
 
 <hr />
-<!-- ==================== NESTED CLASSES ==================== -->
-<a name="section-NestedClasses"></a>
-<table class="summary" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr bgcolor="#70b0f0" class="table-header">
-  <td colspan="2" class="table-header">
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-      <tr valign="top">
-        <td align="left"><span class="table-header">Nested Classes</span></td>
-        <td align="right" valign="top"
-         ><span class="options">[<a href="#section-NestedClasses"
-         class="privatelink" onclick="toggle_private();"
-         >hide private</a>]</span></td>
-      </tr>
-    </table>
-  </td>
-</tr>
-  <tr>
-    <td colspan="2" class="summary">
-    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="bfpy.bftypes.ApiDataType-class.html">ApiDataType</a></code></b>:
-      <code><a href="bfpy.bftypes.ApiDataTypeMeta-class.html">__metaclass__</a></code>
-      </p>
-    </td>
-  </tr>
-</table>
+<p>Used to implement a Factory of named <a 
+  href="bfpy.bfutil.EmptyObject-class.html" class="link">EmptyObject</a> 
+  classes</p>
+
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
 <table class="summary" border="1" cellpadding="3"
@@ -119,10 +96,28 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="bfpy.bftypes.TransferFundsReq-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Initializes the pattern using the given name</td>
+          <td><span class="summary-sig"><a href="bfpy.bfutil.FactoryClass-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Inits the cache</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bftypes-pysrc.html#TransferFundsReq.__init__">source&nbsp;code</a></span>
+            <span class="codelink"><a href="bfpy.bfutil-pysrc.html#FactoryClass.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.bfutil.FactoryClass-class.html#__getattr__" class="summary-sig-name">__getattr__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">name</span>)</span><br />
+      Retrieves (creating if needed) a named subclass of EmptyObject</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bfutil-pysrc.html#FactoryClass.__getattr__">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -132,12 +127,6 @@
   </tr>
   <tr>
     <td colspan="2" class="summary">
-    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="bfpy.bftypes.ApiDataType-class.html">ApiDataType</a></code></b>:
-      <code><a href="bfpy.bftypes.ApiDataType-class.html#__call__">__call__</a></code>,
-      <code><a href="bfpy.bftypes.ApiDataType-class.html#__copy__">__copy__</a></code>,
-      <code><a href="bfpy.bftypes.ApiDataType-class.html#__str__">__str__</a></code>,
-      <code><a href="bfpy.bftypes.ApiDataType-class.html#__unicode__">__unicode__</a></code>
-      </p>
     <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
       <code>__delattr__</code>,
       <code>__format__</code>,
@@ -149,22 +138,23 @@
       <code>__repr__</code>,
       <code>__setattr__</code>,
       <code>__sizeof__</code>,
+      <code>__str__</code>,
       <code>__subclasshook__</code>
       </p>
     </td>
   </tr>
 </table>
-<!-- ==================== CLASS VARIABLES ==================== -->
-<a name="section-ClassVariables"></a>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
 <table class="summary" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr bgcolor="#70b0f0" class="table-header">
   <td colspan="2" class="table-header">
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
       <tr valign="top">
-        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="left"><span class="table-header">Instance Variables</span></td>
         <td align="right" valign="top"
-         ><span class="options">[<a href="#section-ClassVariables"
+         ><span class="options">[<a href="#section-InstanceVariables"
          class="privatelink" onclick="toggle_private();"
          >hide private</a>]</span></td>
       </tr>
@@ -173,47 +163,10 @@
 </tr>
 <tr class="private">
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">dict</span>
     </td><td class="summary">
-        <a href="bfpy.bftypes.TransferFundsReq-class.html#_apiParams" class="summary-name" onclick="show_private();">_apiParams</a> = <code title="[ApiParam('sourceWalletId'), ApiParam('targetWalletId'), ApiParam('amo\
-unt'),]">[ApiParam('sourceWalletId'), ApiParam('targetWall<code class="variable-ellipsis">...</code></code>
-    </td>
-  </tr>
-<tr class="private">
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a name="_params"></a><span class="summary-name">_params</span> = <code title="['sourceWalletId', 'targetWalletId', 'amount']"><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">sourceWalletId</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">targetWalletId</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">amount</code><code class="variable-quote">'</code><code class="variable-group">]</code></code>
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a name="amount"></a><span class="summary-name">amount</span> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x010611B0&gt;">&lt;bfpy.bftypes.ApiParam object at 0x010611B0&gt;</code>
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a name="sourceWalletId"></a><span class="summary-name">sourceWalletId</span> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x01061170&gt;">&lt;bfpy.bftypes.ApiParam object at 0x01061170&gt;</code>
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a name="targetWalletId"></a><span class="summary-name">targetWalletId</span> = <code title="&lt;bfpy.bftypes.ApiParam object at 0x01061190&gt;">&lt;bfpy.bftypes.ApiParam object at 0x01061190&gt;</code>
-    </td>
-  </tr>
-  <tr>
-    <td colspan="2" class="summary">
-    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="bfpy.bftypes.ApiDataType-class.html">ApiDataType</a></code></b>:
-      <code><a href="bfpy.bftypes.ApiDataType-class.html#apitype">apitype</a></code>,
-      <code><a href="bfpy.bftypes.ApiDataType-class.html#header">header</a></code>,
-      <code><a href="bfpy.bftypes.ApiDataType-class.html#pattern">pattern</a></code>
-      </p>
+        <a name="_cache"></a><span class="summary-name">_cache</span><br />
+      holds a reference to already created classes for quick retrieval
     </td>
   </tr>
 </table>
@@ -271,59 +224,40 @@ unt'),]">[ApiParam('sourceWalletId'), ApiParam('targetWall<code class="variable-
     <br /><em class="fname">(Constructor)</em>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bftypes-pysrc.html#TransferFundsReq.__init__">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="bfpy.bfutil-pysrc.html#FactoryClass.__init__">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Initializes the pattern using the given name</p>
+  <p>Inits the cache</p>
   <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>name</code></strong> - name of the type in the soap call if name is None, the pattern 
-          will be empty (except for the substitution)</li>
-    </ul></dd>
     <dt>Overrides:
         object.__init__
-        <dd><em class="note">(inherited documentation)</em></dd>
     </dt>
   </dl>
 </td></tr></table>
 </div>
-<br />
-<!-- ==================== CLASS VARIABLE DETAILS ==================== -->
-<a name="section-ClassVariableDetails"></a>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr bgcolor="#70b0f0" class="table-header">
-  <td colspan="2" class="table-header">
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-      <tr valign="top">
-        <td align="left"><span class="table-header">Class Variable Details</span></td>
-        <td align="right" valign="top"
-         ><span class="options">[<a href="#section-ClassVariableDetails"
-         class="privatelink" onclick="toggle_private();"
-         >hide private</a>]</span></td>
-      </tr>
-    </table>
-  </td>
-</tr>
-</table>
-<a name="_apiParams"></a>
-<div class="private">
+<a name="__getattr__"></a>
+<div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
-  <h3 class="epydoc">_apiParams</h3>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__getattr__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">name</span>)</span>
+    <br /><em class="fname">(Qualification operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bfutil-pysrc.html#FactoryClass.__getattr__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
   
+  <p>Retrieves (creating if needed) a named subclass of EmptyObject</p>
   <dl class="fields">
-  </dl>
-  <dl class="fields">
-    <dt>Value:</dt>
-      <dd><table><tr><td><pre class="variable">
-[ApiParam('sourceWalletId'), ApiParam('targetWalletId'), ApiParam('amo<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
-unt'),]
-</pre></td></tr></table>
-</dd>
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>name</code></strong> (string) - subclass of EmptyObject to retrieve</li>
+    </ul></dd>
   </dl>
 </td></tr></table>
 </div>

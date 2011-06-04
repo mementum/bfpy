@@ -282,8 +282,6 @@ class BfApi(object):
         @param maxRequests: maximum number of requests to issue to Bf in 1 second (20 is maximum before data charges)
                             maxRequests = 0 to unlimit the number of requests
         @type maxRequests: int
-        @param utctime: whether all time objects shall be returned in UTC format (and no timezone object)
-        @type utctime: bool
         '''
         self.preProcess = preProcess if preProcess is not None else bfglobals.preProcess
         self.postProcess = postProcess if postProcess is not None else bfglobals.postProcess

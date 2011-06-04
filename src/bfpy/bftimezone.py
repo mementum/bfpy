@@ -46,12 +46,30 @@ class UTC(tzinfo):
     UTC timezone.
     '''
     def utcoffset(self, dt):
+        '''
+        Return the offset to UTC (GMT) for the given datetime
+
+        @param dt: datetime to see offset against
+        @type dt: datetime
+        '''
         return ZERO
 
     def tzname(self, dt):
+        '''
+        Return the name of this timezone for the given datetime
+
+        @param dt: datetime to see offset against
+        @type dt: datetime
+        '''
         return "UTC"
 
     def dst(self, dt):
+        '''
+        Return the daylight savings offset for the given datetime
+
+        @param dt: datetime to see offset against
+        @type dt: datetime
+        '''
         return ZERO
 
 
@@ -112,6 +130,10 @@ class LocalTimezone(tzinfo):
 
 
 def localizeDateTime(dt):
+    '''
+    Given a datetime.datetime instance it localizes the time to the local system
+    (according to bfglobals settings) and adds a timezone object if needed
+    '''
     if bfglobals.timeUtc or bfglobals.timeUtcIn:
         # Calling application wants utc
         tmpdt = dt if not bfglobals.timeReturnAware else dt.replace(tzinfo=UTC())
@@ -135,6 +157,10 @@ def localizeDateTime(dt):
 
 
 def unLocalizeDateTime(dt):
+    '''
+    Given a datetime.datetime instance it unlocalizes it (according to bfglobals settings)
+    and honours a timezone object if needed
+    '''
     if bfglobals.timeUtc or bfglobals.timeUtcOut:
         # Calling application is passing utc
         return dt.replace(tzinfo=None)
@@ -156,6 +182,10 @@ def unLocalizeDateTime(dt):
 
 
 def parseDateTimeString(dtString):
+    '''
+    Parses an incoming datetime string and returns a datetimeobject
+    (localized or not according to preferences)
+    '''
     # Bf time is: 2000-01-01T00:00:00.000Z
     dtParts = dtString.split('.')
     dt = datetime.strptime(dtParts[0], '%Y-%m-%dT%H:%M:%S')
@@ -165,6 +195,10 @@ def parseDateTimeString(dtString):
     
 
 def fromTimestamp(ts):
+    '''
+    Parses an incoming timestamp and returns a datetimeobject
+    (localized or not according to preferences)
+    '''
     if not bfglobals.timeConvertTimestamps:
         return ts
 
@@ -176,11 +210,20 @@ def fromTimestamp(ts):
 
 
 def fromTimestampString(tstamp):
+    '''
+    Parses an incoming timestamp string and returns a datetimeobject
+    (localized or not according to preferences)
+    '''
     ts = long(tstamp)
     return fromTimestamp(ts)
 
 
 def getDateTimeNow():
+    '''
+    Returns the current time either in local time or utc
+    according to the preferences in bfglobals. This datetime
+    object is meant to be sent to the API servers
+    '''
     if bfglobals.timeUtc or bfGlobals.timeUtcOut:
         return datetime.utcnow()
 
@@ -188,5 +231,9 @@ def getDateTimeNow():
     
 
 def getDateTime(*args):
+    '''
+    Constructs an internal datetime object to be sent to the
+    API servers unlocalized if so set in the bfglobals
+    '''
     dt = datetime(*args)
     return unLocalizeDateTime(dt)

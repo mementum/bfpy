@@ -94,11 +94,11 @@ BfPy global variables and functions module.
                  Default value: False
 
 @type timeConvertTimestaps: bool
-@var timeUtcOut: Some of Bf DateTime values are returned as timestamps (in millisecons) since
-                 the start of epoch (1st of January 1970). If true, these values will be
-                 converted to DateTime objects
+@var timeConvertTimestaps: Some of Bf DateTime values are returned as timestamps (in millisecons) since
+                           the start of epoch (1st of January 1970). If true, these values will be
+                           converted to DateTime objects
 
-                 Default value: True
+                           Default value: True
 
 @type timeReturnAware: bool
 @var timeReturnAware: If True the DateTime objects returned to the application will have be

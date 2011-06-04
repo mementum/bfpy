@@ -3,7 +3,7 @@
           "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>bfpy.bfapicalls.ApiCallExchange</title>
+  <title>bfpy.bftimezone.UTC</title>
   <link rel="stylesheet" href="epydoc.css" type="text/css" />
   <script type="text/javascript" src="epydoc.js"></script>
 </head>
@@ -43,8 +43,8 @@
     <td width="100%">
       <span class="breadcrumbs">
         <a href="bfpy-module.html">Package&nbsp;bfpy</a> ::
-        <a href="bfpy.bfapicalls-module.html">Module&nbsp;bfapicalls</a> ::
-        Class&nbsp;ApiCallExchange
+        <a href="bfpy.bftimezone-module.html">Module&nbsp;bftimezone</a> ::
+        Class&nbsp;UTC
       </span>
     </td>
     <td>
@@ -54,25 +54,24 @@
     onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
         <tr><td align="right"><span class="options"
             >[<a href="frames.html" target="_top">frames</a
-            >]&nbsp;|&nbsp;<a href="bfpy.bfapicalls.ApiCallExchange-class.html"
+            >]&nbsp;|&nbsp;<a href="bfpy.bftimezone.UTC-class.html"
             target="_top">no&nbsp;frames</a>]</span></td></tr>
       </table>
     </td>
   </tr>
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
-<h1 class="epydoc">Class ApiCallExchange</h1><p class="nomargin-top"><span class="codelink"><a href="bfpy.bfapicalls-pysrc.html#ApiCallExchange">source&nbsp;code</a></span></p>
+<h1 class="epydoc">Class UTC</h1><p class="nomargin-top"><span class="codelink"><a href="bfpy.bftimezone-pysrc.html#UTC">source&nbsp;code</a></span></p>
 <pre class="base-tree">
-object --+    
-         |    
-   <a href="bfpy.bfapicalls.ApiCall-class.html">ApiCall</a> --+
-             |
-            <strong class="uidshort">ApiCallExchange</strong>
+     object --+    
+              |    
+datetime.tzinfo --+
+                  |
+                 <strong class="uidshort">UTC</strong>
 </pre>
 
 <hr />
-<p>Specialized version of <a href="bfpy.bfapicalls.ApiCall-class.html" 
-  class="link">ApiCall</a> for Exchange calls</p>
+<p>UTC timezone.</p>
 
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -97,13 +96,47 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="bfpy.bfapicalls.ApiCallExchange-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">operation</span>,
-        <span class="summary-sig-arg">result</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">Result</code><code class="variable-quote">'</code></span>,
-        <span class="summary-sig-arg">**kwargs</span>)</span><br />
-      Initializes the parent class</td>
+          <td><span class="summary-sig"><a href="bfpy.bftimezone.UTC-class.html#utcoffset" class="summary-sig-name">utcoffset</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">dt</span>)</span><br />
+      Return the offset to UTC (GMT) for the given datetime</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="bfpy.bfapicalls-pysrc.html#ApiCallExchange.__init__">source&nbsp;code</a></span>
+            <span class="codelink"><a href="bfpy.bftimezone-pysrc.html#UTC.utcoffset">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.bftimezone.UTC-class.html#tzname" class="summary-sig-name">tzname</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">dt</span>)</span><br />
+      Return the name of this timezone for the given datetime</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bftimezone-pysrc.html#UTC.tzname">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.bftimezone.UTC-class.html#dst" class="summary-sig-name">dst</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">dt</span>)</span><br />
+      Return the daylight savings offset for the given datetime</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bftimezone-pysrc.html#UTC.dst">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -113,95 +146,23 @@ object --+
   </tr>
   <tr>
     <td colspan="2" class="summary">
-    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="bfpy.bfapicalls.ApiCall-class.html">ApiCall</a></code></b>:
-      <code><a href="bfpy.bfapicalls.ApiCall-class.html#__call__">__call__</a></code>,
-      <code><a href="bfpy.bfapicalls.ApiCall-class.html#__get__">__get__</a></code>,
-      <code><a href="bfpy.bfapicalls.ApiCall-class.html#decodeComplex">decodeComplex</a></code>,
-      <code><a href="bfpy.bfapicalls.ApiCall-class.html#decodeSimplex">decodeSimplex</a></code>,
-      <code><a href="bfpy.bfapicalls.ApiCall-class.html#patternSub">patternSub</a></code>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>datetime.tzinfo</code></b>:
+      <code>__getattribute__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>fromutc</code>
       </p>
     <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
       <code>__delattr__</code>,
       <code>__format__</code>,
-      <code>__getattribute__</code>,
       <code>__hash__</code>,
-      <code>__new__</code>,
-      <code>__reduce__</code>,
+      <code>__init__</code>,
       <code>__reduce_ex__</code>,
       <code>__repr__</code>,
       <code>__setattr__</code>,
       <code>__sizeof__</code>,
       <code>__str__</code>,
       <code>__subclasshook__</code>
-      </p>
-    </td>
-  </tr>
-</table>
-<!-- ==================== CLASS VARIABLES ==================== -->
-<a name="section-ClassVariables"></a>
-<table class="summary" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr bgcolor="#70b0f0" class="table-header">
-  <td colspan="2" class="table-header">
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-      <tr valign="top">
-        <td align="left"><span class="table-header">Class Variables</span></td>
-        <td align="right" valign="top"
-         ><span class="options">[<a href="#section-ClassVariables"
-         class="privatelink" onclick="toggle_private();"
-         >hide private</a>]</span></td>
-      </tr>
-    </table>
-  </td>
-</tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">string</span>
-    </td><td class="summary">
-        <a name="ns1"></a><span class="summary-name">ns1</span> = <code title="'http://www.betfair.com/publicapi/v5/BFExchangeService/'"><code class="variable-quote">'</code><code class="variable-string">http://www.betfair.com/publicapi/v5/BFExchangeService/</code><code class="variable-quote">'</code></code><br />
-      namespace where this call was defined
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">string</span>
-    </td><td class="summary">
-        <a name="ns2"></a><span class="summary-name">ns2</span> = <code title="'http://www.betfair.com/publicapi/types/exchange/v5/'"><code class="variable-quote">'</code><code class="variable-string">http://www.betfair.com/publicapi/types/exchange/v5/</code><code class="variable-quote">'</code></code><br />
-      namespace where types for this call are defined
-    </td>
-  </tr>
-  <tr>
-    <td colspan="2" class="summary">
-    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="bfpy.bfapicalls.ApiCall-class.html">ApiCall</a></code></b>:
-      <code><a href="bfpy.bfapicalls.ApiCall-class.html#soappattern">soappattern</a></code>
-      </p>
-    </td>
-  </tr>
-</table>
-<!-- ==================== INSTANCE VARIABLES ==================== -->
-<a name="section-InstanceVariables"></a>
-<table class="summary" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr bgcolor="#70b0f0" class="table-header">
-  <td colspan="2" class="table-header">
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-      <tr valign="top">
-        <td align="left"><span class="table-header">Instance Variables</span></td>
-        <td align="right" valign="top"
-         ><span class="options">[<a href="#section-InstanceVariables"
-         class="privatelink" onclick="toggle_private();"
-         >hide private</a>]</span></td>
-      </tr>
-    </table>
-  </td>
-</tr>
-  <tr>
-    <td colspan="2" class="summary">
-    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="bfpy.bfapicalls.ApiCall-class.html">ApiCall</a></code></b>:
-      <code><a href="bfpy.bfapicalls.ApiCall-class.html#headers">headers</a></code>,
-      <code><a href="bfpy.bfapicalls.ApiCall-class.html#instanceCache">instanceCache</a></code>,
-      <code><a href="bfpy.bfapicalls.ApiCall-class.html#nsxsd">nsxsd</a></code>,
-      <code><a href="bfpy.bfapicalls.ApiCall-class.html#pattern">pattern</a></code>
       </p>
     </td>
   </tr>
@@ -249,32 +210,83 @@ object --+
   </td>
 </tr>
 </table>
-<a name="__init__"></a>
+<a name="utcoffset"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">operation</span>,
-        <span class="sig-arg">result</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">Result</code><code class="variable-quote">'</code></span>,
-        <span class="sig-arg">**kwargs</span>)</span>
-    <br /><em class="fname">(Constructor)</em>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">utcoffset</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">dt</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="bfpy.bfapicalls-pysrc.html#ApiCallExchange.__init__">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="bfpy.bftimezone-pysrc.html#UTC.utcoffset">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Initializes the parent class</p>
+  <p>Return the offset to UTC (GMT) for the given datetime</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>operation</code></strong> (string) - name of the call</li>
+        <li><strong class="pname"><code>dt</code></strong> (datetime) - datetime to see offset against</li>
     </ul></dd>
     <dt>Overrides:
-        object.__init__
+        datetime.tzinfo.utcoffset
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="tzname"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">tzname</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">dt</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bftimezone-pysrc.html#UTC.tzname">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return the name of this timezone for the given datetime</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>dt</code></strong> (datetime) - datetime to see offset against</li>
+    </ul></dd>
+    <dt>Overrides:
+        datetime.tzinfo.tzname
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="dst"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">dst</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">dt</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bftimezone-pysrc.html#UTC.dst">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return the daylight savings offset for the given datetime</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>dt</code></strong> (datetime) - datetime to see offset against</li>
+    </ul></dd>
+    <dt>Overrides:
+        datetime.tzinfo.dst
     </dt>
   </dl>
 </td></tr></table>

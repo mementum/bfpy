@@ -2,7 +2,7 @@
 -- DateTime management reworked to allow Local Timezones/UTC and aware/naive usage by applications (Resolves issue #13)
 -- Returned objects are all named using the Bf provided name or a derived name (in compressed answers) (Resolves issue #15)
 -- Restored createXXXX functionality, ex: createMarket, to retrieve objects (lost with the removal of suds) (Resolves issue #16)
--- Virtual prices merge with other prices (either original or calculated virtual bets) correctes (Resolves issue #17)
+-- Virtual prices merging with other prices (either original or calculated virtual bets) corrected (Resolves issue #17)
 -- Updated to HttxLib 0.97
 
 1.11

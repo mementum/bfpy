@@ -96,128 +96,128 @@
 <a name="L33"></a><tt class="py-lineno">  33</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">datetime</tt> </tt>
 <a name="L34"></a><tt class="py-lineno">  34</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">types</tt> </tt>
 <a name="L35"></a><tt class="py-lineno">  35</tt>  <tt class="py-line"> </tt>
-<a name="L36"></a><tt class="py-lineno">  36</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Module bfpy.bftimezone=bfpy.bftimezone-module.html"><a title="bfpy.bftimezone" class="py-name" href="#" onclick="return doclink('link-0', 'bftimezone', 'link-0');">bftimezone</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Class bfpy.bftimezone.LocalTimezone=bfpy.bftimezone.LocalTimezone-class.html"><a title="bfpy.bftimezone.LocalTimezone" class="py-name" href="#" onclick="return doclink('link-1', 'LocalTimezone', 'link-1');">LocalTimezone</a></tt> </tt>
-<a name="L37"></a><tt class="py-lineno">  37</tt>  <tt class="py-line"> </tt>
+<a name="L36"></a><tt class="py-lineno">  36</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Module bfpy.bfglobals=bfpy.bfglobals-module.html"><a title="bfpy.bfglobals" class="py-name" href="#" onclick="return doclink('link-0', 'bfglobals', 'link-0');">bfglobals</a></tt> </tt>
+<a name="L37"></a><tt class="py-lineno">  37</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Module bfpy.bftimezone=bfpy.bftimezone-module.html"><a title="bfpy.bftimezone" class="py-name" href="#" onclick="return doclink('link-1', 'bftimezone', 'link-1');">bftimezone</a></tt> </tt>
 <a name="L38"></a><tt class="py-lineno">  38</tt>  <tt class="py-line"> </tt>
-<a name="ApiParam"></a><div id="ApiParam-def"><a name="L39"></a><tt class="py-lineno">  39</tt> <a class="py-toggle" href="#" id="ApiParam-toggle" onclick="return toggle('ApiParam');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="bfpy.bftypes.ApiParam-class.html">ApiParam</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="ApiParam-collapsed" style="display:none;" pad="++++" indent="++++"></div><div id="ApiParam-expanded"><a name="L40"></a><tt class="py-lineno">  40</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
-<a name="L41"></a><tt class="py-lineno">  41</tt>  <tt class="py-line"><tt class="py-docstring">    Non-data descriptor class to be installed in a L{ApiDataType}</tt> </tt>
-<a name="L42"></a><tt class="py-lineno">  42</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L43"></a><tt class="py-lineno">  43</tt>  <tt class="py-line"><tt class="py-docstring">    @type name: string</tt> </tt>
-<a name="L44"></a><tt class="py-lineno">  44</tt>  <tt class="py-line"><tt class="py-docstring">    @ivar name: public name of the "param"</tt> </tt>
-<a name="L45"></a><tt class="py-lineno">  45</tt>  <tt class="py-line"><tt class="py-docstring">    @type nullable: bool</tt> </tt>
-<a name="L46"></a><tt class="py-lineno">  46</tt>  <tt class="py-line"><tt class="py-docstring">    @ivar nullable: if the parameter can be nullified upon sending the request</tt> </tt>
-<a name="L47"></a><tt class="py-lineno">  47</tt>  <tt class="py-line"><tt class="py-docstring">    @type defvalue: any</tt> </tt>
-<a name="L48"></a><tt class="py-lineno">  48</tt>  <tt class="py-line"><tt class="py-docstring">    @ivar defvalue: if not None the default value will be applied if no other</tt> </tt>
-<a name="L49"></a><tt class="py-lineno">  49</tt>  <tt class="py-line"><tt class="py-docstring">                    has been later specified</tt> </tt>
-<a name="L50"></a><tt class="py-lineno">  50</tt>  <tt class="py-line"><tt class="py-docstring">    @type listtype: string</tt> </tt>
-<a name="L51"></a><tt class="py-lineno">  51</tt>  <tt class="py-line"><tt class="py-docstring">    @ivar listtype: if the para specifies a list type, this defines the 'soap' type</tt> </tt>
-<a name="L52"></a><tt class="py-lineno">  52</tt>  <tt class="py-line"><tt class="py-docstring">    @type patternList: string</tt> </tt>
-<a name="L53"></a><tt class="py-lineno">  53</tt>  <tt class="py-line"><tt class="py-docstring">    @ivar patternList: pre-computed listtype pattern for element list substitution</tt> </tt>
-<a name="L54"></a><tt class="py-lineno">  54</tt>  <tt class="py-line"><tt class="py-docstring">    @type patternFill: string</tt> </tt>
-<a name="L55"></a><tt class="py-lineno">  55</tt>  <tt class="py-line"><tt class="py-docstring">    @ivar patternFill: pre-computed patter for substitution</tt> </tt>
-<a name="L56"></a><tt class="py-lineno">  56</tt>  <tt class="py-line"><tt class="py-docstring">    @type patternNull: string</tt> </tt>
-<a name="L57"></a><tt class="py-lineno">  57</tt>  <tt class="py-line"><tt class="py-docstring">    @ivar patternNull: precomputed pattern for substitution if the value is nullified</tt> </tt>
-<a name="L58"></a><tt class="py-lineno">  58</tt>  <tt class="py-line"><tt class="py-docstring">    @type instanceval: dict</tt> </tt>
-<a name="L59"></a><tt class="py-lineno">  59</tt>  <tt class="py-line"><tt class="py-docstring">    @ivar instanceval: holds the assigned value to the param on a per instance basis</tt> </tt>
-<a name="L60"></a><tt class="py-lineno">  60</tt>  <tt class="py-line"><tt class="py-docstring">    @type instanceCache: dict</tt> </tt>
-<a name="L61"></a><tt class="py-lineno">  61</tt>  <tt class="py-line"><tt class="py-docstring">    @ivar instanceCache: holds the generated method to be called by holding instances</tt> </tt>
-<a name="L62"></a><tt class="py-lineno">  62</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
-<a name="ApiParam.__init__"></a><div id="ApiParam.__init__-def"><a name="L63"></a><tt class="py-lineno">  63</tt> <a class="py-toggle" href="#" id="ApiParam.__init__-toggle" onclick="return toggle('ApiParam.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="bfpy.bftypes.ApiParam-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">name</tt><tt class="py-op">,</tt> <tt class="py-param">nullable</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-param">xsd</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> <tt class="py-param">value</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">listtype</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="ApiParam.__init__-collapsed" style="display:none;" pad="++++" indent="++++++++"></div><div id="ApiParam.__init__-expanded"><a name="L64"></a><tt class="py-lineno">  64</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
-<a name="L65"></a><tt class="py-lineno">  65</tt>  <tt class="py-line"><tt class="py-docstring">        Initializes the descriptor precomputing the needed patterns</tt> </tt>
-<a name="L66"></a><tt class="py-lineno">  66</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L67"></a><tt class="py-lineno">  67</tt>  <tt class="py-line"><tt class="py-docstring">        @type name: string</tt> </tt>
-<a name="L68"></a><tt class="py-lineno">  68</tt>  <tt class="py-line"><tt class="py-docstring">        @param name: public name of the "param"</tt> </tt>
-<a name="L69"></a><tt class="py-lineno">  69</tt>  <tt class="py-line"><tt class="py-docstring">        @type nullable: bool</tt> </tt>
-<a name="L70"></a><tt class="py-lineno">  70</tt>  <tt class="py-line"><tt class="py-docstring">        @param nullable: if the parameter can be nullified upon sending the request</tt> </tt>
-<a name="L71"></a><tt class="py-lineno">  71</tt>  <tt class="py-line"><tt class="py-docstring">        @type xsd: bool</tt> </tt>
-<a name="L72"></a><tt class="py-lineno">  72</tt>  <tt class="py-line"><tt class="py-docstring">        @param xsd: if the type is xsd standard or not (to be used with nullable)</tt> </tt>
-<a name="L73"></a><tt class="py-lineno">  73</tt>  <tt class="py-line"><tt class="py-docstring">        @type value: any</tt> </tt>
-<a name="L74"></a><tt class="py-lineno">  74</tt>  <tt class="py-line"><tt class="py-docstring">        @param value: to be stored as defvalue</tt> </tt>
-<a name="L75"></a><tt class="py-lineno">  75</tt>  <tt class="py-line"><tt class="py-docstring">        @type listtype: string</tt> </tt>
-<a name="L76"></a><tt class="py-lineno">  76</tt>  <tt class="py-line"><tt class="py-docstring">        @param listtype: if the para specifies a list type, this defines the 'soap' type</tt> </tt>
-<a name="L77"></a><tt class="py-lineno">  77</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
-<a name="L78"></a><tt class="py-lineno">  78</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">instanceCache</tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
-<a name="L79"></a><tt class="py-lineno">  79</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">instanceval</tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
-<a name="L80"></a><tt class="py-lineno">  80</tt>  <tt class="py-line"> </tt>
-<a name="L81"></a><tt class="py-lineno">  81</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">name</tt> <tt class="py-op">=</tt> <tt class="py-name">name</tt> </tt>
-<a name="L82"></a><tt class="py-lineno">  82</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nullable</tt> <tt class="py-op">=</tt> <tt class="py-name">nullable</tt> </tt>
-<a name="L83"></a><tt class="py-lineno">  83</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">defvalue</tt> <tt class="py-op">=</tt> <tt class="py-name">value</tt> </tt>
-<a name="L84"></a><tt class="py-lineno">  84</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">xsd</tt> <tt class="py-op">=</tt> <tt class="py-name">xsd</tt> </tt>
-<a name="L85"></a><tt class="py-lineno">  85</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">listtype</tt> <tt class="py-op">=</tt> <tt class="py-name">listtype</tt> </tt>
-<a name="L86"></a><tt class="py-lineno">  86</tt>  <tt class="py-line"> </tt>
-<a name="L87"></a><tt class="py-lineno">  87</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">patternFill</tt> <tt class="py-op">=</tt> <tt class="py-string">'&lt;%s&gt;%%s&lt;/%s&gt;'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">name</tt><tt class="py-op">,</tt> <tt class="py-name">name</tt><tt class="py-op">)</tt> </tt>
-<a name="L88"></a><tt class="py-lineno">  88</tt>  <tt class="py-line"> </tt>
-<a name="L89"></a><tt class="py-lineno">  89</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nullable</tt><tt class="py-op">:</tt> </tt>
-<a name="L90"></a><tt class="py-lineno">  90</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">patternNull</tt> <tt class="py-op">=</tt> <tt class="py-string">'&lt;%s'</tt> <tt class="py-op">%</tt> <tt class="py-name">name</tt> </tt>
-<a name="L91"></a><tt class="py-lineno">  91</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">xsd</tt><tt class="py-op">:</tt> </tt>
-<a name="L92"></a><tt class="py-lineno">  92</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">patternNull</tt> <tt class="py-op">+=</tt> <tt class="py-string">' xsi:nil="true"'</tt> </tt>
-<a name="L93"></a><tt class="py-lineno">  93</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">patternNull</tt> <tt class="py-op">+=</tt> <tt class="py-string">'/&gt;'</tt> </tt>
-<a name="L94"></a><tt class="py-lineno">  94</tt>  <tt class="py-line"> </tt>
-<a name="L95"></a><tt class="py-lineno">  95</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">patternList</tt> <tt class="py-op">=</tt> <tt class="py-string">'&lt;ns2:%s&gt;%%s&lt;/ns2:%s&gt;'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">listtype</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">listtype</tt><tt class="py-op">)</tt> </tt>
-</div><a name="L96"></a><tt class="py-lineno">  96</tt>  <tt class="py-line"> </tt>
-<a name="L97"></a><tt class="py-lineno">  97</tt>  <tt class="py-line"> </tt>
-<a name="ApiParam.__set__"></a><div id="ApiParam.__set__-def"><a name="L98"></a><tt class="py-lineno">  98</tt> <a class="py-toggle" href="#" id="ApiParam.__set__-toggle" onclick="return toggle('ApiParam.__set__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="bfpy.bftypes.ApiParam-class.html#__set__">__set__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">instance</tt><tt class="py-op">,</tt> <tt class="py-param">value</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="ApiParam.__set__-collapsed" style="display:none;" pad="++++" indent="++++++++"></div><div id="ApiParam.__set__-expanded"><a name="L99"></a><tt class="py-lineno">  99</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
-<a name="L100"></a><tt class="py-lineno"> 100</tt>  <tt class="py-line"><tt class="py-docstring">        Stores the value passed to later generate the exception</tt> </tt>
-<a name="L101"></a><tt class="py-lineno"> 101</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L102"></a><tt class="py-lineno"> 102</tt>  <tt class="py-line"><tt class="py-docstring">        @type instance: instance</tt> </tt>
-<a name="L103"></a><tt class="py-lineno"> 103</tt>  <tt class="py-line"><tt class="py-docstring">        @param instance: instance that is calling the descriptor</tt> </tt>
-<a name="L104"></a><tt class="py-lineno"> 104</tt>  <tt class="py-line"><tt class="py-docstring">        @type value: any</tt> </tt>
-<a name="L105"></a><tt class="py-lineno"> 105</tt>  <tt class="py-line"><tt class="py-docstring">        @param value: value to be stored for substitution in pattern</tt> </tt>
-<a name="L106"></a><tt class="py-lineno"> 106</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
-<a name="L107"></a><tt class="py-lineno"> 107</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">instanceval</tt><tt class="py-op">[</tt><tt class="py-name">instance</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">value</tt> </tt>
-</div><a name="L108"></a><tt class="py-lineno"> 108</tt>  <tt class="py-line"> </tt>
-<a name="L109"></a><tt class="py-lineno"> 109</tt>  <tt class="py-line"> </tt>
-<a name="ApiParam.__get__"></a><div id="ApiParam.__get__-def"><a name="L110"></a><tt class="py-lineno"> 110</tt> <a class="py-toggle" href="#" id="ApiParam.__get__-toggle" onclick="return toggle('ApiParam.__get__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="bfpy.bftypes.ApiParam-class.html#__get__">__get__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">instance</tt><tt class="py-op">,</tt> <tt class="py-param">owner</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="ApiParam.__get__-collapsed" style="display:none;" pad="++++" indent="++++++++"></div><div id="ApiParam.__get__-expanded"><a name="L111"></a><tt class="py-lineno"> 111</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
-<a name="L112"></a><tt class="py-lineno"> 112</tt>  <tt class="py-line"><tt class="py-docstring">        Non-data descriptor implementation.</tt> </tt>
-<a name="L113"></a><tt class="py-lineno"> 113</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L114"></a><tt class="py-lineno"> 114</tt>  <tt class="py-line"><tt class="py-docstring">        If invoked at class level it returns and unbound method pointing that forces the invocation</tt> </tt>
-<a name="L115"></a><tt class="py-lineno"> 115</tt>  <tt class="py-line"><tt class="py-docstring">        of __call__. The invocation has to be done with an instance</tt> </tt>
-<a name="L116"></a><tt class="py-lineno"> 116</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L117"></a><tt class="py-lineno"> 117</tt>  <tt class="py-line"><tt class="py-docstring">        If invoked from an instance it returns the value that is currently stored for such instance</tt> </tt>
-<a name="L118"></a><tt class="py-lineno"> 118</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L119"></a><tt class="py-lineno"> 119</tt>  <tt class="py-line"><tt class="py-docstring">        @type instance: instance of class</tt> </tt>
-<a name="L120"></a><tt class="py-lineno"> 120</tt>  <tt class="py-line"><tt class="py-docstring">        @param instance: instance that calls the descriptor</tt> </tt>
-<a name="L121"></a><tt class="py-lineno"> 121</tt>  <tt class="py-line"><tt class="py-docstring">        @type owner: class</tt> </tt>
-<a name="L122"></a><tt class="py-lineno"> 122</tt>  <tt class="py-line"><tt class="py-docstring">        @param owner: the class that holds the descriptor</tt> </tt>
-<a name="L123"></a><tt class="py-lineno"> 123</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
-<a name="L124"></a><tt class="py-lineno"> 124</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">instance</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
-<a name="L125"></a><tt class="py-lineno"> 125</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">instanceCache</tt><tt class="py-op">.</tt><tt class="py-name">setdefault</tt><tt class="py-op">(</tt><tt class="py-name">owner</tt><tt class="py-op">,</tt> <tt class="py-name">types</tt><tt class="py-op">.</tt><tt class="py-name">MethodType</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-name">owner</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
-<a name="L126"></a><tt class="py-lineno"> 126</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">instanceval</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-name">instance</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">defvalue</tt><tt class="py-op">)</tt> </tt>
-</div><a name="L127"></a><tt class="py-lineno"> 127</tt>  <tt class="py-line"> </tt>
-<a name="L128"></a><tt class="py-lineno"> 128</tt>  <tt class="py-line"> </tt>
-<a name="ApiParam.__call__"></a><div id="ApiParam.__call__-def"><a name="L129"></a><tt class="py-lineno"> 129</tt> <a class="py-toggle" href="#" id="ApiParam.__call__-toggle" onclick="return toggle('ApiParam.__call__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="bfpy.bftypes.ApiParam-class.html#__call__">__call__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">instance</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="ApiParam.__call__-collapsed" style="display:none;" pad="++++" indent="++++++++"></div><div id="ApiParam.__call__-expanded"><a name="L130"></a><tt class="py-lineno"> 130</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
-<a name="L131"></a><tt class="py-lineno"> 131</tt>  <tt class="py-line"><tt class="py-docstring">        Returns the pattern for this param</tt> </tt>
-<a name="L132"></a><tt class="py-lineno"> 132</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L133"></a><tt class="py-lineno"> 133</tt>  <tt class="py-line"><tt class="py-docstring">        @type instance: instance</tt> </tt>
-<a name="L134"></a><tt class="py-lineno"> 134</tt>  <tt class="py-line"><tt class="py-docstring">        @param instance: instance that is calling the descriptor</tt> </tt>
-<a name="L135"></a><tt class="py-lineno"> 135</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L136"></a><tt class="py-lineno"> 136</tt>  <tt class="py-line"><tt class="py-docstring">        @return: textual representation of the defined ApiParam type</tt> </tt>
-<a name="L137"></a><tt class="py-lineno"> 137</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: string</tt> </tt>
-<a name="L138"></a><tt class="py-lineno"> 138</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L139"></a><tt class="py-lineno"> 139</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
-<a name="L140"></a><tt class="py-lineno"> 140</tt>  <tt class="py-line">        <tt class="py-name">value</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">instanceval</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-name">instance</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">defvalue</tt><tt class="py-op">)</tt> </tt>
-<a name="L141"></a><tt class="py-lineno"> 141</tt>  <tt class="py-line"> </tt>
-<a name="L142"></a><tt class="py-lineno"> 142</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">value</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt> <tt class="py-keyword">and</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nullable</tt><tt class="py-op">:</tt> </tt>
-<a name="L143"></a><tt class="py-lineno"> 143</tt>  <tt class="py-line">            <tt class="py-comment"># NOTE: A exception could be raised if not "nullable"</tt> </tt>
-<a name="L144"></a><tt class="py-lineno"> 144</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">patternNull</tt> </tt>
-<a name="L145"></a><tt class="py-lineno"> 145</tt>  <tt class="py-line"> </tt>
-<a name="L146"></a><tt class="py-lineno"> 146</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-name">int</tt><tt class="py-op">,</tt> <tt class="py-name">long</tt><tt class="py-op">,</tt> <tt class="py-name">float</tt><tt class="py-op">,</tt> <tt class="py-name">basestring</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-<a name="L147"></a><tt class="py-lineno"> 147</tt>  <tt class="py-line">            <tt class="py-name">pattern</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">)</tt> </tt>
-<a name="L148"></a><tt class="py-lineno"> 148</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">,</tt> <tt class="py-name">bool</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-<a name="L149"></a><tt class="py-lineno"> 149</tt>  <tt class="py-line">            <tt class="py-name">pattern</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">lower</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
-<a name="L150"></a><tt class="py-lineno"> 150</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-name">list</tt><tt class="py-op">,</tt> <tt class="py-name">tuple</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-<a name="L151"></a><tt class="py-lineno"> 151</tt>  <tt class="py-line">            <tt class="py-name">pattern</tt> <tt class="py-op">=</tt> <tt class="py-string">''</tt> </tt>
-<a name="L152"></a><tt class="py-lineno"> 152</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">val</tt> <tt class="py-keyword">in</tt> <tt class="py-name">value</tt><tt class="py-op">:</tt> </tt>
-<a name="L153"></a><tt class="py-lineno"> 153</tt>  <tt class="py-line">                <tt class="py-name">pattern</tt> <tt class="py-op">+=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">patternList</tt> <tt class="py-op">%</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">val</tt><tt class="py-op">)</tt> </tt>
-<a name="L154"></a><tt class="py-lineno"> 154</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">,</tt> <tt class="py-name">datetime</tt><tt class="py-op">.</tt><tt class="py-name">datetime</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-<a name="L155"></a><tt class="py-lineno"> 155</tt>  <tt class="py-line">            <tt class="py-name">localTimezone</tt> <tt class="py-op">=</tt> <tt id="link-2" class="py-name"><a title="bfpy.bftimezone.LocalTimezone" class="py-name" href="#" onclick="return doclink('link-2', 'LocalTimezone', 'link-1');">LocalTimezone</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
-<a name="L156"></a><tt class="py-lineno"> 156</tt>  <tt class="py-line">            <tt class="py-name">tmpvalue</tt> <tt class="py-op">=</tt> <tt class="py-name">value</tt> <tt class="py-op">-</tt> <tt class="py-name">localTimezone</tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Method bfpy.bftimezone.LocalTimezone.utcoffset()=bfpy.bftimezone.LocalTimezone-class.html#utcoffset"><a title="bfpy.bftimezone.LocalTimezone.utcoffset" class="py-name" href="#" onclick="return doclink('link-3', 'utcoffset', 'link-3');">utcoffset</a></tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">)</tt> </tt>
-<a name="L157"></a><tt class="py-lineno"> 157</tt>  <tt class="py-line">            <tt class="py-name">pattern</tt> <tt class="py-op">=</tt> <tt class="py-name">tmpvalue</tt><tt class="py-op">.</tt><tt class="py-name">isoformat</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">  39</tt>  <tt class="py-line"> </tt>
+<a name="ApiParam"></a><div id="ApiParam-def"><a name="L40"></a><tt class="py-lineno">  40</tt> <a class="py-toggle" href="#" id="ApiParam-toggle" onclick="return toggle('ApiParam');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="bfpy.bftypes.ApiParam-class.html">ApiParam</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ApiParam-collapsed" style="display:none;" pad="++++" indent="++++"></div><div id="ApiParam-expanded"><a name="L41"></a><tt class="py-lineno">  41</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">  42</tt>  <tt class="py-line"><tt class="py-docstring">    Non-data descriptor class to be installed in a L{ApiDataType}</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">  43</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L44"></a><tt class="py-lineno">  44</tt>  <tt class="py-line"><tt class="py-docstring">    @type name: string</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">  45</tt>  <tt class="py-line"><tt class="py-docstring">    @ivar name: public name of the "param"</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">  46</tt>  <tt class="py-line"><tt class="py-docstring">    @type nullable: bool</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">  47</tt>  <tt class="py-line"><tt class="py-docstring">    @ivar nullable: if the parameter can be nullified upon sending the request</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">  48</tt>  <tt class="py-line"><tt class="py-docstring">    @type defvalue: any</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">  49</tt>  <tt class="py-line"><tt class="py-docstring">    @ivar defvalue: if not None the default value will be applied if no other</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">  50</tt>  <tt class="py-line"><tt class="py-docstring">                    has been later specified</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">  51</tt>  <tt class="py-line"><tt class="py-docstring">    @type listtype: string</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">  52</tt>  <tt class="py-line"><tt class="py-docstring">    @ivar listtype: if the para specifies a list type, this defines the 'soap' type</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">  53</tt>  <tt class="py-line"><tt class="py-docstring">    @type patternList: string</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">  54</tt>  <tt class="py-line"><tt class="py-docstring">    @ivar patternList: pre-computed listtype pattern for element list substitution</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">  55</tt>  <tt class="py-line"><tt class="py-docstring">    @type patternFill: string</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">  56</tt>  <tt class="py-line"><tt class="py-docstring">    @ivar patternFill: pre-computed patter for substitution</tt> </tt>
+<a name="L57"></a><tt class="py-lineno">  57</tt>  <tt class="py-line"><tt class="py-docstring">    @type patternNull: string</tt> </tt>
+<a name="L58"></a><tt class="py-lineno">  58</tt>  <tt class="py-line"><tt class="py-docstring">    @ivar patternNull: precomputed pattern for substitution if the value is nullified</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">  59</tt>  <tt class="py-line"><tt class="py-docstring">    @type instanceval: dict</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">  60</tt>  <tt class="py-line"><tt class="py-docstring">    @ivar instanceval: holds the assigned value to the param on a per instance basis</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">  61</tt>  <tt class="py-line"><tt class="py-docstring">    @type instanceCache: dict</tt> </tt>
+<a name="L62"></a><tt class="py-lineno">  62</tt>  <tt class="py-line"><tt class="py-docstring">    @ivar instanceCache: holds the generated method to be called by holding instances</tt> </tt>
+<a name="L63"></a><tt class="py-lineno">  63</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="ApiParam.__init__"></a><div id="ApiParam.__init__-def"><a name="L64"></a><tt class="py-lineno">  64</tt> <a class="py-toggle" href="#" id="ApiParam.__init__-toggle" onclick="return toggle('ApiParam.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="bfpy.bftypes.ApiParam-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">name</tt><tt class="py-op">,</tt> <tt class="py-param">nullable</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-param">xsd</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> <tt class="py-param">value</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">listtype</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ApiParam.__init__-collapsed" style="display:none;" pad="++++" indent="++++++++"></div><div id="ApiParam.__init__-expanded"><a name="L65"></a><tt class="py-lineno">  65</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">  66</tt>  <tt class="py-line"><tt class="py-docstring">        Initializes the descriptor precomputing the needed patterns</tt> </tt>
+<a name="L67"></a><tt class="py-lineno">  67</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L68"></a><tt class="py-lineno">  68</tt>  <tt class="py-line"><tt class="py-docstring">        @type name: string</tt> </tt>
+<a name="L69"></a><tt class="py-lineno">  69</tt>  <tt class="py-line"><tt class="py-docstring">        @param name: public name of the "param"</tt> </tt>
+<a name="L70"></a><tt class="py-lineno">  70</tt>  <tt class="py-line"><tt class="py-docstring">        @type nullable: bool</tt> </tt>
+<a name="L71"></a><tt class="py-lineno">  71</tt>  <tt class="py-line"><tt class="py-docstring">        @param nullable: if the parameter can be nullified upon sending the request</tt> </tt>
+<a name="L72"></a><tt class="py-lineno">  72</tt>  <tt class="py-line"><tt class="py-docstring">        @type xsd: bool</tt> </tt>
+<a name="L73"></a><tt class="py-lineno">  73</tt>  <tt class="py-line"><tt class="py-docstring">        @param xsd: if the type is xsd standard or not (to be used with nullable)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno">  74</tt>  <tt class="py-line"><tt class="py-docstring">        @type value: any</tt> </tt>
+<a name="L75"></a><tt class="py-lineno">  75</tt>  <tt class="py-line"><tt class="py-docstring">        @param value: to be stored as defvalue</tt> </tt>
+<a name="L76"></a><tt class="py-lineno">  76</tt>  <tt class="py-line"><tt class="py-docstring">        @type listtype: string</tt> </tt>
+<a name="L77"></a><tt class="py-lineno">  77</tt>  <tt class="py-line"><tt class="py-docstring">        @param listtype: if the para specifies a list type, this defines the 'soap' type</tt> </tt>
+<a name="L78"></a><tt class="py-lineno">  78</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L79"></a><tt class="py-lineno">  79</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">instanceCache</tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L80"></a><tt class="py-lineno">  80</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">instanceval</tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L81"></a><tt class="py-lineno">  81</tt>  <tt class="py-line"> </tt>
+<a name="L82"></a><tt class="py-lineno">  82</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">name</tt> <tt class="py-op">=</tt> <tt class="py-name">name</tt> </tt>
+<a name="L83"></a><tt class="py-lineno">  83</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nullable</tt> <tt class="py-op">=</tt> <tt class="py-name">nullable</tt> </tt>
+<a name="L84"></a><tt class="py-lineno">  84</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">defvalue</tt> <tt class="py-op">=</tt> <tt class="py-name">value</tt> </tt>
+<a name="L85"></a><tt class="py-lineno">  85</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">xsd</tt> <tt class="py-op">=</tt> <tt class="py-name">xsd</tt> </tt>
+<a name="L86"></a><tt class="py-lineno">  86</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">listtype</tt> <tt class="py-op">=</tt> <tt class="py-name">listtype</tt> </tt>
+<a name="L87"></a><tt class="py-lineno">  87</tt>  <tt class="py-line"> </tt>
+<a name="L88"></a><tt class="py-lineno">  88</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">patternFill</tt> <tt class="py-op">=</tt> <tt class="py-string">'&lt;%s&gt;%%s&lt;/%s&gt;'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">name</tt><tt class="py-op">,</tt> <tt class="py-name">name</tt><tt class="py-op">)</tt> </tt>
+<a name="L89"></a><tt class="py-lineno">  89</tt>  <tt class="py-line"> </tt>
+<a name="L90"></a><tt class="py-lineno">  90</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nullable</tt><tt class="py-op">:</tt> </tt>
+<a name="L91"></a><tt class="py-lineno">  91</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">patternNull</tt> <tt class="py-op">=</tt> <tt class="py-string">'&lt;%s'</tt> <tt class="py-op">%</tt> <tt class="py-name">name</tt> </tt>
+<a name="L92"></a><tt class="py-lineno">  92</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">xsd</tt><tt class="py-op">:</tt> </tt>
+<a name="L93"></a><tt class="py-lineno">  93</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">patternNull</tt> <tt class="py-op">+=</tt> <tt class="py-string">' xsi:nil="true"'</tt> </tt>
+<a name="L94"></a><tt class="py-lineno">  94</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">patternNull</tt> <tt class="py-op">+=</tt> <tt class="py-string">'/&gt;'</tt> </tt>
+<a name="L95"></a><tt class="py-lineno">  95</tt>  <tt class="py-line"> </tt>
+<a name="L96"></a><tt class="py-lineno">  96</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">patternList</tt> <tt class="py-op">=</tt> <tt class="py-string">'&lt;ns2:%s&gt;%%s&lt;/ns2:%s&gt;'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">listtype</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">listtype</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L97"></a><tt class="py-lineno">  97</tt>  <tt class="py-line"> </tt>
+<a name="L98"></a><tt class="py-lineno">  98</tt>  <tt class="py-line"> </tt>
+<a name="ApiParam.__set__"></a><div id="ApiParam.__set__-def"><a name="L99"></a><tt class="py-lineno">  99</tt> <a class="py-toggle" href="#" id="ApiParam.__set__-toggle" onclick="return toggle('ApiParam.__set__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="bfpy.bftypes.ApiParam-class.html#__set__">__set__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">instance</tt><tt class="py-op">,</tt> <tt class="py-param">value</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ApiParam.__set__-collapsed" style="display:none;" pad="++++" indent="++++++++"></div><div id="ApiParam.__set__-expanded"><a name="L100"></a><tt class="py-lineno"> 100</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L101"></a><tt class="py-lineno"> 101</tt>  <tt class="py-line"><tt class="py-docstring">        Stores the value passed to later generate the exception</tt> </tt>
+<a name="L102"></a><tt class="py-lineno"> 102</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L103"></a><tt class="py-lineno"> 103</tt>  <tt class="py-line"><tt class="py-docstring">        @type instance: instance</tt> </tt>
+<a name="L104"></a><tt class="py-lineno"> 104</tt>  <tt class="py-line"><tt class="py-docstring">        @param instance: instance that is calling the descriptor</tt> </tt>
+<a name="L105"></a><tt class="py-lineno"> 105</tt>  <tt class="py-line"><tt class="py-docstring">        @type value: any</tt> </tt>
+<a name="L106"></a><tt class="py-lineno"> 106</tt>  <tt class="py-line"><tt class="py-docstring">        @param value: value to be stored for substitution in pattern</tt> </tt>
+<a name="L107"></a><tt class="py-lineno"> 107</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L108"></a><tt class="py-lineno"> 108</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">instanceval</tt><tt class="py-op">[</tt><tt class="py-name">instance</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">value</tt> </tt>
+</div><a name="L109"></a><tt class="py-lineno"> 109</tt>  <tt class="py-line"> </tt>
+<a name="L110"></a><tt class="py-lineno"> 110</tt>  <tt class="py-line"> </tt>
+<a name="ApiParam.__get__"></a><div id="ApiParam.__get__-def"><a name="L111"></a><tt class="py-lineno"> 111</tt> <a class="py-toggle" href="#" id="ApiParam.__get__-toggle" onclick="return toggle('ApiParam.__get__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="bfpy.bftypes.ApiParam-class.html#__get__">__get__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">instance</tt><tt class="py-op">,</tt> <tt class="py-param">owner</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ApiParam.__get__-collapsed" style="display:none;" pad="++++" indent="++++++++"></div><div id="ApiParam.__get__-expanded"><a name="L112"></a><tt class="py-lineno"> 112</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L113"></a><tt class="py-lineno"> 113</tt>  <tt class="py-line"><tt class="py-docstring">        Non-data descriptor implementation.</tt> </tt>
+<a name="L114"></a><tt class="py-lineno"> 114</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L115"></a><tt class="py-lineno"> 115</tt>  <tt class="py-line"><tt class="py-docstring">        If invoked at class level it returns and unbound method pointing that forces the invocation</tt> </tt>
+<a name="L116"></a><tt class="py-lineno"> 116</tt>  <tt class="py-line"><tt class="py-docstring">        of __call__. The invocation has to be done with an instance</tt> </tt>
+<a name="L117"></a><tt class="py-lineno"> 117</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L118"></a><tt class="py-lineno"> 118</tt>  <tt class="py-line"><tt class="py-docstring">        If invoked from an instance it returns the value that is currently stored for such instance</tt> </tt>
+<a name="L119"></a><tt class="py-lineno"> 119</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L120"></a><tt class="py-lineno"> 120</tt>  <tt class="py-line"><tt class="py-docstring">        @type instance: instance of class</tt> </tt>
+<a name="L121"></a><tt class="py-lineno"> 121</tt>  <tt class="py-line"><tt class="py-docstring">        @param instance: instance that calls the descriptor</tt> </tt>
+<a name="L122"></a><tt class="py-lineno"> 122</tt>  <tt class="py-line"><tt class="py-docstring">        @type owner: class</tt> </tt>
+<a name="L123"></a><tt class="py-lineno"> 123</tt>  <tt class="py-line"><tt class="py-docstring">        @param owner: the class that holds the descriptor</tt> </tt>
+<a name="L124"></a><tt class="py-lineno"> 124</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L125"></a><tt class="py-lineno"> 125</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">instance</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L126"></a><tt class="py-lineno"> 126</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">instanceCache</tt><tt class="py-op">.</tt><tt class="py-name">setdefault</tt><tt class="py-op">(</tt><tt class="py-name">owner</tt><tt class="py-op">,</tt> <tt class="py-name">types</tt><tt class="py-op">.</tt><tt class="py-name">MethodType</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-name">owner</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L127"></a><tt class="py-lineno"> 127</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">instanceval</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-name">instance</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">defvalue</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L128"></a><tt class="py-lineno"> 128</tt>  <tt class="py-line"> </tt>
+<a name="L129"></a><tt class="py-lineno"> 129</tt>  <tt class="py-line"> </tt>
+<a name="ApiParam.__call__"></a><div id="ApiParam.__call__-def"><a name="L130"></a><tt class="py-lineno"> 130</tt> <a class="py-toggle" href="#" id="ApiParam.__call__-toggle" onclick="return toggle('ApiParam.__call__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="bfpy.bftypes.ApiParam-class.html#__call__">__call__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">instance</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ApiParam.__call__-collapsed" style="display:none;" pad="++++" indent="++++++++"></div><div id="ApiParam.__call__-expanded"><a name="L131"></a><tt class="py-lineno"> 131</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L132"></a><tt class="py-lineno"> 132</tt>  <tt class="py-line"><tt class="py-docstring">        Returns the pattern for this param</tt> </tt>
+<a name="L133"></a><tt class="py-lineno"> 133</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L134"></a><tt class="py-lineno"> 134</tt>  <tt class="py-line"><tt class="py-docstring">        @type instance: instance</tt> </tt>
+<a name="L135"></a><tt class="py-lineno"> 135</tt>  <tt class="py-line"><tt class="py-docstring">        @param instance: instance that is calling the descriptor</tt> </tt>
+<a name="L136"></a><tt class="py-lineno"> 136</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L137"></a><tt class="py-lineno"> 137</tt>  <tt class="py-line"><tt class="py-docstring">        @return: textual representation of the defined ApiParam type</tt> </tt>
+<a name="L138"></a><tt class="py-lineno"> 138</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: string</tt> </tt>
+<a name="L139"></a><tt class="py-lineno"> 139</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L140"></a><tt class="py-lineno"> 140</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L141"></a><tt class="py-lineno"> 141</tt>  <tt class="py-line">        <tt class="py-name">value</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">instanceval</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-name">instance</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">defvalue</tt><tt class="py-op">)</tt> </tt>
+<a name="L142"></a><tt class="py-lineno"> 142</tt>  <tt class="py-line"> </tt>
+<a name="L143"></a><tt class="py-lineno"> 143</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">value</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt> <tt class="py-keyword">and</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nullable</tt><tt class="py-op">:</tt> </tt>
+<a name="L144"></a><tt class="py-lineno"> 144</tt>  <tt class="py-line">            <tt class="py-comment"># NOTE: A exception could be raised if not "nullable"</tt> </tt>
+<a name="L145"></a><tt class="py-lineno"> 145</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">patternNull</tt> </tt>
+<a name="L146"></a><tt class="py-lineno"> 146</tt>  <tt class="py-line"> </tt>
+<a name="L147"></a><tt class="py-lineno"> 147</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-name">int</tt><tt class="py-op">,</tt> <tt class="py-name">long</tt><tt class="py-op">,</tt> <tt class="py-name">float</tt><tt class="py-op">,</tt> <tt class="py-name">basestring</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L148"></a><tt class="py-lineno"> 148</tt>  <tt class="py-line">            <tt class="py-name">pattern</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">)</tt> </tt>
+<a name="L149"></a><tt class="py-lineno"> 149</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">,</tt> <tt class="py-name">bool</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L150"></a><tt class="py-lineno"> 150</tt>  <tt class="py-line">            <tt class="py-name">pattern</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">lower</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L151"></a><tt class="py-lineno"> 151</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-name">list</tt><tt class="py-op">,</tt> <tt class="py-name">tuple</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L152"></a><tt class="py-lineno"> 152</tt>  <tt class="py-line">            <tt class="py-name">pattern</tt> <tt class="py-op">=</tt> <tt class="py-string">''</tt> </tt>
+<a name="L153"></a><tt class="py-lineno"> 153</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">val</tt> <tt class="py-keyword">in</tt> <tt class="py-name">value</tt><tt class="py-op">:</tt> </tt>
+<a name="L154"></a><tt class="py-lineno"> 154</tt>  <tt class="py-line">                <tt class="py-name">pattern</tt> <tt class="py-op">+=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">patternList</tt> <tt class="py-op">%</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">val</tt><tt class="py-op">)</tt> </tt>
+<a name="L155"></a><tt class="py-lineno"> 155</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">,</tt> <tt class="py-name">datetime</tt><tt class="py-op">.</tt><tt class="py-name">datetime</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L156"></a><tt class="py-lineno"> 156</tt>  <tt class="py-line">            <tt class="py-name">tmpvalue</tt> <tt class="py-op">=</tt> <tt id="link-2" class="py-name"><a title="bfpy.bftimezone" class="py-name" href="#" onclick="return doclink('link-2', 'bftimezone', 'link-1');">bftimezone</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Function bfpy.bftimezone.unLocalizeDateTime()=bfpy.bftimezone-module.html#unLocalizeDateTime"><a title="bfpy.bftimezone.unLocalizeDateTime" class="py-name" href="#" onclick="return doclink('link-3', 'unLocalizeDateTime', 'link-3');">unLocalizeDateTime</a></tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">)</tt> </tt>
+<a name="L157"></a><tt class="py-lineno"> 157</tt>  <tt class="py-line">            <tt class="py-name">pattern</tt> <tt class="py-op">=</tt> <tt class="py-name">value</tt><tt class="py-op">.</tt><tt class="py-name">isoformat</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
 <a name="L158"></a><tt class="py-lineno"> 158</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
 <a name="L159"></a><tt class="py-lineno"> 159</tt>  <tt class="py-line">            <tt class="py-name">pattern</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">)</tt> </tt>
 <a name="L160"></a><tt class="py-lineno"> 160</tt>  <tt class="py-line"> </tt>
@@ -512,7 +512,7 @@ bfpy.bftypes.WithdrawToPaymentCardReq._apiParams" class="py-name" href="#" oncli
 <a name="L272"></a><tt class="py-lineno"> 272</tt>  <tt class="py-line">        <tt class="py-op">]</tt> </tt>
 <a name="L273"></a><tt class="py-lineno"> 273</tt>  <tt class="py-line"> </tt>
 <a name="APIRequestHeader.__init__"></a><div id="APIRequestHeader.__init__-def"><a name="L274"></a><tt class="py-lineno"> 274</tt> <a class="py-toggle" href="#" id="APIRequestHeader.__init__-toggle" onclick="return toggle('APIRequestHeader.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="bfpy.bftypes.APIRequestHeader-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="APIRequestHeader.__init__-collapsed" style="display:none;" pad="++++" indent="++++++++"></div><div id="APIRequestHeader.__init__-expanded"><a name="L275"></a><tt class="py-lineno"> 275</tt>  <tt class="py-line">        <tt id="link-18" class="py-name" targets="Class bfpy.bftypes.ApiDataType=bfpy.bftypes.ApiDataType-class.html"><a title="bfpy.bftypes.ApiDataType" class="py-name" href="#" onclick="return doclink('link-18', 'ApiDataType', 'link-18');">ApiDataType</a></tt><tt class="py-op">.</tt><tt id="link-19" class="py-name" targets="Method bfpy.bfapi.BfApi.MinStake.__init__()=bfpy.bfapi.BfApi.MinStake-class.html#__init__,Method bfpy.bfapi.BfApi.__init__()=bfpy.bfapi.BfApi-class.html#__init__,Method bfpy.bfapicalls.ApiCall.__init__()=bfpy.bfapicalls.ApiCall-class.html#__init__,Method bfpy.bfapicalls.ApiCallExchange.__init__()=bfpy.bfapicalls.ApiCallExchange-class.html#__init__,Method bfpy.bfapicalls.ApiCallGlobal.__init__()=bfpy.bfapicalls.ApiCallGlobal-class.html#__init__,Method bfpy.bfapicalls.ApiCallVendor.__init__()=bfpy.bfapicalls.ApiCallVendor-class.html#__init__,Method bfpy.bfclient.BfClient.__init__()=bfpy.bfclient.BfClient-class.html#__init__,Method bfpy.bfclientext.GetCurrentBets.__init__()=bfpy.bfclientext.GetCurrentBets-class.html#__init__,Method bfpy.bfclientext.GetEvents.__init__()=bfpy.bfclientext.GetEvents-class.html#__init__,Method bfpy.bfclientext.PlaceBets.__init__()=bfpy.bfclientext.PlaceBets-class.html#__init__,Method bfpy.bfcounter.DataCounter.__init__()=bfpy.bfcounter.DataCounter-class.html#__init__,Method bfpy.bfcounter.DataRequest.__init__()=bfpy.bfcounter.DataRequest-class.html#__init__,Method bfpy.bfdirect.ApiService.__init__()=bfpy.bfdirect.ApiService-class.html#__init__,Method bfpy.bferror.BfApiError.__init__()=bfpy.bferror.BfApiError-class.html#__init__,Method bfpy.bferror.BfApplicationError.__init__()=bfpy.bferror.BfApplicationError-class.html#__init__,Method bfpy.bferror.BfBetfairError.__init__()=bfpy.bferror.BfBetfairError-class.html#__init__,Method bfpy.bferror.BfError.__init__()=bfpy.bferror.BfError-class.html#__init__,Method bfpy.bferror.BfHtmlError.__init__()=bfpy.bferror.BfHtmlError-class.html#__init__,Method bfpy.bferror.BfHttpError.__init__()=bfpy.bferror.BfHttpError-class.html#__init__,Method bfpy.bferror.BfNetworkError.__init__()=bfpy.bferror.BfNetworkError-class.html#__init__,Method bfpy.bferror.BfPythonError.__init__()=bfpy.bferror.BfPythonError-class.html#__init__,Method bfpy.bferror.BfServiceError.__init__()=bfpy.bferror.BfServiceError-class.html#__init__,Method bfpy.bferror.BfTransportError.__init__()=bfpy.bferror.BfTransportError-class.html#__init__,Method bfpy.bfprocessors.ArrayFix.__init__()=bfpy.bfprocessors.ArrayFix-class.html#__init__,Method bfpy.bfprocessors.ProcMarketPricesCompressed.__init__()=bfpy.bfprocessors.ProcMarketPricesCompressed-class.html#__init__,Method bfpy.bfservice.ExchangeObject.__init__()=bfpy.bfservice.ExchangeObject-class.html#__init__,Method bfpy.bfservice.ExchangeServiceDef.__init__()=bfpy.bfservice.ExchangeServiceDef-class.html#__init__,Method bfpy.bfservice.GlobalObject.__init__()=bfpy.bfservice.GlobalObject-class.html#__init__,Method bfpy.bfservice.GlobalServiceDef.__init__()=bfpy.bfservice.GlobalServiceDef-class.html#__init__,Method bfpy.bfservice.ServiceDef.__init__()=bfpy.bfservice.ServiceDef-class.html#__init__,Method bfpy.bfservice.ServiceDescriptor.__init__()=bfpy.bfservice.ServiceDescriptor-class.html#__init__,Method bfpy.bfservice.ServiceObject.__init__()=bfpy.bfservice.ServiceObject-class.html#__init__,Method bfpy.bfservice.VendorObject.__init__()=bfpy.bfservice.VendorObject-class.html#__init__,Method bfpy.bfservice.VendorServiceDef.__init__()=bfpy.bfservice.VendorServiceDef-class.html#__init__,Method bfpy.bftimezone.LocalTimezone.__init__()=bfpy.bftimezone.LocalTimezone-class.html#__init__,Method bfpy.bftransport.BfTransport.__init__()=bfpy.bftransport.BfTransport-class.html#__init__,Method bfpy.bftransport.BfTransportError.__init__()=bfpy.bftransport.BfTransportError-class.html#__init__,Method bfpy.bftransport.BfTransportHtmlError.__init__()=bfpy.bftransport.BfTransportHtmlError-class.html#__init__,Method bfpy.bftransport.BfTransportHttpError.__init__()=bfpy.bftransport.BfTransportHttpError-class.html#__init__,Method bfpy.bftransport.BfTransportReply.__init__()=bfpy.bftransport.BfTransportReply-class.html#__init__,Method bfpy.bftransport.BfTransportRequest.__init__()=bfpy.bftransport.BfTransportRequest-class.html#__init__,Method bfpy.bftransport.BfTransportSocketError.__init__()=bfpy.bftransport.BfTransportSocketError-class.html#__init__,Method bfpy.bftypes.APIRequestHeader.__init__()=bfpy.bftypes.APIRequestHeader-class.html#__init__,Method bfpy.bftypes.AddPaymentCardReq.__init__()=bfpy.bftypes.AddPaymentCardReq-class.html#__init__,Method bfpy.bftypes.ApiDataType.__init__()=bfpy.bftypes.ApiDataType-class.html#__init__,Method bfpy.bftypes.ApiParam.__init__()=bfpy.bftypes.ApiParam-class.html#__init__,Method bfpy.bftypes.CancelBets.__init__()=bfpy.bftypes.CancelBets-class.html#__init__,Method bfpy.bftypes.CancelBetsByMarketReq.__init__()=bfpy.bftypes.CancelBetsByMarketReq-class.html#__init__,Method bfpy.bftypes.CancelBetsReq.__init__()=bfpy.bftypes.CancelBetsReq-class.html#__init__,Method bfpy.bftypes.CancelVendorAccessRequestReq.__init__()=bfpy.bftypes.CancelVendorAccessRequestReq-class.html#__init__,Method bfpy.bftypes.ConvertCurrencyReq.__init__()=bfpy.bftypes.ConvertCurrencyReq-class.html#__init__,Method bfpy.bftypes.CreateVendorAccessRequestReq.__init__()=bfpy.bftypes.CreateVendorAccessRequestReq-class.html#__init__,Method bfpy.bftypes.DeletePaymentCardReq.__init__()=bfpy.bftypes.DeletePaymentCardReq-class.html#__init__,Method bfpy.bftypes.DepositFromPaymentCardReq.__init__()=bfpy.bftypes.DepositFromPaymentCardReq-class.html#__init__,Method bfpy.bftypes.ForgotPasswordReq.__init__()=bfpy.bftypes.ForgotPasswordReq-class.html#__init__,Method bfpy.bftypes.GetAccountFundsReq.__init__()=bfpy.bftypes.GetAccountFundsReq-class.html#__init__,Method bfpy.bftypes.GetAccountStatementReq.__init__()=bfpy.bftypes.GetAccountStatementReq-class.html#__init__,Method bfpy.bftypes.GetAllMarketsReq.__init__()=bfpy.bftypes.GetAllMarketsReq-class.html#__init__,Method bfpy.bftypes.GetBetHistoryReq.__init__()=bfpy.bftypes.GetBetHistoryReq-class.html#__init__,Method bfpy.bftypes.GetBetLiteReq.__init__()=bfpy.bftypes.GetBetLiteReq-class.html#__init__,Method bfpy.bftypes.GetBetMatchesLiteReq.__init__()=bfpy.bftypes.GetBetMatchesLiteReq-class.html#__init__,Method bfpy.bftypes.GetBetReq.__init__()=bfpy.bftypes.GetBetReq-class.html#__init__,Method bfpy.bftypes.GetCompleteMarketPricesCompressedReq.__init__()=bfpy.bftypes.GetCompleteMarketPricesCompressedReq-class.html#__init__,Method bfpy.bftypes.GetCurrenciesReq.__init__()=bfpy.bftypes.GetCurrenciesReq-class.html#__init__,Method bfpy.bftypes.GetCurrenciesV2Req.__init__()=bfpy.bftypes.GetCurrenciesV2Req-class.html#__init__,Method bfpy.bftypes.GetCurrentBetsLiteReq.__init__()=bfpy.bftypes.GetCurrentBetsLiteReq-class.html#__init__,Method bfpy.bftypes.GetCurrentBetsReq.__init__()=bfpy.bftypes.GetCurrentBetsReq-class.html#__init__,Method bfpy.bftypes.GetDetailedAvailableMktDepthReq.__init__()=bfpy.bftypes.GetDetailedAvailableMktDepthReq-class.html#__init__,Method bfpy.bftypes.GetEventTypesReq.__init__()=bfpy.bftypes.GetEventTypesReq-class.html#__init__,Method bfpy.bftypes.GetEventsReq.__init__()=bfpy.bftypes.GetEventsReq-class.html#__init__,Method bfpy.bftypes.GetInPlayMarketsReq.__init__()=bfpy.bftypes.GetInPlayMarketsReq-class.html#__init__,Method bfpy.bftypes.GetMUBetsLiteReq.__init__()=bfpy.bftypes.GetMUBetsLiteReq-class.html#__init__,Method bfpy.bftypes.GetMUBetsReq.__init__()=bfpy.bftypes.GetMUBetsReq-class.html#__init__,Method bfpy.bftypes.GetMarketInfoReq.__init__()=bfpy.bftypes.GetMarketInfoReq-class.html#__init__,Method bfpy.bftypes.GetMarketPricesCompressedReq.__init__()=bfpy.bftypes.GetMarketPricesCompressedReq-class.html#__init__,Method bfpy.bftypes.GetMarketPricesReq.__init__()=bfpy.bftypes.GetMarketPricesReq-class.html#__init__,Method bfpy.bftypes.GetMarketProfitAndLossReq.__init__()=bfpy.bftypes.GetMarketProfitAndLossReq-class.html#__init__,Method bfpy.bftypes.GetMarketReq.__init__()=bfpy.bftypes.GetMarketReq-class.html#__init__,Method bfpy.bftypes.GetMarketTradedVolumeCompressedReq.__init__()=bfpy.bftypes.GetMarketTradedVolumeCompressedReq-class.html#__init__,Method bfpy.bftypes.GetMarketTradedVolumeReq.__init__()=bfpy.bftypes.GetMarketTradedVolumeReq-class.html#__init__,Method bfpy.bftypes.GetPaymentCardReq.__init__()=bfpy.bftypes.GetPaymentCardReq-class.html#__init__,Method bfpy.bftypes.GetPrivateMarketsReq.__init__()=bfpy.bftypes.GetPrivateMarketsReq-class.html#__init__,Method bfpy.bftypes.GetSilksReq.__init__()=bfpy.bftypes.GetSilksReq-class.html#__init__,Method bfpy.bftypes.GetSilksV2Req.__init__()=bfpy.bftypes.GetSilksV2Req-class.html#__init__,Method bfpy.bftypes.GetSubscriptionInfoReq.__init__()=bfpy.bftypes.GetSubscriptionInfoReq-class.html#__init__,Method bfpy.bftypes.GetVendorAccessRequestsReq.__init__()=bfpy.bftypes.GetVendorAccessRequestsReq-class.html#__init__,Method bfpy.bftypes.GetVendorInfoReq.__init__()=bfpy.bftypes.GetVendorInfoReq-class.html#__init__,Method bfpy.bftypes.GetVendorUsersReq.__init__()=bfpy.bftypes.GetVendorUsersReq-class.html#__init__,Method bfpy.bftypes.KeepAliveReq.__init__()=bfpy.bftypes.KeepAliveReq-class.html#__init__,Method bfpy.bftypes.LoginReq.__init__()=bfpy.bftypes.LoginReq-class.html#__init__,Method bfpy.bftypes.LogoutReq.__init__()=bfpy.bftypes.LogoutReq-class.html#__init__,Method bfpy.bftypes.ModifyPasswordReq.__init__()=bfpy.bftypes.ModifyPasswordReq-class.html#__init__,Method bfpy.bftypes.ModifyProfileReq.__init__()=bfpy.bftypes.ModifyProfileReq-class.html#__init__,Method bfpy.bftypes.PlaceBets.__init__()=bfpy.bftypes.PlaceBets-class.html#__init__,Method bfpy.bftypes.PlaceBetsReq.__init__()=bfpy.bftypes.PlaceBetsReq-class.html#__init__,Method bfpy.bftypes.RetrieveLIMBMessageReq.__init__()=bfpy.bftypes.RetrieveLIMBMessageReq-class.html#__init__,Method bfpy.bftypes.SelfExcludeReq.__init__()=bfpy.bftypes.SelfExcludeReq-class.html#__init__,Method bfpy.bftypes.SetChatNameReq.__init__()=bfpy.bftypes.SetChatNameReq-class.html#__init__,Method bfpy.bftypes.SubmitLIMBMessageReq.__init__()=bfpy.bftypes.SubmitLIMBMessageReq-class.html#__init__,Method bfpy.bftypes.TransferFundsReq.__init__()=bfpy.bftypes.TransferFundsReq-class.html#__init__,Method bfpy.bftypes.UpdateBets.__init__()=bfpy.bftypes.UpdateBets-class.html#__init__,Method bfpy.bftypes.UpdateBetsReq.__init__()=bfpy.bftypes.UpdateBetsReq-class.html#__init__,Method bfpy.bftypes.UpdatePaymentCardReq.__init__()=bfpy.bftypes.UpdatePaymentCardReq-class.html#__init__,Method bfpy.bftypes.VendorSubscriptionReq.__init__()=bfpy.bftypes.VendorSubscriptionReq-class.html#__init__,Method bfpy.bftypes.ViewProfileReq.__init__()=bfpy.bftypes.ViewProfileReq-class.html#__init__,Method bfpy.bftypes.ViewProfileV2Req.__init__()=bfpy.bftypes.ViewProfileV2Req-class.html#__init__,Method bfpy.bftypes.ViewReferAndEarnReq.__init__()=bfpy.bftypes.ViewReferAndEarnReq-class.html#__init__,Method bfpy.bftypes.WithdrawToPaymentCardReq.__init__()=bfpy.bftypes.WithdrawToPaymentCardReq-class.html#__init__,Method bfpy.bfutil.SharedData.__init__()=bfpy.bfutil.SharedData-class.html#__init__"><a title="bfpy.bfapi.BfApi.MinStake.__init__
+</div><div id="APIRequestHeader.__init__-collapsed" style="display:none;" pad="++++" indent="++++++++"></div><div id="APIRequestHeader.__init__-expanded"><a name="L275"></a><tt class="py-lineno"> 275</tt>  <tt class="py-line">        <tt id="link-18" class="py-name" targets="Class bfpy.bftypes.ApiDataType=bfpy.bftypes.ApiDataType-class.html"><a title="bfpy.bftypes.ApiDataType" class="py-name" href="#" onclick="return doclink('link-18', 'ApiDataType', 'link-18');">ApiDataType</a></tt><tt class="py-op">.</tt><tt id="link-19" class="py-name" targets="Method bfpy.bfapi.BfApi.MinStake.__init__()=bfpy.bfapi.BfApi.MinStake-class.html#__init__,Method bfpy.bfapi.BfApi.__init__()=bfpy.bfapi.BfApi-class.html#__init__,Method bfpy.bfapicalls.ApiCall.__init__()=bfpy.bfapicalls.ApiCall-class.html#__init__,Method bfpy.bfapicalls.ApiCallExchange.__init__()=bfpy.bfapicalls.ApiCallExchange-class.html#__init__,Method bfpy.bfapicalls.ApiCallGlobal.__init__()=bfpy.bfapicalls.ApiCallGlobal-class.html#__init__,Method bfpy.bfapicalls.ApiCallVendor.__init__()=bfpy.bfapicalls.ApiCallVendor-class.html#__init__,Method bfpy.bfclient.BfClient.__init__()=bfpy.bfclient.BfClient-class.html#__init__,Method bfpy.bfclientext.GetCurrentBets.__init__()=bfpy.bfclientext.GetCurrentBets-class.html#__init__,Method bfpy.bfclientext.GetEvents.__init__()=bfpy.bfclientext.GetEvents-class.html#__init__,Method bfpy.bfclientext.PlaceBets.__init__()=bfpy.bfclientext.PlaceBets-class.html#__init__,Method bfpy.bfcounter.DataCounter.__init__()=bfpy.bfcounter.DataCounter-class.html#__init__,Method bfpy.bfcounter.DataRequest.__init__()=bfpy.bfcounter.DataRequest-class.html#__init__,Method bfpy.bfdirect.ApiService.__init__()=bfpy.bfdirect.ApiService-class.html#__init__,Method bfpy.bferror.BfApiError.__init__()=bfpy.bferror.BfApiError-class.html#__init__,Method bfpy.bferror.BfApplicationError.__init__()=bfpy.bferror.BfApplicationError-class.html#__init__,Method bfpy.bferror.BfBetfairError.__init__()=bfpy.bferror.BfBetfairError-class.html#__init__,Method bfpy.bferror.BfError.__init__()=bfpy.bferror.BfError-class.html#__init__,Method bfpy.bferror.BfHtmlError.__init__()=bfpy.bferror.BfHtmlError-class.html#__init__,Method bfpy.bferror.BfHttpError.__init__()=bfpy.bferror.BfHttpError-class.html#__init__,Method bfpy.bferror.BfNetworkError.__init__()=bfpy.bferror.BfNetworkError-class.html#__init__,Method bfpy.bferror.BfPythonError.__init__()=bfpy.bferror.BfPythonError-class.html#__init__,Method bfpy.bferror.BfServiceError.__init__()=bfpy.bferror.BfServiceError-class.html#__init__,Method bfpy.bferror.BfTransportError.__init__()=bfpy.bferror.BfTransportError-class.html#__init__,Method bfpy.bfprocessors.ArrayFix.__init__()=bfpy.bfprocessors.ArrayFix-class.html#__init__,Method bfpy.bfprocessors.ProcMarketPricesCompressed.__init__()=bfpy.bfprocessors.ProcMarketPricesCompressed-class.html#__init__,Method bfpy.bfservice.ExchangeObject.__init__()=bfpy.bfservice.ExchangeObject-class.html#__init__,Method bfpy.bfservice.ExchangeServiceDef.__init__()=bfpy.bfservice.ExchangeServiceDef-class.html#__init__,Method bfpy.bfservice.GlobalObject.__init__()=bfpy.bfservice.GlobalObject-class.html#__init__,Method bfpy.bfservice.GlobalServiceDef.__init__()=bfpy.bfservice.GlobalServiceDef-class.html#__init__,Method bfpy.bfservice.ServiceDef.__init__()=bfpy.bfservice.ServiceDef-class.html#__init__,Method bfpy.bfservice.ServiceDescriptor.__init__()=bfpy.bfservice.ServiceDescriptor-class.html#__init__,Method bfpy.bfservice.ServiceObject.__init__()=bfpy.bfservice.ServiceObject-class.html#__init__,Method bfpy.bfservice.VendorObject.__init__()=bfpy.bfservice.VendorObject-class.html#__init__,Method bfpy.bfservice.VendorServiceDef.__init__()=bfpy.bfservice.VendorServiceDef-class.html#__init__,Method bfpy.bftimezone.LocalTimezone.__init__()=bfpy.bftimezone.LocalTimezone-class.html#__init__,Method bfpy.bftransport.BfTransport.__init__()=bfpy.bftransport.BfTransport-class.html#__init__,Method bfpy.bftransport.BfTransportError.__init__()=bfpy.bftransport.BfTransportError-class.html#__init__,Method bfpy.bftransport.BfTransportHtmlError.__init__()=bfpy.bftransport.BfTransportHtmlError-class.html#__init__,Method bfpy.bftransport.BfTransportHttpError.__init__()=bfpy.bftransport.BfTransportHttpError-class.html#__init__,Method bfpy.bftransport.BfTransportReply.__init__()=bfpy.bftransport.BfTransportReply-class.html#__init__,Method bfpy.bftransport.BfTransportRequest.__init__()=bfpy.bftransport.BfTransportRequest-class.html#__init__,Method bfpy.bftransport.BfTransportSocketError.__init__()=bfpy.bftransport.BfTransportSocketError-class.html#__init__,Method bfpy.bftypes.APIRequestHeader.__init__()=bfpy.bftypes.APIRequestHeader-class.html#__init__,Method bfpy.bftypes.AddPaymentCardReq.__init__()=bfpy.bftypes.AddPaymentCardReq-class.html#__init__,Method bfpy.bftypes.ApiDataType.__init__()=bfpy.bftypes.ApiDataType-class.html#__init__,Method bfpy.bftypes.ApiParam.__init__()=bfpy.bftypes.ApiParam-class.html#__init__,Method bfpy.bftypes.CancelBets.__init__()=bfpy.bftypes.CancelBets-class.html#__init__,Method bfpy.bftypes.CancelBetsByMarketReq.__init__()=bfpy.bftypes.CancelBetsByMarketReq-class.html#__init__,Method bfpy.bftypes.CancelBetsReq.__init__()=bfpy.bftypes.CancelBetsReq-class.html#__init__,Method bfpy.bftypes.CancelVendorAccessRequestReq.__init__()=bfpy.bftypes.CancelVendorAccessRequestReq-class.html#__init__,Method bfpy.bftypes.ConvertCurrencyReq.__init__()=bfpy.bftypes.ConvertCurrencyReq-class.html#__init__,Method bfpy.bftypes.CreateVendorAccessRequestReq.__init__()=bfpy.bftypes.CreateVendorAccessRequestReq-class.html#__init__,Method bfpy.bftypes.DeletePaymentCardReq.__init__()=bfpy.bftypes.DeletePaymentCardReq-class.html#__init__,Method bfpy.bftypes.DepositFromPaymentCardReq.__init__()=bfpy.bftypes.DepositFromPaymentCardReq-class.html#__init__,Method bfpy.bftypes.ForgotPasswordReq.__init__()=bfpy.bftypes.ForgotPasswordReq-class.html#__init__,Method bfpy.bftypes.GetAccountFundsReq.__init__()=bfpy.bftypes.GetAccountFundsReq-class.html#__init__,Method bfpy.bftypes.GetAccountStatementReq.__init__()=bfpy.bftypes.GetAccountStatementReq-class.html#__init__,Method bfpy.bftypes.GetAllMarketsReq.__init__()=bfpy.bftypes.GetAllMarketsReq-class.html#__init__,Method bfpy.bftypes.GetBetHistoryReq.__init__()=bfpy.bftypes.GetBetHistoryReq-class.html#__init__,Method bfpy.bftypes.GetBetLiteReq.__init__()=bfpy.bftypes.GetBetLiteReq-class.html#__init__,Method bfpy.bftypes.GetBetMatchesLiteReq.__init__()=bfpy.bftypes.GetBetMatchesLiteReq-class.html#__init__,Method bfpy.bftypes.GetBetReq.__init__()=bfpy.bftypes.GetBetReq-class.html#__init__,Method bfpy.bftypes.GetCompleteMarketPricesCompressedReq.__init__()=bfpy.bftypes.GetCompleteMarketPricesCompressedReq-class.html#__init__,Method bfpy.bftypes.GetCurrenciesReq.__init__()=bfpy.bftypes.GetCurrenciesReq-class.html#__init__,Method bfpy.bftypes.GetCurrenciesV2Req.__init__()=bfpy.bftypes.GetCurrenciesV2Req-class.html#__init__,Method bfpy.bftypes.GetCurrentBetsLiteReq.__init__()=bfpy.bftypes.GetCurrentBetsLiteReq-class.html#__init__,Method bfpy.bftypes.GetCurrentBetsReq.__init__()=bfpy.bftypes.GetCurrentBetsReq-class.html#__init__,Method bfpy.bftypes.GetDetailedAvailableMktDepthReq.__init__()=bfpy.bftypes.GetDetailedAvailableMktDepthReq-class.html#__init__,Method bfpy.bftypes.GetEventTypesReq.__init__()=bfpy.bftypes.GetEventTypesReq-class.html#__init__,Method bfpy.bftypes.GetEventsReq.__init__()=bfpy.bftypes.GetEventsReq-class.html#__init__,Method bfpy.bftypes.GetInPlayMarketsReq.__init__()=bfpy.bftypes.GetInPlayMarketsReq-class.html#__init__,Method bfpy.bftypes.GetMUBetsLiteReq.__init__()=bfpy.bftypes.GetMUBetsLiteReq-class.html#__init__,Method bfpy.bftypes.GetMUBetsReq.__init__()=bfpy.bftypes.GetMUBetsReq-class.html#__init__,Method bfpy.bftypes.GetMarketInfoReq.__init__()=bfpy.bftypes.GetMarketInfoReq-class.html#__init__,Method bfpy.bftypes.GetMarketPricesCompressedReq.__init__()=bfpy.bftypes.GetMarketPricesCompressedReq-class.html#__init__,Method bfpy.bftypes.GetMarketPricesReq.__init__()=bfpy.bftypes.GetMarketPricesReq-class.html#__init__,Method bfpy.bftypes.GetMarketProfitAndLossReq.__init__()=bfpy.bftypes.GetMarketProfitAndLossReq-class.html#__init__,Method bfpy.bftypes.GetMarketReq.__init__()=bfpy.bftypes.GetMarketReq-class.html#__init__,Method bfpy.bftypes.GetMarketTradedVolumeCompressedReq.__init__()=bfpy.bftypes.GetMarketTradedVolumeCompressedReq-class.html#__init__,Method bfpy.bftypes.GetMarketTradedVolumeReq.__init__()=bfpy.bftypes.GetMarketTradedVolumeReq-class.html#__init__,Method bfpy.bftypes.GetPaymentCardReq.__init__()=bfpy.bftypes.GetPaymentCardReq-class.html#__init__,Method bfpy.bftypes.GetPrivateMarketsReq.__init__()=bfpy.bftypes.GetPrivateMarketsReq-class.html#__init__,Method bfpy.bftypes.GetSilksReq.__init__()=bfpy.bftypes.GetSilksReq-class.html#__init__,Method bfpy.bftypes.GetSilksV2Req.__init__()=bfpy.bftypes.GetSilksV2Req-class.html#__init__,Method bfpy.bftypes.GetSubscriptionInfoReq.__init__()=bfpy.bftypes.GetSubscriptionInfoReq-class.html#__init__,Method bfpy.bftypes.GetVendorAccessRequestsReq.__init__()=bfpy.bftypes.GetVendorAccessRequestsReq-class.html#__init__,Method bfpy.bftypes.GetVendorInfoReq.__init__()=bfpy.bftypes.GetVendorInfoReq-class.html#__init__,Method bfpy.bftypes.GetVendorUsersReq.__init__()=bfpy.bftypes.GetVendorUsersReq-class.html#__init__,Method bfpy.bftypes.KeepAliveReq.__init__()=bfpy.bftypes.KeepAliveReq-class.html#__init__,Method bfpy.bftypes.LoginReq.__init__()=bfpy.bftypes.LoginReq-class.html#__init__,Method bfpy.bftypes.LogoutReq.__init__()=bfpy.bftypes.LogoutReq-class.html#__init__,Method bfpy.bftypes.ModifyPasswordReq.__init__()=bfpy.bftypes.ModifyPasswordReq-class.html#__init__,Method bfpy.bftypes.ModifyProfileReq.__init__()=bfpy.bftypes.ModifyProfileReq-class.html#__init__,Method bfpy.bftypes.PlaceBets.__init__()=bfpy.bftypes.PlaceBets-class.html#__init__,Method bfpy.bftypes.PlaceBetsReq.__init__()=bfpy.bftypes.PlaceBetsReq-class.html#__init__,Method bfpy.bftypes.RetrieveLIMBMessageReq.__init__()=bfpy.bftypes.RetrieveLIMBMessageReq-class.html#__init__,Method bfpy.bftypes.SelfExcludeReq.__init__()=bfpy.bftypes.SelfExcludeReq-class.html#__init__,Method bfpy.bftypes.SetChatNameReq.__init__()=bfpy.bftypes.SetChatNameReq-class.html#__init__,Method bfpy.bftypes.SubmitLIMBMessageReq.__init__()=bfpy.bftypes.SubmitLIMBMessageReq-class.html#__init__,Method bfpy.bftypes.TransferFundsReq.__init__()=bfpy.bftypes.TransferFundsReq-class.html#__init__,Method bfpy.bftypes.UpdateBets.__init__()=bfpy.bftypes.UpdateBets-class.html#__init__,Method bfpy.bftypes.UpdateBetsReq.__init__()=bfpy.bftypes.UpdateBetsReq-class.html#__init__,Method bfpy.bftypes.UpdatePaymentCardReq.__init__()=bfpy.bftypes.UpdatePaymentCardReq-class.html#__init__,Method bfpy.bftypes.VendorSubscriptionReq.__init__()=bfpy.bftypes.VendorSubscriptionReq-class.html#__init__,Method bfpy.bftypes.ViewProfileReq.__init__()=bfpy.bftypes.ViewProfileReq-class.html#__init__,Method bfpy.bftypes.ViewProfileV2Req.__init__()=bfpy.bftypes.ViewProfileV2Req-class.html#__init__,Method bfpy.bftypes.ViewReferAndEarnReq.__init__()=bfpy.bftypes.ViewReferAndEarnReq-class.html#__init__,Method bfpy.bftypes.WithdrawToPaymentCardReq.__init__()=bfpy.bftypes.WithdrawToPaymentCardReq-class.html#__init__,Method bfpy.bfutil.EmptyObject.__init__()=bfpy.bfutil.EmptyObject-class.html#__init__,Method bfpy.bfutil.FactoryClass.__init__()=bfpy.bfutil.FactoryClass-class.html#__init__,Method bfpy.bfutil.SharedData.__init__()=bfpy.bfutil.SharedData-class.html#__init__"><a title="bfpy.bfapi.BfApi.MinStake.__init__
 bfpy.bfapi.BfApi.__init__
 bfpy.bfapicalls.ApiCall.__init__
 bfpy.bfapicalls.ApiCallExchange.__init__
@@ -620,6 +620,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-19', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">ns</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-name">name</tt><tt class="py-op">=</tt><tt class="py-string">'header'</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L276"></a><tt class="py-lineno"> 276</tt>  <tt class="py-line"> </tt>
 <a name="L277"></a><tt class="py-lineno"> 277</tt>  <tt class="py-line"> </tt>
@@ -806,6 +808,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-28', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L294"></a><tt class="py-lineno"> 294</tt>  <tt class="py-line"> </tt>
 <a name="L295"></a><tt class="py-lineno"> 295</tt>  <tt class="py-line"> </tt>
@@ -919,6 +923,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-30', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L299"></a><tt class="py-lineno"> 299</tt>  <tt class="py-line"> </tt>
 <a name="L300"></a><tt class="py-lineno"> 300</tt>  <tt class="py-line"> </tt>
@@ -1032,6 +1038,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-32', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L304"></a><tt class="py-lineno"> 304</tt>  <tt class="py-line"> </tt>
 <a name="L305"></a><tt class="py-lineno"> 305</tt>  <tt class="py-line"> </tt>
@@ -1214,6 +1222,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-38', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L318"></a><tt class="py-lineno"> 318</tt>  <tt class="py-line"> </tt>
 <a name="L319"></a><tt class="py-lineno"> 319</tt>  <tt class="py-line"> </tt>
@@ -1389,6 +1399,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-41', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L325"></a><tt class="py-lineno"> 325</tt>  <tt class="py-line"> </tt>
 <a name="L326"></a><tt class="py-lineno"> 326</tt>  <tt class="py-line"> </tt>
@@ -1564,6 +1576,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-44', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L332"></a><tt class="py-lineno"> 332</tt>  <tt class="py-line"> </tt>
 <a name="L333"></a><tt class="py-lineno"> 333</tt>  <tt class="py-line"> </tt>
@@ -1740,6 +1754,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-48', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L340"></a><tt class="py-lineno"> 340</tt>  <tt class="py-line"> </tt>
 <a name="L341"></a><tt class="py-lineno"> 341</tt>  <tt class="py-line"> </tt>
@@ -1921,6 +1937,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-56', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L353"></a><tt class="py-lineno"> 353</tt>  <tt class="py-line"> </tt>
 <a name="L354"></a><tt class="py-lineno"> 354</tt>  <tt class="py-line"> </tt>
@@ -2099,6 +2117,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-61', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L363"></a><tt class="py-lineno"> 363</tt>  <tt class="py-line"> </tt>
 <a name="L364"></a><tt class="py-lineno"> 364</tt>  <tt class="py-line"> </tt>
@@ -2287,6 +2307,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-76', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L383"></a><tt class="py-lineno"> 383</tt>  <tt class="py-line"> </tt>
 <a name="L384"></a><tt class="py-lineno"> 384</tt>  <tt class="py-line"> </tt>
@@ -2464,6 +2486,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-80', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L392"></a><tt class="py-lineno"> 392</tt>  <tt class="py-line"> </tt>
 <a name="L393"></a><tt class="py-lineno"> 393</tt>  <tt class="py-line"> </tt>
@@ -2641,6 +2665,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-84', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L401"></a><tt class="py-lineno"> 401</tt>  <tt class="py-line"> </tt>
 <a name="L402"></a><tt class="py-lineno"> 402</tt>  <tt class="py-line"> </tt>
@@ -2818,6 +2844,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-89', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L410"></a><tt class="py-lineno"> 410</tt>  <tt class="py-line"> </tt>
 <a name="L411"></a><tt class="py-lineno"> 411</tt>  <tt class="py-line"> </tt>
@@ -3002,6 +3030,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-101', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L426"></a><tt class="py-lineno"> 426</tt>  <tt class="py-line"> </tt>
 <a name="L427"></a><tt class="py-lineno"> 427</tt>  <tt class="py-line"> </tt>
@@ -3183,6 +3213,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-110', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L439"></a><tt class="py-lineno"> 439</tt>  <tt class="py-line"> </tt>
 <a name="L440"></a><tt class="py-lineno"> 440</tt>  <tt class="py-line"> </tt>
@@ -3364,6 +3396,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-118', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L452"></a><tt class="py-lineno"> 452</tt>  <tt class="py-line"> </tt>
 <a name="L453"></a><tt class="py-lineno"> 453</tt>  <tt class="py-line"> </tt>
@@ -3541,6 +3575,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-123', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L461"></a><tt class="py-lineno"> 461</tt>  <tt class="py-line"> </tt>
 <a name="L462"></a><tt class="py-lineno"> 462</tt>  <tt class="py-line"> </tt>
@@ -3718,6 +3754,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-127', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L470"></a><tt class="py-lineno"> 470</tt>  <tt class="py-line"> </tt>
 <a name="L471"></a><tt class="py-lineno"> 471</tt>  <tt class="py-line"> </tt>
@@ -3896,6 +3934,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-133', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L480"></a><tt class="py-lineno"> 480</tt>  <tt class="py-line"> </tt>
 <a name="L481"></a><tt class="py-lineno"> 481</tt>  <tt class="py-line"> </tt>
@@ -4072,6 +4112,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-137', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L488"></a><tt class="py-lineno"> 488</tt>  <tt class="py-line"> </tt>
 <a name="L489"></a><tt class="py-lineno"> 489</tt>  <tt class="py-line"> </tt>
@@ -4249,6 +4291,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-142', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L497"></a><tt class="py-lineno"> 497</tt>  <tt class="py-line"> </tt>
 <a name="L498"></a><tt class="py-lineno"> 498</tt>  <tt class="py-line"> </tt>
@@ -4426,6 +4470,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-147', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L506"></a><tt class="py-lineno"> 506</tt>  <tt class="py-line"> </tt>
 <a name="L507"></a><tt class="py-lineno"> 507</tt>  <tt class="py-line"> </tt>
@@ -4610,6 +4656,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-159', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L522"></a><tt class="py-lineno"> 522</tt>  <tt class="py-line"> </tt>
 <a name="L523"></a><tt class="py-lineno"> 523</tt>  <tt class="py-line"> </tt>
@@ -4794,6 +4842,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-171', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L538"></a><tt class="py-lineno"> 538</tt>  <tt class="py-line"> </tt>
 <a name="L539"></a><tt class="py-lineno"> 539</tt>  <tt class="py-line"> </tt>
@@ -4974,6 +5024,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-179', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L550"></a><tt class="py-lineno"> 550</tt>  <tt class="py-line"> </tt>
 <a name="L551"></a><tt class="py-lineno"> 551</tt>  <tt class="py-line"> </tt>
@@ -5153,6 +5205,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-186', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L561"></a><tt class="py-lineno"> 561</tt>  <tt class="py-line"> </tt>
 <a name="L562"></a><tt class="py-lineno"> 562</tt>  <tt class="py-line"> </tt>
@@ -5330,6 +5384,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-191', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L570"></a><tt class="py-lineno"> 570</tt>  <tt class="py-line"> </tt>
 <a name="L571"></a><tt class="py-lineno"> 571</tt>  <tt class="py-line"> </tt>
@@ -5509,6 +5565,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-197', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L581"></a><tt class="py-lineno"> 581</tt>  <tt class="py-line"> </tt>
 <a name="L582"></a><tt class="py-lineno"> 582</tt>  <tt class="py-line"> </tt>
@@ -5687,6 +5745,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-202', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L591"></a><tt class="py-lineno"> 591</tt>  <tt class="py-line"> </tt>
 <a name="L592"></a><tt class="py-lineno"> 592</tt>  <tt class="py-line"> </tt>
@@ -5865,6 +5925,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-207', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L601"></a><tt class="py-lineno"> 601</tt>  <tt class="py-line"> </tt>
 <a name="L602"></a><tt class="py-lineno"> 602</tt>  <tt class="py-line"> </tt>
@@ -6044,6 +6106,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-211', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L612"></a><tt class="py-lineno"> 612</tt>  <tt class="py-line"> </tt>
 <a name="L613"></a><tt class="py-lineno"> 613</tt>  <tt class="py-line"> </tt>
@@ -6228,6 +6292,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-223', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">name</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L628"></a><tt class="py-lineno"> 628</tt>  <tt class="py-line"> </tt>
 <a name="L629"></a><tt class="py-lineno"> 629</tt>  <tt class="py-line"> </tt>
@@ -6404,6 +6470,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-227', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L636"></a><tt class="py-lineno"> 636</tt>  <tt class="py-line"> </tt>
 <a name="L637"></a><tt class="py-lineno"> 637</tt>  <tt class="py-line"> </tt>
@@ -6580,6 +6648,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-231', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">name</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L644"></a><tt class="py-lineno"> 644</tt>  <tt class="py-line"> </tt>
 <a name="L645"></a><tt class="py-lineno"> 645</tt>  <tt class="py-line"> </tt>
@@ -6757,6 +6827,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-235', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L653"></a><tt class="py-lineno"> 653</tt>  <tt class="py-line"> </tt>
 <a name="L654"></a><tt class="py-lineno"> 654</tt>  <tt class="py-line"> </tt>
@@ -6933,6 +7005,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-239', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L661"></a><tt class="py-lineno"> 661</tt>  <tt class="py-line"> </tt>
 <a name="L662"></a><tt class="py-lineno"> 662</tt>  <tt class="py-line"> </tt>
@@ -7115,6 +7189,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-249', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">name</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L675"></a><tt class="py-lineno"> 675</tt>  <tt class="py-line"> </tt>
 <a name="L676"></a><tt class="py-lineno"> 676</tt>  <tt class="py-line"> </tt>
@@ -7311,6 +7387,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-269', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L703"></a><tt class="py-lineno"> 703</tt>  <tt class="py-line"> </tt>
 <a name="L704"></a><tt class="py-lineno"> 704</tt>  <tt class="py-line"> </tt>
@@ -7489,6 +7567,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-274', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L713"></a><tt class="py-lineno"> 713</tt>  <tt class="py-line"> </tt>
 <a name="L714"></a><tt class="py-lineno"> 714</tt>  <tt class="py-line"> </tt>
@@ -7669,6 +7749,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-281', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L725"></a><tt class="py-lineno"> 725</tt>  <tt class="py-line"> </tt>
 <a name="L726"></a><tt class="py-lineno"> 726</tt>  <tt class="py-line"> </tt>
@@ -7852,6 +7934,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-291', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L740"></a><tt class="py-lineno"> 740</tt>  <tt class="py-line"> </tt>
 <a name="L741"></a><tt class="py-lineno"> 741</tt>  <tt class="py-line"> </tt>
@@ -7965,6 +8049,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-293', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L745"></a><tt class="py-lineno"> 745</tt>  <tt class="py-line"> </tt>
 <a name="L746"></a><tt class="py-lineno"> 746</tt>  <tt class="py-line"> </tt>
@@ -8148,6 +8234,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-303', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">name</tt><tt class="py-op">=</tt><tt class="py-string">'req'</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L760"></a><tt class="py-lineno"> 760</tt>  <tt class="py-line"> </tt>
 <a name="L761"></a><tt class="py-lineno"> 761</tt>  <tt class="py-line"> </tt>
@@ -8324,6 +8412,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-306', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L768"></a><tt class="py-lineno"> 768</tt>  <tt class="py-line"> </tt>
 <a name="L769"></a><tt class="py-lineno"> 769</tt>  <tt class="py-line"> </tt>
@@ -8500,6 +8590,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-309', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L776"></a><tt class="py-lineno"> 776</tt>  <tt class="py-line"> </tt>
 <a name="L777"></a><tt class="py-lineno"> 777</tt>  <tt class="py-line"> </tt>
@@ -8679,6 +8771,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-315', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L787"></a><tt class="py-lineno"> 787</tt>  <tt class="py-line"> </tt>
 <a name="L788"></a><tt class="py-lineno"> 788</tt>  <tt class="py-line"> </tt>
@@ -8873,6 +8967,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-336', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L813"></a><tt class="py-lineno"> 813</tt>  <tt class="py-line"> </tt>
 <a name="L814"></a><tt class="py-lineno"> 814</tt>  <tt class="py-line"> </tt>
@@ -9049,6 +9145,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-339', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L821"></a><tt class="py-lineno"> 821</tt>  <tt class="py-line"> </tt>
 <a name="L822"></a><tt class="py-lineno"> 822</tt>  <tt class="py-line"> </tt>
@@ -9227,6 +9325,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-344', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L831"></a><tt class="py-lineno"> 831</tt>  <tt class="py-line"> </tt>
 <a name="L832"></a><tt class="py-lineno"> 832</tt>  <tt class="py-line"> </tt>
@@ -9405,6 +9505,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-349', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L841"></a><tt class="py-lineno"> 841</tt>  <tt class="py-line"> </tt>
 <a name="L842"></a><tt class="py-lineno"> 842</tt>  <tt class="py-line"> </tt>
@@ -9590,6 +9692,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-361', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L858"></a><tt class="py-lineno"> 858</tt>  <tt class="py-line"> </tt>
 <a name="L859"></a><tt class="py-lineno"> 859</tt>  <tt class="py-line"> </tt>
@@ -9768,6 +9872,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-367', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L868"></a><tt class="py-lineno"> 868</tt>  <tt class="py-line"> </tt>
 <a name="L869"></a><tt class="py-lineno"> 869</tt>  <tt class="py-line"> </tt>
@@ -9958,6 +10064,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-384', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L890"></a><tt class="py-lineno"> 890</tt>  <tt class="py-line"> </tt>
 <a name="L891"></a><tt class="py-lineno"> 891</tt>  <tt class="py-line"> </tt>
@@ -10134,6 +10242,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-387', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L898"></a><tt class="py-lineno"> 898</tt>  <tt class="py-line"> </tt>
 <a name="L899"></a><tt class="py-lineno"> 899</tt>  <tt class="py-line"> </tt>
@@ -10313,6 +10423,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-391', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L909"></a><tt class="py-lineno"> 909</tt>  <tt class="py-line"> </tt>
 <a name="L910"></a><tt class="py-lineno"> 910</tt>  <tt class="py-line"> </tt>
@@ -10489,6 +10601,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-394', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L917"></a><tt class="py-lineno"> 917</tt>  <tt class="py-line"> </tt>
 <a name="L918"></a><tt class="py-lineno"> 918</tt>  <tt class="py-line"> </tt>
@@ -10668,6 +10782,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-400', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L928"></a><tt class="py-lineno"> 928</tt>  <tt class="py-line"> </tt>
 <a name="L929"></a><tt class="py-lineno"> 929</tt>  <tt class="py-line"> </tt>
@@ -10850,6 +10966,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-406', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L942"></a><tt class="py-lineno"> 942</tt>  <tt class="py-line"> </tt>
 <a name="L943"></a><tt class="py-lineno"> 943</tt>  <tt class="py-line"> </tt>
@@ -11031,6 +11149,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-414', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L955"></a><tt class="py-lineno"> 955</tt>  <tt class="py-line"> </tt>
 <a name="L956"></a><tt class="py-lineno"> 956</tt>  <tt class="py-line"> </tt>
@@ -11209,6 +11329,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-419', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L965"></a><tt class="py-lineno"> 965</tt>  <tt class="py-line"> </tt>
 <a name="L966"></a><tt class="py-lineno"> 966</tt>  <tt class="py-line"> </tt>
@@ -11393,6 +11515,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-430', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L981"></a><tt class="py-lineno"> 981</tt>  <tt class="py-line"> </tt>
 <a name="L982"></a><tt class="py-lineno"> 982</tt>  <tt class="py-line"> </tt>
@@ -11573,6 +11697,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-437', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L993"></a><tt class="py-lineno"> 993</tt>  <tt class="py-line"> </tt>
 <a name="L994"></a><tt class="py-lineno"> 994</tt>  <tt class="py-line"> </tt>
@@ -11755,6 +11881,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-444', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L1006"></a><tt class="py-lineno">1006</tt>  <tt class="py-line"> </tt>
 <a name="L1007"></a><tt class="py-lineno">1007</tt>  <tt class="py-line"> </tt>
@@ -11931,6 +12059,8 @@ bfpy.bftypes.ViewProfileReq.__init__
 bfpy.bftypes.ViewProfileV2Req.__init__
 bfpy.bftypes.ViewReferAndEarnReq.__init__
 bfpy.bftypes.WithdrawToPaymentCardReq.__init__
+bfpy.bfutil.EmptyObject.__init__
+bfpy.bfutil.FactoryClass.__init__
 bfpy.bfutil.SharedData.__init__" class="py-name" href="#" onclick="return doclink('link-447', '__init__', 'link-19');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
 </div></div><a name="L1014"></a><tt class="py-lineno">1014</tt>  <tt class="py-line"> </tt><script type="text/javascript">
 <!--
@@ -11970,7 +12100,7 @@ expandto(location.href);
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Fri May 27 01:55:17 2011
+    Generated by Epydoc 3.0.1 on Sat Jun 04 02:13:36 2011
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

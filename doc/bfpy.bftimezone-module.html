@@ -85,8 +85,161 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
+        <a href="bfpy.bftimezone.UTC-class.html" class="summary-name">UTC</a><br />
+      UTC timezone.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
         <a href="bfpy.bftimezone.LocalTimezone-class.html" class="summary-name">LocalTimezone</a><br />
       System specific local timezone.
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="localizeDateTime"></a><span class="summary-sig-name">localizeDateTime</span>(<span class="summary-sig-arg">dt</span>)</span><br />
+      Given a datetime.datetime instance it localizes the time to the local
+      system (according to bfglobals settings) and adds a timezone object 
+      if needed</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bftimezone-pysrc.html#localizeDateTime">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="unLocalizeDateTime"></a><span class="summary-sig-name">unLocalizeDateTime</span>(<span class="summary-sig-arg">dt</span>)</span><br />
+      Given a datetime.datetime instance it unlocalizes it (according to 
+      bfglobals settings) and honours a timezone object if needed</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bftimezone-pysrc.html#unLocalizeDateTime">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="parseDateTimeString"></a><span class="summary-sig-name">parseDateTimeString</span>(<span class="summary-sig-arg">dtString</span>)</span><br />
+      Parses an incoming datetime string and returns a datetimeobject 
+      (localized or not according to preferences)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bftimezone-pysrc.html#parseDateTimeString">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="fromTimestamp"></a><span class="summary-sig-name">fromTimestamp</span>(<span class="summary-sig-arg">ts</span>)</span><br />
+      Parses an incoming timestamp and returns a datetimeobject (localized 
+      or not according to preferences)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bftimezone-pysrc.html#fromTimestamp">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="fromTimestampString"></a><span class="summary-sig-name">fromTimestampString</span>(<span class="summary-sig-arg">tstamp</span>)</span><br />
+      Parses an incoming timestamp string and returns a datetimeobject 
+      (localized or not according to preferences)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bftimezone-pysrc.html#fromTimestampString">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bfpy.bftimezone-module.html#getDateTimeNow" class="summary-sig-name">getDateTimeNow</a>()</span><br />
+      Returns the current time either in local time or utc according to the
+      preferences in bfglobals.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bftimezone-pysrc.html#getDateTimeNow">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getDateTime"></a><span class="summary-sig-name">getDateTime</span>(<span class="summary-sig-arg">*args</span>)</span><br />
+      Constructs an internal datetime object to be sent to the API servers 
+      unlocalized if so set in the bfglobals</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bfpy.bftimezone-pysrc.html#getDateTime">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
     </td>
   </tr>
 </table>
@@ -111,10 +264,57 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
+        <a name="ZERO"></a><span class="summary-name">ZERO</span> = <code title="datetime.timedelta(0)">datetime.timedelta(0)</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
         <a name="__package__"></a><span class="summary-name">__package__</span> = <code title="'bfpy'"><code class="variable-quote">'</code><code class="variable-string">bfpy</code><code class="variable-quote">'</code></code>
     </td>
   </tr>
 </table>
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="getDateTimeNow"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getDateTimeNow</span>()</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bfpy.bftimezone-pysrc.html#getDateTimeNow">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns the current time either in local time or utc according to the 
+  preferences in bfglobals. This datetime object is meant to be sent to the
+  API servers</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
 <!-- ==================== NAVIGATION BAR ==================== -->
 <table class="navbar" border="0" width="100%" cellpadding="0"
        bgcolor="#a0c0ff" cellspacing="0">
@@ -146,7 +346,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Fri May 27 01:55:14 2011
+    Generated by Epydoc 3.0.1 on Sat Jun 04 02:13:34 2011
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

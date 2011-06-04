@@ -207,6 +207,8 @@ class ServiceDef(ServiceDescriptor):
         @type args: tuple
         @param kwargs: names and values of args for the service request
         @type kwargs: dict
+
+        @raise BfPythonError: if exchangeId was not passed for an exchange call
         '''
         # Calls to Exchanges need the specific exchange endPoint
         # passed to the functions as 1st unnamed arg
