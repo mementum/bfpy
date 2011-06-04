@@ -33,7 +33,11 @@ Net Location connecting object L{HttxNetLocation} implementation
 '''
 
 from collections import deque
-from time import clock
+import sys
+if sys.platform == 'win32':
+    from time import clock as tclock
+else:
+    from time import time as tclock
 
 from httxbase import HttxBase
 from httxconnection import HttxConnection
@@ -145,7 +149,7 @@ class HttxNetLocation(HttxBase):
             try:
                 httxconn = self.httxconnque.pop()
                 # Check if the HTTP keepalive timeout has been exceeded
-                if (clock() - httxconn.timestamp) >= self.options.keepalive:
+                if (tclock() - httxconn.timestamp) >= self.options.keepalive:
                     # Simulate that no connection was available
                     raise IndexError
                 # The connection is no longer in any container, it will be discarded

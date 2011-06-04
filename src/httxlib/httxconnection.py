@@ -47,7 +47,11 @@ except ImportError:
 from socket import error as SocketError, IPPROTO_TCP, TCP_NODELAY
 from ssl import CERT_NONE
 from urlparse import urlsplit
-from time import clock
+import sys
+if sys.platform == 'win32':
+    from time import clock as tclock
+else:
+    from time import time as tclock
 
 from httxauth import authbasic, authdigest
 from httxbase import HttxBase
@@ -211,7 +215,7 @@ class HttxConnection(HttxBase):
             # It may not be supported on all systems
             pass
 
-        self.timestamp = clock()
+        self.timestamp = tclock()
 
 
     def request(self, httxreq):
@@ -256,7 +260,7 @@ class HttxConnection(HttxBase):
         self.lastreq = httxreq
 
         # Update the timestamp
-        self.timestamp = clock()
+        self.timestamp = tclock()
 
         # Async applications need something to wait on. Return our socket
         return self.conn.sock

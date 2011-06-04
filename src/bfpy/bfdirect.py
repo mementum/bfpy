@@ -37,6 +37,7 @@ import types
 import bfapicalls
 import bfglobals
 import bftypes
+import bfutil
 
 class ApiServiceMeta(type):
     '''
@@ -194,17 +195,24 @@ class ApiService(object):
         return obj
 
 
-    def getObject(self, name):
+    def getObject(self, name, create=False):
         '''
         Returns an L{ApiDataType} by name
 
         @type name: string
         @param name: the object to be returned
+        @type create: bool
+        @param create: if a mock object has to be created if no such object
+                       has been declared
 
-        @rtype: ApiDataType
+        @rtype: ApiDataType or a named subclass of EmptyObject
         @returns: the sought object
         '''
-        return self.objects[name]()
+        if name in self.objects:
+            return self.objects[name]()
+        elif create:
+            return getattr(bfutil.Factory, name)()
+
 
 
     def getService(self, name):

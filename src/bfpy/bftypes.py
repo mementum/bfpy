@@ -33,7 +33,8 @@ Classes for definition and management of API types
 import datetime
 import types
 
-from bftimezone import LocalTimezone
+import bfglobals
+import bftimezone
 
 
 class ApiParam(object):
@@ -152,9 +153,8 @@ class ApiParam(object):
             for val in value:
                 pattern += self.patternList % str(val)
         elif isinstance(value, datetime.datetime):
-            localTimezone = LocalTimezone()
-            tmpvalue = value - localTimezone.utcoffset(value)
-            pattern = tmpvalue.isoformat()
+            tmpvalue = bftimezone.unLocalizeDateTime(value)
+            pattern = value.isoformat()
         else:
             pattern = str(value)
 

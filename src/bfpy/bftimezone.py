@@ -31,8 +31,29 @@ BfPy Timezone classes. Adapted (if needed) from the Python documentation to make
 them more generic
 '''
 
+import calendar
 from datetime import datetime, timedelta, tzinfo
 import time as _time
+
+import bfglobals
+
+
+ZERO = timedelta(0)
+
+
+class UTC(tzinfo):
+    '''
+    UTC timezone.
+    '''
+    def utcoffset(self, dt):
+        return ZERO
+
+    def tzname(self, dt):
+        return "UTC"
+
+    def dst(self, dt):
+        return ZERO
+
 
 class LocalTimezone(tzinfo):
     '''
@@ -40,7 +61,6 @@ class LocalTimezone(tzinfo):
 
     As seen in the Python docs (with mods)
     '''
-    zero = timedelta(0)
     def __init__(self):
         self.stdOffset = timedelta(seconds=-_time.timezone)
         if _time.daylight:
@@ -66,7 +86,7 @@ class LocalTimezone(tzinfo):
         @param dt: datetime to see offset against
         @type dt: datetime
         '''
-        return self.dstDiff if self._isdst(dt) else LocalTimezone.zero
+        return self.dstDiff if self._isdst(dt) else ZERO
 
     def tzname(self, dt):
         '''
@@ -85,9 +105,88 @@ class LocalTimezone(tzinfo):
         @param dt: datetime to see offset against
         @type dt: datetime
         '''
-        tt = (dt.year, dt.month, dt.day,
-              dt.hour, dt.minute, dt.second,
-              dt.weekday(), 0, -1)
+        tt = (dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second, dt.weekday(), 0, -1)
         stamp = _time.mktime(tt)
         tt = _time.localtime(stamp)
         return tt.tm_isdst > 0
+
+
+def localizeDateTime(dt):
+    if bfglobals.timeUtc or bfglobals.timeUtcIn:
+        # Calling application wants utc
+        tmpdt = dt if not bfglobals.timeReturnAware else dt.replace(tzinfo=UTC())
+        return tmpdt
+
+    # Localized time wished
+    localTimezone = LocalTimezone()
+    try:
+        utcoffset = localTimezone.utcoffset(dt)
+    except:
+        # Fails with the dates from getSubscriptionInfo
+        # Generate an offset for our current time
+        utcoffset = localTimezone.utcoffset(datetime.now())
+
+    tmpdt = dt + utcoffset
+
+    if bfglobals.timeReturnAware:
+        tmpdt = tmpdt.replace(tzinfo=localTimezone)
+
+    return tmpdt
+
+
+def unLocalizeDateTime(dt):
+    if bfglobals.timeUtc or bfglobals.timeUtcOut:
+        # Calling application is passing utc
+        return dt.replace(tzinfo=None)
+        
+    utcoffset = ZERO
+    if bfglobals.timeHonourAware:
+        utcoffset = None if dt.tzinfo is None else dt.utcoffset()
+
+    if not bfglobals.timeHonourAware or utcoffset is None:
+        localTimezone = LocalTimezone()
+        try:
+            utcoffset = localTimezone.utcoffset(dt)
+        except:
+            # Fails with the dates from getSubscriptionInfo
+            # generate an offset for our current time
+            utcoffset = localTimezone.utcoffset(datetime.now())
+
+    return dt - utcoffset
+
+
+def parseDateTimeString(dtString):
+    # Bf time is: 2000-01-01T00:00:00.000Z
+    dtParts = dtString.split('.')
+    dt = datetime.strptime(dtParts[0], '%Y-%m-%dT%H:%M:%S')
+    dt = dt.replace(microsecond=int(dtParts[1][0:3]) * 1000)
+
+    return localizeDateTime(dt)
+    
+
+def fromTimestamp(ts):
+    if not bfglobals.timeConvertTimestamps:
+        return ts
+
+    secs, msecs = divmod(ts, 1000)
+
+    dt = datetime.utcfromtimestamp(secs)
+    dt = dt.replace(microsecond=msecs * 1000)
+    return localizeDateTime(dt)
+
+
+def fromTimestampString(tstamp):
+    ts = long(tstamp)
+    return fromTimestamp(ts)
+
+
+def getDateTimeNow():
+    if bfglobals.timeUtc or bfGlobals.timeUtcOut:
+        return datetime.utcnow()
+
+    return datetime.now()
+    
+
+def getDateTime(*args):
+    dt = datetime(*args)
+    return unLocalizeDateTime(dt)

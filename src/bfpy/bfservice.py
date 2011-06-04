@@ -76,8 +76,7 @@ class ServiceDescriptor(object):
         It returns a method type pointing to itself. This forces the invocation
         of __call__
         '''
-        return self._instanceCache.setdefault(instance,
-                                              types.MethodType(self, instance, owner))
+        return self._instanceCache.setdefault(instance, types.MethodType(self, instance, owner))
 
 
     def __call__(self, *args, **kwargs):
@@ -430,7 +429,7 @@ class ServiceObject(ServiceDescriptor):
         @type kwargs: dict
         '''
         # Retrieve the object from the endPoint
-        serviceObject = instance.getObject(self.endPoint, self.objectName)
+        serviceObject = instance.getObject(self.endPoint, self.objectName, create=True)
 
         # get the default values and update them
         objArgs = self.kwargs.copy()
@@ -484,7 +483,7 @@ class VendorObject(ServiceObject):
 
     def __init__(self, objectName, **kwargs):
         '''
-        Initialize a ServiceObject with the Vendor endPoint (1)
+        Initialize a ServiceObject with the Vendor endPoint (-1)
         
         @param objectName: name of the object to be retrieved
         @type objectName: str

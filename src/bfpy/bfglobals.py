@@ -66,6 +66,7 @@ BfPy global variables and functions module.
 @type postProcess: bool
 @var postProcess: default library behaviour: process (easing use) Betfair answers
                   before sending them to Betfair
+
 @type catchAllExceptions: bool
 @var catchAllException: catch and return as BfPythonError any possible error generated
                         along the library once a service has been called
@@ -73,10 +74,50 @@ BfPy global variables and functions module.
 @type separateCounters: bool
 @var separateCounters: use separate counters (per exchange/endpoint) to throttle requests
                       of calls that fall under the DataRequest (default: False)
+
+@type timeUtc: bool
+@var timeUtc: if True all DateTime objects received from Bf will be returned to the calling
+              application as UTC and the library will assume that DateTime objects passed by
+              the application are in UTC
+
+              Default value: False
+
+@type timeUtcIn: bool
+@var timeUtcIn: if True all DateTime objects received from Bf will be returned to the calling
+              application as UTC.
+
+              Default value: False
+
+@type timeUtcOut: bool
+@var timeUtcOut: if True all DateTime objects passed by the application are in UTCr
+
+                 Default value: False
+
+@type timeConvertTimestaps: bool
+@var timeUtcOut: Some of Bf DateTime values are returned as timestamps (in millisecons) since
+                 the start of epoch (1st of January 1970). If true, these values will be
+                 converted to DateTime objects
+
+                 Default value: True
+
+@type timeReturnAware: bool
+@var timeReturnAware: If True the DateTime objects returned to the application will have be
+                      be aware (have a timezone) representing the local timezone
+
+                      Default value: False
+
+
+@type timeHonourAware: bool
+@var timeHonourAware: If True the DateTime objects passed by the application are expected to
+                      be aware (have a timezone) representing the local timezone and such
+                      local timezone will be used for the conversion to UTC before the value
+                      is sent to Betfair
+
+                      Default value: False
 '''
 
 libname = 'BfPy'
-version = 1.11
+version = 1.12
 libstring = '%s %s' % (libname, str(version))
 
 freeApiId = 82
@@ -97,10 +138,12 @@ EndPointUrls = {
     ExchangeAus: 'https://api-au.betfair.com/exchange/v5/BFExchangeService',
     }
 
+wsdlDefs = dict()
+
 try:
     import bfwsdl
 except ImportError:
-    wsdlDefs = dict()
+    pass
 else:
     wsdlDefs = {
         Vendor: bfwsdl.BFVendorService,
@@ -117,3 +160,10 @@ postProcess = True
 catchAllExceptions = True
 
 separateCounters = False
+
+timeUtc = False
+timeUtcIn = False
+timeUtcOut = False
+timeConvertTimestamps = True
+timeReturnAware = False
+timeHonourAware = False

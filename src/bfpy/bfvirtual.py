@@ -35,7 +35,7 @@ from copy import deepcopy
 from decimal import Decimal, ROUND_UP, ROUND_DOWN
 
 import bfticks
-from bfutil import EmptyObject
+import bfutil
 
 TWOPLACES = Decimal(10) ** -2
 
@@ -101,7 +101,7 @@ def VirtualPrices(marketPrices, minGBPStake=2.0, rateGBP=None, freeApi=False):
                     break
 
                 # Create the Virtual Bet
-                vBet = EmptyObject()
+                vBet = bfutil.Factory.Price()
                 vBet.betType = vBetType # It's a lay in the exchange, available to be layed
                 vBet.depth = 0 # not really known at this moment
 
@@ -134,7 +134,8 @@ def VirtualPrices(marketPrices, minGBPStake=2.0, rateGBP=None, freeApi=False):
                 elif freeApi:
                     # Or if freeApi wants to see all bets
                     rPrice0.vBets[vBetType].append(vBet)
-
+                    
+                # Remove the payout from the other runners
                 for rPrice in runnerPrices:
                     bestPricesTo = getattr(rPrice, attrName)
                     if rPrice0.selectionId != rPrice.selectionId and bestPricesTo:
@@ -153,9 +154,8 @@ def VirtualPrices(marketPrices, minGBPStake=2.0, rateGBP=None, freeApi=False):
             oBets = getattr(rPrice, attrName)
             vBets = rPrice.vBets[vBetType]
 
-            # Save a copy of the original bets
-            setattr(rPrice, attrName + 'Orig', deepcopy(oBets))
-            # Put an empty list as the placeholder for merged bets
+            # Possibly save a copy of the original bets
+            # setattr(rPrice, attrName + 'Orig', deepcopy(oBets))
             bestPricesTo = list()
             setattr(rPrice, attrName, bestPricesTo)
 
@@ -163,22 +163,21 @@ def VirtualPrices(marketPrices, minGBPStake=2.0, rateGBP=None, freeApi=False):
                 vBet = vBets[0]
                 oBet = oBets[0]
 
-                if (vBetType == 'L' and vBet.price > oBet.price) or \
-                   (vBetType == 'B' and vBet.price < oBet.price):
+                if bestPricesTo and bestPricesTo[-1].price == vBet.price:
+                    bestPricesTo[-1].amountAvailable += vBet.amountAvailable
+                    del vBets[0]
+                    continue
+                elif vBet.price > oBet.price and vBetType == 'L':
                     bestPricesTo.append(vBets.pop(0))
-                elif vBet.price == oBet.price:
-                    vBet.amountAvailable += oBet.amountAvailable
+                    continue
+                elif vBet.price < oBet.price and vBetType == 'B':
                     bestPricesTo.append(vBets.pop(0))
-                    while vBets and vBets[0].price == oBet.price:
-                        bestPricesTo[-1].amountAvailable += vBets[0].amountAvailable
-                        del vBets[0]
-                    oBets.pop(0)
-                else:
-                    bestPricesTo.append(oBets.pop(0))
+                    continue
+
+                bestPricesTo.append(oBets.pop(0))
 
             # Top if needed
             while len(bestPricesTo) < 3 and vBets:
                 bestPricesTo.append(vBets.pop(0))
             while len(bestPricesTo) < 3 and oBets:
                 bestPricesTo.append(oBets.pop(0))
-

@@ -251,7 +251,7 @@ class BfApi(object):
         - getVendorAccessRequests
           Default parameters:
           status = ACTIVE
-        - getSubscriptionInfo
+        - getSubscriptionInfoVendor
           Default parameters:
           username = '' (internal Betfair use, but cannot be set to null)
         - getVendorInfo
@@ -267,8 +267,8 @@ class BfApi(object):
 
 
     def __init__(self,
-                 preProcess=bfglobals.preProcess,
-                 postProcess=bfglobals.postProcess,
+                 preProcess=None,
+                 postProcess=None,
                  maxRequests=20,
                  separateCounters=None,
                  **kwargs):
@@ -282,9 +282,11 @@ class BfApi(object):
         @param maxRequests: maximum number of requests to issue to Bf in 1 second (20 is maximum before data charges)
                             maxRequests = 0 to unlimit the number of requests
         @type maxRequests: int
+        @param utctime: whether all time objects shall be returned in UTC format (and no timezone object)
+        @type utctime: bool
         '''
-        self.preProcess = preProcess
-        self.postProcess = postProcess
+        self.preProcess = preProcess if preProcess is not None else bfglobals.preProcess
+        self.postProcess = postProcess if postProcess is not None else bfglobals.postProcess
         self.maxRequests = maxRequests
         self.dataCounter = dict()
 
@@ -304,6 +306,11 @@ class BfApi(object):
         self.apiServices = dict()
         for endPoint in bfglobals.EndPoints:
             self.apiServices[endPoint] = bfdirect.ApiService(endPoint=endPoint, transport=self.transport.clone())
+
+        # Modify arguments in globals - example for timeXXX
+        for key, val in kwargs.iteritems():
+            if hasattr(bfglobals, key):
+                setattr(bfglobals, key, val)
 
 
     def clone(self):
@@ -345,7 +352,7 @@ class BfApi(object):
         return self.apiServices[endPoint].getService(serviceName)
 
 
-    def getObject(self, endPoint, objectName, apiHeader=False):
+    def getObject(self, endPoint, objectName, apiHeader=False, create=False):
         '''
         Returns an object from an endPoint
 
@@ -359,7 +366,7 @@ class BfApi(object):
         @return: the requested object and whether the object is fetched from the DirectApi
         @rtype: DirectApi method
         '''
-        obj = self.apiServices[endPoint].getObject(objectName)
+        obj = self.apiServices[endPoint].getObject(objectName, create=create)
         if apiHeader:
             obj.header = self.apiServices[endPoint].getObject('APIRequestHeader')
             obj.header.clientStamp = 0
@@ -568,13 +575,12 @@ class BfApi(object):
         ExchangeServiceDef('getMarketTradedVolumeCompressed', skipErrorCodes=['EVENT_SUSPENDED', 'EVENT_CLOSED'],
                            preProc=[PreMarketTradedVolumeCompressed()],
                            postProc=[ProcMarketTradedVolumeCompressed()], weight=1),
-        ExchangeServiceDef('getMUBets', skipErrorCodes=['NO_RESULTS'], weight=-1,
-                           betStatus='MU', excludeLastSecond=False,
-                           matchedSince=datetime(2000, 01, 01, 00, 00, 00),
-                           orderBy='BET_ID', recordCount=200, sortOrder='ASC', startRecord=0),
-        ExchangeServiceDef('getMUBetsLite', skipErrorCodes=['NO_RESULTS'], weight=-1,
-                           betStatus='MU', excludeLastSecond=False, matchedSince=datetime(2000, 01, 01, 00, 00, 00),
-                           orderBy='BET_ID', recordCount=200, sortOrder='ASC', startRecord=0),
+        ExchangeServiceDef('getMUBets', skipErrorCodes=['NO_RESULTS'], preProc=[PreMuBets()], weight=-1,
+                           betStatus='MU', excludeLastSecond=False, orderBy='BET_ID', recordCount=200,
+                           sortOrder='ASC', startRecord=0),
+        ExchangeServiceDef('getMUBetsLite', skipErrorCodes=['NO_RESULTS'], preProc=[PreMuBets()], weight=-1,
+                           betStatus='MU', excludeLastSecond=False, orderBy='BET_ID', recordCount=200,
+                           sortOrder='ASC', startRecord=0),
         ExchangeServiceDef('getMarketProfitAndLoss', skipErrorCodes=['MARKET_CLOSED', 'INVALID_MARKET'],
                            preProc=[PreProcMarketProfitAndLoss()], postProc=[ProcMarketProfitAndLoss()], weight=1,
                            includeBspBets=False, includeSettledBets=False, netOfCommission=False),

@@ -30,12 +30,12 @@
 Implementation of BfApi request and response processors
 '''
 
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 import bferror
 import bfglobals
 import bftimezone
-from bfutil import EmptyObject
+import bfutil
 import bfvirtual
 
 
@@ -128,18 +128,14 @@ class ProcAllMarkets(object):
                 marketItemFields.extend(extraFields)
 
             # Create a generic object and populate it with the market fields
-            marketItem = EmptyObject()
+            marketItem = bfutil.Factory.MarketItem()
             # marketItem = self.GetObjectExchange('Market')
 
             marketItem.marketId = int(marketItemFields[0])
             marketItem.marketName = marketItemFields[1]
             marketItem.marketType = marketItemFields[2]
             marketItem.marketStatus = marketItemFields[3]
-            marketItem.marketTime = datetime.fromtimestamp(long(marketItemFields[4]) / 1000)
-
-            # Add the local timezone
-            localTimezone = bftimezone.LocalTimezone()
-            marketItem.marketTime.replace(tzinfo=localTimezone)
+            marketItem.marketTime = bftimezone.fromTimestampString(marketItemFields[4])
             
             menuPathParts = list()
             menuParts = marketItemFields[5].split('\\')
@@ -171,7 +167,8 @@ class ProcAllMarkets(object):
             marketItem.delay = int(marketItemFields[7])
             marketItem.exchangeId = int(marketItemFields[8])
             marketItem.countryISO3 = marketItemFields[9]
-            marketItem.lastRefresh = datetime.fromtimestamp(long(marketItemFields[10])/1000)
+            marketItem.lastRefresh = bftimezone.fromTimestampString(marketItemFields[10])
+
             marketItem.numberOfRunners = int(marketItemFields[11])
             marketItem.numberOfWinners = int(marketItemFields[12])
             marketItem.totalAmountMatched = float(marketItemFields[13])
@@ -280,21 +277,8 @@ class ProcMarket(object):
 
         # Embed the exchangeId in the answer, since this is a must for betting
         response.market.exchangeId = exchangeId
+        response.market.lastRefresh = bftimezone.fromTimestamp(response.market.lastRefresh)
 
-        if False:
-            localTimezone = LocalTimezone()
-            utcoffset = localTimezone.utcoffset(response.market.marketTime)
-            response.market.marketTime += utcoffset
-
-            # Make a non-naive datetime object (in case the calling app wanted to
-            # move it to another timezone)
-            response.market.marketTime = datetime(response.market.marketTime.year,
-                                                  response.market.marketTime.month,
-                                                  response.market.marketTime.day,
-                                                  response.market.marketTime.hour,
-                                                  response.market.marketTime.minute,
-                                                  response.market.marketTime.second,
-                                                  tzinfo=localTimezone)
 
 class ProcMarketPricesCompressed(object):
     '''
@@ -310,15 +294,6 @@ class ProcMarketPricesCompressed(object):
             response.marketPrices = self.ParseMarketPricesCompressed(response.marketPrices, self.completeCompressed)
         else:
             response.completeMarketPrices = self.ParseMarketPricesCompressed(response.completeMarketPrices, self.completeCompressed)
-
-        # Array Fixes of the "decompressed prices" string - Can't be done before
-        if self.completeCompressed:
-            response.completeMarketPrices.runnerPrices = response.completeMarketPrices.runnerPrices.RunnerPrices
-        else:
-            response.marketPrices.runnerPrices = response.marketPrices.runnerPrices.RunnerPrices
-            for runner in response.marketPrices.runnerPrices:
-                runner.bestPricesToBack = runner.bestPricesToBack.Price
-                runner.bestPricesToLay = runner.bestPricesToLay.Price
 
         # Virtual prices
         if not self.completeCompressed:
@@ -349,9 +324,11 @@ class ProcMarketPricesCompressed(object):
         '''
         # Split the string in main MarketPrices object + Runner Objects
         if compressedPrices is None:
-            marketPrices = EmptyObject()
-            marketPrices.runnerPrices = EmptyObject()
-            marketPrices.runnerPrices.RunnerPrices = list()
+            if not self.completeCompressed:
+                marketPrices = bfutil.Factory.MarketPrices()
+            else:
+                marketPrices = bfutil.Factory.CompleteMarketPrices()
+            marketPrices.runnerPrices = list()
             return marketPrices
 
         parts = compressedPrices.split(':')
@@ -379,7 +356,7 @@ class ProcMarketPricesCompressed(object):
             runner = self.ParseMarketPricesCompressedRunner(runnerPart, completeCompressed)
 
             # Append it to the array of runners
-            marketPrices.runnerPrices.RunnerPrices.append(runner)
+            marketPrices.runnerPrices.append(runner)
 
         #return the fully populated MarketPrices object
         return marketPrices
@@ -400,9 +377,11 @@ class ProcMarketPricesCompressed(object):
         '''
         # Generate the object to store the information
         # marketPrices = self.GetObjectExchange('MarketPrices')
-        marketPrices = EmptyObject()
-        marketPrices.runnerPrices = EmptyObject()
-        marketPrices.runnerPrices.RunnerPrices = list()
+        if not completeCompressed:
+            marketPrices = bfutil.Factory.MarketPrices()
+        else:
+            marketPrices = bfutil.Factory.CompleteMarketPrices()
+        marketPrices.runnerPrices = list()
 
         # Split it into its constituent parts
         parts = marketPricesHeader.split('~')
@@ -417,7 +396,7 @@ class ProcMarketPricesCompressed(object):
             marketPrices.marketInfo = parts[5]
             marketPrices.discountAllowed = bool(parts[6])
             marketPrices.marketBaseRate = float(parts[7])
-            marketPrices.lastRefresh = datetime.fromtimestamp(long(parts[8])/1000)
+            marketPrices.lastRefresh = bftimezone.fromTimestampString(parts[8])
             marketPrices.removedRunners = parts[9]
             marketPrices.bspMarket = (parts[10] == 'Y')
         else:
@@ -457,14 +436,9 @@ class ProcMarketPricesCompressed(object):
         @rtype: RunnerPrices objects
         '''
         # Generate a RunnerPrices object
-        # runner = self.GetObjectExchange('RunnerPrices')
-        runner = EmptyObject()
-        runner.bestPricesToBack = EmptyObject()
-        runner.bestPricesToBack.Price = list()
-        runner.bestPricesToBack.price = runner.bestPricesToBack.Price
-        runner.bestPricesToLay = EmptyObject()
-        runner.bestPricesToLay.Price = list()
-        runner.bestPricesToLay.price = runner.bestPricesToLay.Price
+        runner = bfutil.Factory.RunnerPrices()
+        runner.bestPricesToBack = list()
+        runner.bestPricesToLay = list()
 
         # Parse the runner main fields, header + 2xPrices
         partsRunner = marketPricesRunner.split('|')
@@ -526,7 +500,7 @@ class ProcMarketPricesCompressed(object):
                 # numFieldsPerPrice has to be added to the index to include the last element.
                 price = self.ParseMarketPricesCompressedRunnerPrice(partsPrices[index:index + numFieldsPerPrice])
 
-                runner.bestPricesToBack.Price.append(price)
+                runner.bestPricesToBack.append(price)
 
             partsPrices = partsRunner[2].split('~')
             numPrices = len(partsPrices) / numFieldsPerPrice
@@ -537,7 +511,7 @@ class ProcMarketPricesCompressed(object):
                 # numFieldsPerPrice has to be added to the index to include the last element
                 price = self.ParseMarketPricesCompressedRunnerPrice(partsPrices[index:index + numFieldsPerPrice])
 
-                runner.bestPricesToLay.Price.append(price)
+                runner.bestPricesToLay.append(price)
                     
         return runner
 
@@ -567,7 +541,7 @@ class ProcMarketPricesCompressed(object):
         '''
         # Generate a RunnerPrices object
         # price = self.GetObjectExchange('Price')
-        price = EmptyObject()
+        price = bfutil.Factory.Price()
 
         # Split the price in its constituent parts
         # parts = p_price.split('~')
@@ -594,7 +568,7 @@ class ProcMarketPricesCompressed(object):
         '''
         # Generate a RunnerPrices object
         # price = self.GetObjectExchange('AvailabilityInfo')
-        price = EmptyObject()
+        price = bfutil.Factory.AvailabilityInfo()
 
         # Split the price in its constituent parts
         # parts = p_price.split('~')
@@ -655,6 +629,9 @@ class ProcMarketPrices(object):
 
         # Virtual prices
         instance = kwargs.get('instance')
+
+        response.marketPrices.lastRefresh = bftimezone.fromTimestamp(response.marketPrices.lastRefresh)
+
         if instance.productId != bfglobals.freeApiId and \
                instance.MinBets[instance.currency].rateGBP is not None:
             # In the freeApi there is no rateGBP and the virtualPrices can't
@@ -703,7 +680,7 @@ class ProcMarketTradedVolumeCompressed(object):
         
         runnerInfosStr = response.tradedVolume.split(':')
         for runnerInfoStr in runnerInfosStr[1:]:
-            runnerInfo = EmptyObject()
+            runnerInfo = bfutil.Factory.RunnerInfo()
 
             runnerInfoParts = runnerInfoStr.split('|')
             if runnerInfoParts is None:
@@ -724,7 +701,7 @@ class ProcMarketTradedVolumeCompressed(object):
                     continue
                 priceItemParts = priceItemStr.split('~')
 
-                priceItem = EmptyObject()
+                priceItem = bfutil.Factory.TradedAmounts()
                 priceItem.odds = float(priceItemParts[0])
                 priceItem.totalMatchedAmount = float(priceItemParts[1])
 
@@ -760,10 +737,10 @@ class PreBetHistory(object):
     '''
     def __call__(self, request, requestArgs, **kwargs):
         if 'placedDateFrom' not in requestArgs:
-            requestArgs['placedDateFrom'] = datetime.now() - timedelta(days=1)
+            requestArgs['placedDateFrom'] = bftimezone.getDateTimeNow() - timedelta(days=1)
 
         if 'placedDateTo' not in requestArgs:
-            requestArgs['placedDateTo'] = datetime.now()
+            requestArgs['placedDateTo'] = bftimezone.getDateTimeNow()
 
 
 class PreAccountStatement(object):
@@ -774,7 +751,18 @@ class PreAccountStatement(object):
     '''
     def __call__(self, request, requestArgs, **kwargs):
         if 'startDate' not in requestArgs:
-            requestArgs['startDate'] = datetime.now() - timedelta(days=1)
+            requestArgs['startDate'] = bftimezone.getDateTimeNow() - timedelta(days=1)
 
         if 'endDate' not in requestArgs:
-            requestArgs['endDate'] = datetime.now()
+            requestArgs['endDate'] = bftimezone.getDateTimeNow()
+
+
+class PreMuBets(object):
+    '''
+    Request processor
+
+    Provide a default matchedSince request
+    '''
+    def __call__(self, request, requestArgs, **kwargs):
+        if 'matchedSince' not in requestArgs:
+            requestArgs['matchedSince'] = bftimezone.getDateTime(2000, 01, 01, 00, 00, 00)

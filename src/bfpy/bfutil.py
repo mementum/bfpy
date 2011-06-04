@@ -201,6 +201,10 @@ class EmptyObject(object):
     compressed answers
     '''
     printer = Printer()
+    def __init__(self, **kwargs):
+        for key, val in kwargs.iteritems():
+            setattr(self, key, val)
+
     def __str__(self):
         return unicode(self).encode('utf-8')
     
@@ -209,6 +213,35 @@ class EmptyObject(object):
 
     def __len__(self):
         return len(self.__dict__)
+
+
+class FactoryClass(object):
+    '''
+    Used to implement a Factory of named L{EmptyObject} classes
+
+    @type _cache: dict
+    @ivar _cache: holds a reference to already created classes for quick retrieval
+    '''
+    def __init__(self):
+        '''
+        Inits the cache
+        '''
+        self._cache = dict()
+
+    def __getattr__(self, name):
+        '''
+        Retrieves (creating if needed) a named subclass of EmptyObject
+
+        @type name: string
+        @param name: subclass of EmptyObject to retrieve
+        '''
+        return self._cache.setdefault(name, type(name, (EmptyObject, ), dict()))
+
+'''
+@type Factory: FactoryClass
+@var Factory: instance of FactoryClass to create/retrieve named subclasses of EmptyObject
+'''
+Factory = FactoryClass()
 
 
 class SharedData(object):

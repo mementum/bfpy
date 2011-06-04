@@ -65,14 +65,13 @@ Soap processing
 
 import base64
 from cStringIO import StringIO
-from datetime import datetime
 try:
     from xml.etree.cElementTree import Element, SubElement, QName, iterparse
 except ImportError:
     from xml.etree.ElementTree import Element, SubElement, QName, iterparse
 
-from bftimezone import LocalTimezone
-from bfutil import EmptyObject
+import bftimezone
+import bfutil
 
 # SOAP 1.1 namespaces
 NS_SOAP_ENV = "{http://schemas.xmlsoap.org/soap/envelope/}"
@@ -142,20 +141,6 @@ def look_for_fault(response):
 # @throws ValueError If the element has an unknown type.
 
 
-def convertTime(dtString):
-    dt = datetime.strptime(dtString.split('.')[0], '%Y-%m-%dT%H:%M:%S')
-    localTimezone = LocalTimezone()
-    try:
-        utcoffset = localTimezone.utcoffset(dt)
-    except:
-        # Fails with the dates from getSubscriptionInfo
-        utcoffset = localTimezone.utcoffset(datetime.now())
-
-    dt += utcoffset
-    dt.replace(tzinfo=localTimezone)
-    return dt
-
-
 XSDTYPES = {
     'string': lambda x: x or '',
     'int': lambda x: int(x),
@@ -165,7 +150,7 @@ XSDTYPES = {
     'float': lambda x: float(x),
     'boolean': lambda x: x == 'true',
     # 'dateTime': lambda x: datetime.strptime(x.split('.')[0], '%Y-%m-%dT%H:%M:%S'),
-    'dateTime': convertTime,
+    'dateTime': bftimezone.parseDateTimeString,
     }
 
 def decode_element(element, simplexDecoders):
@@ -234,9 +219,11 @@ def decode(element, complexDecoders, simplexDecoders):
         except ValueError:
             if xsitype and xsitype.startswith(NS_XSD):
                 raise # unknown primitive type
-            
+    else:
+        valtype = 'UnkObjType'
+
     # assume it's a structure
-    value = EmptyObject()
+    value = getattr(bfutil.Factory, valtype)()
     for elem in element:
         # Set the name of the instance attribute without namespace
         setattr(value, elem.tag.split('}')[-1], decode(elem, complexDecoders, simplexDecoders))

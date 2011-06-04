@@ -1,3 +1,10 @@
+1.12
+-- DateTime management reworked to allow Local Timezones/UTC and aware/naive usage by applications (Resolves issue #13)
+-- Returned objects are all named using the Bf provided name or a derived name (in compressed answers) (Resolves issue #15)
+-- Restored createXXXX functionality, ex: createMarket, to retrieve objects (lost with the removal of suds) (Resolves issue #16)
+-- Virtual prices merge with other prices (either original or calculated virtual bets) correctes (Resolves issue #17)
+-- Updated to HttxLib 0.97
+
 1.11
 -- Complete API Support via DirectAPI (Resolves issue #8)
 -- Informative error message if ExchangeId is not passed to an Exchange call (Resolves issue #9)
@@ -8,7 +15,7 @@
 -- Virtual Prices are supported (Resolves issue #6)
 -- DirectAPI datetime objects sent in UTC format always. They were before directly translated to the given time regardless of the timezone (Resolves issue #7)
 -- DataCounter uses now time.clock for Windows and time.time for other platforms to ensure throttling problems under Unix/Linux systems (Resolves issue #11)
--- Vendor API call getSubscriptionInfo available as getSuscriptionInfoVendor to avoid conflict with the call of the same name (Resolves Issuue #12)
+-- Vendor API call getSubscriptionInfo available as getSuscriptionInfoVendor to avoid conflict with the call of the same name (Resolves Issue #12)
 -- All returned datetimes are now adjusted to the localtime (Resolves issue #13)
 -- Updated to HttxLib 0.96
 
