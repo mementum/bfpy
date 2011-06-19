@@ -117,7 +117,7 @@ BfPy global variables and functions module.
 '''
 
 libname = 'BfPy'
-version = 1.12
+version = 1.13
 libstring = '%s %s' % (libname, str(version))
 
 freeApiId = 82

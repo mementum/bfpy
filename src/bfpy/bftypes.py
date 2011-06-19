@@ -144,8 +144,10 @@ class ApiParam(object):
             # NOTE: A exception could be raised if not "nullable"
             return self.patternNull
 
-        if isinstance(value, (int, long, float, basestring)):
+        if isinstance(value, (int, long, basestring)):
             pattern = str(value)
+        elif isinstance(value, float):
+            pattern = '%.2f' % value
         elif isinstance(value, bool):
             pattern = str(value).lower()
         elif isinstance(value, (list, tuple)):
