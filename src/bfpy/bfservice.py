@@ -35,6 +35,7 @@ import types
 
 import bferror
 import bfglobals
+from bfprocessors import ArrayFix
 
 class ServiceDescriptor(object):
     '''
@@ -131,7 +132,7 @@ class ServiceDef(ServiceDescriptor):
 
     def __init__(self, endPoint,
                  methodName, serviceName=None, requestName=None,
-                 apiHeader=True, skipErrorCodes=None,
+                 apiHeader=True, skipErrorCodes=None, arrays=None,
                  preProc=None, postProc=None, weight=0,
                  **kwargs):
         '''
@@ -149,6 +150,8 @@ class ServiceDef(ServiceDescriptor):
         @type apiHeader: bool
         @param skipErrorCodes: errorCodes that will not signal an error
         @type skipErrorCodes: list
+        @param arrays: arrays to be un-nullified if returned as null
+        @type array: list
         @param preProc: callables that will pre process a service request
         @type preProc: list
         @param postProc: callables that will post process a service response
@@ -177,14 +180,9 @@ class ServiceDef(ServiceDescriptor):
         if skipErrorCodes:
             self.skipErrorCodes.extend(skipErrorCodes)
 
-        if preProc is None:
-            preProc = list()
-        self.preProc = preProc
-
-        if postProc is None:
-            postProc = list()
-        self.postProc = postProc
-
+        self.arrays = ArrayFix(arrays) if arrays else None
+        self.preProc = preProc if preProc else list()
+        self.postProc = postProc if postProc else list()
         self.weight = weight
 
 
@@ -254,6 +252,9 @@ class ServiceDef(ServiceDescriptor):
         response = instance.invoke(self.methodName, service,
                                    request, self.skipErrorCodes)
 
+        if self.arrays:
+            self.arrays(response)
+
         # Post-Process the response if needed
         if instance.postProcess:
             for postProc in self.postProc:
@@ -271,7 +272,7 @@ class GlobalServiceDef(ServiceDef):
         
     def __init__(self,
                  methodName, serviceName=None, requestName=None,
-                 apiHeader=True, skipErrorCodes=None,
+                 apiHeader=True, skipErrorCodes=None, arrays=None,
                  preProc=None, postProc=None, weight=0,
                  **kwargs):
         '''
@@ -288,6 +289,8 @@ class GlobalServiceDef(ServiceDef):
         @type apiHeader: bool
         @param skipErrorCodes: errorCodes that will not signal an error
         @type skipErrorCodes: list
+        @param arrays: arrays to be un-nullified if returned as null
+        @type array: list
         @param preProc: callables that will pre process a service request
         @type preProc: list
         @param postProc: callables that will post process a service response
@@ -298,7 +301,7 @@ class GlobalServiceDef(ServiceDef):
         ServiceDef.__init__(
             self, bfglobals.Global,
             methodName, serviceName=serviceName, requestName=requestName,
-            apiHeader=apiHeader, skipErrorCodes=skipErrorCodes,
+            apiHeader=apiHeader, skipErrorCodes=skipErrorCodes, arrays=arrays,
             preProc=preProc, postProc=postProc, weight=weight,
             **kwargs)
 
@@ -311,7 +314,7 @@ class ExchangeServiceDef(ServiceDef):
 
     def __init__(self,
                  methodName, serviceName=None, requestName=None,
-                 apiHeader=True, skipErrorCodes=None,
+                 apiHeader=True, skipErrorCodes=None, arrays=None,
                  preProc=None, postProc=None, weight=0,
                  **kwargs):
         '''
@@ -328,6 +331,8 @@ class ExchangeServiceDef(ServiceDef):
         @type apiHeader: bool
         @param skipErrorCodes: errorCodes that will not signal an error
         @type skipErrorCodes: list
+        @param arrays: arrays to be un-nullified if returned as null
+        @type array: list
         @param preProc: callables that will pre process a service request
         @type preProc: list
         @param postProc: callables that will post process a service response
@@ -338,7 +343,7 @@ class ExchangeServiceDef(ServiceDef):
         ServiceDef.__init__(
             self, bfglobals.Exchange,
             methodName, serviceName=serviceName, requestName=requestName,
-            apiHeader=apiHeader, skipErrorCodes=skipErrorCodes,
+            apiHeader=apiHeader, skipErrorCodes=skipErrorCodes, arrays=arrays,
             preProc=preProc, postProc=postProc, weight=weight,
             **kwargs)
 
@@ -354,7 +359,7 @@ class VendorServiceDef(ServiceDef):
 
     def __init__(self,
                  methodName, serviceName=None, requestName=None,
-                 apiHeader=True, skipErrorCodes=None,
+                 apiHeader=True, skipErrorCodes=None, arrays=None,
                  preProc=None, postProc=None, weight=0,
                  **kwargs):
         '''
@@ -371,6 +376,8 @@ class VendorServiceDef(ServiceDef):
         @type apiHeader: bool
         @param skipErrorCodes: errorCodes that will not signal an error
         @type skipErrorCodes: list
+        @param arrays: arrays to be un-nullified if returned as null
+        @type array: list
         @param preProc: callables that will pre process a service request
         @type preProc: list
         @param postProc: callables that will post process a service response
@@ -382,7 +389,7 @@ class VendorServiceDef(ServiceDef):
         ServiceDef.__init__(
             self, bfglobals.Vendor,
             methodName, serviceName=serviceName, requestName=requestName,
-            apiHeader=apiHeader, skipErrorCodes=skipErrorCodes,
+            apiHeader=apiHeader, skipErrorCodes=skipErrorCodes, arrays=arrays,
             preProc=preProc, postProc=postProc, weight=weight,
             **kwargs)
 

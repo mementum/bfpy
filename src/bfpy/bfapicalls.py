@@ -34,7 +34,6 @@ and metaclass to install them in an API provider
 import types
 
 import bfglobals
-import bfprocessors
 import bfsoap
 import bftransport
 import bftypes
@@ -106,11 +105,6 @@ $$request$$
         self.headers['Content-type'] = 'text/xml; charset=utf-8'
         self.headers['User-agent'] = bfglobals.libstring
         self.headers['SoapAction'] = '"%s"' % self.operation
-
-        if 'arrays' in kwargs:
-            self.arrays = bfprocessors.ArrayFix(kwargs['arrays'])
-        else:
-            self.arrays = None
 
 
     def decodeComplex(self, element, xstype, valtype):
@@ -203,12 +197,7 @@ $$request$$
         reply = instance.transport.send(httpreq)
 
         response = bfsoap.soap_process(reply.message, [self.decodeComplex], [self.decodeSimplex])
-        response = getattr(response, self.result)
-
-        if self.arrays:
-            self.arrays(response)
-
-        return response
+        return getattr(response, self.result)
 
 
 class ApiCallGlobal(ApiCall):
