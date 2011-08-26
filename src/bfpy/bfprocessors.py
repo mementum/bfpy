@@ -449,8 +449,6 @@ class ProcMarketPricesCompressed(object):
 
         # Assign the header fields
         runner.selectionId = int(partsHeader[0])
-        # AsianLineId is not sent in the compressed format
-        runner.asianLineId = 0
         runner.sortOrder = int(partsHeader[1])
         runner.totalAmountMatched = float(partsHeader[2])
 
@@ -460,15 +458,25 @@ class ProcMarketPricesCompressed(object):
         runner.reductionFactor = self.ToFloatIfNotNull(partsHeader[5])
 
         runner.vacant = (partsHeader[6] == 'true')
+        # AsianLine Id is only ok for getCompleteMarketPricesCompressed
+        # New (at least as of 2011-08-18)
+        if completeCompressed:
+            runner.asianLineId = int(partsHeader[7])
+            baseBSPIdx = 8
+        else:
+            runner.asianLineId = 0
+            baseBSPIdx = 7
 
         # There 'may' be 3 additional fields for SP prices
         # SP do only apply to horses, so even if they are present, we leave
         # them out of the equation for now
         # The latest experiments show the fields always in place
         # Protect with a sanity check (try or check for length of array and strings)
-        runner.farBSP = self.ToFloatIfNotNull(partsHeader[7])
-        runner.nearBSP = self.ToFloatIfNotNull(partsHeader[8])
-        runner.actualBSP = self.ToFloatIfNotNull(partsHeader[9])
+
+        # Index + 1 since "asianline" also present (see above)
+        runner.farBSP = self.ToFloatIfNotNull(partsHeader[baseBSPIdx])
+        runner.nearBSP = self.ToFloatIfNotNull(partsHeader[baseBSPIdx+1])
+        runner.actualBSP = self.ToFloatIfNotNull(partsHeader[baseBSPIdx+2])
 
         if completeCompressed == True:
             numFieldsPerPrice = 5
@@ -576,10 +584,16 @@ class ProcMarketPricesCompressed(object):
         parts = compressedPriceParts
 
         price.odds = float(parts[0])
-        price.totalAvailableBackAmount = float(parts[1])
-        price.totalAvailableLayAmount = float(parts[2])
-        price.totalBspBackAmount = float(parts[3])
-        price.totalBspLayAmount = float(parts[4])
+        # Changed naming to follow Bf document naming and avoid confusion
+        # Added alias for compatibility
+        price.totalAvailableToBack = float(parts[1])
+        price.totalAvailableBackAmount = price.totalAvailableToBack
+        price.totalAvailableToLay = float(parts[2])
+        price.totalAvailableLayAmount = price.totalAvailableToLay
+        price.totalBspLiability = float(parts[3])
+        price.totalBspLayAmount = price.totalBspLiability
+        price.totalBspBackersStakeVolume = float(parts[4])
+        price.totalBspBackAmount = price.totalBspBackersStakeVolume
 
         return price
 

@@ -1,6 +1,7 @@
 1.13
 -- Float values to be sent to the server are capped to 2 decimal places (Resolves issue #19)
 -- Nullified Array Processing reverted to abstract definition call to avoid clash (and unexpected exception) with API errors (Resolves issue #18)
+-- BSP prices parsing corrected for getCompleteMarketPricesCompressed with naming conventions changed (alias added for compatibility) (Resolves issue #21)
 
 1.12
 -- DateTime management reworked to allow Local Timezones/UTC and aware/naive usage by applications (Resolves issue #13)
