@@ -224,7 +224,7 @@ def getDateTimeNow():
     according to the preferences in bfglobals. This datetime
     object is meant to be sent to the API servers
     '''
-    if bfglobals.timeUtc or bfGlobals.timeUtcOut:
+    if bfglobals.timeUtc or bfglobals.timeUtcOut:
         return datetime.utcnow()
 
     return datetime.now()

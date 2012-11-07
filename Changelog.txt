@@ -1,3 +1,6 @@
+1.14
+-- Corrected typo in bftimezone.py (Resolves issue #27)
+
 1.13
 -- Float values to be sent to the server are capped to 2 decimal places (Resolves issue #19)
 -- Nullified Array Processing reverted to abstract definition call to avoid clash (and unexpected exception) with API errors (Resolves issue #18)
