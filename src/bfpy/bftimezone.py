@@ -187,9 +187,16 @@ def parseDateTimeString(dtString):
     (localized or not according to preferences)
     '''
     # Bf time is: 2000-01-01T00:00:00.000Z
-    dtParts = dtString.split('.')
-    dt = datetime.strptime(dtParts[0], '%Y-%m-%dT%H:%M:%S')
-    dt = dt.replace(microsecond=int(dtParts[1][0:3]) * 1000)
+    try:
+        dtParts = dtString.split('.')
+        dt = datetime.strptime(dtParts[0], '%Y-%m-%dT%H:%M:%S')
+        dt = dt.replace(microsecond=int(dtParts[1][0:3]) * 1000)
+    except:
+        # 2012-12-27
+        # Apparently people without a funded account receive a strange
+        # time answer. We need to catch the exception and return a bogus
+        # time
+        dt = datetime.utcnow()
 
     return localizeDateTime(dt)
     

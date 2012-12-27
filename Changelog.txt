@@ -1,5 +1,6 @@
 1.14
 -- Corrected typo in bftimezone.py (Resolves issue #27)
+-- Catch exception in time parsing if bogus time is received. This apparently affects people with non-funded accounts and the exception in time processing prevents the login error from being displayed (Resolves issue #26)
 
 1.13
 -- Float values to be sent to the server are capped to 2 decimal places (Resolves issue #19)
